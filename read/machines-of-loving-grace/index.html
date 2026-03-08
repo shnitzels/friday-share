@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מכונות של חסד אוהב — דריו אמודי</title>
+<meta property="og:title" content="מכונות של חסד אוהב — כיצד AI יכול לשנות את העולם לטובה">
+<meta property="og:description" content="תרגום לעברית של המאמר של דריו אמודי, מנכ״ל Anthropic, על הפוטנציאל החיובי של בינה מלאכותית חזקה בביולוגיה, מדעי המוח, כלכלה, ממשל ומשמעות.">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="מכונות של חסד אוהב — דריו אמודי">
+<meta name="twitter:description" content="תרגום לעברית של המאמר של דריו אמודי על הפוטנציאל החיובי של AI חזק">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.8;
+  color: #1a1a1a;
+  background: #fff;
+  direction: rtl;
+  text-align: right;
+}
+.container { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+h1 { font-size: 32px; font-weight: 600; margin: 48px 0 8px; line-height: 1.3; }
+h2 { font-size: 24px; font-weight: 600; margin: 48px 0 16px; line-height: 1.4; color: #111; }
+h3 { font-size: 20px; font-weight: 600; margin: 32px 0 12px; }
+.subtitle { font-size: 20px; color: #444; margin-bottom: 8px; }
+.date { font-size: 14px; color: #888; margin-bottom: 32px; }
+.origin-box {
+  background: #f8f8f8;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 40px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #555;
+}
+.origin-box a { color: #2563eb; text-decoration: none; }
+.origin-box a:hover { text-decoration: underline; }
+p { margin-bottom: 16px; }
+ul, ol { margin: 0 24px 16px 0; padding: 0; }
+li { margin-bottom: 8px; }
+blockquote {
+  border-right: 3px solid #ddd;
+  padding: 8px 20px 8px 0;
+  margin: 16px 0;
+  font-size: 15px;
+  color: #555;
+  font-style: italic;
+}
+strong { font-weight: 600; }
+.section-break { border: none; border-top: 1px solid #e5e5e5; margin: 48px 0; }
+.svg-chart {
+  margin: 32px 0;
+  text-align: center;
+}
+.svg-chart svg {
+  max-width: 100%;
+  height: auto;
+}
+.source-footer {
+  margin-top: 64px;
+  padding-top: 24px;
+  border-top: 1px solid #e0e0e0;
+  font-size: 14px;
+  color: #888;
+}
+.source-footer a { color: #2563eb; text-decoration: none; }
+.footnote-ref { font-size: 13px; vertical-align: super; color: #888; }
+.footnotes { font-size: 14px; color: #666; margin-top: 48px; border-top: 1px solid #e5e5e5; padding-top: 24px; }
+.footnotes p { margin-bottom: 10px; }
+@media (max-width: 600px) {
+  .container { padding: 24px 16px 60px; }
+  h1 { font-size: 26px; }
+  h2 { font-size: 21px; }
+  body { font-size: 16px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="origin-box">
+📄 תרגום לעברית של המאמר <a href="https://darioamodei.com/essay/machines-of-loving-grace" target="_blank">"Machines of Loving Grace"</a> מאת <strong>דריו אמודי</strong>, מנכ״ל Anthropic. המאמר המקורי פורסם באוקטובר 2024.
+</div>
+
+<h1>מכונות של חסד אוהב</h1>
+<p class="subtitle">כיצד בינה מלאכותית יכולה לשנות את העולם לטובה</p>
+<p class="date">אוקטובר 2024</p>
+
+<p>אני חושב ומדבר הרבה על הסיכונים של בינה מלאכותית חזקה. החברה שאני מנכ״ל שלה, Anthropic, עוסקת הרבה במחקר כיצד לצמצם סיכונים אלה. בגלל זה, אנשים לפעמים מסיקים שאני פסימיסט או "דומר" שחושב ש-AI יהיה בעיקר רע או מסוכן. אני לא חושב כך כלל. למעשה, אחת הסיבות העיקריות שלי להתמקד בסיכונים היא שהם הדבר היחיד שעומד בינינו לבין מה שאני רואה כעתיד חיובי ביסודו. אני חושב שרוב האנשים מזלזלים עד כמה הצד החיובי של AI יכול להיות רדיקלי, בדיוק כפי שרוב האנשים מזלזלים עד כמה הסיכונים יכולים להיות חמורים.</p>
+
+<p>במאמר זה אני מנסה לשרטט כיצד עשוי להיראות הצד החיובי הזה — כיצד עולם עם בינה מלאכותית חזקה עשוי להיראות אם הכול ילך כשורה. כמובן שאיש אינו יכול לדעת את העתיד בוודאות או בדיוק, וההשפעות של AI חזק צפויות להיות אפילו פחות צפויות משינויים טכנולוגיים קודמים, כך שכל זה בהכרח יהיה מורכב מניחושים. אבל אני מכוון לפחות לניחושים מושכלים ושימושיים, שתופסים את הטעם של מה שיקרה גם אם רוב הפרטים יתבררו כשגויים. אני כולל הרבה פרטים בעיקר כי אני חושב שחזון קונקרטי עושה יותר לקידום הדיון מאשר חזון מסויג ומופשט מאוד.</p>
+
+<p>ראשית, עם זאת, רציתי להסביר בקצרה מדוע אני ו-Anthropic לא דיברנו כל כך הרבה על הצדדים החיוביים של AI חזק, ומדוע כנראה נמשיך, באופן כללי, לדבר הרבה על סיכונים. בפרט, בחרתי בכך מתוך רצון:</p>
+
+<ul>
+<li><strong>למקסם מינוף.</strong> הפיתוח הבסיסי של טכנולוגיית AI ורבות (לא כל) מיתרונותיה נראה בלתי נמנע (אלא אם הסיכונים יטרפדו הכול) ומונע ביסודו על ידי כוחות שוק חזקים. מצד שני, הסיכונים אינם קבועים מראש ופעולותינו יכולות לשנות מאוד את הסבירות שלהם.</li>
+<li><strong>להימנע מתדמית של תעמולה.</strong> חברות AI שמדברות על כל היתרונות המדהימים של AI עלולות להיראות כתעמלנים, או כאילו הן מנסות להסיח את הדעת מהחסרונות. אני גם חושב שכעניין של עיקרון, זה רע לנשמה שלך להקדיש יותר מדי מזמנך ל"שיווק הסחורה שלך".</li>
+<li><strong>להימנע מגרנדיוזיות.</strong> אני לעתים קרובות נדחה מהאופן שבו דמויות ציבוריות רבות בתחום סיכוני AI (שלא לדבר על מנהיגי חברות AI) מדברים על העולם שלאחר AGI, כאילו שזו המשימה שלהם להביא אותו לבד כמו נביא שמוביל את עמו לישועה. אני חושב שזה מסוכן לראות חברות כמעצבות חד-צדדית את העולם, ומסוכן לראות מטרות טכנולוגיות מעשיות במונחים דתיים בעצם.</li>
+<li><strong>להימנע מ"מטען" של מדע בדיוני.</strong> למרות שאני חושב שרוב האנשים מזלזלים בצד החיובי של AI חזק, הקהילה הקטנה של אנשים שכן דנה בעתידות רדיקליים של AI עושה זאת לעתים קרובות בטון "מדע-בדיוני" מוגזם (הכולל למשל העלאת תודעה למחשב, חקר חלל, או אווירה כללית של סייברפאנק). אני חושב שזה גורם לאנשים להתייחס לטענות בפחות רצינות, ולהעניק להן סוג של אי-מציאותיות.</li>
+</ul>
+
+<p>ועם זאת, למרות כל החששות שלמעלה, אני באמת חושב שחשוב לדון כיצד עולם טוב עם AI חזק יכול להיראות, תוך שאנחנו עושים כמיטב יכולתנו להימנע מהמכשולים הנ״ל. למעשה, אני חושב שזה קריטי שיהיה חזון מעורר השראה באמת של העתיד, ולא רק תוכנית לכיבוי שריפות. רבות מהשלכות AI החזק הן יריביות או מסוכנות, אבל בסופו של יום, חייב להיות משהו שאנחנו נלחמים למענו, תוצאה בעלת סכום חיובי שבה כולם מרוויחים, משהו שמרתק אנשים להתעלות מעל מריבותיהם ולהתמודד עם האתגרים שלפנינו. פחד הוא סוג אחד של מניע, אבל הוא לא מספיק: אנחנו צריכים גם תקווה.</p>
+
+<p>רשימת היישומים החיוביים של AI חזק היא ארוכה מאוד (וכוללת רובוטיקה, ייצור, אנרגיה ועוד רבים), אבל אני הולך להתמקד במספר קטן של תחומים שנראים לי בעלי הפוטנציאל הגדול ביותר לשפר ישירות את איכות חיי האדם. חמש הקטגוריות שאני הכי נרגש מהן הן:</p>
+
+<!-- 5-Section Overview Diagram -->
+<div class="svg-chart">
+<svg viewBox="0 0 800 220" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ef4444"/><stop offset="100%" stop-color="#dc2626"/></linearGradient>
+    <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#8b5cf6"/><stop offset="100%" stop-color="#7c3aed"/></linearGradient>
+    <linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#d97706"/></linearGradient>
+    <linearGradient id="g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#2563eb"/></linearGradient>
+    <linearGradient id="g5" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#10b981"/><stop offset="100%" stop-color="#059669"/></linearGradient>
+  </defs>
+  <!-- Cards -->
+  <g>
+    <rect x="10" y="20" width="140" height="180" rx="12" fill="url(#g1)" opacity="0.9"/>
+    <text x="80" y="70" text-anchor="middle" fill="white" font-size="32">🧬</text>
+    <text x="80" y="105" text-anchor="middle" fill="white" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="14">ביולוגיה</text>
+    <text x="80" y="125" text-anchor="middle" fill="white" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="14">ובריאות גופנית</text>
+    <text x="80" y="160" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="'Noto Sans Hebrew',sans-serif" font-size="11">ריפוי מחלות, הארכת</text>
+    <text x="80" y="176" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="'Noto Sans Hebrew',sans-serif" font-size="11">חיים, חופש ביולוגי</text>
+  </g>
+  <g>
+    <rect x="168" y="20" width="140" height="180" rx="12" fill="url(#g2)" opacity="0.9"/>
+    <text x="238" y="70" text-anchor="middle" fill="white" font-size="32">🧠</text>
+    <text x="238" y="105" text-anchor="middle" fill="white" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="14">מדעי המוח</text>
+    <text x="238" y="125" text-anchor="middle" fill="white" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="14">ובריאות הנפש</text>
+    <text x="238" y="160" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="'Noto Sans Hebrew',sans-serif" font-size="11">ריפוי מחלות נפש,</text>
+    <text x="238" y="176" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="'Noto Sans Hebrew',sans-serif" font-size="11">שיפור חוויה אנושית</text>
+  </g>
+  <g>
+    <rect x="326" y="20" width="140" height="180" rx="12" fill="url(#g3)" opacity="0.9"/>
+    <text x="396" y="70" text-anchor="middle" fill="white" font-size="32">📈</text>
+    <text x="396" y="105" text-anchor="middle" fill="white" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="14">פיתוח כלכלי</text>
+    <text x="396" y="125" text-anchor="middle" fill="white" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="14">ועוני</text>
+    <text x="396" y="160" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="'Noto Sans Hebrew',sans-serif" font-size="11">צמצום פערים, צמיחה</text>
+    <text x="396" y="176" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="'Noto Sans Hebrew',sans-serif" font-size="11">בעולם המתפתח</text>
+  </g>
+  <g>
+    <rect x="484" y="20" width="140" height="180" rx="12" fill="url(#g4)" opacity="0.9"/>
+    <text x="554" y="70" text-anchor="middle" fill="white" font-size="32">⚖️</text>
+    <text x="554" y="105" text-anchor="middle" fill="white" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="14">שלום</text>
+    <text x="554" y="125" text-anchor="middle" fill="white" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="14">וממשל</text>
+    <text x="554" y="160" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="'Noto Sans Hebrew',sans-serif" font-size="11">דמוקרטיה, זכויות</text>
+    <text x="554" y="176" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="'Noto Sans Hebrew',sans-serif" font-size="11">אדם, שלטון חוק</text>
+  </g>
+  <g>
+    <rect x="642" y="20" width="140" height="180" rx="12" fill="url(#g5)" opacity="0.9"/>
+    <text x="712" y="70" text-anchor="middle" fill="white" font-size="32">💡</text>
+    <text x="712" y="105" text-anchor="middle" fill="white" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="14">עבודה</text>
+    <text x="712" y="125" text-anchor="middle" fill="white" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="14">ומשמעות</text>
+    <text x="712" y="160" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="'Noto Sans Hebrew',sans-serif" font-size="11">ארגון חברתי חדש,</text>
+    <text x="712" y="176" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="'Noto Sans Hebrew',sans-serif" font-size="11">משמעות בעידן AI</text>
+  </g>
+</svg>
+</div>
+
+<p>התחזיות שלי הולכות להיות רדיקליות כפי שנמדדות ברוב הסטנדרטים (פרט לחזונות "סינגולריות" מדע-בדיוניים), אבל אני מתכוון אליהן ברצינות ובכנות. כל מה שאני אומר יכול בקלות רבה להתגלות כשגוי, אבל לפחות ניסיתי לבסס את עמדותיי על הערכה חצי-אנליטית של כמה מהר ההתקדמות בתחומים שונים עשויה להאיץ ומה זה עשוי להשמיע בפועל. אני בר מזל שיש לי ניסיון מקצועי גם בביולוגיה וגם במדעי המוח, ואני חובב מושכל בתחום הפיתוח הכלכלי, אבל אני בטוח שאטעה בהרבה דברים. דבר אחד שכתיבת המאמר הזה גרמה לי להבין הוא שיהיה ערך רב לאסוף קבוצת מומחים בתחומים (בביולוגיה, כלכלה, יחסים בינלאומיים ותחומים אחרים) כדי לכתוב גרסה הרבה יותר טובה ומושכלת ממה שהפקתי כאן.</p>
+
+<hr class="section-break">
+
+<h2>הנחות יסוד ומסגרת</h2>
+
+<p>כדי להפוך את המאמר כולו ליותר מדויק ומבוסס, מועיל לציין בבירור מה אנחנו מתכוונים ב-AI חזק (כלומר, הסף שבו שעון ה-5-10 שנים מתחיל לתקתק), וכן להציג מסגרת לחשיבה על ההשפעות של AI כזה ברגע שהוא קיים.</p>
+
+<p>כיצד ייראה AI חזק (אני לא אוהב את המונח AGI), ומתי (או אם) הוא יגיע, הוא נושא ענק בפני עצמו. אני חושב שהוא עשוי להגיע כבר ב-2026, אם כי יש גם דרכים שבהן זה יכול לקחת הרבה יותר זמן. אבל לצורכי מאמר זה, הייתי רוצה לשים את השאלות האלה בצד, להניח שהוא יגיע בקרוב סביר, ולהתמקד במה שקורה ב-5-10 השנים לאחר מכן.</p>
+
+<p>ב-AI חזק, יש לי בראש מודל AI — ככל הנראה דומה בצורתו ל-LLM-ים של היום, אם כי ייתכן שיתבסס על ארכיטקטורה אחרת — עם התכונות הבאות:</p>
+
+<ul>
+<li>מבחינת אינטליגנציה טהורה, הוא חכם יותר מזוכה פרס נובל ברוב התחומים הרלוונטיים — ביולוגיה, תכנות, מתמטיקה, הנדסה, כתיבה וכו׳.</li>
+<li>בנוסף לכך שהוא סתם "דבר חכם שמדברים איתו", יש לו את כל ה"ממשקים" הזמינים לאדם שעובד באופן וירטואלי, כולל טקסט, שמע, וידאו, שליטה בעכבר ומקלדת, וגישה לאינטרנט.</li>
+<li>הוא לא רק עונה באופן פסיבי על שאלות; במקום זאת, אפשר לתת לו משימות שלוקח שעות, ימים או שבועות להשלים, ואז הוא הולך ומבצע את המשימות האלה באופן אוטונומי.</li>
+<li>אין לו גלגול פיזי, אבל הוא יכול לשלוט בכלים פיזיים קיימים, רובוטים או ציוד מעבדה דרך מחשב.</li>
+<li>המשאבים שמשמשים לאימון המודל ניתנים להסבה להרצת מיליוני עותקים ממנו, והמודל יכול לקלוט מידע ולייצר פעולות במהירות של בערך פי 10-100 מהאדם.</li>
+<li>כל אחד ממיליוני העותקים יכול לפעול באופן עצמאי במשימות שאינן קשורות, או אם צריך כולם יכולים לעבוד יחד באותו אופן שבו בני אדם משתפים פעולה.</li>
+</ul>
+
+<p>אפשר לסכם את זה כ<strong>"מדינה של גאונים במרכז נתונים"</strong>.</p>
+
+<p>ברור שישות כזו תהיה מסוגלת לפתור בעיות קשות מאוד, מהר מאוד, אבל זה לא טריוויאלי להבין כמה מהר. שתי עמדות "קיצוניות" נראות לי שגויות. ראשית, אפשר לחשוב שהעולם ישתנה מיידית בקנה מידה של שניות או ימים ("הסינגולריות"). הבעיה עם זה היא שיש גבולות פיזיים ומעשיים אמיתיים. אינטליגנציה עשויה להיות חזקה מאוד, אבל היא אינה אבקת קסם.</p>
+
+<p>שנית, ובאופן הפוך, אפשר להאמין שההתקדמות הטכנולוגית רוויה או מוגבלת על ידי נתוני עולם אמיתי או גורמים חברתיים, ושאינטליגנציה על-אנושית תוסיף מעט מאוד. זה נראה לי באותה מידה לא סביר.</p>
+
+<p>אני חושב שהאמת צפויה להיות עירוב מבולגן כלשהו של שתי התמונות הקיצוניות האלה. אני מאמין שאנחנו צריכים מסגרות חדשות כדי לחשוב על הפרטים האלה בצורה פרודוקטיבית.</p>
+
+<p>כלכלנים מדברים לעתים קרובות על "גורמי ייצור": דברים כמו עבודה, קרקע והון. אני מאמין שבעידן ה-AI, עלינו לדבר על <strong>התשואה השולית לאינטליגנציה</strong>, ולנסות להבין מהם הגורמים האחרים שמשלימים את האינטליגנציה והופכים לגורמים מגבילים כשהאינטליגנציה גבוהה מאוד.</p>
+
+<p>הניחוש שלי לגבי רשימת הגורמים שמגבילים או משלימים את האינטליגנציה כולל:</p>
+
+<!-- Framework Diagram: Marginal Returns to Intelligence -->
+<div class="svg-chart">
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="400" fill="#fafafa" rx="12"/>
+  <text x="400" y="35" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="18" fill="#1a1a1a">תשואה שולית לאינטליגנציה — חמשת הגורמים המגבילים</text>
+  
+  <!-- Central arrow representing intelligence -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#6366f1"/></marker>
+  </defs>
+  <line x1="80" y1="210" x2="720" y2="210" stroke="#6366f1" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="400" y="200" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="13" fill="#6366f1">אינטליגנציה ← עוקפת מכשולים לאורך זמן →</text>
+
+  <!-- Barriers -->
+  <g>
+    <rect x="100" y="240" width="120" height="100" rx="8" fill="#fee2e2" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="160" y="270" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="12" fill="#dc2626">מהירות</text>
+    <text x="160" y="288" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="12" fill="#dc2626">העולם החיצון</text>
+    <text x="160" y="312" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-size="10" fill="#666">ניסויים, חומרה,</text>
+    <text x="160" y="326" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-size="10" fill="#666">תהליכים ביולוגיים</text>
+  </g>
+  <g>
+    <rect x="240" y="240" width="120" height="100" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="300" y="270" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="12" fill="#d97706">צורך</text>
+    <text x="300" y="288" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="12" fill="#d97706">בנתונים</text>
+    <text x="300" y="312" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-size="10" fill="#666">חוסר בנתונים גולמיים</text>
+    <text x="300" y="326" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-size="10" fill="#666">לא נפתר ע״י חוכמה</text>
+  </g>
+  <g>
+    <rect x="380" y="240" width="120" height="100" rx="8" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5"/>
+    <text x="440" y="270" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="12" fill="#7c3aed">מורכבות</text>
+    <text x="440" y="288" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="12" fill="#7c3aed">מהותית</text>
+    <text x="440" y="312" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-size="10" fill="#666">מערכות כאוטיות,</text>
+    <text x="440" y="326" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-size="10" fill="#666">בלתי ניתנות לחיזוי</text>
+  </g>
+  <g>
+    <rect x="520" y="240" width="120" height="100" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="580" y="270" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="12" fill="#2563eb">אילוצים</text>
+    <text x="580" y="288" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="12" fill="#2563eb">אנושיים</text>
+    <text x="580" y="312" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-size="10" fill="#666">חוקים, רגולציה,</text>
+    <text x="580" y="326" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-size="10" fill="#666">התנגדות חברתית</text>
+  </g>
+  <g>
+    <rect x="660" y="240" width="120" height="100" rx="8" fill="#f0fdf4" stroke="#10b981" stroke-width="1.5"/>
+    <text x="720" y="270" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="12" fill="#059669">חוקי</text>
+    <text x="720" y="288" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="12" fill="#059669">הפיזיקה</text>
+    <text x="720" y="312" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-size="10" fill="#666">מהירות אור, חוקי</text>
+    <text x="720" y="326" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-size="10" fill="#666">תרמודינמיקה</text>
+  </g>
+
+  <!-- Top: short-term vs long-term -->
+  <rect x="100" y="60" width="350" height="50" rx="8" fill="#fff7ed" stroke="#fb923c" stroke-width="1" stroke-dasharray="4"/>
+  <text x="275" y="82" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-size="12" fill="#c2410c">בטווח הקצר: אינטליגנציה מוגבלת מאוד ע״י גורמים אלו</text>
+  <text x="275" y="100" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-size="11" fill="#c2410c">→ חסמים חזקים</text>
+
+  <rect x="470" y="60" width="310" height="50" rx="8" fill="#f0fdf4" stroke="#22c55e" stroke-width="1" stroke-dasharray="4"/>
+  <text x="625" y="82" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-size="12" fill="#16a34a">בטווח הארוך: אינטליגנציה עוקפת בהדרגה</text>
+  <text x="625" y="100" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-size="11" fill="#16a34a">את הגורמים (מלבד חוקי פיזיקה)</text>
+
+  <text x="400" y="385" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-size="11" fill="#999">השאלה המרכזית: כמה מהר זה קורה ובאיזה סדר?</text>
+</svg>
+</div>
+
+<ul>
+<li><strong>מהירות העולם החיצון.</strong> סוכנים אינטליגנטיים צריכים לפעול באופן אינטראקטיבי בעולם כדי להשיג דברים וגם כדי ללמוד. אבל העולם זז רק כל כך מהר. תאים ובעלי חיים רצים במהירות קבועה, כך שניסויים עליהם לוקחים כמות זמן מסוימת שעשויה להיות בלתי ניתנת לצמצום.</li>
+<li><strong>צורך בנתונים.</strong> לפעמים נתונים גולמיים חסרים ובהיעדרם אינטליגנציה נוספת אינה עוזרת. פיזיקאי חלקיקים היום הם מאוד מתוחכמים ופיתחו מגוון רחב של תיאוריות, אך חסרים את הנתונים לבחור ביניהן.</li>
+<li><strong>מורכבות מהותית.</strong> יש דברים שהם מטבעם בלתי צפויים או כאוטיים ואפילו ה-AI החזק ביותר לא יכול לחזות אותם או לפענח אותם בצורה משמעותית טובה יותר.</li>
+<li><strong>אילוצים מצד בני אדם.</strong> דברים רבים לא ניתנים לביצוע בלי לשבור חוקים, לפגוע בבני אדם, או לפגוע בחברה. מבנים חברתיים רבים הם לא יעילים או אפילו מזיקים באופן פעיל, אבל קשה לשנות אותם תוך כיבוד אילוצים.</li>
+<li><strong>חוקי הפיזיקה.</strong> זו גרסה חדה יותר של הנקודה הראשונה. יש חוקים פיזיקליים מסוימים שנראים בלתי ניתנים לשבירה. לא ניתן לנסוע מהר יותר מהאור. חישוב דורש מינימום מסוים של אנרגיה לכל ביט.</li>
+</ul>
+
+<p>יש הבחנה נוספת המבוססת על סדרי זמן. דברים שהם אילוצים קשים בטווח הקצר עשויים להפוך לגמישים יותר בפני אינטליגנציה בטווח הארוך. לכן, עלינו לדמיין תמונה שבה האינטליגנציה מוגבלת בתחילה מאוד על ידי גורמי הייצור האחרים, אבל לאורך זמן האינטליגנציה עצמה עוקפת יותר ויותר את הגורמים האחרים, גם אם הם לעולם לא מתמוססים לגמרי. <strong>השאלה המרכזית היא כמה מהר הכול קורה ובאיזה סדר.</strong></p>
+
+<hr class="section-break">
+
+<h2>1. ביולוגיה ובריאות</h2>
+
+<p>ביולוגיה היא כנראה התחום שבו להתקדמות מדעית יש את הפוטנציאל הגדול ביותר לשפר באופן ישיר וחד-משמעי את איכות חיי האדם. במאה האחרונה חלק מהמכות העתיקות ביותר של האנושות (כמו אבעבועות שחורות) נוצחו סוף סוף, אבל רבות אחרות עדיין נותרות, והבסתן תהיה הישג הומניטרי אדיר. מעבר אפילו לריפוי מחלות, המדע הביולוגי יכול בעיקרון לשפר את איכות הבסיס של הבריאות האנושית, על ידי הארכת אורך החיים הבריא של האדם, הגברת השליטה והחופש על התהליכים הביולוגיים שלנו, וטיפול בבעיות יומיומיות שכיום אנחנו חושבים עליהן כחלקים בלתי משתנים של המצב האנושי.</p>
+
+<p>בשפת "הגורמים המגבילים" של הסעיף הקודם, האתגרים העיקריים ביישום ישיר של אינטליגנציה לביולוגיה הם נתונים, מהירות העולם הפיזי ומורכבות מהותית. אילוצים אנושיים גם הם משחקים תפקיד בשלב מאוחר יותר, כשניסויים קליניים מעורבים.</p>
+
+<p>ניסויים על תאים, בעלי חיים ואפילו תהליכים כימיים מוגבלים על ידי מהירות העולם הפיזי: פרוטוקולים ביולוגיים רבים כוללים תרבית חיידקים או תאים אחרים, או פשוט המתנה לתגובות כימיות להתרחש, ולפעמים זה יכול לקחת ימים או אפילו שבועות. ניסויים על בעלי חיים יכולים לקחת חודשים (או יותר) וניסויים אנושיים לוקחים לעתים קרובות שנים.</p>
+
+<p>בהינתן כל זאת, ביולוגים רבים היו ספקנים לגבי הערך של AI ו"ביג דאטה" בביולוגיה. אבל אני חושב שהפרספקטיבה הפסימית הזו חושבת על AI בצורה שגויה. אם ההשערה המרכזית שלנו לגבי התקדמות AI נכונה, אז הדרך הנכונה לחשוב על AI היא לא כשיטה לניתוח נתונים, אלא כ<strong>ביולוג וירטואלי</strong> שמבצע את כל המשימות שביולוגים עושים, כולל תכנון והרצת ניסויים בעולם האמיתי, המצאת שיטות ביולוגיות חדשות או טכניקות מדידה, וכן הלאה.</p>
+
+<p>חלק גדול להפתיע מההתקדמות בביולוגיה הגיע ממספר זעיר באמת של תגליות, הקשורות לעתים קרובות לכלי מדידה רחבים או טכניקות שמאפשרות התערבות מדויקת אך מוכללת או ניתנת לתכנות במערכות ביולוגיות. יש אולי תגלית גדולה אחת כזו בשנה והן מניעות יותר מ-50% מההתקדמות בביולוגיה. כמה דוגמאות כוללות:</p>
+
+<ul>
+<li><strong>CRISPR:</strong> טכניקה שמאפשרת עריכה חיה של כל גן באורגניזמים חיים.</li>
+<li><strong>מיקרוסקופיה מתקדמת:</strong> מיקרוסקופים אלקטרוניים, מיקרוסקופים של כוח אטומי ועוד.</li>
+<li><strong>ריצוף גנום וסינתזה:</strong> שירדו בעלות במספר סדרי גודל בעשורים האחרונים.</li>
+<li><strong>אופטוגנטיקה:</strong> טכניקות שמאפשרות לגרום לנוירון לירות על ידי הארת אור עליו.</li>
+<li><strong>חיסוני mRNA:</strong> שבעיקרון מאפשרים לתכנן חיסון נגד כל דבר ולאחר מכן להתאים אותו במהירות.</li>
+<li><strong>טיפולים תאיים כמו CAR-T:</strong> שמאפשרים לקחת תאי חיסון מהגוף ו"לתכנת אותם מחדש" לתקוף כל דבר.</li>
+<li><strong>תובנות מושגיות</strong> כמו תיאוריית הנבטים או ההבנה של הקשר בין מערכת החיסון לסרטן.</li>
+</ul>
+
+<p>אני טוען טענה מכרעת לגבי טכנולוגיות אלו: אני חושב שקצב הגילוי שלהן יכול לגדול פי 10 או יותר אם היו הרבה יותר חוקרים מוכשרים ויצירתיים. מדוע? כי התגליות האלו נעשות בדרך כלל על ידי מספר זעיר של חוקרים; הן לעתים קרובות "יכלו להיעשות" שנים קודם לכן; ופרויקטים מוצלחים הם לעתים קרובות צנועים או רעיונות שאנשים לא חשבו שהם מבטיחים.</p>
+
+<p>לכן, הניחוש שלי הוא ש-<strong>AI חזק יכול להאיץ את קצב התגליות האלו פי 10 לפחות, ולתת לנו את 50-100 השנים הבאות של התקדמות ביולוגית ב-5-10 שנים</strong>. אני אתייחס לזה כ"המאה ה-21 הדחוסה": הרעיון שאחרי פיתוח AI חזק, נעשה בכמה שנים את כל ההתקדמות בביולוגיה ורפואה שהיינו עושים במאה ה-21 כולה.</p>
+
+<!-- Timeline Chart: The Compressed 21st Century -->
+<div class="svg-chart">
+<svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="320" fill="#fafafa" rx="12"/>
+  <text x="400" y="30" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="16" fill="#1a1a1a">המאה ה-21 הדחוסה: 50-100 שנות התקדמות ביולוגית ב-5-10 שנים</text>
+  
+  <!-- Timeline bar -->
+  <rect x="60" y="60" width="680" height="24" rx="12" fill="#e5e7eb"/>
+  <rect x="60" y="60" width="130" height="24" rx="12" fill="#6366f1"/>
+  <text x="125" y="77" text-anchor="middle" fill="white" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="11">5-10 שנים עם AI</text>
+  <text x="440" y="77" text-anchor="middle" fill="#888" font-family="'Noto Sans Hebrew',sans-serif" font-size="11">= 50-100 שנים של התקדמות אנושית רגילה</text>
+
+  <!-- Milestones -->
+  <g transform="translate(80,110)">
+    <circle cx="0" cy="12" r="8" fill="#ef4444"/>
+    <text x="16" y="16" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="13" fill="#1a1a1a">מניעה וטיפול במחלות זיהומיות</text>
+    <text x="16" y="34" font-family="'Noto Sans Hebrew',sans-serif" font-size="11" fill="#666">חיסונים נגד כל דבר, חיסול מגפות עתיקות</text>
+  </g>
+  <g transform="translate(80,155)">
+    <circle cx="0" cy="12" r="8" fill="#f59e0b"/>
+    <text x="16" y="16" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="13" fill="#1a1a1a">חיסול רוב הסרטן</text>
+    <text x="16" y="34" font-family="'Noto Sans Hebrew',sans-serif" font-size="11" fill="#666">ירידה של 95%+ בתמותה ותחלואה, טיפולים מותאמים אישית</text>
+  </g>
+  <g transform="translate(80,200)">
+    <circle cx="0" cy="12" r="8" fill="#8b5cf6"/>
+    <text x="16" y="16" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="13" fill="#1a1a1a">מניעת אלצהיימר וריפוי מחלות גנטיות</text>
+    <text x="16" y="34" font-family="'Noto Sans Hebrew',sans-serif" font-size="11" fill="#666">סינון עוברים מתקדם, צאצאי CRISPR בטוחים יותר</text>
+  </g>
+  <g transform="translate(80,245)">
+    <circle cx="0" cy="12" r="8" fill="#10b981"/>
+    <text x="16" y="16" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="13" fill="#1a1a1a">חופש ביולוגי והכפלת תוחלת החיים</text>
+    <text x="16" y="34" font-family="'Noto Sans Hebrew',sans-serif" font-size="11" fill="#666">שליטה מלאה בתהליכים ביולוגיים, תוחלת חיים ~150 שנה</text>
+  </g>
+
+  <text x="400" y="305" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-size="11" fill="#999">הערכה מבוססת על קצב ההתקדמות במאה ה-20 וחיזוי האצה פי 10+ על ידי AI</text>
+</svg>
+</div>
+
+<p>להלן רשימה של מה שאנחנו עשויים לצפות לו:</p>
+
+<ul>
+<li><strong>מניעה וטיפול אמינים כמעט בכל מחלה זיהומית טבעית.</strong> בהינתן ההתקדמות האדירה נגד מחלות זיהומיות במאה ה-20, זה לא רדיקלי לדמיין שנוכל פחות או יותר "לסיים את העבודה" במאה 21 דחוסה.</li>
+<li><strong>חיסול רוב הסרטן.</strong> שיעורי התמותה מסרטן ירדו ~2% בשנה בעשורים האחרונים. ירידות של 95% או יותר גם בתמותה וגם בתחלואה נראות אפשריות.</li>
+<li><strong>מניעה וריפוי יעילים מאוד של מחלות גנטיות.</strong> סינון עוברים משופר מאוד יאפשר כנראה למנוע רוב המחלות הגנטיות, וצאצא בטוח יותר של CRISPR עשוי לרפא מחלות גנטיות באנשים קיימים.</li>
+<li><strong>מניעת אלצהיימר.</strong> זה נראה בדיוק כסוג הבעיה שניתן לפתור עם כלי מדידה טובים יותר; יש סיכוי טוב שניתן יהיה למנוע אותו בהתערבויות פשוטות יחסית.</li>
+<li><strong>טיפול משופר ברוב המחלות האחרות.</strong> כולל סוכרת, השמנה, מחלות לב, מחלות אוטואימוניות ועוד. רובן נראות "קלות יותר" לפתרון מסרטן ואלצהיימר.</li>
+<li><strong>חופש ביולוגי.</strong> משקל, מראה חיצוני, רבייה ותהליכים ביולוגיים אחרים יהיו בשליטה מלאה של אנשים.</li>
+<li><strong>הכפלת תוחלת החיים האנושית.</strong> זה עשוי להישמע רדיקלי, אבל תוחלת החיים עלתה כמעט פי 2 במאה ה-20 (מ~40 שנים ל~75), כך שזה "בתוך המגמה" שה"מאה 21 הדחוסה" תכפיל אותה שוב ל-150.</li>
+</ul>
+
+<!-- Life Expectancy Comparison -->
+<div class="svg-chart">
+<svg viewBox="0 0 800 280" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="280" fill="#fafafa" rx="12"/>
+  <text x="400" y="30" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="16" fill="#1a1a1a">הכפלת תוחלת חיים: המאה ה-20 מול ה"מאה ה-21 הדחוסה"</text>
+
+  <!-- 20th Century -->
+  <text x="250" y="65" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="14" fill="#444">המאה ה-20</text>
+  <text x="250" y="82" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-size="12" fill="#888">(100 שנה)</text>
+  <rect x="120" y="100" width="100" height="130" rx="6" fill="#fca5a5"/>
+  <text x="170" y="170" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="22" fill="#991b1b">~40</text>
+  <text x="170" y="190" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-size="12" fill="#991b1b">שנה</text>
+  <text x="170" y="245" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-size="18" fill="#666">→</text>
+  <rect x="280" y="100" width="100" height="130" rx="6" fill="#86efac"/>
+  <text x="330" y="170" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="22" fill="#166534">~75</text>
+  <text x="330" y="190" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-size="12" fill="#166534">שנה</text>
+  <text x="250" y="260" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="13" fill="#6366f1">×1.9</text>
+
+  <!-- Compressed 21st -->
+  <text x="580" y="65" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="14" fill="#444">"המאה ה-21 הדחוסה"</text>
+  <text x="580" y="82" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-size="12" fill="#888">(5-10 שנים עם AI)</text>
+  <rect x="450" y="100" width="100" height="130" rx="6" fill="#93c5fd"/>
+  <text x="500" y="170" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="22" fill="#1e3a8a">~75</text>
+  <text x="500" y="190" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-size="12" fill="#1e3a8a">שנה</text>
+  <text x="500" y="245" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-size="18" fill="#666">→</text>
+  <rect x="610" y="100" width="100" height="130" rx="6" fill="#a78bfa"/>
+  <text x="660" y="170" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="22" fill="#4c1d95">~150</text>
+  <text x="660" y="190" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-size="12" fill="#4c1d95">שנה</text>
+  <text x="580" y="260" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="13" fill="#6366f1">×2.0</text>
+</svg>
+</div>
+
+<p>שווה להסתכל על הרשימה הזו ולהרהר כמה שונה יהיה העולם אם כל זה יושג 7-12 שנים מעכשיו. מיותר לציין שזה יהיה ניצחון הומניטרי בלתי נתפס, ביטול בבת אחת של רוב המכות שרדפו את האנושות במשך אלפי שנים. רבים מחברי ועמיתיי מגדלים ילדים, וכשילדים אלה יגדלו, אני מקווה שכל אזכור של מחלה יישמע להם כמו שצפדינה, אבעבועות שחורות או המגפה השחורה נשמעים לנו.</p>
+
+<hr class="section-break">
+
+<h2>2. מדעי המוח והנפש</h2>
+
+<p>בסעיף הקודם התמקדתי במחלות פיזיות ובביולוגיה באופן כללי, ולא כיסיתי מדעי מוח או בריאות הנפש. אבל מדעי המוח הם תת-דיסציפלינה של ביולוגיה ובריאות הנפש חשובה לא פחות מבריאות גופנית. למעשה, אם בכלל, בריאות הנפש משפיעה על רווחת האדם באופן ישיר אפילו יותר מבריאות גופנית. מאות מיליוני אנשים חיים באיכות חיים נמוכה מאוד בגלל בעיות כמו התמכרות, דיכאון, סכיזופרניה, אוטיזם בתפקוד נמוך, PTSD, פסיכופתיה או מוגבלויות שכליות. מיליארדים נוספים מתמודדים עם בעיות יומיומיות שלעתים קרובות ניתן לפרש כגרסאות הרבה יותר קלות של אחד מההפרעות הקליניות החמורות האלה.</p>
+
+<p>המסגרת הבסיסית שהצגתי לביולוגיה חלה באותה מידה על מדעי המוח. אני חושב שמסגרת "100 שנות התקדמות ב-5-10 שנים" חלה על מדעי המוח באותו אופן שהיא חלה על ביולוגיה ומאותן סיבות.</p>
+
+<p>יש דבר אחד שכדאי להוסיף לתמונה הבסיסית הזו: חלק מהדברים שלמדנו (או לומדים) על AI עצמו בשנים האחרונות צפויים לעזור לקדם את מדעי המוח. פרשנות (interpretability) היא דוגמה ברורה: השאלה הבסיסית של "כיצד רשתות מבוזרות ומאומנות של יחידות פשוטות שמבצעות פעולות לינאריות/לא-לינאריות משולבות עובדות יחד כדי לבצע חישובים חשובים" היא אותה שאלה, ואני חושד מאוד שפרטי התקשורת בין נוירונים בודדים יופשטו ברוב השאלות המעניינות.</p>
+
+<p>מעבר לפרשנות, מה שלמדנו מ-AI על אופן אימון מערכות אינטליגנטיות צריך (אם כי אני לא בטוח שכבר) לחולל מהפכה במדעי המוח. הרעיון שפונקציית מטרה פשוטה בתוספת הרבה נתונים יכולה להניע התנהגויות מורכבות להפליא הופך אותו למעניין יותר להבין את פונקציות המטרה וההטיות הארכיטקטוניות ופחות מעניין להבין את פרטי החישובים המתהווים.</p>
+
+<p>אני מצפה ש-AI יאיץ את ההתקדמות במדעי המוח לאורך ארבעה מסלולים נפרדים:</p>
+
+<ul>
+<li><strong>ביולוגיה מולקולרית מסורתית, כימיה וגנטיקה.</strong> זה בעצם אותו סיפור כמו הביולוגיה הכללית.</li>
+<li><strong>מדידה והתערבות עצבית ברזולוציה גבוהה.</strong> היכולת למדוד מה הרבה נוירונים בודדים או מעגלים עצביים עושים, ולהתערב כדי לשנות את התנהגותם.</li>
+<li><strong>מדעי המוח החישוביים המתקדמים.</strong> גם התובנות הספציפיות וגם הגישה הכללית של AI מודרני יכולים כנראה להיות מיושמים בצורה פורייה.</li>
+<li><strong>התערבויות התנהגותיות.</strong> פסיכיאטריה ופסיכולוגיה פיתחו מגוון רחב של התערבויות התנהגותיות, ו-AI יכול להאיץ גם את אלו. הרעיון של "מאמן AI" שתמיד עוזר לך להיות הגרסה הטובה ביותר של עצמך נראה מבטיח מאוד.</li>
+</ul>
+
+<p>הניחוש שלי למה שיקרה בפועל:</p>
+
+<ul>
+<li><strong>רוב המחלות הנפשיות כנראה ניתנות לריפוי.</strong> מחלות כמו PTSD, דיכאון, סכיזופרניה, התמכרות וכו׳ יכולות כנראה להיפתר ולקבל טיפול יעיל מאוד באמצעות שילוב כלשהו של ארבעת הכיוונים שלמעלה.</li>
+<li><strong>מצבים "מבניים" מאוד עשויים להיות קשים יותר, אך לא בלתי אפשריים.</strong> אולי יש דרך כלשהי לשכנע את המוח הבוגר למצב מוקדם או פלסטי יותר שבו ניתן לעצב אותו מחדש.</li>
+<li><strong>מניעה גנטית יעילה של מחלות נפש נראית אפשרית.</strong></li>
+<li><strong>גם בעיות יומיומיות שאנחנו לא חושבים עליהן כמחלה קלינית ייפתרו.</strong> כנראה שהרבה יותר תרופות קיימות ולא התגלו, ואולי גם מודליות חדשות לגמרי של התערבות.</li>
+<li><strong>חוויית הבסיס האנושית יכולה להיות הרבה יותר טובה.</strong> "מרחב מה שאפשר לחוות" הוא רחב מאוד וחלק גדול יותר מחייהם של אנשים יכול להיות מורכב מרגעים מיוחדים אלה. זו אולי הגרסה של מדעי המוח של "חופש ביולוגי".</li>
+</ul>
+
+<p>לסיכום, מדעי המוח מואצי-AI צפויים לשפר מאוד טיפולים, או אפילו לרפא, את רוב המחלות הנפשיות, וכן להרחיב מאוד את "החופש הקוגניטיבי והנפשי" ואת היכולות הקוגניטיביות והרגשיות של האדם. אולי העולם לא ייראה אחרת מבחוץ, אבל העולם כפי שחווה אותו בני אדם יהיה מקום הרבה יותר טוב ואנושי יותר.</p>
+
+<hr class="section-break">
+
+<h2>3. פיתוח כלכלי ועוני</h2>
+
+<p>שני הסעיפים הקודמים עוסקים בפיתוח טכנולוגיות חדשות שמרפאות מחלות ומשפרות את איכות חיי האדם. אולם שאלה ברורה, מפרספקטיבה הומניטרית, היא: "האם לכולם תהיה גישה לטכנולוגיות האלה?"</p>
+
+<p>דבר אחד הוא לפתח תרופה למחלה, דבר אחר הוא לחסל את המחלה מהעולם. רמת החיים בחלקים רבים של העולם עדיין עניה באופן נואש: התמ"ג לנפש הוא ~$2,000 בתת-סהרן אפריקה לעומת ~$75,000 בארצות הברית. אם AI יגביר עוד יותר את הצמיחה הכלכלית ואיכות החיים בעולם המפותח, תוך שהוא עושה מעט כדי לעזור לעולם המתפתח, עלינו לראות זאת כישלון מוסרי נורא.</p>
+
+<p>אני לא בטוח ש-AI יכול לטפל באי-שוויון וצמיחה כלכלית באותה מידה שאני בטוח שהוא יכול להמציא טכנולוגיות יסודיות, כי הכלכלה כוללת הרבה אילוצים מבני אדם, כמו גם מנה גדולה של מורכבות מהותית. עם זאת, יש לי סיבות משמעותיות לאופטימיות:</p>
+
+<!-- Economic Development Bar Chart -->
+<div class="svg-chart">
+<svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="300" fill="#fafafa" rx="12"/>
+  <text x="400" y="30" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-weight="600" font-size="16" fill="#1a1a1a">תמ"ג לנפש: מצב נוכחי מול תרחיש אופטימי עם AI (5-10 שנים)</text>
+  
+  <!-- Bars -->
+  <g>
+    <!-- Sub-Saharan Africa current -->
+    <rect x="80" y="210" width="80" height="20" rx="4" fill="#fca5a5"/>
+    <text x="76" y="225" text-anchor="end" font-family="'Noto Sans Hebrew',sans-serif" font-size="11" fill="#666">תת-סהרן אפריקה (היום)</text>
+    <text x="168" y="225" font-family="'Noto Sans Hebrew',sans-serif" font-size="11" fill="#991b1b">$2K</text>
+    
+    <!-- Sub-Saharan Africa projected -->
+    <rect x="80" y="175" width="280" height="20" rx="4" fill="#86efac"/>
+    <text x="76" y="190" text-anchor="end" font-family="'Noto Sans Hebrew',sans-serif" font-size="11" fill="#666">תת-סהרן אפריקה (תרחיש AI)</text>
+    <text x="368" y="190" font-family="'Noto Sans Hebrew',sans-serif" font-size="11" fill="#166534">$20-25K (כסין היום)</text>
+    
+    <!-- Developing world current -->
+    <rect x="80" y="140" width="160" height="20" rx="4" fill="#93c5fd"/>
+    <text x="76" y="155" text-anchor="end" font-family="'Noto Sans Hebrew',sans-serif" font-size="11" fill="#666">עולם מתפתח (היום)</text>
+    <text x="248" y="155" font-family="'Noto Sans Hebrew',sans-serif" font-size="11" fill="#1e3a8a">$6-12K</text>
+    
+    <!-- Developing world projected -->
+    <rect x="80" y="105" width="600" height="20" rx="4" fill="#a78bfa"/>
+    <text x="76" y="120" text-anchor="end" font-family="'Noto Sans Hebrew',sans-serif" font-size="11" fill="#666">עולם מתפתח (תרחיש AI)</text>
+    <text x="688" y="120" font-family="'Noto Sans Hebrew',sans-serif" font-size="11" fill="#4c1d95">>$75K</text>
+    
+    <!-- US current -->
+    <rect x="80" y="70" width="570" height="20" rx="4" fill="#fbbf24"/>
+    <text x="76" y="85" text-anchor="end" font-family="'Noto Sans Hebrew',sans-serif" font-size="11" fill="#666">ארה"ב (היום)</text>
+    <text x="658" y="85" font-family="'Noto Sans Hebrew',sans-serif" font-size="11" fill="#92400e">$75K</text>
+  </g>
+  
+  <text x="400" y="260" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-size="11" fill="#999">תרחיש חלום: צמיחה שנתית של 20% בעולם המתפתח (10% מהחלטות AI + 10% מפיזור טכנולוגיה)</text>
+  <text x="400" y="278" text-anchor="middle" font-family="'Noto Sans Hebrew',sans-serif" font-size="11" fill="#999">* זה לא מה שקורה כברירת מחדל — נדרש מאמץ משותף של כולנו</text>
+</svg>
+</div>
+
+<ul>
+<li><strong>הפצת התערבויות בריאות.</strong> התחום שבו אני הכי אופטימי. מחלות אכן נמחקו בקמפיינים מלמעלה-למטה: אבעבועות שחורות חוסלו לחלוטין בשנות ה-70, ופוליו ותולעת גינאה כמעט נעלמו. מטרה טובה היא שהעולם המתפתח 5-10 שנים לאחר AI חזק יהיה לפחות בריא יותר משמעותית מהעולם המפותח היום.</li>
+<li><strong>צמיחה כלכלית.</strong> כמה כלכלות מזרח אסיה השיגו צמיחה שנתית ריאלית של ~10% בתמ"ג בעשורים האחרונים של המאה ה-20. סביר ש"שרי אוצר ונגידי בנקים מרכזיים של AI" יוכלו לשחזר או לעלות על ההישג הזה. תרחיש חלום: צמיחה שנתית של 20% בעולם המתפתח.</li>
+<li><strong>ביטחון תזונתי.</strong> AI יכול להביא מהפכה ירוקה שנייה המונעת על ידי AI, שתעזור לסגור את הפער בין העולם המתפתח למפותח.</li>
+<li><strong>מיתון שינוי אקלים.</strong> AI יוביל לשיפורים בטכנולוגיות שמאטות או מונעות שינוי אקלים, מהסרת פחמן מהאטמוספירה ואנרגיה נקייה ועד לבשר מעבדה.</li>
+<li><strong>אי-שוויון בתוך מדינות.</strong> אני יותר אופטימי לגבי אי-שוויון בתוך מדינות, במיוחד בעולם המפותח, משתי סיבות: שווקים בדרך כלל טובים בהורדת העלות של טכנולוגיות בעלות ערך גבוה, ומוסדות פוליטיים של העולם המפותח רגישים יותר לאזרחיהם.</li>
+<li><strong>בעיית ה"אופט-אאוט".</strong> חשש הוא שאנשים יסרבו ליתרונות מונעי AI (בדומה לתנועה נגד חיסונים). היסטורית, תנועות נגד טכנולוגיה היו יותר נביחה מנשיכה: רוב האנשים מאמצים את הטכנולוגיה בסופו של דבר.</li>
+</ul>
+
+<p>בסך הכול, אני אופטימי לגבי הבאת ההתקדמות הביולוגית של AI במהירות לאנשים בעולם המתפתח. אני מקווה, אם כי לא בטוח, ש-AI יכול גם לאפשר שיעורי צמיחה כלכלית חסרי תקדים. אם נעשה זאת, נוכל לבצע לפחות מקדמה על ההבטחות של כבוד ושוויון שאנחנו חייבים לכל בן אנוש עלי אדמות.</p>
+
+<hr class="section-break">
+
+<h2>4. שלום וממשל</h2>
+
+<p>נניח שהכול בשלושת הסעיפים הראשונים הולך כשורה: מחלות, עוני ואי-שוויון מצטמצמים משמעותית ובסיס החוויה האנושית עולה בצורה ניכרת. מזה לא נובע שכל הגורמים העיקריים לסבל אנושי נפתרים. בני אדם עדיין מהווים איום זה על זה.</p>
+
+<p>למרבה הצער, אינני רואה סיבה חזקה להאמין ש-AI יקדם באופן מבני דמוקרטיה ושלום, באותו אופן שאני חושב שהוא יקדם מבנית בריאות האדם ויפחית עוני. קונפליקט אנושי הוא יריבי ו-AI יכול בעיקרון לעזור גם ל"טובים" וגם ל"רעים". אם משהו, כמה גורמים מבניים נראים מדאיגים: AI צפוי לאפשר תעמולה ומעקב הרבה יותר טובים, שניהם כלים מרכזיים בארגז הכלים של האוטוקרט.</p>
+
+<p>לכן, תלוי בנו כשחקנים אינדיבידואליים להטות דברים לכיוון הנכון. אני חושב על הנושא כמחולק לשני חלקים: קונפליקט בינלאומי, והמבנה הפנימי של מדינות.</p>
+
+<p>בצד הבינלאומי, נראה חשוב מאוד שדמוקרטיות יהיו בעמדת עליונות על הבמה העולמית כש-AI חזק נוצר. הניחוש הנוכחי שלי לגבי הדרך הטובה ביותר לעשות זאת הוא באמצעות <strong>"אסטרטגיית אנטנטה"</strong>, שבה קואליציה של דמוקרטיות מבקשת להשיג יתרון ברור על AI חזק על ידי אבטחת שרשרת האספקה שלו, התרחבות מהירה, ומניעת גישה של יריבים למשאבי מפתח כמו שבבים וציוד מוליכים למחצה. קואליציה זו תשתמש מצד אחד ב-AI להשגת עליונות צבאית יציבה (המקל) ובד בבד תציע להפיץ את היתרונות של AI חזק (הגזר) לקבוצה הולכת וגדלה של מדינות בתמורה לתמיכה באסטרטגיית הקואליציה לקידום דמוקרטיה.</p>
+
+<p>אם נוכל לעשות את כל זה, אולי זה יוביל באופן אופטימי ל"1991 נצחי" — עולם שבו דמוקרטיות מובילות וחלומותיו של פוקויאמה מתממשים.</p>
+
+<p>גם אם כל זה הולך כשורה, נותרת שאלת המאבק בין דמוקרטיה לאוטוקרטיה בתוך כל מדינה. יש לי אופטימיות מסוימת שבסביבה גלובלית שבה דמוקרטיות שולטות ב-AI החזק ביותר, AI עשוי למעשה להעדיף מבנית דמוקרטיה בכל מקום — באמצעות סביבת מידע חופשית שאוטוקרטיות חסרות את היכולת הטכנית לחסום או לנטר.</p>
+
+<p>ניתן גם לשאול כיצד דברים יכולים להיות "טובים מהרגיל" — לא רק כיצד להימנע מאוטוקרטיה, אלא כיצד להפוך דמוקרטיות לטובות יותר ממה שהן היום:</p>
+
+<ul>
+<li><strong>שיפור מערכת המשפט.</strong> AI הוא הטכנולוגיה הראשונה המסוגלת לבצע שיפוטים רחבים ומעורפלים בצורה חזירה ומכנית. שילוב של אובייקטיביות עם היכולת להבין מצבים מבולגנים בעולם האמיתי אמור לייצר יישומים חיוביים רציניים למשפט וצדק.</li>
+<li><strong>מיצוב דעות ובניית קונצנזוס.</strong> AI יכול לשמש גם לאיגום דעות וגם להנעת קונצנזוס בין אזרחים.</li>
+<li><strong>אספקת שירותי ממשלה.</strong> AI שמושכל ומתחשב שתפקידו לתת לך את כל מה שמגיע לך מהממשלה בחוק בצורה שאתה יכול להבין — ושגם עוזר לך לציית לכללים ממשלתיים מבלבלים — יהיה עניין גדול.</li>
+</ul>
+
+<p>כל אלה הם רעיונות מעורפלים במידת מה, ואני לא בטוח בכדאיותם כמו בהתקדמויות בביולוגיה. אבל הדבר החשוב הוא שיהיה חזון שאפתני. החזון של AI כערב לחירות, זכויות פרט ושוויון בפני החוק הוא חזון חזק מדי מכדי שלא להילחם למענו.</p>
+
+<hr class="section-break">
+
+<h2>5. עבודה ומשמעות</h2>
+
+<p>גם אם הכול בארבעת הסעיפים הקודמים הולך כשורה, נשארת לפחות שאלה חשובה אחת. "זה נהדר שאנחנו חיים בעולם כל כך מתקדם טכנולוגית וגם הוגן והגון", מישהו עשוי להתנגד, "אבל כש-AI עושה הכול, כיצד יהיה לבני אדם משמעות? ולעניין זה, כיצד הם ישרדו כלכלית?"</p>
+
+<p>אני חושב שהשאלה הזו קשה יותר מהאחרות. לא בהכרח שאני יותר פסימי לגביה, אלא שהיא מעורפלת יותר וקשה יותר לחיזוי מראש, כי היא נוגעת לשאלות מקרוסקופיות על אופן ארגון החברה שנוטות להיפתר רק עם הזמן ובאופן מבוזר.</p>
+
+<p>בשאלת המשמעות, אני חושב שזו ככל הנראה טעות להאמין שמשימות שאתה מבצע חסרות משמעות רק כי AI יכול לעשות אותן טוב יותר. רוב האנשים אינם הטובים בעולם בשום דבר, וזה לא נראה שמפריע להם במיוחד. אני מבלה הרבה זמן במשחקי וידאו, שחייה, הליכה בחוץ ושיחות עם חברים, שכולם מייצרים אפס ערך כלכלי. אני חושב שמשמעות מגיעה בעיקר מיחסים אנושיים וחיבור, לא מעבודה כלכלית.</p>
+
+<p>הנושא הכלכלי למעשה נראה לי קשה יותר מנושא המשמעות. בטווח הקצר אני מסכים עם הטענות שליתרון יחסי ימשיך לשמור אנשים רלוונטיים ולמעשה יגדיל את הפרודוקטיביות שלהם. כל עוד AI רק טוב יותר ב-90% מעבודה נתונה, 10% האחרים יגרמו לבני אדם להפוך לממונפים מאוד. תחום אחד שבו לבני אדם צפוי להיות יתרון יחסי (או אפילו מוחלט) לזמן משמעותי הוא העולם הפיזי.</p>
+
+<p>עם זאת, אני כן חושב שבטווח הארוך AI יהפוך לכל כך יעיל באופן רחב וכל כך זול שזה כבר לא יחול. בנקודה הזו, הסידור הכלכלי הנוכחי שלנו כבר לא יהיה הגיוני, ויהיה צורך בשיחה חברתית רחבה יותר על אופן ארגון הכלכלה.</p>
+
+<p>אמנם זה עשוי להישמע מטורף, אבל העובדה היא שהציוויליזציה ניווטה בהצלחה שינויים כלכליים גדולים בעבר: ממשק ואיסוף לחקלאות, מחקלאות לפאודליזם, ומפאודליזם לתעשיינות. אני חושד שמשהו חדש ומוזר יותר יידרש, ושזה משהו שאיש היום לא עשה עבודה טובה בלתאר. זה יכול להיות פשוט כמו הכנסה בסיסית אוניברסלית גדולה לכולם, אם כי אני חושד שזה יהיה רק חלק קטן מפתרון.</p>
+
+<hr class="section-break">
+
+<h2>סיכום</h2>
+
+<p>דרך הנושאים המגוונים שלמעלה, ניסיתי להציג חזון של עולם שהוא גם סביר אם הכול הולך כשורה עם AI, וגם טוב הרבה יותר מהעולם היום. אני לא יודע אם העולם הזה מציאותי, וגם אם הוא כן, הוא לא יושג ללא מאמץ עצום ומאבק של אנשים רבים אמיצים ומסורים. כולם (כולל חברות AI!) יצטרכו לעשות את חלקם גם כדי למנוע סיכונים וגם כדי לממש את היתרונות במלואם.</p>
+
+<p>אבל זה עולם ששווה להילחם למענו. אם כל זה באמת יקרה במהלך 5 עד 10 שנים — הבסת רוב המחלות, הצמיחה בחופש הביולוגי והקוגניטיבי, הרמת מיליארדי אנשים מעוני כדי לחלוק בטכנולוגיות החדשות, רנסנס של דמוקרטיה ליברלית וזכויות אדם — אני חושד שכל מי שצופה בכך יופתע מההשפעה שזה יהיה עליו. אני לא מתכוון לחוויה של להפיק תועלת אישית מכל הטכנולוגיות החדשות, למרות שזה בוודאי יהיה מדהים. אני מתכוון לחוויה של לצפות בסט אידיאלים שנשמר זמן רב מתממש מול כולנו בבת אחת. אני חושב שרבים ממש יזילו דמעות מזה.</p>
+
+<p>במהלך כתיבת המאמר הזה שמתי לב למתח מעניין. במובן אחד, החזון שמוצג כאן הוא רדיקלי מאוד: זה לא מה שכמעט אף אחד מצפה שיקרה בעשור הקרוב, וככל הנראה ייראה לרבים כפנטזיה אבסורדית. אבל באותו הזמן יש בו משהו ברור באופן מסנוור — משהו מוכרע מראש — כאילו ניסיונות רבים ושונים לתאר עולם טוב מובילים בהכרח לכאן בקירוב.</p>
+
+<p>אני חושב שהערכים של התרבות (Culture) מספרי איאן מ. בנקס הם אסטרטגיה מנצחת כי הם סכום של מיליון החלטות קטנות שיש להן כוח מוסרי ברור ושנוטות למשוך את כולם לאותו צד. אינטואיציות אנושיות בסיסיות של הוגנות, שיתוף פעולה, סקרנות ואוטונומיה קשות לוויכוח, והן מצטברות באופן שהדחפים ההרסניים שלנו לעתים קרובות אינם. קל לטעון שילדים לא צריכים למות ממחלה אם אנחנו יכולים למנוע את זה, ומשם קל לטעון שהילדים של כולם ראויים לזכות הזו באותה מידה. משם זה לא רחוק לטעון שכולנו צריכים להתאחד ולהפעיל את השכל שלנו כדי להשיג תוצאה זו.</p>
+
+<p><strong>עם זאת, זהו דבר של יופי מרומם. יש לנו את ההזדמנות לשחק תפקיד קטן בהפיכתו למציאות.</strong></p>
+
+<div class="source-footer">
+<p>המאמר המקורי באנגלית: <a href="https://darioamodei.com/essay/machines-of-loving-grace" target="_blank">Machines of Loving Grace — Dario Amodei</a></p>
+<p>תורגם לעברית. אוקטובר 2024.</p>
+</div>
+
+</div>
+</body>
+</html>
