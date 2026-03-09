@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>כוחות עליונים ומקים נמוכים — סיכום שבועי מ-Stratechery</title>
+    <meta property="og:title" content="כוחות עליונים ומקים נמוכים — סיכום שבועי מ-Stratechery">
+    <meta property="og:description" content="אנתרופיק מול הפנטגון, MacBook Neo של אפל, פרמאונט רוכשת את וורנר בראדרס, הכנסות אנתרופיק שוברות שיאים, ותוצאות אנבידיה — חמישה סיפורים שמעצבים את עתיד הטכנולוגיה">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="כוחות עליונים ומקים נמוכים — סיכום שבועי מ-Stratechery">
+    <meta name="twitter:description" content="אנתרופיק מול הפנטגון, MacBook Neo של אפל, פרמאונט רוכשת את וורנר בראדרס, הכנסות אנתרופיק שוברות שיאים, ותוצאות אנבידיה">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans Hebrew', sans-serif;
+            font-size: 18px;
+            line-height: 1.8;
+            color: #1a1a1a;
+            background: #fff;
+            padding: 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 { font-size: 32px; font-weight: 600; margin-bottom: 10px; }
+        .subtitle { font-size: 20px; color: #555; margin-bottom: 30px; line-height: 1.5; }
+        h2 { font-size: 24px; font-weight: 600; margin: 50px 0 20px; color: #1a1a1a; border-bottom: 2px solid #e0e0e0; padding-bottom: 10px; }
+        h3 { font-size: 20px; font-weight: 600; margin: 30px 0 15px; }
+        p { margin-bottom: 18px; }
+        .intro-box {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 40px;
+        }
+        .intro-box a { color: #0066cc; text-decoration: none; }
+        .intro-box a:hover { text-decoration: underline; }
+        .source-link {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 16px;
+            color: #666;
+        }
+        .source-link a { color: #0066cc; text-decoration: none; }
+        blockquote {
+            border-right: 4px solid #0066cc;
+            padding: 10px 20px;
+            margin: 20px 0;
+            background: #f8f9fa;
+            font-style: italic;
+        }
+        .chart-container {
+            margin: 30px 0;
+            text-align: center;
+        }
+        .chart-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .chart-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        strong { font-weight: 600; }
+        @media (max-width: 600px) {
+            body { padding: 15px; font-size: 16px; }
+            h1 { font-size: 26px; }
+            h2 { font-size: 21px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<h1>כוחות עליונים ומקים נמוכים</h1>
+<p class="subtitle">חמישה סיפורים שמעצבים את עתיד הטכנולוגיה, הביטחון וההוליווד — מתוך הסיכום השבועי של בן תומפסון ב-Stratechery, מרץ 2026</p>
+
+<div class="intro-box">
+    📰 מאמר זה מבוסס על הסיכום השבועי של <strong>Stratechery</strong> — <a href="https://stratechery.com/2026/higher-powers-and-lower-macs/" target="_blank">"Higher Powers and Lower Macs"</a> — בתוספת מחקר מקורי ומקורות נוספים. המאמר המקורי זמין למנויים בלבד.
+</div>
+
+<p>השבוע שחלף היה מהסוערים שידעה תעשיית הטכנולוגיה בשנים האחרונות. מעימות חסר תקדים בין חברת בינה מלאכותית לממשלת ארצות הברית, דרך מחשב נייד של אפל שמחירו שובר כל שיא, ועד עסקת מדיה של 111 מיליארד דולר — חמשת הסיפורים שנסקור כאן מספרים, כל אחד בדרכו, על עולם שבו הכללים הישנים כבר לא עובדים.</p>
+
+<p>בן תומפסון, מייסד Stratechery ואחד מהאנליסטים המשפיעים ביותר בתעשייה, כינה את הסיכום השבועי שלו "כוחות עליונים ומקים נמוכים" (Higher Powers and Lower Macs) — שם שמכיל בתוכו את שני הקטבים של השבוע: מצד אחד, כוחות עליונים — ממשלות, צבאות, תאגידי ענק — שנאבקים על שליטה בטכנולוגיה החזקה ביותר שנוצרה אי פעם. מצד שני, "מקים נמוכים" — אפל שמוכרת לראשונה מק במחיר של 599 דולר, תמורה שהייתה בלתי נתפסת עד לאחרונה.</p>
+
+<!-- ============================================ -->
+<h2>1. אנתרופיק מול ממשלת ארצות הברית: העימות שמגדיר את עידן ה-AI</h2>
+
+<p>אם מישהו חיפש רגע שבו הבינה המלאכותית עברה מנושא טכנולוגי לנושא גיאופוליטי-ביטחוני מהמעלה הראשונה — הוא הגיע. העימות בין אנתרופיק (Anthropic), אחת מחברות ה-AI המובילות בעולם, לבין משרד המלחמה של ארצות הברית (שם חדש שהוחזר לפנטגון) הוא ללא ספק הסיפור הגדול של השבוע — ואולי של השנה כולה.</p>
+
+<h3>הרקע: איך הגענו לכאן</h3>
+
+<p>ביולי 2025, משרד ההגנה האמריקני חתם על חוזי אב בשווי של עד 200 מיליון דולר כל אחד עם ארבע חברות AI מובילות: אנתרופיק, OpenAI, Google DeepMind, ו-xAI של אילון מאסק. המטרה הייתה לאפשר שימוש בטכנולוגיות AI מתקדמות ("frontier AI") עבור סדרי העדיפויות של הביטחון הלאומי.</p>
+
+<p>הבעיה התחילה כשהפנטגון דרש מאנתרופיק להסיר מגבלות מסוימות שהחברה מחילה על המודל שלה, Claude — במיוחד בכל הנוגע לשימוש במודל לצורך <strong>מעקב המוני ביתי</strong> ו<strong>נשק אוטונומי מלא</strong>. אנתרופיק סירבה, בטענה שמדובר בקווים אדומים שהיא לא מוכנה לחצות.</p>
+
+<p>ב-24 בפברואר 2026, שר המלחמה פיט הגסת (Pete Hegseth) נתן לאנתרופיק דד-ליין: עד 17:01 שעון החוף המזרחי של יום שישי — או שתסכימו לתנאים של הממשלה, או שנסיים את הקשר. אנתרופיק לא זעה. מיד לאחר שעבר המועד, הגסת פרסם הכרזה ב-X (לשעבר טוויטר): "העמדה של אנתרופיק אינה עולה בקנה אחד עם העקרונות האמריקניים."</p>
+
+<p>ההגסת הורה לפנטגון להכריז על אנתרופיק כ<strong>"סיכון לשרשרת האספקה הביטחונית"</strong> — צעד חסר תקדים כלפי חברה אמריקנית. משמעות ההכרזה: כל קבלן, ספק, או שותף שעובד עם הצבא האמריקני מנוע מלקיים עסקים עם אנתרופיק. הנשיא טראמפ הוסיף שמן למדורה כשהורה לכל סוכנויות הממשלה "להפסיק מיידית" כל שימוש בטכנולוגיה של אנתרופיק, וכינה את החברה "שמאלנים מטורפים."</p>
+
+<p>דאריו אמודאי, מנכ"ל אנתרופיק, כתב בתגובה: "זכותו של משרד ההגנה לבחור קבלנים שעולים בקנה אחד עם החזון שלו. אבל בהתחשב בערך המשמעותי שהטכנולוגיה של אנתרופיק מספקת לכוחות המזוינים שלנו, אנו מקווים שישקלו מחדש." אנתרופיק הודיעה שתערער על ההחלטה בבית המשפט, בטענה שלהגסת אין סמכות חוקית לכפות את האיסור מעבר לעבודה צבאית ישירה.</p>
+
+<h3>ההקבלה לנשק גרעיני</h3>
+
+<p>אחד ההיבטים המרתקים ביותר של הסיכום של תומפסון הוא הראיון עם <strong>גרגורי אלן</strong> (Gregory C. Allen), יועץ בכיר במרכז ואדהואני ל-AI ב-CSIS (המרכז ללימודים אסטרטגיים ובינלאומיים). אלן, שחוקר מזה שנים את המפגש בין AI לביטחון לאומי, מצביע על הקבלות מדאיגות בין הויכוח הנוכחי לבין ארבעה תקדימים היסטוריים של טכנולוגיה צבאית טרנספורמטיבית: <strong>גרעין, חלל-אוויר, סייבר, וביוטכנולוגיה</strong>.</p>
+
+<p>ההקבלה לנשק הגרעיני חריפה במיוחד. בתחילת עידן הגרעין, הייתה אופוריה טכנולוגית — האמונה שאפשר לנצל את הכוח החדש לכל מטרה. לקח עשרות שנים, מלחמה קרה, וכמה רגעי קרבה לאסון, כדי לפתח את מסגרת הבקרה והפיקוח שאנחנו מכירים היום. אלן שואל: האם אנחנו בתחילת מסלול דומה עם AI?</p>
+
+<p>המדיניות הנוכחית של ארצות הברית בנוגע ל-AI ופיקוד גרעיני היא חד-משמעית: בן אדם תמיד בלולאה. אבל הפנטגון מעדכן כעת את מדיניות הנשק האוטונומי שלו (DODD 3000.09) — מדיניות בת עשור — ויש בלבול נרחב לגבי מה בדיוק מותר ומה אסור.</p>
+
+<div class="chart-container">
+<div class="chart-title">ציר הזמן: אנתרופיק מול הפנטגון</div>
+<svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" style="direction:ltr">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#0066cc"/>
+    </marker>
+  </defs>
+  <!-- Timeline line -->
+  <line x1="80" y1="160" x2="750" y2="160" stroke="#0066cc" stroke-width="3" marker-end="url(#arrow)"/>
+  <!-- Events -->
+  <circle cx="130" cy="160" r="8" fill="#0066cc"/>
+  <text x="130" y="130" text-anchor="middle" font-size="12" font-family="Noto Sans Hebrew" fill="#1a1a1a" font-weight="600">יולי 2025</text>
+  <text x="130" y="195" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#555">חוזי $200M</text>
+  <text x="130" y="210" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#555">עם 4 חברות AI</text>
+
+  <circle cx="280" cy="160" r="8" fill="#0066cc"/>
+  <text x="280" y="130" text-anchor="middle" font-size="12" font-family="Noto Sans Hebrew" fill="#1a1a1a" font-weight="600">ינואר 2026</text>
+  <text x="280" y="195" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#555">אסטרטגיית AI</text>
+  <text x="280" y="210" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#555">של הפנטגון</text>
+
+  <circle cx="430" cy="160" r="8" fill="#e63946"/>
+  <text x="430" y="130" text-anchor="middle" font-size="12" font-family="Noto Sans Hebrew" fill="#1a1a1a" font-weight="600">24 פברואר</text>
+  <text x="430" y="195" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#555">אולטימטום</text>
+  <text x="430" y="210" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#555">של הגסת</text>
+
+  <circle cx="560" cy="160" r="8" fill="#e63946"/>
+  <text x="560" y="130" text-anchor="middle" font-size="12" font-family="Noto Sans Hebrew" fill="#1a1a1a" font-weight="600">28 פברואר</text>
+  <text x="560" y="195" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#555">טראמפ: רשימה</text>
+  <text x="560" y="210" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#555">שחורה ממשלתית</text>
+
+  <circle cx="700" cy="160" r="8" fill="#e63946"/>
+  <text x="700" y="130" text-anchor="middle" font-size="12" font-family="Noto Sans Hebrew" fill="#1a1a1a" font-weight="600">6 מרץ</text>
+  <text x="700" y="195" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#555">הפנטגון: &quot;סיכון</text>
+  <text x="700" y="210" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#555">לשרשרת אספקה&quot;</text>
+
+  <!-- Legend -->
+  <circle cx="250" cy="280" r="6" fill="#0066cc"/>
+  <text x="235" y="285" text-anchor="end" font-size="12" font-family="Noto Sans Hebrew" fill="#555">שיתוף פעולה</text>
+  <circle cx="450" cy="280" r="6" fill="#e63946"/>
+  <text x="435" y="285" text-anchor="end" font-size="12" font-family="Noto Sans Hebrew" fill="#555">עימות</text>
+</svg>
+</div>
+
+<h3>עמדת תומפסון: לגיטימי אבל בלתי נסבל</h3>
+
+<p>תומפסון, כדרכו, לא בוחר צד באופן פשטני. הוא מכיר בכך שהדאגות של אנתרופיק <strong>לגיטימיות</strong> — אכן יש סיכונים אמיתיים בשימוש ב-AI ללא מגבלות לצורכי מעקב ונשק אוטונומי. אבל הוא מוסיף שהעמדה של אנתרופיק היא "בלתי נסבלת ומנותקת מהמציאות." למה? כי בסופו של דבר, חברה פרטית לא יכולה ולא צריכה להיות זו שמחליטה מה צבא דמוקרטי עושה ומה לא.</p>
+
+<p>זו נקודה חשובה. מאז מלחמת העולם השנייה, ממשלת ארצות הברית הגדירה את החזית של הטכנולוגיה המתקדמת. המחשוב, האינטרנט, ה-GPS — כולם נולדו בפרויקטים ממשלתיים. עכשיו, לראשונה, הטכנולוגיה המתקדמת ביותר נמצאת בידיים פרטיות. ואותן ידיים פרטיות אומרות לממשלה: "לא."</p>
+
+<p>כפי שציינה לורן קאהן, חוקרת בכירה במרכז ג'ורג'טאון לביטחון וטכנולוגיה מתעוררת: "אין מנצחים כאן. זה משאיר טעם רע בפה של כולם."</p>
+
+<p>העניין הוא שהעימות הזה הוא רק ההתחלה. OpenAI ו-Google עלולות למצוא את עצמן באותו מצב מחר. השאלה המרכזית — מי קובע את הגבולות של AI צבאי, החברות הפרטיות או הממשלה הנבחרת — היא שאלה שתלווה אותנו עשרות שנים. הביולטין של מדעני האטום (Bulletin of the Atomic Scientists) אף פרסם ניתוח שכותרתו "העימות של אנתרופיק עם משרד המלחמה עלול לגרום לאסון ברמה אקזיסטנציאלית."</p>
+
+<p>תומפסון מציע שהפתרון חייב להיות מוסדי — רגולציה ברורה, מנגנוני פיקוח שקופים, ותהליכי התקשרות שמאזנים בין צרכים ביטחוניים לגבולות אתיים. אבל בינתיים, במציאות של מרץ 2026, אנחנו במקום של עימות חסר תקדים.</p>
+
+<!-- ============================================ -->
+<h2>2. MacBook Neo: הפעם הראשונה שאפל רצתה להיות זולה</h2>
+
+<p>אפל הכריזה על ה-MacBook Neo, ובכך השיקה מחשב נייד חדש לגמרי שמטרתו העיקרית — לראשונה בתולדות החברה — היא להיות <strong>זול</strong>. לא דק, לא חזק, לא אלגנטי-במיוחד. פשוט זול. $599.</p>
+
+<h3>מפרט: שבב אייפון במק</h3>
+
+<p>ה-MacBook Neo הוא ההפתעה הגדולה של האירוע של אפל בתחילת מרץ. לאחר שבוע של הכרזות — iPhone 17e, iPad Air מחודש, ו-MacBook Pro עם שבבי M5 — אפל חשפה קטגוריה חדשה לגמרי בליין-אפ שלה.</p>
+
+<p>המפרט מספר את הסיפור: שבב <strong>A18 Pro</strong> — אותו מעבד שנמצא ב-iPhone 16 Pro ו-Pro Max שהושק ב-2024. לראשונה בהיסטוריה, מק משתמש בשבב של אייפון במקום בשבבי סדרת M. עוד: <strong>8GB של זיכרון מאוחד</strong> (כמו אייפון, חצי מה-MacBook Air), <strong>6 ליבות CPU</strong>, <strong>5 ליבות GPU</strong>, מסך Liquid Retina בגודל 12.9 אינץ' ברזולוציה של 2408x1506, ו-256GB אחסון בדגם הבסיסי.</p>
+
+<p>הצבעים — Silver, Indigo, Blush, ו-Citrus — מזכירים את ה-iBook G3 המיתולוגי ואת ה-iMac הנוכחי. המחשב שוקל 1.22 ק"ג ועובי של 1.27 ס"מ — מעט עבה יותר מה-MacBook Air. חיי סוללה ליום שלם, מצלמה 1080p, רמקולים עם Dolby Atmos, וחיישן Touch ID (רק בדגם ה-$699 עם 512GB).</p>
+
+<div class="chart-container">
+<div class="chart-title">השוואת מחירי כניסה: ליין-אפ ה-Mac</div>
+<svg viewBox="0 0 700 350" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect x="50" y="20" width="620" height="300" fill="#f8f9fa" rx="8"/>
+  <!-- Y axis labels -->
+  <text x="45" y="270" text-anchor="end" font-size="13" font-family="Noto Sans Hebrew" fill="#555">$0</text>
+  <text x="45" y="220" text-anchor="end" font-size="13" font-family="Noto Sans Hebrew" fill="#555">$500</text>
+  <text x="45" y="170" text-anchor="end" font-size="13" font-family="Noto Sans Hebrew" fill="#555">$1,000</text>
+  <text x="45" y="120" text-anchor="end" font-size="13" font-family="Noto Sans Hebrew" fill="#555">$1,500</text>
+  <text x="45" y="70" text-anchor="end" font-size="13" font-family="Noto Sans Hebrew" fill="#555">$2,000</text>
+  <!-- Grid lines -->
+  <line x1="55" y1="265" x2="660" y2="265" stroke="#ddd" stroke-width="1"/>
+  <line x1="55" y1="215" x2="660" y2="215" stroke="#ddd" stroke-width="1"/>
+  <line x1="55" y1="165" x2="660" y2="165" stroke="#ddd" stroke-width="1"/>
+  <line x1="55" y1="115" x2="660" y2="115" stroke="#ddd" stroke-width="1"/>
+  <line x1="55" y1="65" x2="660" y2="65" stroke="#ddd" stroke-width="1"/>
+  <!-- Bars -->
+  <rect x="100" y="145" width="80" height="120" fill="#0066cc" rx="4"/>
+  <text x="140" y="140" text-anchor="middle" font-size="14" font-family="Noto Sans Hebrew" fill="#0066cc" font-weight="600">$1,199</text>
+  <text x="140" y="290" text-anchor="middle" font-size="13" font-family="Noto Sans Hebrew" fill="#1a1a1a">MacBook Air</text>
+
+  <rect x="250" y="65" width="80" height="200" fill="#333" rx="4"/>
+  <text x="290" y="58" text-anchor="middle" font-size="14" font-family="Noto Sans Hebrew" fill="#333" font-weight="600">$1,999</text>
+  <text x="290" y="290" text-anchor="middle" font-size="13" font-family="Noto Sans Hebrew" fill="#1a1a1a">MacBook Pro</text>
+
+  <rect x="400" y="205" width="80" height="60" fill="#e63946" rx="4"/>
+  <text x="440" y="198" text-anchor="middle" font-size="14" font-family="Noto Sans Hebrew" fill="#e63946" font-weight="600">$599</text>
+  <text x="440" y="290" text-anchor="middle" font-size="13" font-family="Noto Sans Hebrew" fill="#1a1a1a">MacBook Neo</text>
+
+  <rect x="550" y="185" width="80" height="80" fill="#999" rx="4"/>
+  <text x="590" y="178" text-anchor="middle" font-size="14" font-family="Noto Sans Hebrew" fill="#999" font-weight="600">$799</text>
+  <text x="590" y="290" text-anchor="middle" font-size="13" font-family="Noto Sans Hebrew" fill="#1a1a1a">M1 Air</text>
+  <text x="590" y="305" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#999">(לשעבר)</text>
+</svg>
+</div>
+
+<h3>"ספיישל של טים קוק" — שום שבב לא ילך לפח</h3>
+
+<p>תומפסון מכנה את ה-MacBook Neo "ספיישל של טים קוק" — וזה לא בהכרח מחמאה ולא בהכרח ביקורת. המשמעות: טים קוק, שהוא קודם כל אשף שרשרת אספקה, מצא דרך לוודא שאף שבב אייפון לא ילך לפח. שבבי A18 Pro שלא עברו את בקרת האיכות לאייפון, או שנותרו עודפים בייצור, מקבלים עכשיו בית חדש — ב-Mac.</p>
+
+<p>זה ההפך הגמור מה-MacBook Air הדק-במיוחד. אם המוטיבציה מאחורי ה-Air הייתה "בואו נעשה את המחשב הכי דק ואלגנטי שאפשר," המוטיבציה כאן היא "בואו נעשה את המחשב הכי זול שאפשר" — ולמחזר שבבי אייפון בדרך. זה קלאסי טים קוק: יעילות תפעולית מרבית, אפס בזבוז.</p>
+
+<p>האייפדים השתמשו בשבבי Mac במשך שנים (סדרת M ב-iPad Pro). עכשיו הכיוון מתהפך: מק משתמש בשבב אייפון. זה אומר שאקולוגיית Apple Silicon הפכה למעגל שלם — שבבים נעים בשני הכיוונים בין מוצרים.</p>
+
+<h3>המשמעות האסטרטגית</h3>
+
+<p>ה-MacBook Neo מכוון ישירות לשני קהלים: משתמשי Chromebook שרוצים יותר, ומשתמשי Windows שמחפשים אלטרנטיבה זולה. עם $599, אפל נכנסת לטריטוריה שמעולם לא פעלה בה — וזה מרתק.</p>
+
+<p>יש כאן גם היגיון עסקי עמוק יותר. כל MacBook Neo הוא שער כניסה לאקוסיסטם של אפל. משתמש שמתחיל עם מק ב-$599 עשוי לרכוש iCloud+, Apple Music, Apple TV+, ובסופו של דבר — iPhone. אפל משחקת כאן את המשחק הארוך.</p>
+
+<!-- ============================================ -->
+<h2>3. פרמאונט מנצחת את Netflix בקרב על וורנר בראדרס</h2>
+
+<p>בעסקת הענק שעשויה לעצב מחדש את הוליווד, <strong>Paramount Skydance</strong> ניצחה את Netflix בקרב על רכישת <strong>Warner Bros. Discovery</strong>. Netflix פרשה מההתמודדות, ופרמאונט זכתה עם הצעה עוינת של $31 למניה — עסקה בשווי כולל של <strong>111 מיליארד דולר</strong>.</p>
+
+<h3>הסאגה המלאה</h3>
+
+<p>הסיפור התחיל בדצמבר 2025 כשפרמאונט סקיידאנס הגישה הצעה עוינת (hostile bid) לרכישת WBD. Netflix הגיבה עם הצעה משלה — לרכוש את נכסי הסטרימינג והסטודיו של WBD (ללא רשתות הכבלים) ב-$27.75 למניה. הדירקטוריון של WBD אישר את עסקת Netflix.</p>
+
+<p>אבל פרמאונט לא ויתרה. ב-24 בפברואר 2026 היא העלתה את ההצעה ל-$31 למניה, הכל במזומן — עבור <strong>כל</strong> WBD, כולל רשתות הכבלים CNN, TBS ו-TNT. Netflix קיבלה שהות של ארבעה ימים לתת הצעה משופרת.</p>
+
+<p>Netflix בחרה לפרוש. "העסקה שמשאנו עליה הייתה יוצרת ערך לבעלי המניות עם מסלול ברור לאישור רגולטורי," אמרו מנכ"לי Netflix טד סרנדוס וגרג פיטרס. "אבל תמיד היינו ממושמעים, ובמחיר הנדרש כדי לעמוד בהצעה של פרמאונט, העסקה כבר לא אטרקטיבית מבחינה פיננסית."</p>
+
+<p>מניית Netflix זינקה ב-10% לאחר ההודעה — השוק חגג את המשמעת הפיננסית. מניית פרמאונט עלתה ב-5%. מניית WBD ירדה ב-2%.</p>
+
+<div class="chart-container">
+<div class="chart-title">מלחמת ההצעות: Netflix מול Paramount על WBD</div>
+<svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+  <rect x="50" y="20" width="620" height="260" fill="#f8f9fa" rx="8"/>
+  <!-- Labels -->
+  <text x="60" y="50" font-size="14" font-family="Noto Sans Hebrew" fill="#1a1a1a" font-weight="600">מחיר למניה ($)</text>
+  <!-- Netflix line -->
+  <polyline points="120,180 280,165 440,155 520,155" fill="none" stroke="#e63946" stroke-width="3"/>
+  <circle cx="120" cy="180" r="5" fill="#e63946"/>
+  <circle cx="280" cy="165" r="5" fill="#e63946"/>
+  <circle cx="440" cy="155" r="5" fill="#e63946"/>
+  <circle cx="520" cy="155" r="5" fill="#e63946"/>
+  <text x="120" y="200" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#e63946">$24</text>
+  <text x="280" y="185" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#e63946">$26</text>
+  <text x="440" y="175" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#e63946">$27.75</text>
+  <text x="520" y="175" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#e63946">פרישה ❌</text>
+  <!-- Paramount line -->
+  <polyline points="200,170 360,150 520,120" fill="none" stroke="#0066cc" stroke-width="3"/>
+  <circle cx="200" cy="170" r="5" fill="#0066cc"/>
+  <circle cx="360" cy="150" r="5" fill="#0066cc"/>
+  <circle cx="520" cy="120" r="5" fill="#0066cc"/>
+  <text x="200" y="160" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#0066cc">$28</text>
+  <text x="360" y="140" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#0066cc">$30</text>
+  <text x="520" y="110" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#0066cc">$31 ✓</text>
+  <!-- Legend -->
+  <line x1="180" y1="250" x2="210" y2="250" stroke="#e63946" stroke-width="3"/>
+  <text x="175" y="255" text-anchor="end" font-size="13" font-family="Noto Sans Hebrew" fill="#e63946">Netflix</text>
+  <line x1="380" y1="250" x2="410" y2="250" stroke="#0066cc" stroke-width="3"/>
+  <text x="375" y="255" text-anchor="end" font-size="13" font-family="Noto Sans Hebrew" fill="#0066cc">Paramount</text>
+  <!-- Time axis -->
+  <text x="120" y="235" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#999">דצמבר 2025</text>
+  <text x="320" y="235" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#999">ינואר 2026</text>
+  <text x="520" y="235" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#999">פברואר 2026</text>
+</svg>
+</div>
+
+<h3>מה Netflix הפסידה — ומה הרוויחה</h3>
+
+<p>Netflix הפסידה את הספרייה של Warner Bros. — אחת הספריות הגדולות והחשובות בהיסטוריית הקולנוע. Harry Potter, DC, Game of Thrones, Looney Tunes — כל אלה יישארו בידי פרמאונט. זה מכאיב.</p>
+
+<p>אבל Netflix גם הציגה משמעת פיננסית מרשימה. סרנדוס תיאר את העסקה כ-"nice to have במחיר הנכון, לא must have בכל מחיר." השוק תגמל את זה. Netflix לא צריכה לרכוש תוכן — היא יודעת ליצור אותו. בשנת 2025 היא הוציאה למעלה מ-17 מיליארד דולר על תוכן מקורי. היא לא צריכה את באטמן כדי להצליח.</p>
+
+<p>מהצד השני, פרמאונט סקיידאנס — בהובלת דיוויד אליסון, יורש אורקל — יוצרת את אחד מתאגידי המדיה הגדולים בהיסטוריה. השילוב של Paramount (Paramount+, CBS, Nickelodeon, MTV) עם WBD (HBO, CNN, Warner Bros. Studios, DC) ייצור ישות שמתחרה בדיסני מבחינת עומק הספרייה ובNetflix מבחינת הפצה.</p>
+
+<p>דייוויד זאסלב, מנכ"ל WBD, אמר: "אנחנו נרגשים מהפוטנציאל של פרמאונט סקיידאנס ו-Warner Bros. Discovery משולבים ולא יכולים לחכות להתחיל לעבוד ביחד לספר את הסיפורים שמניעים את העולם."</p>
+
+<p>אבל לא כולם שמחים. עסקה של 111 מיליארד דולר שמאחדת שני סטודיו גדולים תעורר ביקורת רגולטורית, דאגות לגבי ריכוזיות, ושאלות לגבי פיטורים. הוליווד חרדה.</p>
+
+<!-- ============================================ -->
+<h2>4. הכנסות אנתרופיק: מהירות הבריחה של ה-Enterprise</h2>
+
+<p>בזמן שאנתרופיק נלחמת בפנטגון, העסק שלה פשוט עף. לפי הערכות Sacra, אנתרופיק הגיעה ל<strong>-19 מיליארד דולר בהכנסות שנתיות מחושבות (annualized revenue)</strong> במרץ 2026. זה עלייה מ-14 מיליארד בפברואר ו-9 מיליארד בסוף 2025. קצב הצמיחה הוא מטורף — הכפלה בתוך שלושה חודשים.</p>
+
+<div class="chart-container">
+<div class="chart-title">הכנסות אנתרופיק — קצב שנתי מחושב (מיליארדי $)</div>
+<svg viewBox="0 0 700 350" xmlns="http://www.w3.org/2000/svg">
+  <rect x="60" y="20" width="600" height="290" fill="#f8f9fa" rx="8"/>
+  <!-- Y axis -->
+  <text x="55" y="275" text-anchor="end" font-size="12" font-family="Noto Sans Hebrew" fill="#555">$0</text>
+  <text x="55" y="225" text-anchor="end" font-size="12" font-family="Noto Sans Hebrew" fill="#555">$5B</text>
+  <text x="55" y="175" text-anchor="end" font-size="12" font-family="Noto Sans Hebrew" fill="#555">$10B</text>
+  <text x="55" y="125" text-anchor="end" font-size="12" font-family="Noto Sans Hebrew" fill="#555">$15B</text>
+  <text x="55" y="75" text-anchor="end" font-size="12" font-family="Noto Sans Hebrew" fill="#555">$20B</text>
+  <!-- Grid -->
+  <line x1="65" y1="270" x2="650" y2="270" stroke="#ddd"/>
+  <line x1="65" y1="220" x2="650" y2="220" stroke="#ddd"/>
+  <line x1="65" y1="170" x2="650" y2="170" stroke="#ddd"/>
+  <line x1="65" y1="120" x2="650" y2="120" stroke="#ddd"/>
+  <line x1="65" y1="70" x2="650" y2="70" stroke="#ddd"/>
+  <!-- Area fill -->
+  <polygon points="120,250 230,230 340,210 450,180 510,140 580,80 580,270 120,270" fill="#0066cc" opacity="0.15"/>
+  <!-- Line -->
+  <polyline points="120,250 230,230 340,210 450,180 510,140 580,80" fill="none" stroke="#0066cc" stroke-width="3"/>
+  <!-- Points -->
+  <circle cx="120" cy="250" r="5" fill="#0066cc"/>
+  <text x="120" y="245" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#0066cc" font-weight="600">$2B</text>
+  <circle cx="230" cy="230" r="5" fill="#0066cc"/>
+  <text x="230" y="225" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#0066cc" font-weight="600">$4B</text>
+  <circle cx="340" cy="210" r="5" fill="#0066cc"/>
+  <text x="340" y="205" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#0066cc" font-weight="600">$6B</text>
+  <circle cx="450" cy="180" r="5" fill="#0066cc"/>
+  <text x="450" y="175" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#0066cc" font-weight="600">$9B</text>
+  <circle cx="510" cy="140" r="5" fill="#0066cc"/>
+  <text x="510" y="133" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#0066cc" font-weight="600">$14B</text>
+  <circle cx="580" cy="80" r="6" fill="#e63946"/>
+  <text x="580" y="70" text-anchor="middle" font-size="13" font-family="Noto Sans Hebrew" fill="#e63946" font-weight="600">$19B</text>
+  <!-- X axis -->
+  <text x="120" y="295" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#999">Q1 '25</text>
+  <text x="230" y="295" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#999">Q2 '25</text>
+  <text x="340" y="295" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#999">Q3 '25</text>
+  <text x="450" y="295" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#999">Q4 '25</text>
+  <text x="510" y="295" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#999">פבר' 26</text>
+  <text x="580" y="295" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#999">מרץ 26</text>
+</svg>
+</div>
+
+<h3>הסוכנים כמנוע הצמיחה</h3>
+
+<p>מה מניע את הצמיחה המטורפת הזו? שני מילים: <strong>סוכני AI</strong> (AI Agents). בפברואר 2026, אנתרופיק השיקה מערכת פלאגינים חדשה לארגונים שמאפשרת פריסה של סוכנים מוכנים מראש — לפיננסים, הנדסה, ועיצוב. קייט ג'נסן, ראשת Anthropic Americas, הסבירה: "2025 היה אמור להיות שנת הסוכנים, אבל ההייפ התברר כמוקדם מדי. זו לא הייתה כישלון של מאמץ — זו הייתה כישלון של גישה."</p>
+
+<p>עכשיו, בתחילת 2026, הגישה השתנתה. במקום לנסות לבנות סוכנים כלליים שעושים הכל, אנתרופיק מציעה סוכנים ממוקדים שמתחברים לתוכנות קיימות — מה שמאיים ישירות על ענקיות ה-SaaS המסורתיות. מנויי Claude Code הארגוניים הוכפלו פי ארבע מתחילת 2026, ושימוש ארגוני מהווה כעת <strong>למעלה ממחצית מכלל הכנסות Claude Code</strong>.</p>
+
+<p>בפברואר 2026, אנתרופיק גייסה סבב G ענק — 30 מיליארד דולר בשווי של 380 מיליארד דולר. מדובר באחד הגיוסים הגדולים בהיסטוריה. והעובדה שזה קרה באותו שבוע שבו הפנטגון הכריז עליהם כ"סיכון לשרשרת אספקה" — אומרת הכל על המצב הפרדוקסלי של החברה.</p>
+
+<h3>האיום על תוכנת SaaS</h3>
+
+<p>תומפסון מצביע על נקודה מרתקת: סוכני AI מאיימים על מודל העסקים של תוכנת SaaS ארגונית, אבל <strong>מגבירים</strong> את הביקוש לשבבים. כל סוכן שרץ ברקע, מנתח מסמכים, כותב קוד, או מנהל תהליכים — צורך כוח חישוב. והרבה ממנו. זה מעגל שנוצר: יותר סוכנים → יותר ביקוש לשבבים → יותר הכנסות לאנבידיה → יותר יכולת חישוב → סוכנים טובים יותר → עוד יותר סוכנים.</p>
+
+<!-- ============================================ -->
+<h2>5. תוצאות אנבידיה: נקודת הפיתול של הסוכנים</h2>
+
+<p>ואם דיברנו על סוכנים וביקוש לשבבים — תוצאות הרבעון הרביעי של שנת הכספים 2026 של אנבידיה סיפקו את ההוכחה הספרתית. הכנסות של <strong>68.13 מיליארד דולר</strong> ברבעון אחד. צמיחה של 73% לעומת אותו רבעון בשנה שעברה. רווח מתואם של $1.62 למניה, לעומת תחזית של $1.53.</p>
+
+<p>ג'נסן הואנג, מנכ"ל אנבידיה, הכריז: "הביקוש לחישוב גדל באופן אקספוננציאלי — נקודת הפיתול של AI אגנטי הגיעה." הוא הזכיר ספציפית את Codex, Claude Code, Claude Cowork, ו-OpenClaw כדוגמאות למוצרים שמניעים את הביקוש.</p>
+
+<div class="chart-container">
+<div class="chart-title">הכנסות אנבידיה — רבעוניות (מיליארדי $)</div>
+<svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg">
+  <rect x="60" y="20" width="600" height="270" fill="#f8f9fa" rx="8"/>
+  <!-- Y axis -->
+  <text x="55" y="260" text-anchor="end" font-size="12" font-family="Noto Sans Hebrew" fill="#555">$0</text>
+  <text x="55" y="210" text-anchor="end" font-size="12" font-family="Noto Sans Hebrew" fill="#555">$20B</text>
+  <text x="55" y="160" text-anchor="end" font-size="12" font-family="Noto Sans Hebrew" fill="#555">$40B</text>
+  <text x="55" y="110" text-anchor="end" font-size="12" font-family="Noto Sans Hebrew" fill="#555">$60B</text>
+  <text x="55" y="60" text-anchor="end" font-size="12" font-family="Noto Sans Hebrew" fill="#555">$80B</text>
+  <!-- Grid -->
+  <line x1="65" y1="255" x2="650" y2="255" stroke="#ddd"/>
+  <line x1="65" y1="205" x2="650" y2="205" stroke="#ddd"/>
+  <line x1="65" y1="155" x2="650" y2="155" stroke="#ddd"/>
+  <line x1="65" y1="105" x2="650" y2="105" stroke="#ddd"/>
+  <line x1="65" y1="55" x2="650" y2="55" stroke="#ddd"/>
+  <!-- Bars -->
+  <rect x="100" y="160" width="55" height="95" fill="#76b900" rx="3"/>
+  <text x="127" y="155" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#76b900" font-weight="600">$39.3</text>
+  <text x="127" y="278" text-anchor="middle" font-size="10" font-family="Noto Sans Hebrew" fill="#999">Q4 FY25</text>
+
+  <rect x="200" y="140" width="55" height="115" fill="#76b900" rx="3"/>
+  <text x="227" y="135" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#76b900" font-weight="600">$46.2</text>
+  <text x="227" y="278" text-anchor="middle" font-size="10" font-family="Noto Sans Hebrew" fill="#999">Q1 FY26</text>
+
+  <rect x="300" y="120" width="55" height="135" fill="#76b900" rx="3"/>
+  <text x="327" y="115" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#76b900" font-weight="600">$53.4</text>
+  <text x="327" y="278" text-anchor="middle" font-size="10" font-family="Noto Sans Hebrew" fill="#999">Q2 FY26</text>
+
+  <rect x="400" y="100" width="55" height="155" fill="#76b900" rx="3"/>
+  <text x="427" y="95" text-anchor="middle" font-size="11" font-family="Noto Sans Hebrew" fill="#76b900" font-weight="600">$62.1</text>
+  <text x="427" y="278" text-anchor="middle" font-size="10" font-family="Noto Sans Hebrew" fill="#999">Q3 FY26</text>
+
+  <rect x="500" y="70" width="55" height="185" fill="#0066cc" rx="3"/>
+  <text x="527" y="62" text-anchor="middle" font-size="13" font-family="Noto Sans Hebrew" fill="#0066cc" font-weight="600">$68.1</text>
+  <text x="527" y="278" text-anchor="middle" font-size="10" font-family="Noto Sans Hebrew" fill="#1a1a1a" font-weight="600">Q4 FY26</text>
+
+  <!-- Growth label -->
+  <text x="600" y="120" font-size="16" font-family="Noto Sans Hebrew" fill="#e63946" font-weight="600">+73%</text>
+  <text x="600" y="140" font-size="11" font-family="Noto Sans Hebrew" fill="#999">שנה-על-שנה</text>
+</svg>
+</div>
+
+<h3>הפרדוקס: סוכנים מאיימים על תוכנה אבל מעשירים את אנבידיה</h3>
+
+<p>תומפסון מנתח פרדוקס מרתק: סוכני AI מאיימים על תעשיית התוכנה הארגונית, אבל מייצרים ביקוש אדיר לחומרה. למה? כי סוכנים הם לא כמו צ'אטבוטים. צ'אטבוט מחכה לשאלה, עונה, ונעצר. סוכן עובד ברציפות — חושב, מתכנן, מבצע, בודק, ומתקן. סוכן בודד יכול לצרוך פי 10 עד 100 יותר כוח חישוב מאינטראקציה רגילה עם צ'אטבוט.</p>
+
+<p>כולין קרס, סמנכ"לית הכספים של אנבידיה, אמרה שהחברה ממשיכה לצפות ש"רוב הצמיחה שלנו תונע על ידי מרכזי נתונים, בהתאם לרבעון הקודם." היא ציינה שאנבידיה לא מניחה הכנסות ממחשוב מרכזי נתונים מסין, בהתאם לאי-הוודאות הרגולטורית.</p>
+
+<p>המספרים לשנת הכספים המלאה מדהימים: רווח GAAP של $4.90 למניה. הכנסות שנתיות כוללות שעברו את ה-230 מיליארד דולר. וזה עדיין רק ההתחלה — שבבי Rubin, הדור הבא, צפויים לייצר קפיצת ביצועים נוספת שתאפשר סוכנים מורכבים עוד יותר.</p>
+
+<h3>המשמעות הרחבה: מי מרוויח ומי מפסיד</h3>
+
+<p>אם סוכנים הם העתיד — וכל הסימנים מצביעים על כך — המפה של המנצחים והמפסידים ברורה:</p>
+
+<p><strong>מרוויחים:</strong> אנבידיה (שבבים), ספקי תשתית ענן (AWS, Azure, GCP), חברות AI שמפתחות מודלים (אנתרופיק, OpenAI), וחברות שמפתחות כלי פיתוח לסוכנים.</p>
+
+<p><strong>מפסידים:</strong> חברות SaaS מסורתיות שמוכרות רישיונות תוכנה — Salesforce, ServiceNow, Workday — שעלולות לגלות שהלקוחות שלהן מעדיפים סוכן AI שמבצע את העבודה ישירות, ללא צורך בתוכנה ייעודית. כפי שאנתרופיק עצמה טוענת: הסוכנים שלה הם "תחליף ישיר לכלי SaaS מסורתיים."</p>
+
+<!-- ============================================ -->
+<h2>הנקודה המשותפת: שינוי כוח</h2>
+
+<p>חמשת הסיפורים האלה, למרות שנראים שונים, חולקים נושא מרכזי אחד: <strong>שינוי במאזן הכוחות</strong>.</p>
+
+<p>אנתרופיק מול הפנטגון — מי שולט ב-AI, חברות פרטיות או ממשלות? MacBook Neo — אפל מוותרת על הנחלה של "פרימיום בלבד" כדי לכבוש שווקים חדשים. פרמאונט-WBD — כוח מדיה מתרכז בידיים מעטות יותר. הכנסות אנתרופיק — הסוכנים משנים את מבנה הכוח בתעשיית התוכנה. אנבידיה — החומרה שולטת מחדש, אחרי עשור של "תוכנה אוכלת את העולם."</p>
+
+<p>תומפסון כותב שהמכנה המשותף של כל הסיפורים הללו הוא ש<strong>הכללים הישנים כבר לא חלים</strong>. ממשלות שהיו שולטות בטכנולוגיה צבאית מתגלות כתלויות בחברות פרטיות. חברות שהיו מוכרות רק מוצרי יוקרה מוכרות עכשיו מחשבים ב-$599. אימפריות מדיה שנבנו במשך מאה שנה מחליפות ידיים בעסקאות של 111 מיליארד דולר. וסטארט-אפ בן שלוש שנים מגיע להכנסות של 19 מיליארד דולר בשנה.</p>
+
+<p>עידן ה-AI לא רק משנה מה אפשר לעשות. הוא משנה מי יכול לעשות את זה, ומי מחליט.</p>
+
+<p>השבוע הבא צפוי להביא פרקים חדשים בכל אחד מהסיפורים הללו. אנתרופיק תגיש תביעה משפטית. ה-MacBook Neo יתחיל להימכר (11 במרץ). פרמאונט תתחיל את תהליך אישור הרגולציה. ושוק ה-AI ימשיך לרוץ קדימה, בלי לחכות לאף אחד.</p>
+
+<div class="source-link">
+    <p>מקור: <a href="https://stratechery.com/2026/higher-powers-and-lower-macs/" target="_blank">Stratechery — "Higher Powers and Lower Macs"</a> מאת בן תומפסון, מרץ 2026</p>
+    <p>מקורות נוספים: <a href="https://www.cnbc.com/2026/02/27/defense-anthropic-ai-war-risks-hegseth-amodei.html" target="_blank">CNBC</a>, <a href="https://www.theguardian.com/technology/2026/mar/09/anthropic-artificial-intelligence-pentagon" target="_blank">The Guardian</a>, <a href="https://www.wired.com/story/new-budget-apple-macbook-2026/" target="_blank">WIRED</a>, <a href="https://www.npr.org/2026/03/01/nx-s1-5728340/paramount-outbids-netflix-to-acquire-warner-bros-discovery-for-111-billion" target="_blank">NPR</a>, <a href="https://fortune.com/2026/02/25/nvidia-nvda-earnings-q4-results-jensen-huang/" target="_blank">Fortune</a>, <a href="https://www.pymnts.com/artificial-intelligence-2/2026/enterprises-drive-anthropic-run-rate-revenue-to-19-billion/" target="_blank">PYMNTS</a></p>
+</div>
+
+</div>
+</body>
+</html>
