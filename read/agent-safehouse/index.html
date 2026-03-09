@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Safehouse — ארגז חול ברמת הקרנל למפתחים שמריצים סוכני AI על macOS</title>
+    <meta property="og:title" content="Agent Safehouse — ארגז חול ברמת הקרנל לסוכני AI על macOS">
+    <meta property="og:description" content="סקירה מעמיקה של Agent Safehouse — כלי קוד פתוח שמשתמש ב-sandbox-exec של macOS כדי להגביל סוכני קוד AI לקבצים שהם באמת צריכים. מודל deny-first, התקנה בשורה אחת, ותמיכה ב-Claude Code, Codex, Amp ו-Gemini.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Agent Safehouse — ארגז חול ברמת הקרנל לסוכני AI על macOS">
+    <meta name="twitter:description" content="סקירה מעמיקה של Agent Safehouse — כלי קוד פתוח שמשתמש ב-sandbox-exec של macOS כדי להגביל סוכני קוד AI לקבצים שהם באמת צריכים.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans Hebrew', sans-serif;
+            font-size: 18px;
+            line-height: 1.8;
+            color: #1a1a1a;
+            background: #fff;
+            padding: 40px 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 { font-size: 32px; font-weight: 600; margin-bottom: 8px; }
+        h2 { font-size: 24px; font-weight: 600; margin: 40px 0 16px; color: #111; }
+        .subtitle { font-size: 20px; color: #555; margin-bottom: 24px; }
+        .date { font-size: 14px; color: #888; margin-bottom: 32px; }
+        p { margin-bottom: 18px; }
+        .intro-box {
+            background: #f0f7ff;
+            border: 1px solid #c4ddf5;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-bottom: 32px;
+            font-size: 16px;
+        }
+        .intro-box a { color: #1a6dd4; text-decoration: none; }
+        .intro-box a:hover { text-decoration: underline; }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            direction: ltr;
+            unicode-bidi: embed;
+        }
+        pre {
+            background: #1e1e2e;
+            color: #cdd6f4;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            direction: ltr;
+            text-align: left;
+            margin: 16px 0 24px;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        .svg-diagram {
+            margin: 28px 0;
+            text-align: center;
+        }
+        .svg-diagram svg {
+            max-width: 100%;
+            height: auto;
+        }
+        ul { margin: 12px 24px 18px; }
+        li { margin-bottom: 8px; }
+        .source-link {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 15px;
+            color: #666;
+        }
+        .source-link a { color: #1a6dd4; text-decoration: none; }
+        .source-link a:hover { text-decoration: underline; }
+        strong { font-weight: 600; }
+        blockquote {
+            border-right: 4px solid #1a6dd4;
+            padding: 12px 20px;
+            margin: 20px 0;
+            background: #fafafa;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>Agent Safehouse — ארגז חול ברמת הקרנל לסוכני AI על macOS</h1>
+    <div class="subtitle">איך כלי קוד פתוח פשוט הופך את מודל האבטחה של סוכני קוד על הראש: במקום "הכל מותר", רק מה שאישרת במפורש</div>
+    <div class="date">מרץ 2026</div>
+
+    <div class="intro-box">
+        📌 מאמר זה מבוסס על האתר הרשמי של הפרויקט: <a href="https://agent-safehouse.dev/" target="_blank" rel="noopener">agent-safehouse.dev</a>
+        &nbsp;|&nbsp;
+        קוד מקור: <a href="https://github.com/eugene1g/agent-safehouse" target="_blank" rel="noopener">GitHub</a>
+    </div>
+
+    <h2>הבעיה: כשנותנים לסוכן AI את המפתחות לממלכה</h2>
+
+    <p>המהפכה של סוכני קוד AI — כלים כמו Claude Code, OpenAI Codex CLI, Amp ו-Gemini CLI — שינתה את האופן שבו מפתחים כותבים תוכנה. במקום לכתוב כל שורת קוד ידנית, אפשר לתת לסוכן משימה שלמה: "תבנה לי API של הזמנות", "תתקן את הבאג הזה", "תעשה רפקטורינג למודול הזה". הסוכן קורא קבצים, כותב קוד, מריץ פקודות טרמינל, ומבצע git commit — הכל בעצמו.</p>
+
+    <p>אבל יש בעיה מהותית. כשסוכן AI רץ על המחשב שלך, הוא יורש את <strong>כל ההרשאות שלך</strong>. אותו סוכן שיכול לערוך קבצים בפרויקט שלך, יכול גם לקרוא את מפתחות ה-SSH שלך, לגשת לקרדנשיאלס של AWS, לעיין בקבצים אישיים, או להריץ פקודות הרסניות. ו-LLM-ים הם הסתברותיים מטבעם — הם לא מכונה דטרמיניסטית שתמיד עושה בדיוק מה שאמרו לה.</p>
+
+    <blockquote>
+        "LLMs are probabilistic — 1% chance of disaster makes it a matter of when, not if."
+    </blockquote>
+
+    <p>דמיינו סוכן שמקבל prompt injection דרך קובץ README זדוני, או שפשוט "מהזה" ומריץ <code>rm -rf ~</code> במקום לנקות רק את תיקיית build. זה לא תרחיש תיאורטי — זו שאלה של מתי. וככל שיותר מפתחים מריצים סוכנים במצב "YOLO" (עם דגלים כמו <code>--dangerously-skip-permissions</code> ב-Claude Code, או <code>--dangerously-bypass-approvals-and-sandbox</code> ב-Codex), הסיכון הולך וגדל.</p>
+
+    <p>הפרדוקס ברור: כדי שסוכני AI יהיו באמת שימושיים, הם צריכים גישה רחבה למערכת הקבצים ולטרמינל. אבל גישה רחבה בלי בקרה היא מתכון לאסון. עד עכשיו, הבחירה הייתה בינארית — או לאשר כל פעולה ידנית (מה שהורג את הפרודוקטיביות), או לתת גישה מלאה ולקוות לטוב.</p>
+
+    <div class="svg-diagram">
+        <svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg" style="max-width:660px;">
+            <defs>
+                <linearGradient id="dangerGrad" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#fee2e2"/>
+                    <stop offset="100%" stop-color="#fca5a5"/>
+                </linearGradient>
+                <linearGradient id="safeGrad" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#dcfce7"/>
+                    <stop offset="100%" stop-color="#86efac"/>
+                </linearGradient>
+            </defs>
+            <text x="350" y="28" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="17" font-weight="600" fill="#1a1a1a">נוף האיומים: מה סוכן AI יכול לגעת בו</text>
+            <!-- Without -->
+            <rect x="20" y="50" width="310" height="250" rx="12" fill="url(#dangerGrad)" stroke="#f87171" stroke-width="1.5"/>
+            <text x="175" y="78" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="15" font-weight="600" fill="#991b1b">⚠️ בלי Safehouse — גישה מלאה</text>
+            <g font-family="Noto Sans Hebrew, sans-serif" font-size="14" fill="#7f1d1d">
+                <text x="175" y="112" text-anchor="middle">~/my-project/ ✅</text>
+                <text x="175" y="138" text-anchor="middle">~/.ssh/ ✅ מפתחות SSH</text>
+                <text x="175" y="164" text-anchor="middle">~/.aws/ ✅ קרדנשיאלס ענן</text>
+                <text x="175" y="190" text-anchor="middle">~/Documents/ ✅ מסמכים אישיים</text>
+                <text x="175" y="216" text-anchor="middle">~/other-repos/ ✅ פרויקטים אחרים</text>
+                <text x="175" y="242" text-anchor="middle">~/.env, ~/.npmrc ✅ סודות</text>
+                <text x="175" y="272" text-anchor="middle" font-weight="600" fill="#991b1b">$ rm -rf ~ ✅ הרסני!</text>
+            </g>
+            <!-- With -->
+            <rect x="370" y="50" width="310" height="250" rx="12" fill="url(#safeGrad)" stroke="#4ade80" stroke-width="1.5"/>
+            <text x="525" y="78" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="15" font-weight="600" fill="#166534">🔒 עם Safehouse — רק מה שאישרת</text>
+            <g font-family="Noto Sans Hebrew, sans-serif" font-size="14" fill="#15803d">
+                <text x="525" y="112" text-anchor="middle">~/my-project/ ✅ קריאה+כתיבה</text>
+                <text x="525" y="138" text-anchor="middle">~/.ssh/ 🚫 חסום בקרנל</text>
+                <text x="525" y="164" text-anchor="middle">~/.aws/ 🚫 חסום בקרנל</text>
+                <text x="525" y="190" text-anchor="middle">~/Documents/ 🚫 חסום בקרנל</text>
+                <text x="525" y="216" text-anchor="middle">~/other-repos/ 🚫 חסום בקרנל</text>
+                <text x="525" y="242" text-anchor="middle">~/.env, ~/.npmrc 🚫 חסום בקרנל</text>
+                <text x="525" y="272" text-anchor="middle" font-weight="600" fill="#166534">$ rm -rf ~ 🚫 Operation not permitted</text>
+            </g>
+        </svg>
+    </div>
+
+    <h2>הפתרון: Agent Safehouse — Deny-First ברמת הקרנל</h2>
+
+    <p><strong>Agent Safehouse</strong> הוא כלי קוד פתוח שנוצר על ידי Eugene Golderman, שמציע תשובה אלגנטית ומעשית לבעיה הזו. במקום לבנות מנגנון אבטחה חדש מאפס, הוא ממנף יכולת מובנית של macOS שרוב המפתחים לא מכירים: <code>sandbox-exec</code>.</p>
+
+    <p><code>sandbox-exec</code> הוא מנגנון sandboxing ברמת הקרנל של macOS (חלק מ-Seatbelt, מערכת האבטחה של Apple). הוא מאפשר להריץ תהליך עם פרופיל הרשאות מותאם אישית — ברמת הקרנל, לא ברמת האפליקציה. כלומר, אפילו אם הסוכן מנסה לגשת לקובץ אסור, הקרנל עצמו חוסם את הגישה לפני שהתהליך בכלל רואה את הנתונים.</p>
+
+    <p>העיקרון המנחה הוא <strong>Deny-First</strong>: כברירת מחדל, שום דבר לא נגיש. רק מה שהוגדר במפורש כמותר — מותר. זה הפוך ממודל ההרשאות הרגיל, שבו תהליך שרץ תחת המשתמש שלך יכול לגשת לכל מה שאתה יכול.</p>
+
+    <h2>איך זה עובד בפועל</h2>
+
+    <p>ההתקנה היא פשוטה עד כדי מפתיע. Agent Safehouse הוא סקריפט Bash יחיד, ללא תלויות חיצוניות — רק Bash ו-macOS:</p>
+
+    <pre># הורדת safehouse
+mkdir -p ~/.local/bin
+curl -fsSL https://raw.githubusercontent.com/eugene1g/agent-safehouse/main/dist/safehouse.sh \
+ -o ~/.local/bin/safehouse
+chmod +x ~/.local/bin/safehouse
+
+# הרצת סוכן בתוך ארגז החול
+cd ~/projects/my-app
+safehouse claude --dangerously-skip-permissions</pre>
+
+    <p>כשמריצים סוכן דרך <code>safehouse</code>, הכלי אוטומטית נותן לסוכן הרשאות קריאה וכתיבה לתיקייה הנוכחית (או ה-git root), והרשאות קריאה ל-toolchains מותקנים (כמו Node.js, Python וכו'). כל שאר תיקיית הבית — מפתחות SSH, קרדנשיאלס, ריפוזיטוריז אחרים, קבצים אישיים — חסומים ברמת הקרנל.</p>
+
+    <p>רוצים הוכחה? נסו להריץ בתוך ה-sandbox:</p>
+
+    <pre># ניסיון לקרוא מפתח SSH — נחסם ע"י הקרנל
+safehouse cat ~/.ssh/id_ed25519
+# cat: /Users/you/.ssh/id_ed25519: Operation not permitted
+
+# ניסיון לרשום תיקייה של פרויקט אחר — בלתי נראה
+safehouse ls ~/other-project
+# ls: /Users/you/other-project: Operation not permitted
+
+# אבל הפרויקט הנוכחי עובד כרגיל
+safehouse ls .
+# README.md src/ package.json ...</pre>
+
+    <div class="svg-diagram">
+        <svg viewBox="0 0 700 360" xmlns="http://www.w3.org/2000/svg" style="max-width:660px;">
+            <text x="350" y="28" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="17" font-weight="600" fill="#1a1a1a">מודל ההרשאות של Agent Safehouse</text>
+            <!-- Kernel layer -->
+            <rect x="50" y="50" width="600" height="290" rx="14" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,3"/>
+            <text x="350" y="74" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="13" fill="#64748b">macOS Kernel — sandbox-exec (Seatbelt)</text>
+            <!-- Agent -->
+            <rect x="250" y="92" width="200" height="44" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+            <text x="350" y="120" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="15" font-weight="600" fill="#1e40af">🤖 סוכן AI</text>
+            <!-- Arrow down -->
+            <line x1="350" y1="136" x2="350" y2="165" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+            <defs><marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#64748b"/></marker></defs>
+            <!-- Safehouse filter -->
+            <rect x="150" y="165" width="400" height="36" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+            <text x="350" y="189" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="14" font-weight="600" fill="#92400e">🛡️ פרופיל Safehouse — סינון ברמת הקרנל</text>
+            <!-- Allowed -->
+            <rect x="80" y="225" width="170" height="100" rx="8" fill="#dcfce7" stroke="#4ade80" stroke-width="1.5"/>
+            <text x="165" y="250" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="13" font-weight="600" fill="#166534">✅ מותר</text>
+            <text x="165" y="272" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="12" fill="#15803d">~/my-project/ (R/W)</text>
+            <text x="165" y="292" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="12" fill="#15803d">~/shared-lib/ (R)</text>
+            <text x="165" y="312" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="12" fill="#15803d">Toolchains (R)</text>
+            <!-- Denied -->
+            <rect x="280" y="225" width="170" height="100" rx="8" fill="#fee2e2" stroke="#f87171" stroke-width="1.5"/>
+            <text x="365" y="250" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="13" font-weight="600" fill="#991b1b">🚫 חסום</text>
+            <text x="365" y="272" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="12" fill="#991b1b">~/.ssh/</text>
+            <text x="365" y="292" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="12" fill="#991b1b">~/.aws/</text>
+            <text x="365" y="312" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="12" fill="#991b1b">~/other-repos/</text>
+            <!-- Invisible -->
+            <rect x="480" y="225" width="170" height="100" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+            <text x="565" y="250" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="13" font-weight="600" fill="#475569">👻 בלתי נראה</text>
+            <text x="565" y="272" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="12" fill="#64748b">~/Documents/</text>
+            <text x="565" y="292" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="12" fill="#64748b">~/Desktop/</text>
+            <text x="565" y="312" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="12" fill="#64748b">קבצים אישיים</text>
+            <!-- Arrows from filter -->
+            <line x1="250" y1="201" x2="165" y2="225" stroke="#4ade80" stroke-width="1.5"/>
+            <line x1="350" y1="201" x2="365" y2="225" stroke="#f87171" stroke-width="1.5"/>
+            <line x1="450" y1="201" x2="565" y2="225" stroke="#94a3b8" stroke-width="1.5"/>
+        </svg>
+    </div>
+
+    <h2>תמיכה בכל הסוכנים המובילים</h2>
+
+    <p>Agent Safehouse תוכנן לעבוד עם כל סוכני הקוד המובילים של 2025-2026:</p>
+
+    <ul>
+        <li><strong>Claude Code</strong> (Anthropic) — עם <code>--dangerously-skip-permissions</code></li>
+        <li><strong>Codex CLI</strong> (OpenAI) — עם <code>--dangerously-bypass-approvals-and-sandbox</code></li>
+        <li><strong>Amp</strong> (Sourcegraph) — עם <code>--dangerously-allow-all</code></li>
+        <li><strong>Gemini CLI</strong> (Google) — עם <code>--yolo</code></li>
+    </ul>
+
+    <p>שימו לב לדפוס: כל סוכן מציע דגל "מצב מסוכן" שמוותר על אישורים ידניים. שמות הדגלים עצמם (<code>dangerously-*</code>, <code>--yolo</code>) מעידים על כך שגם היצרנים יודעים שזו פשרה מסוכנת. Agent Safehouse מאפשר להשתמש בדגלים האלה <strong>בבטחה</strong> — כי גם אם הסוכן עושה מה שהוא רוצה, הקרנל מגביל אותו למה שאישרתם.</p>
+
+    <h2>Shell Functions — אבטחה אוטומטית ושקופה</h2>
+
+    <p>אחד הרעיונות החכמים ב-Safehouse הוא השימוש ב-shell functions שעוטפים כל סוכן אוטומטית. במקום לזכור להריץ <code>safehouse claude</code> כל פעם, מגדירים פונקציות ב-<code>.zshrc</code>:</p>
+
+    <pre># ~/.zshrc
+safe() { safehouse --add-dirs-ro=~/mywork "$@"; }
+
+# כל סוכן רץ אוטומטית בתוך ארגז חול
+claude() { safe claude --dangerously-skip-permissions "$@"; }
+codex() { safe codex --dangerously-bypass-approvals-and-sandbox "$@"; }
+amp() { safe amp --dangerously-allow-all "$@"; }
+gemini() { NO_BROWSER=true safe gemini --yolo "$@"; }
+
+# צריך להריץ בלי sandbox? השתמש ב-command
+# command claude</pre>
+
+    <p>מהרגע שהפונקציות מוגדרות, כל פעם שמקלידים <code>claude</code> בטרמינל, הסוכן רץ אוטומטית בתוך ארגז החול. אם צריך להריץ בלי sandbox (למשל, לשיחה אינטראקטיבית רגילה), משתמשים ב-<code>command claude</code> כדי לעקוף את הפונקציה.</p>
+
+    <h2>הגישה הטכנית: למה sandbox-exec ולא Docker</h2>
+
+    <p>אפשר לשאול: למה לא להשתמש ב-Docker? או ב-VM? התשובה נוגעת לפרקטיקה של פיתוח יומיומי.</p>
+
+    <p><strong>Docker</strong> מבודד באופן מלא, אבל יוצר חיכוך עצום: צריך לבנות image, להעביר קבצים פנימה והחוצה, לנהל volumes, ולהתמודד עם הבדלי מערכת הפעלה. סוכן AI שרץ בתוך Docker לא רואה את ה-toolchain המקומי שלך, לא יכול להריץ <code>git push</code> בצורה טבעית, ולא מרגיש כמו חלק מסביבת הפיתוח.</p>
+
+    <p><strong>sandbox-exec</strong>, לעומת זאת, מריץ את התהליך ישירות על macOS, עם אותו kernel, אותם כלים, אותה מערכת קבצים — רק עם מסנן הרשאות ברמת הקרנל. התוצאה: סוכן שמרגיש בדיוק כמו רגיל, אבל לא יכול לצאת מהגדרות הגישה שהגדרתם. אפס חיכוך, אפס תלויות, אפס זמן הקמה.</p>
+
+    <p>חשוב לציין שהפרויקט מגדיר את עצמו בצורה כנה כ-"hardening layer, not a perfect security boundary against a determined attacker". זו שכבת הקשחה, לא גבול אבטחה מושלם. נגד סוכן AI רגיל שפשוט שוגה או מקבל prompt injection — זה יותר מספיק. נגד תוקף מתוחכם שבהכוונה מנסה לפרוץ sandbox — זה לא מה שהכלי מבטיח.</p>
+
+    <h2>יצירת פרופילים מותאמים עם LLM</h2>
+
+    <p>תכונה מעניינת במיוחד היא היכולת להשתמש ב-LLM כדי ליצור פרופיל sandbox מותאם אישית. הפרויקט מספק prompt מוכן שאפשר להעתיק ולהדביק לכל סוכן AI, שמנחה את הסוכן לבדוק את מבנה תיקיית הבית שלך, להבין אילו כלים מותקנים, ולייצר פרופיל <code>sandbox-exec</code> ב-least-privilege — הרשאות מינימליות בלבד.</p>
+
+    <p>ה-LLM גם ידע להציע מיקום עמיד לפרופיל (כמו <code>~/.config/sandbox-exec.profile</code>), wrapper שנותן גישה לתיקייה הנוכחית, וקיצורי shell לסוכנים המועדפים. זה מטא-שימוש מרתק: להשתמש ב-AI כדי לאבטח AI.</p>
+
+    <h2>הגדרות ספציפיות למכונה</h2>
+
+    <p>למפתחים שעובדים עם ריפוזיטוריז משותפים, Safehouse מציע מנגנון אלגנטי להפרדה בין הגדרות משותפות להגדרות מקומיות. באמצעות <code>SAFEHOUSE_APPEND_PROFILE</code>, אפשר להוסיף override-ים מקומיים שלא נכנסים ל-git:</p>
+
+    <pre># ~/.zshrc
+export SAFEHOUSE_APPEND_PROFILE="$HOME/.config/agent-safehouse/local-overrides.sb"
+
+safe() {
+  safehouse \
+    --add-dirs-ro="$HOME/server" \
+    --append-profile="$SAFEHOUSE_APPEND_PROFILE" \
+    "$@"
+}</pre>
+
+    <p>קובץ ה-override המקומי יכול להכיל הרשאות ספציפיות למכונה — למשל, גישת קריאה לתיקיית media של CleanShot או לכונן רשת משותף. זה חשוב בצוותים שבהם כל מפתח עובד עם mount points שונים.</p>
+
+    <div class="svg-diagram">
+        <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" style="max-width:660px;">
+            <text x="350" y="28" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="17" font-weight="600" fill="#1a1a1a">שכבות האבטחה: הגנה לעומק</text>
+            <!-- Layer 1 - outermost -->
+            <rect x="50" y="50" width="600" height="230" rx="16" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+            <text x="350" y="76" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="14" font-weight="600" fill="#1e40af">שכבה 1: macOS Kernel — sandbox-exec (Seatbelt)</text>
+            <!-- Layer 2 -->
+            <rect x="100" y="90" width="500" height="170" rx="12" fill="#fefce8" stroke="#eab308" stroke-width="1.5"/>
+            <text x="350" y="114" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="14" font-weight="600" fill="#854d0e">שכבה 2: פרופיל Safehouse — deny-first + allow-list</text>
+            <!-- Layer 3 -->
+            <rect x="150" y="128" width="400" height="112" rx="10" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.5"/>
+            <text x="350" y="152" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="14" font-weight="600" fill="#166534">שכבה 3: Shell functions — עטיפה אוטומטית</text>
+            <!-- Core -->
+            <rect x="220" y="166" width="260" height="56" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+            <text x="350" y="192" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="15" font-weight="600" fill="#1e40af">🤖 סוכן AI — רץ בבטחה</text>
+            <text x="350" y="210" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="11" fill="#3b82f6">רואה רק את הפרויקט + toolchains</text>
+        </svg>
+    </div>
+
+    <h2>הפילוסופיה: Least Privilege מעשי</h2>
+
+    <p>הפילוסופיה של Agent Safehouse מסוכמת בארבעה עקרונות:</p>
+
+    <ul>
+        <li><strong>התחל מ-deny-all</strong> — כברירת מחדל, הכל חסום</li>
+        <li><strong>אפשר רק מה שהסוכן צריך</strong> — כדי לעשות עבודה שימושית</li>
+        <li><strong>שמור על פרודוקטיביות</strong> — אבטחה שלא ניתנת לשימוש לא תיושם</li>
+        <li><strong>הפוך את הפחתת הסיכון לקלה כברירת מחדל</strong> — אם זה קל, אנשים יעשו את זה</li>
+    </ul>
+
+    <p>העיקרון האחרון הוא אולי החשוב מכולם. כלי אבטחה שדורש הגדרה מורכבת לא ייושם. Agent Safehouse דורש שורה אחת התקנה ושורה אחת הרצה. זו הסיבה שהוא עובד.</p>
+
+    <h2>ההשלכות הרחבות: עתיד אבטחת סוכני AI</h2>
+
+    <p>Agent Safehouse הוא חלק מטרנד גדול יותר בתעשייה: ההכרה שסוכני AI צריכים מודל אבטחה משלהם, שונה מזה של אפליקציות רגילות.</p>
+
+    <p>במודל המסורתי, תוכנה עושה בדיוק מה שכתבו לה לעשות. אם יש באג, זה באג בקוד שנכתב. עם סוכני AI, המצב שונה לחלוטין: הסוכן מקבל משימה בשפה טבעית ומחליט בעצמו אילו פעולות לבצע. ההחלטות שלו הן הסתברותיות — לפעמים הוא עושה דברים מפתיעים, לא תמיד במובן הטוב.</p>
+
+    <p>זה יוצר קטגוריה חדשה של סיכוני אבטחה:</p>
+
+    <ul>
+        <li><strong>שגיאות לא דטרמיניסטיות</strong> — הסוכן יכול לפרש משימה אחרת בכל הרצה</li>
+        <li><strong>Prompt injection</strong> — קוד זדוני בקבצים יכול לגרום לסוכן לבצע פעולות לא מכוונות</li>
+        <li><strong>הסלמת הרשאות לא מכוונת</strong> — סוכן שמנסה "לעזור" על ידי גישה לקבצים שלא היה צריך</li>
+        <li><strong>דליפת מידע</strong> — סוכן ששולח תוכן קבצים רגישים ל-API חיצוני כחלק מה-context</li>
+    </ul>
+
+    <p>הפתרון של Safehouse — הגבלה ברמת הקרנל — הוא הגישה הנכונה כי הוא לא סומך על הסוכן בכלל. לא משנה מה הסוכן מנסה לעשות, הקרנל חוסם גישה לא מורשית. זה defense in depth אמיתי.</p>
+
+    <h2>מגבלות ונקודות לשיפור</h2>
+
+    <p>חשוב להיות כנים לגבי מגבלות הגישה:</p>
+
+    <ul>
+        <li><strong>macOS בלבד</strong> — sandbox-exec הוא מנגנון ספציפי ל-macOS. מפתחי Linux יצטרכו פתרונות אחרים (כמו bubblewrap או seccomp)</li>
+        <li><strong>לא חסם מושלם</strong> — כפי שהפרויקט עצמו מציין, זו שכבת הקשחה, לא boundary אבטחה מוחלט</li>
+        <li><strong>sandbox-exec מיושן</strong> — Apple סימנה את sandbox-exec כ-deprecated, אם כי הוא עדיין עובד ב-macOS הנוכחי. עתיד הכלי תלוי בהחלטות של Apple</li>
+        <li><strong>Network access</strong> — ניהול גישת רשת דורש הגדרה נוספת מעבר להרשאות קבצים</li>
+    </ul>
+
+    <p>למרות המגבלות האלה, היחס עלות-תועלת הוא מצוין. התקנה של 30 שניות מספקת שכבת הגנה משמעותית נגד רוב התרחישים הנפוצים של נזק מסוכן AI.</p>
+
+    <h2>סיכום: חובה לכל מי שמריץ סוכני AI מקומיים</h2>
+
+    <p>Agent Safehouse עונה על צורך אמיתי ומיידי. עם הגידול האקספוננציאלי בשימוש בסוכני קוד AI, השאלה אינה האם סוכן ישגה באופן הרסני — אלא מתי. הכלי מציע מענה פרקטי, קל להתקנה, ומבוסס על מנגנון קרנל מוכח.</p>
+
+    <p>אם אתם מפתחים על macOS ומשתמשים בסוכני AI כמו Claude Code, Codex, Amp או Gemini — אין סיבה טובה לא להתקין את Safehouse. זה כמו חגורת בטיחות: מקווים שלא תצטרכו אותה, אבל כשתצטרכו — תהיו שמחים שחגרתם.</p>
+
+    <blockquote>
+        "Go full --yolo. We've got you."
+    </blockquote>
+
+    <p>עם Agent Safehouse, ה-YOLO הזה סוף סוף אחראי.</p>
+
+    <div class="source-link">
+        <p>🔗 מקור: <a href="https://agent-safehouse.dev/" target="_blank" rel="noopener">agent-safehouse.dev</a> &nbsp;|&nbsp; קוד מקור: <a href="https://github.com/eugene1g/agent-safehouse" target="_blank" rel="noopener">GitHub</a></p>
+    </div>
+
+</div>
+</body>
+</html>
