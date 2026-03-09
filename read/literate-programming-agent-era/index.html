@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>כדאי לחזור לתכנות ספרותי בעידן הסוכנים</title>
+<meta property="og:title" content="כדאי לחזור לתכנות ספרותי בעידן הסוכנים">
+<meta property="og:description" content="תרגום לעברית של המאמר We Should Revisit Literate Programming in the Agent Era מאת silly.business">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="כדאי לחזור לתכנות ספרותי בעידן הסוכנים">
+<meta name="twitter:description" content="תרגום לעברית של המאמר We Should Revisit Literate Programming in the Agent Era מאת silly.business">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Noto Sans Hebrew', sans-serif; font-size: 18px; line-height: 1.8; color: #1a1a1a; background: #fff; padding: 2rem 1rem; }
+.container { max-width: 900px; margin: 0 auto; }
+h1 { font-size: 32px; font-weight: 600; margin-bottom: 0.5rem; }
+h2 { font-size: 24px; font-weight: 600; margin: 2rem 0 1rem; }
+.subtitle { font-size: 20px; color: #555; margin-bottom: 2rem; }
+p { margin-bottom: 1.2rem; }
+.intro-box { background: #f7f7f7; border: 1px solid #e0e0e0; border-radius: 8px; padding: 1.2rem 1.5rem; margin-bottom: 2.5rem; font-size: 16px; }
+.intro-box a { color: #2563eb; text-decoration: none; }
+.intro-box a:hover { text-decoration: underline; }
+.source-link { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #e0e0e0; font-size: 16px; color: #555; }
+.source-link a { color: #2563eb; text-decoration: none; }
+.svg-diagram { margin: 2rem 0; text-align: center; }
+.svg-diagram svg { max-width: 100%; height: auto; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>כדאי לחזור לתכנות ספרותי בעידן הסוכנים</h1>
+<div class="subtitle">תרגום מאמר מאת silly.business</div>
+
+<div class="intro-box">
+🔗 מאמר זה הוא תרגום לעברית של
+<a href="https://silly.business/blog/we-should-revisit-literate-programming-in-the-agent-era/" target="_blank" rel="noopener">
+"We Should Revisit Literate Programming in the Agent Era"
+</a>
+מאת silly.business.
+</div>
+
+<p>תכנות ספרותי (Literate Programming) הוא הרעיון שקוד צריך להיות משולב עם טקסט פרוזה, כך שקורא לא מיודע יוכל לקרוא בסיס קוד כנרטיב, ולצאת עם הבנה של איך הוא עובד ומה הוא עושה.</p>
+
+<p>למרות שהרעיון הזה סיקרן אותי מזה זמן רב, ומצאתי לו שימושים במספר מקרים שונים, גיליתי שבפועל תכנות ספרותי הופך למטלה של תחזוקת שני נרטיבים מקבילים: הקוד עצמו, והפרוזה. זה כמובן הגביל את אימוצו.</p>
+
+<p>מבחינה היסטורית, בפרקטיקה, תכנות ספרותי נפוץ בעיקר כמחברות Jupyter בקהילת מדעי הנתונים, שם הסברים חיים לצד חישובים ותוצאותיהם בדפדפן.</p>
+
+<p>קוראים ותיקים של הבלוג הזה יודעים ש-Emacs Org Mode תומך בתכנות ספרותי רב-שפתי דרך חבילת org-babel שלו, המאפשרת הרצת שפות שרירותיות עם תוצאות שנלכדות בחזרה לתוך המסמך, אבל זה נשאר דפוס נישתי לנרדים כמוני.</p>
+
+<p>אפילו עבור מישהו נלהב מהדפוס הזה כמוני, זה הופך למסורבל להשתמש ב-Org כמקור האמת לפרויקטי תוכנה גדולים יותר, כיוון שקוד המקור בעצם הופך לפלט מקומפל, ואחרי כל עריכה בקובץ ה-Org, הקוד צריך להיחלץ מחדש ולהיות ממוקם ביעד שלו ("tangled", בעגה של Org Mode). כמובן שאפשר לאטמט את זה, אבל קל להיקלע למצבים מעצבנים שבהם אתה או הסוכן שלך ערכתם את קוד המקור האמיתי והוא נדרס ב-tangle הבא.</p>
+
+<div class="svg-diagram">
+<svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg" style="direction:ltr">
+  <defs>
+    <marker id="arrow1" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#e74c3c"/></marker>
+    <marker id="arrow2" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#27ae60"/></marker>
+  </defs>
+  <text x="350" y="28" text-anchor="middle" font-family="Noto Sans Hebrew,sans-serif" font-weight="600" font-size="18" fill="#1a1a1a">בעיית ה-Tangling: לפני ואחרי סוכנים</text>
+  <!-- Before -->
+  <text x="175" y="60" text-anchor="middle" font-family="Noto Sans Hebrew,sans-serif" font-weight="600" font-size="15" fill="#e74c3c">לפני סוכנים ❌</text>
+  <rect x="50" y="75" width="120" height="45" rx="8" fill="#ffeaea" stroke="#e74c3c" stroke-width="1.5"/>
+  <text x="110" y="103" text-anchor="middle" font-family="Noto Sans Hebrew,sans-serif" font-size="13" fill="#1a1a1a">קובץ Org</text>
+  <rect x="200" y="75" width="120" height="45" rx="8" fill="#ffeaea" stroke="#e74c3c" stroke-width="1.5"/>
+  <text x="260" y="103" text-anchor="middle" font-family="Noto Sans Hebrew,sans-serif" font-size="13" fill="#1a1a1a">קוד מקור</text>
+  <line x1="170" y1="97" x2="198" y2="97" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow1)"/>
+  <text x="184" y="90" text-anchor="middle" font-family="Noto Sans Hebrew,sans-serif" font-size="10" fill="#e74c3c">tangle</text>
+  <rect x="50" y="140" width="270" height="40" rx="8" fill="#fff3f3" stroke="#e74c3c" stroke-width="1" stroke-dasharray="5,3"/>
+  <text x="185" y="162" text-anchor="middle" font-family="Noto Sans Hebrew,sans-serif" font-size="12" fill="#c0392b">⚠️ עריכה ידנית בקוד → נדרסת ב-tangle הבא!</text>
+  <rect x="80" y="200" width="190" height="40" rx="8" fill="#fff3f3" stroke="#e74c3c" stroke-width="1"/>
+  <text x="175" y="225" text-anchor="middle" font-family="Noto Sans Hebrew,sans-serif" font-size="12" fill="#c0392b">תחזוקת פרוזה + קוד = מטלה ידנית</text>
+  <!-- After -->
+  <text x="525" y="60" text-anchor="middle" font-family="Noto Sans Hebrew,sans-serif" font-weight="600" font-size="15" fill="#27ae60">עם סוכנים ✅</text>
+  <rect x="430" y="75" width="120" height="45" rx="8" fill="#eafff0" stroke="#27ae60" stroke-width="1.5"/>
+  <text x="490" y="103" text-anchor="middle" font-family="Noto Sans Hebrew,sans-serif" font-size="13" fill="#1a1a1a">קובץ Org</text>
+  <rect x="570" y="75" width="120" height="45" rx="8" fill="#eafff0" stroke="#27ae60" stroke-width="1.5"/>
+  <text x="630" y="103" text-anchor="middle" font-family="Noto Sans Hebrew,sans-serif" font-size="13" fill="#1a1a1a">קוד מקור</text>
+  <line x1="550" y1="97" x2="568" y2="97" stroke="#27ae60" stroke-width="2" marker-end="url(#arrow2)"/>
+  <rect x="455" y="140" width="170" height="45" rx="22" fill="#d5f5e3" stroke="#27ae60" stroke-width="1.5"/>
+  <text x="540" y="167" text-anchor="middle" font-family="Noto Sans Hebrew,sans-serif" font-size="14" fill="#1a1a1a">🤖 סוכן AI</text>
+  <line x1="540" y1="120" x2="540" y2="138" stroke="#27ae60" stroke-width="1.5" marker-end="url(#arrow2)"/>
+  <text x="540" y="210" text-anchor="middle" font-family="Noto Sans Hebrew,sans-serif" font-size="12" fill="#27ae60">הסוכן מטפל ב-tangle, בסנכרון פרוזה/קוד,</text>
+  <text x="540" y="228" text-anchor="middle" font-family="Noto Sans Hebrew,sans-serif" font-size="12" fill="#27ae60">ולעולם לא מתעייף מלהסביר מחדש</text>
+</svg>
+</div>
+
+<p>עם זאת, הייתה לי מספיק הצלחה בשימוש בתכנות ספרותי לניהול קונפיגורציה אישית, עד שלא הצלחתי לוותר לחלוטין על הרעיון, אפילו לפני עליית מודלי השפה הגדולים (LLMs).</p>
+
+<p>לדוגמה: לפני סוכני קוד, אימצתי דפוס של שימוש ב-Org Mode לבדיקות ידניות ורישום הערות: במקום לעבוד בשורת הפקודה, הייתי כותב פקודות נוספות לתוך העורך שלי ומריץ אותן שם, עורך אותן במקום עד שכל צעד היה נכון, ומריץ אותן במקום, כך שכשסיימתי היה לי מסמך שמסביר בדיוק את הצעדים שננקטו, בלי צעדים מיותרים או רישום הערות. שילוב הפעולה של יצירת ההערה עם הרצת הבדיקה נותן לך את ההערות בחינם כשהבדיקה מסתיימת.</p>
+
+<p>זה אפילו יותר מרגש עכשיו שיש לנו סוכני קוד. ל-Claude ול-Kimi ולחברים שלהם יש אחיזה מצוינת בתחביר Org Mode; זו שפת סימון סלחנית והם ממש טובים באלה. כל התיעוד זמין באינטרנט וכנראה היה בנתוני האימון, ובעוד שחיסרון גדול של Org Mode הוא כמה תחביר יש בו, זה לא בעיה בכלל עבור מודל שפה.</p>
+
+<p>עכשיו כשאני רוצה לבדוק פיצ׳ר, אני מבקש מהבוט לכתוב לי runbook ב-Org. אז אני יכול לסקור אותו – הפרוזה מסבירה את הרפלקציה של המודל על הכוונה מאחורי כל צעד, ובלוקי הקוד ניתנים להרצה אינטראקטיבית אחרי שאני מסיים לסקור, אחד בכל פעם או את כל הקובץ כמו סקריפט. התוצאות יאוחסנו במסמך, מתחת לקוד, כמו מחברת Jupyter.</p>
+
+<p>אני יכול לערוך את הפרוזה ולבקש מהמודל לעדכן את הקוד, או לערוך את הקוד ולבקש מהמודל לשקף את המשמעות בטקסט. או לבקש מהסוכן לשנות את שניהם בו-זמנית. הבעיה של תחזוקת המערכות המקבילות נעלמת.</p>
+
+<p>הסוכן מקבל הוראה לטפל ב-tangling, ובעיית החילוץ נעלמת. אפשר להנחות את הסוכן עם קובץ AGENTS.md להתייחס לקובץ ה-Org Mode כמקור האמת, תמיד להסביר בפרוזה מה קורה, ולעשות tangle לפני הרצה. הסוכן מצוין בכל הדברים האלה, והוא אף פעם לא מתעייף מלהסביר משהו מחדש בפרוזה אחרי שינוי קטן בקוד.</p>
+
+<div class="svg-diagram">
+<svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg" style="direction:ltr">
+  <text x="350" y="28" text-anchor="middle" font-family="Noto Sans Hebrew,sans-serif" font-weight="600" font-size="18" fill="#1a1a1a">זרימת עבודה של תכנות ספרותי עם סוכן AI</text>
+  <!-- Flow -->
+  <rect x="30" y="60" width="140" height="50" rx="10" fill="#e8f4fd" stroke="#2980b9" stroke-width="1.5"/>
+  <text x="100" y="82" text-anchor="middle" font-family="Noto Sans Hebrew,sans-serif" font-size="13" fill="#1a1a1a">👤 המפתח</text>
+  <text x="100" y="100" text-anchor="middle" font-family="Noto Sans Hebrew,sans-serif" font-size="11" fill="#555">מבקש runbook</text>
+
+  <rect x="210" y="60" width="140" height="50" rx="10" fill="#fef9e7" stroke="#f39c12" stroke-width="1.5"/>
+  <text x="280" y="82" text-anchor="middle" font-family="Noto Sans Hebrew,sans-serif" font-size="13" fill="#1a1a1a">🤖 סוכן AI</text>
+  <text x="280" y="100" text-anchor="middle" font-family="Noto Sans Hebrew,sans-serif" font-size="11" fill="#555">כותב פרוזה + קוד</text>
+
+  <rect x="390" y="60" width="140" height="50" rx="10" fill="#f5eef8" stroke="#8e44ad" stroke-width="1.5"/>
+  <text x="460" y="82" text-anchor="middle" font-family="Noto Sans Hebrew,sans-serif" font-size="13" fill="#1a1a1a">👤 סקירה</text>
+  <text x="460" y="100" text-anchor="middle" font-family="Noto Sans Hebrew,sans-serif" font-size="11" fill="#555">קריאה והרצה</text>
+
+  <rect x="540" y="140" width="140" height="50" rx="10" fill="#d5f5e3" stroke="#27ae60" stroke-width="1.5"/>
+  <text x="610" y="162" text-anchor="middle" font-family="Noto Sans Hebrew,sans-serif" font-size="13" fill="#1a1a1a">📄 מסמך חי</text>
+  <text x="610" y="180" text-anchor="middle" font-family="Noto Sans Hebrew,sans-serif" font-size="11" fill="#555">פרוזה + קוד + תוצאות</text>
+
+  <line x1="170" y1="85" x2="208" y2="85" stroke="#2980b9" stroke-width="2" marker-end="url(#arrow2)"/>
+  <line x1="350" y1="85" x2="388" y2="85" stroke="#f39c12" stroke-width="2" marker-end="url(#arrow2)"/>
+  <path d="M 460 110 Q 460 140 538 165" fill="none" stroke="#8e44ad" stroke-width="2" marker-end="url(#arrow2)"/>
+
+  <!-- Feedback loop -->
+  <path d="M 280 110 Q 280 230 460 230 Q 610 230 610 192" fill="none" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrow1)"/>
+  <text x="400" y="248" text-anchor="middle" font-family="Noto Sans Hebrew,sans-serif" font-size="11" fill="#e74c3c">🔄 עריכה → הסוכן מסנכרן פרוזה ↔ קוד</text>
+</svg>
+</div>
+
+<p>העבודה הנוספת היסודית של תכנות ספרותי, שלפי דעתי היא הסיבה שהוא לא נפוץ, מבוטלת על ידי הסוכן, והיא מנצלת יכולות שמודל השפה הגדול הכי טוב בהן: תרגום וסיכום.</p>
+
+<p>כיתרון נוסף, בסיס הקוד יכול עכשיו להיות מיוצא לפורמטים רבים לקריאה נוחה. זה חשוב במיוחד אם התפקיד העיקרי של מהנדסים עובר מכתיבה לקריאה.</p>
+
+<div class="svg-diagram">
+<svg viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg" style="direction:ltr">
+  <text x="250" y="28" text-anchor="middle" font-family="Noto Sans Hebrew,sans-serif" font-weight="600" font-size="18" fill="#1a1a1a">השינוי בתפקיד המהנדס</text>
+  <!-- Writing bar -->
+  <text x="110" y="65" text-anchor="middle" font-family="Noto Sans Hebrew,sans-serif" font-size="14" fill="#1a1a1a">לפני סוכנים</text>
+  <rect x="160" y="50" width="280" height="28" rx="5" fill="#e8f4fd" stroke="#2980b9" stroke-width="1"/>
+  <rect x="160" y="50" width="200" height="28" rx="5" fill="#2980b9"/>
+  <text x="260" y="69" text-anchor="middle" font-family="Noto Sans Hebrew,sans-serif" font-size="12" fill="#fff">כתיבת קוד (70%)</text>
+  <text x="370" y="69" text-anchor="middle" font-family="Noto Sans Hebrew,sans-serif" font-size="11" fill="#2980b9">קריאה (30%)</text>
+
+  <!-- Reading bar -->
+  <text x="110" y="125" text-anchor="middle" font-family="Noto Sans Hebrew,sans-serif" font-size="14" fill="#1a1a1a">עם סוכנים</text>
+  <rect x="160" y="110" width="280" height="28" rx="5" fill="#ffeaea" stroke="#27ae60" stroke-width="1"/>
+  <rect x="160" y="110" width="200" height="28" rx="5" fill="#27ae60"/>
+  <text x="260" y="129" text-anchor="middle" font-family="Noto Sans Hebrew,sans-serif" font-size="12" fill="#fff">קריאת קוד וסקירה (70%)</text>
+  <text x="370" y="129" text-anchor="middle" font-family="Noto Sans Hebrew,sans-serif" font-size="11" fill="#c0392b">כתיבה (30%)</text>
+
+  <text x="250" y="175" text-anchor="middle" font-family="Noto Sans Hebrew,sans-serif" font-size="13" fill="#555">תכנות ספרותי הופך את הקריאה לנוחה יותר 📖</text>
+</svg>
+</div>
+
+<p>אין לי נתונים לתמוך בזה, אבל אני גם חושד שתכנות ספרותי ישפר את איכות הקוד המיוצר, כי הפרוזה שמסבירה את הכוונה מאחורי כל בלוק קוד תופיע בהקשר לצד הקוד עצמו.</p>
+
+<p>לא הייתה לי עדיין הזדמנות לנסות את הדפוס הזה על בסיס קוד גדול ורציני יותר. עד כה, השתמשתי בזרימת עבודה הזו רק לבדיקות ולתיעוד תהליכים ידניים, אבל אני נרגש מהיישום שלה שם.</p>
+
+<p>אני גם מכיר בכך שפורמט Org הוא גורם מגביל, בגלל השילוב ההדוק שלו עם Emacs. עם זאת, אני מאמין מזה זמן רב ש-Org צריך לברוח מ-Emacs. הייתי מקדם משהו כמו Markdown במקום, אבל ל-Markdown חסרה היכולת לכלול מטא-דאטה. אבל כרגיל בפוסטים שלי על Emacs, זה לא המימוש הספציפי של Emacs לרעיון שמרגש אותי, כפי שבמקרה הזה המימוש של Org לתכנות ספרותי עושה.</p>
+
+<p>זה הרעיון עצמו שמרגש אותי, לא הכלי.</p>
+
+<p>עם סוכנים, האם זה הופך לפרקטי שיהיו בסיסי קוד גדולים שאפשר לקרוא כנרטיב, שהפרוזה שלהם נשמרת מסונכרנת עם שינויים בקוד על ידי מכונות בלתי-נלאות?</p>
+
+<p>אני חושב שזו שאלה מרתקת.</p>
+
+<div class="source-link">
+📖 מקור:
+<a href="https://silly.business/blog/we-should-revisit-literate-programming-in-the-agent-era/" target="_blank" rel="noopener">
+We Should Revisit Literate Programming in the Agent Era — silly.business
+</a>
+</div>
+
+</div>
+</body>
+</html>
