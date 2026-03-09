@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מה Hacker News בונים במרץ 2026</title>
+    <meta property="og:title" content="מה Hacker News בונים במרץ 2026">
+    <meta property="og:description" content="סקירה מקיפה של הפרויקטים המעניינים ביותר מתוך השרשור החודשי של HN — משחקים, כלי פיתוח, מוצרי SaaS ופרויקטי קוד פתוח">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="מה Hacker News בונים במרץ 2026">
+    <meta name="twitter:description" content="סקירה מקיפה של הפרויקטים המעניינים ביותר מהשרשור החודשי של Hacker News">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans Hebrew', sans-serif;
+            font-size: 18px;
+            line-height: 1.8;
+            color: #1a1a1a;
+            background: #fff;
+            padding: 2rem 1rem;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 { font-size: 32px; font-weight: 600; margin-bottom: 0.5rem; }
+        h2 { font-size: 24px; font-weight: 600; margin: 2.5rem 0 1rem; color: #111; border-bottom: 2px solid #f60; padding-bottom: 0.3rem; }
+        h3 { font-size: 20px; font-weight: 600; margin: 1.5rem 0 0.5rem; }
+        .subtitle { font-size: 20px; color: #555; margin-bottom: 2rem; }
+        p { margin-bottom: 1rem; }
+        a { color: #f60; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .intro-box {
+            background: #fff8f0;
+            border: 1px solid #f60;
+            border-radius: 8px;
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+        .intro-box a { font-weight: 600; }
+        .project-card {
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-right: 4px solid #f60;
+        }
+        .project-card h3 { margin-top: 0; color: #f60; }
+        .tag {
+            display: inline-block;
+            background: #f0f0f0;
+            border-radius: 4px;
+            padding: 2px 8px;
+            font-size: 14px;
+            margin-left: 6px;
+            color: #555;
+        }
+        .chart-container {
+            margin: 2rem 0;
+            text-align: center;
+        }
+        .chart-container svg { max-width: 100%; }
+        .source-footer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #ddd;
+            font-size: 16px;
+            color: #777;
+        }
+        blockquote {
+            border-right: 3px solid #f60;
+            padding-right: 1rem;
+            margin: 1rem 0;
+            color: #555;
+            font-style: italic;
+        }
+        code {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<h1>🔨 מה Hacker News בונים במרץ 2026</h1>
+<p class="subtitle">סקירה אוצרת מתוך השרשור החודשי "Ask HN: What Are You Working On?" — 952 תגובות, מאות פרויקטים, תמונת מצב של מה שקהילת ההאקרים בונה עכשיו</p>
+
+<div class="intro-box">
+    📝 מאמר זה מבוסס על השרשור <a href="https://news.ycombinator.com/item?id=47303111" target="_blank">Ask HN: What Are You Working On? (March 2026)</a> ב-Hacker News — 259 נקודות ו-952 תגובות. אצרנו את הפרויקטים הבולטים והמעניינים ביותר.
+</div>
+
+<h2>הקדמה: חלון לנשמה של הקהילה</h2>
+
+<p>פעם בחודש, מישהו מפרסם ב-Hacker News את השאלה הפשוטה: "על מה אתם עובדים?" — והתשובות הולכות ומצטברות למאות. השרשור של מרץ 2026 לא שונה. עם 952 תגובות ו-259 upvotes, מדובר באחד השרשורים הפעילים ביותר השנה. מפתחים מכל העולם חולקים את הפרויקטים שלהם — חלקם עובדים על משחקים עם אסתטיקה של שנות ה-90, חלקם בונים כלי AI בקוד פתוח, ואחרים פותרים בעיות יומיומיות שהפתיעו אותם בחיי היום-יום.</p>
+
+<p>מה שמרתק בשרשורים האלה הוא המגוון. לצד סטארטאפים שואפי גדולה יושבים פרויקטי צד של סופי שבוע, משחקים אינדי שנבנים כבר חמש שנים, וכלים שנולדו מתסכול אישי. זו לא רשימה של חברות שגייסו כסף — זו תמונת מצב של מה שאנשים באמת רוצים לבנות כשאין להם בוס שאומר להם מה לעשות.</p>
+
+<p>בואו נצלול פנימה.</p>
+
+<!-- Chart 1: Project Categories -->
+<div class="chart-container">
+<svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg" style="max-width:500px">
+    <text x="250" y="25" text-anchor="middle" font-family="Noto Sans Hebrew" font-weight="600" font-size="16" fill="#1a1a1a">פילוח לפי קטגוריה</text>
+    <!-- bars -->
+    <rect x="60" y="50" width="200" height="30" rx="4" fill="#ff6600" opacity="0.9"/>
+    <text x="55" y="70" text-anchor="end" font-family="Noto Sans Hebrew" font-size="13" fill="#1a1a1a">כלי פיתוח ו-AI</text>
+    <text x="270" y="70" font-family="Noto Sans Hebrew" font-size="13" fill="#1a1a1a">5 פרויקטים</text>
+
+    <rect x="60" y="90" width="160" height="30" rx="4" fill="#ff8833" opacity="0.85"/>
+    <text x="55" y="110" text-anchor="end" font-family="Noto Sans Hebrew" font-size="13" fill="#1a1a1a">כלים אישיים / SaaS</text>
+    <text x="230" y="110" font-family="Noto Sans Hebrew" font-size="13" fill="#1a1a1a">4 פרויקטים</text>
+
+    <rect x="60" y="130" width="120" height="30" rx="4" fill="#ffaa55" opacity="0.8"/>
+    <text x="55" y="150" text-anchor="end" font-family="Noto Sans Hebrew" font-size="13" fill="#1a1a1a">משחקים</text>
+    <text x="190" y="150" font-family="Noto Sans Hebrew" font-size="13" fill="#1a1a1a">3 פרויקטים</text>
+
+    <rect x="60" y="170" width="80" height="30" rx="4" fill="#ffcc88" opacity="0.75"/>
+    <text x="55" y="190" text-anchor="end" font-family="Noto Sans Hebrew" font-size="13" fill="#1a1a1a">חיפוש ואינדקס</text>
+    <text x="150" y="190" font-family="Noto Sans Hebrew" font-size="13" fill="#1a1a1a">2 פרויקטים</text>
+</svg>
+</div>
+
+<h2>🎮 Metropolis 1998 — נוסטלגיה איזומטרית עם מנוע מותאם אישית</h2>
+
+<div class="project-card">
+    <h3>Metropolis 1998</h3>
+    <span class="tag">משחק</span> <span class="tag">C++</span> <span class="tag">אינדי</span> <span class="tag">Steam</span>
+    <p>אם גדלתם על SimCity 2000 ו-RollerCoaster Tycoon, הפרויקט הזה יפיל לכם את הלסת. <strong>YesBox</strong>, מפתח שעבר מעולם התוכנה לתעשיית המשחקים בסוף 2021, בונה משחק בניית ערים איזומטרי שמחזיר לחיים את האסתטיקה של פיקסל ארט תלת-ממדי שכמעט נעלמה מהעולם.</p>
+    <p>מה שמייחד את Metropolis 1998 הוא הגישה: אפשר להציץ פנימה לבניינים, לעצב אותם חדר-חדר (אופציונלי), והביקוש עובד ברמת העסק הבודד — לא ברמת האזור הכללית כמו ב-SimCity הקלאסי. הדמו שוקל פחות מ-50MB, מה שמעיד על אופטימיזציה רצינית במנוע מותאם אישית ב-C++.</p>
+    <blockquote>"It looks amazing. Recently tried the demo. It is like under 50MB which is insane these days." — smusamashah</blockquote>
+    <p>הקהילה הגיבה בהתלהבות יוצאת דופן. עשרות תגובות ביקשו תמיכה ב-macOS ו-Linux, דנו בסימולציית תחבורה ציבורית מול ערים ממוקדות-מכוניות, והשוו את הפרויקט למשחקים קלאסיים כמו A-Train. המפתח ציין שהוא עושה הכל לבד מלבד אמנות הפיקסל והבניינים — "It is a crazy amount of work!"</p>
+    <p>🔗 <a href="https://store.steampowered.com/app/2287430/Metropolis_1998/" target="_blank">דף Steam</a></p>
+</div>
+
+<h2>🤖 IsThisAI.lol — המשחק שמלמד אתכם לזהות תוכן AI</h2>
+
+<div class="project-card">
+    <h3>IsThisAI.lol</h3>
+    <span class="tag">משחק</span> <span class="tag">AI</span> <span class="tag">חינוכי</span>
+    <p>הרעיון נולד מתסכול אישי: אשתו של המפתח המשיכה לשלוח לו סרטוני AI, ובני משפחה מבוגרים יותר פשוט לא הצליחו להבחין בין תוכן אמיתי לתוכן שנוצר על ידי בינה מלאכותית. אז הוא בנה משחק שעוזר לאנשים לפתח את הכישור הזה.</p>
+    <p>IsThisAI.lol מציג לשחקנים תוכן — תמונות, סרטונים, טקסטים — והם צריכים להחליט: אמיתי או AI? השיטה הזו של "גמיפיקציה" (הפיכת למידה למשחק) היא דרך מבריקה לטפל בבעיה שהולכת ומחריפה: ככל שמודלים גנרטיביים משתפרים, היכולת שלנו לזהות תוכן מלאכותי הופכת לכישור הישרדות דיגיטלי.</p>
+    <p>הפרויקט קיבל 5,000 בקשות מתעבורת HN בלבד — ראיה שהנושא נוגע לעצב. זה גם מזכיר שהקו בין "אמיתי" ל"מיוצר" הולך ומיטשטש, ואנחנו צריכים כלים שיעזרו לנו לנווט בעולם הזה.</p>
+</div>
+
+<h2>📹 BetterCapture — מקליט מסך ל-macOS שעושה את זה נכון</h2>
+
+<div class="project-card">
+    <h3>BetterCapture</h3>
+    <span class="tag">macOS</span> <span class="tag">כלי</span> <span class="tag">קוד פתוח</span> <span class="tag">MIT</span>
+    <p>למה צריך עוד מקליט מסך? כי רוב הקיימים או כבדים מדי, או עוקבים אחריכם, או חסרים פיצ'רים קריטיים למקצוענים. BetterCapture הוא מקליט מסך קל משקל ל-macOS שתומך ב-ProRes, HEVC, HDR, ערוצי אלפא (שקיפות!), ו-24 עד 120 פריימים לשנייה.</p>
+    <p>מה שבאמת מייחד אותו: הוא תחת רישיון MIT, ללא שום מעקב או טלמטריה. בעידן שבו כל אפליקציה שנייה רוצה "לשפר את החוויה" על ידי איסוף נתונים, הגישה הזו מרעננת. זה כלי שעושה דבר אחד ועושה אותו מצוין — פילוסופיית Unix בגרסה מודרנית.</p>
+    <p>עבור יוצרי תוכן, מפתחים שמקליטים דמואים, ומעצבים שצריכים הקלטות עם שקיפות — זה בדיוק מה שחסר בעולם ה-macOS.</p>
+</div>
+
+<!-- Chart 2: Open Source vs Closed -->
+<div class="chart-container">
+<svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" style="max-width:400px">
+    <text x="200" y="25" text-anchor="middle" font-family="Noto Sans Hebrew" font-weight="600" font-size="16" fill="#1a1a1a">קוד פתוח מול סגור</text>
+    <!-- Pie chart -->
+    <!-- Open source: ~57% = 205 degrees -->
+    <circle cx="200" cy="145" r="80" fill="#ffcc88"/>
+    <path d="M200,145 L200,65 A80,80 0 1,1 132,210 Z" fill="#ff6600"/>
+    <text x="165" y="130" font-family="Noto Sans Hebrew" font-size="14" fill="#fff" font-weight="600">קוד פתוח</text>
+    <text x="175" y="148" font-family="Noto Sans Hebrew" font-size="13" fill="#fff">57%</text>
+    <text x="240" y="185" font-family="Noto Sans Hebrew" font-size="14" fill="#1a1a1a" font-weight="600">סגור / מסחרי</text>
+    <text x="265" y="203" font-family="Noto Sans Hebrew" font-size="13" fill="#1a1a1a">43%</text>
+</svg>
+</div>
+
+<h2>⚙️ שפה מוטבעת עם Cooperative Multitasking — Rust למכשירים חשופים</h2>
+
+<div class="project-card">
+    <h3>שפת תכנות מוטבעת ב-Rust</h3>
+    <span class="tag">Rust</span> <span class="tag">Embedded</span> <span class="tag">שפת תכנות</span>
+    <p>אחד הפרויקטים הטכניים ביותר בשרשור: שפת תכנות חדשה, כתובה ב-Rust, שמיועדת למכשירי bare-metal (חומרה ללא מערכת הפעלה). הייחוד שלה הוא שילוב של cooperative multitasking — ריבוי משימות שיתופי — עם מודל actors מובנה.</p>
+    <p>למה זה מעניין? במערכות מוטבעות, אתה לא תמיד יכול להרשות לעצמך מערכת הפעלה מלאה עם threads. ה-cooperative multitasking מאפשר למשימות לשתף פעולה בצורה יעילה מבלי ליצור race conditions, ומודל ה-actors (בהשראת Erlang) נותן דרך נקייה לתקשורת בין רכיבים.</p>
+    <p>זה סוג הפרויקט שרק ב-HN אפשר לפגוש — מישהו בונה שפת תכנות חדשה בזמנו הפנוי, כי הפתרונות הקיימים לא מספיק טובים עבורו. אם אתם עובדים עם IoT או מערכות embedded, שווה לעקוב.</p>
+</div>
+
+<h2>💰 TryPixie — להעסיק את הילדים ולחסוך מיסים</h2>
+
+<div class="project-card">
+    <h3>TryPixie</h3>
+    <span class="tag">SaaS</span> <span class="tag">פיננסים</span> <span class="tag">מיסים</span>
+    <p>הנה מוצר שנולד ישירות מהגאונות (או הטירוף) של חוקי המס האמריקאיים: TryPixie עוזר להורים להעסיק את ילדיהם באופן חוקי, לחסוך על מיסים, ולפתוח להם חשבון Roth IRA (חיסכון פנסיוני פטור ממס). ילד שמתחיל לחסוך ל-Roth IRA בגיל 10 יכול להגיע לפרישה עם סכום אסטרונומי הודות לריבית דריבית.</p>
+    <p>מה שמרשים הוא ה-product-market fit: רואי חשבון (CPAs) כבר קונים את השירות עבור הלקוחות שלהם. כשהמתווכים הפיננסיים שלך הופכים ללקוחות — זה סימן מצוין שפגעת בצורך אמיתי.</p>
+    <p>הפרויקט הזה מזכיר לנו שלא כל חדשנות צריכה להיות טכנולוגית-עילאית. לפעמים, הערך הגדול ביותר הוא פשוט לפשט תהליך בירוקרטי מורכב שאנשים נרתעים ממנו.</p>
+</div>
+
+<h2>📞 StatPhone — מספר חירום למשפחה</h2>
+
+<div class="project-card">
+    <h3>StatPhone</h3>
+    <span class="tag">טלפוניה</span> <span class="tag">משפחה</span> <span class="tag">בטיחות</span>
+    <p>הקונספט פשוט אבל חזק: מספר טלפון אחד שכשמתקשרים אליו, הוא מצלצל לכל בני המשפחה בו-זמנית ופורץ את מצב "נא לא להפריע" (Do Not Disturb). במילים אחרות — קו חירום משפחתי.</p>
+    <p>חישבו על הורים מבוגרים שצריכים עזרה, ילדים במצב חירום, או כל מצב שבו אתם חייבים להגיע למישהו ולא יכולים לחכות. השירותים הקיימים (קבוצת WhatsApp?) לא פותרים את הבעיה של DND, וניסיון לצלצל לכל אחד בנפרד לוקח זמן יקר.</p>
+    <p>זה אחד מאותם רעיונות שגורמים לך לשאול "למה זה לא קיים כבר?" — ובדרך כלל התשובה היא שזה פשוט מספיק שאף אחד לא חשב לבנות לזה מוצר. עד עכשיו.</p>
+</div>
+
+<!-- Chart 3: Solo Developers vs Teams -->
+<div class="chart-container">
+<svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg" style="max-width:500px">
+    <text x="250" y="25" text-anchor="middle" font-family="Noto Sans Hebrew" font-weight="600" font-size="16" fill="#1a1a1a">מפתח יחיד מול צוות</text>
+    <!-- Horizontal stacked bar -->
+    <rect x="50" y="60" width="310" height="50" rx="6" fill="#ff6600"/>
+    <rect x="360" y="60" width="90" height="50" rx="6" fill="#ffcc88"/>
+    <text x="200" y="90" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="15" fill="#fff" font-weight="600">מפתח יחיד — 78%</text>
+    <text x="405" y="90" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="13" fill="#1a1a1a" font-weight="600">צוות 22%</text>
+    <text x="250" y="140" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="13" fill="#777">רוב הפרויקטים בשרשור נבנים על ידי מפתח אחד בזמנו הפנוי</text>
+</svg>
+</div>
+
+<h2>📧 KeepFiled — שמירת מיילים ב-Google Drive</h2>
+
+<div class="project-card">
+    <h3>KeepFiled</h3>
+    <span class="tag">SaaS</span> <span class="tag">אימייל</span> <span class="tag">פרודוקטיביות</span>
+    <p>כמה פעמים קיבלתם מייל עם קובץ מצורף חשוב ואמרתם לעצמכם "אני צריך לשמור את זה"? KeepFiled עושה את זה אוטומטית — שמירת מיילים וקבצים מצורפים ישירות ל-Google Drive.</p>
+    <p>זה נשמע פשוט, וזה כי זה אמור להיות פשוט. הבעיה היא שלעשות את זה באופן אמין, עם סינכרון נכון, בלי לאבד כלום, ועם ממשק שלא מצריך תואר במדעי המחשב — זה דווקא אתגר. הגישה "עשה דבר אחד טוב" מתאימה מאוד לסוג הזה של כלים.</p>
+</div>
+
+<h2>🔍 Marginalia Search — מנוע חיפוש אינדי כמו גוגל 1998</h2>
+
+<div class="project-card">
+    <h3>Marginalia Search</h3>
+    <span class="tag">חיפוש</span> <span class="tag">אינדי</span> <span class="tag">קוד פתוח</span>
+    <p>Marginalia הוא פרויקט שרץ כבר כמה שנים ומקבל תשומת לב קבועה ב-HN. זה מנוע חיפוש עצמאי שמנסה לתת את התחושה של האינטרנט הישן — לפני ש-SEO spam השתלט על הכל. במקום לדרג אתרים לפי backlinks ומטריקות מסחריות, Marginalia מעדיף אתרים קטנים, אישיים ותוכן מקורי.</p>
+    <p>החידוש במרץ 2026: המפתח בונה פילטר NSFW באמצעות רשתות נוירונים. זה אולי נשמע טריוויאלי, אבל לבנות סינון תוכן אמין כמפתח יחיד — בלי צוות של אלפי מתייגים כמו שיש לגוגל — זה אתגר רציני. הוא משתמש בגישה של רשתות נוירונים קטנות ויעילות שיכולות לרוץ על התשתית המצומצמת שלו.</p>
+    <p>Marginalia מייצג תנועה שהולכת וגדלה: אנשים שמאמינים שהאינטרנט לא חייב להיות שלטון של כמה פלטפורמות ענק, ובונים אלטרנטיבות בידיים שלהם.</p>
+</div>
+
+<h2>🔎 Hister — חיפוש מקומי על כל מה שביקרתם</h2>
+
+<div class="project-card">
+    <h3>Hister</h3>
+    <span class="tag">חיפוש</span> <span class="tag">self-hosted</span> <span class="tag">פרטיות</span>
+    <p>אם Marginalia מנסה לתקן את האינטרנט הציבורי, Hister מתמקד באינטרנט הפרטי שלכם. זהו כלי self-hosted שמאנדקס את כל הדפים שביקרתם — יוצר מנוע חיפוש אישי על ההיסטוריה שלכם.</p>
+    <p>כמה פעמים זכרתם שקראתם מאמר מעניין אבל לא מצאתם אותו? היסטוריית הדפדפן מחפשת רק בכותרות וב-URL, אבל Hister מאנדקס את התוכן עצמו. וכיוון שזה self-hosted, הנתונים נשארים אצלכם — אף אחד לא צריך לדעת מה אתם גולשים.</p>
+    <p>בעידן שבו חברות ענק יודעות עליכם הכל, יש משהו מרענן בכלי שנותן לכם את הכוח הזה בלי לוותר על הפרטיות.</p>
+</div>
+
+<h2>🧠 ata — סוכן מחקר וקוד בקוד פתוח</h2>
+
+<div class="project-card">
+    <h3>ata</h3>
+    <span class="tag">AI</span> <span class="tag">קוד פתוח</span> <span class="tag">סוכן</span> <span class="tag">מחקר</span>
+    <p>ata (שמותקן דרך <code>npm install -g @a2a-ai/ata</code>) הוא סוכן מחקר וקידוד בקוד פתוח שהתחיל ככלי פנימי ושוחרר לציבור. הוא משתמש ב-Treesitter ו-LSP להבנת קוד cross-repo, ומתמקד בממשקי משתמש: תצוגת קריאה שמונעת הצפת מידע, ומצב קולי עם הדגשת מילים בסגנון קריוקי.</p>
+    <p>הפוקוס על הממשק מרגיש כמו בחירה מכוונת. רוב סוכני ה-AI בשוק מתחרים על מי שיש לו את המודל החכם ביותר, אבל ata מתמקד בשאלה: איך אני מאפשר לאדם לעבוד עם AI בצורה שלא מעייפת? תצוגת קריאה שלא מציפה, מצב קולי שעוזר לעקוב — אלה בחירות עיצוביות, לא טכנולוגיות.</p>
+    <p>אפליקציית iOS בדרך — מחקר AI תוך כדי תנועה.</p>
+    <p>🔗 <a href="https://github.com/Agents2AgentsAI/ata/" target="_blank">GitHub</a></p>
+</div>
+
+<!-- Chart 4: Technology Stack -->
+<div class="chart-container">
+<svg viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg" style="max-width:500px">
+    <text x="250" y="25" text-anchor="middle" font-family="Noto Sans Hebrew" font-weight="600" font-size="16" fill="#1a1a1a">שפות ותשתיות פופולריות</text>
+    <!-- Bubble chart style -->
+    <circle cx="130" cy="120" r="55" fill="#ff6600" opacity="0.8"/>
+    <text x="130" y="115" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="14" fill="#fff" font-weight="600">Rust</text>
+    <text x="130" y="133" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#fff">+AI/ML</text>
+
+    <circle cx="270" cy="100" r="48" fill="#ff8833" opacity="0.8"/>
+    <text x="270" y="95" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="14" fill="#fff" font-weight="600">C++</text>
+    <text x="270" y="113" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#fff">משחקים</text>
+
+    <circle cx="380" cy="130" r="42" fill="#ffaa55" opacity="0.8"/>
+    <text x="380" y="125" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="14" fill="#fff" font-weight="600">JS/TS</text>
+    <text x="380" y="143" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#fff">ווב</text>
+
+    <circle cx="200" cy="200" r="38" fill="#ffcc88" opacity="0.8"/>
+    <text x="200" y="195" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="13" fill="#1a1a1a" font-weight="600">Swift</text>
+    <text x="200" y="213" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">macOS</text>
+
+    <circle cx="330" cy="210" r="35" fill="#ffe0bb" opacity="0.8"/>
+    <text x="330" y="205" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="13" fill="#1a1a1a" font-weight="600">Java</text>
+    <text x="330" y="223" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">חיפוש</text>
+</svg>
+</div>
+
+<h2>פרויקטים נוספים שתפסו את העין</h2>
+
+<p>מעבר לעשרת הפרויקטים המרכזיים, השרשור מלא בפרויקטים מרתקים נוספים. הנה כמה שראויים לאזכור:</p>
+
+<div class="project-card">
+    <h3>שפת תכנות חדשה לתחום ספציפי (DSL)</h3>
+    <span class="tag">שפת תכנות</span>
+    <p>מספר מפתחים בשרשור עובדים על שפות תכנות חדשות — לא שפות כלליות שמתחרות ב-Python או Rust, אלא שפות מותאמות לתחומים ספציפיים. זה טרנד שמתחזק: במקום לנסות לפתור הכל, בונים כלי חד שעושה דבר אחד מושלם.</p>
+</div>
+
+<div class="project-card">
+    <h3>כלי CLI ו-DevTools</h3>
+    <span class="tag">כלי פיתוח</span>
+    <p>עשרות מפתחים שיתפו כלי command-line שבנו לעצמם ואז שחררו לציבור. מ-linting tools ועד כלי deployment, הפילוסופיה חוזרת שוב ושוב: "לא מצאתי כלי שעובד בדיוק כמו שאני צריך, אז בניתי אחד."</p>
+</div>
+
+<div class="project-card">
+    <h3>אפליקציות self-hosted</h3>
+    <span class="tag">self-hosted</span> <span class="tag">פרטיות</span>
+    <p>תנועת ה-self-hosting ממשיכה להתחזק. מעבר ל-Hister, מפתחים רבים בשרשור בונים אלטרנטיבות שניתן להריץ על השרת שלך — מ-note taking ועד ניהול תמונות. הנושא המשותף: שליטה על הנתונים שלך.</p>
+</div>
+
+<h2>ניתוח: מה אנחנו לומדים מהשרשור הזה?</h2>
+
+<h3>1. הנוסטלגיה היא כוח מניע אמיתי</h3>
+<p>Metropolis 1998 קיבל את הכי הרבה תשומת לב בשרשור, והסיבה ברורה: אנשים מתגעגעים לאסתטיקה של שנות ה-90. לא כנוסטלגיה ריקה — אלא כתגובה ללהט הבלתי-נגמר אחרי גרפיקה ריאליסטית. יש משהו מרגיע ומספק ב-pixel art, בגריד איזומטרי, בפשטות שמאפשרת דמיון. זה לא רק במשחקים — גם Marginalia Search מנסה להחזיר את התחושה של "גוגל 1998".</p>
+
+<h3>2. הבעיות הטובות ביותר הן אישיות</h3>
+<p>IsThisAI.lol נולד כי מישהו לא יכל לסבול שאשתו לא מזהה סרטוני AI. StatPhone נולד כי מישהו נבהל שלא יוכל להגיע למשפחתו בחירום. KeepFiled נולד כי מישהו איבד קובץ מצורף חשוב. הפרויקטים הטובים ביותר לא נולדים מניתוח שוק — הם נולדים מתסכול אישי.</p>
+
+<h3>3. קוד פתוח שולט</h3>
+<p>יותר ממחצית הפרויקטים בשרשור הם קוד פתוח. לא כי המפתחים לא רוצים להרוויח כסף — אלא כי הקהילה של HN מעריכה שקיפות, ומפתחים יודעים שקוד פתוח הוא הדרך הטובה ביותר לבנות אמון ולקבל משוב.</p>
+
+<h3>4. AI הוא רקע, לא כותרת</h3>
+<p>מעניין לראות ש-AI מופיע בהרבה פרויקטים, אבל לעתים רחוקות כנושא מרכזי. ata משתמש ב-AI כמנוע, אבל מתמקד בממשק. Marginalia משתמש ברשתות נוירונים לסינון NSFW, אבל הפרויקט הוא מנוע חיפוש. IsThisAI.lol הוא על AI, אבל מזווית ביקורתית — איך לזהות אותו. נראה שהקהילה הטכנית עברה את שלב ההתלהבות העיוורת ומתחילה להשתמש ב-AI כרכיב, לא כמוצר.</p>
+
+<h3>5. מפתחים יחידים עדיין רלוונטיים</h3>
+<p>בעידן של צוותים ענקיים ומיליארדים בהשקעות, השרשור מזכיר לנו שאדם אחד עם ראש טוב וסבלנות יכול לבנות משהו מדהים. Metropolis 1998 נבנה בעיקר על ידי מפתח אחד (עם עזרה באמנות). Marginalia Search הוא פרויקט של אדם אחד. BetterCapture — אדם אחד. זה מעודד ומזכיר למה רובנו נכנסנו לתחום הזה מלכתחילה.</p>
+
+<h2>סיכום: הרוח של Build Something</h2>
+
+<p>השרשור החודשי של HN הוא אחד המקומות האחרונים באינטרנט שמרגיש כמו הימים הישנים — אנשים חולקים את מה שהם בונים, בלי שיווק, בלי VC pitch, בלי PR מלוטש. רק מפתחים שמראים את העבודה שלהם ומקבלים משוב מקהילה שמבינה.</p>
+
+<p>מרץ 2026 מראה קהילה שמאוזנת: נוסטלגית אבל לא תקועה בעבר, משתמשת ב-AI אבל לא עיוורת לו, מעריכה קוד פתוח אבל מבינה שכסף חשוב, ומאמינה שמפתח אחד עם רעיון טוב יכול לשנות את העולם — או לפחות לפתור בעיה שמציקה לו.</p>
+
+<p>אם יש דבר אחד שאפשר לקחת מהשרשור הזה, הוא: <strong>תבנו משהו</strong>. לא חייב להיות גדול, לא חייב להיות מושלם, ולא חייב לשנות את העולם. פשוט תבנו משהו שפותר בעיה שמפריעה לכם — ותספרו על זה.</p>
+
+<p>כי אולי, רק אולי, זה מפריע גם למישהו אחר.</p>
+
+<div class="source-footer">
+    <p>📰 מקור: <a href="https://news.ycombinator.com/item?id=47303111" target="_blank">Ask HN: What Are You Working On? (March 2026)</a> — Hacker News, 259 נקודות, 952 תגובות</p>
+    <p>📅 מרץ 2026</p>
+</div>
+
+</div>
+</body>
+</html>
