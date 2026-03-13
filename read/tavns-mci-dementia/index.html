@@ -3,230 +3,342 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>גירוי עצב הוואגוס דרך העור (taVNS) לטיפול בליקוי קוגניטיבי קל (MCI) ודמנציה</title>
+<title>גירוי עצב הוואגוס דרך האוזן: טיפול חדשני בליקוי קוגניטיבי קל</title>
 <meta name="robots" content="noindex, nofollow">
-<meta property="og:title" content="גירוי עצב הוואגוס דרך העור (taVNS) לטיפול בליקוי קוגניטיבי קל ודמנציה">
-<meta property="og:description" content="מסמך לרופא המטפל — מרץ 2026. סיכום מחקרי על taVNS, פרוטוקול טיפול, בטיחות ומכשיר מומלץ.">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  font-family: 'Noto Sans Hebrew', sans-serif;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 40px 20px 80px;
-  background: #fff;
-  color: #1a1a1a;
-  line-height: 1.9;
-  font-size: 17px;
-}
-h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; line-height: 1.4; }
-h2 { font-size: 22px; font-weight: 700; margin-top: 40px; margin-bottom: 16px; color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 8px; }
-h3 { font-size: 18px; font-weight: 600; margin-top: 28px; margin-bottom: 12px; color: #34495e; }
-p { margin-bottom: 16px; }
-.subtitle { font-size: 15px; color: #666; margin-bottom: 4px; }
-.meta { font-size: 14px; color: #999; margin-bottom: 32px; }
-a { color: #2980b9; text-decoration: none; word-break: break-all; }
-a:hover { text-decoration: underline; }
-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 15px; }
-th, td { border: 1px solid #ddd; padding: 10px 14px; text-align: right; }
-th { background: #f7f9fc; font-weight: 600; }
-tr:nth-child(even) { background: #fafafa; }
-.highlight { background: #e8f4fd; border-right: 4px solid #2980b9; padding: 16px 20px; margin: 20px 0; border-radius: 4px; }
-.warning { background: #fdf2e9; border-right: 4px solid #e67e22; padding: 16px 20px; margin: 20px 0; border-radius: 4px; }
-ul { padding-right: 24px; margin-bottom: 16px; }
-li { margin-bottom: 8px; }
-.source-tag { display: inline-block; background: #eee; color: #555; padding: 4px 12px; border-radius: 20px; font-size: 13px; margin-bottom: 24px; }
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:#0f0f0f;color:#e0e0e0;line-height:1.85;font-size:17px}
+.hero{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);padding:60px 20px 50px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at 30% 50%,rgba(59,130,246,0.08) 0%,transparent 70%);animation:pulse 8s ease-in-out infinite alternate}
+@keyframes pulse{0%{transform:scale(1)}100%{transform:scale(1.1)}}
+.hero h1{font-size:clamp(1.6rem,4vw,2.4rem);color:#fff;max-width:800px;margin:0 auto 16px;line-height:1.4;position:relative}
+.hero .subtitle{color:#93c5fd;font-size:1.05rem;max-width:700px;margin:0 auto}
+.hero .meta{color:#9ca3af;font-size:0.85rem;margin-top:18px}
+.container{max-width:780px;margin:0 auto;padding:30px 20px 60px}
+h2{color:#60a5fa;font-size:1.45rem;margin:40px 0 16px;padding-bottom:8px;border-bottom:2px solid #1e3a5f}
+h3{color:#93c5fd;font-size:1.15rem;margin:28px 0 12px}
+p{margin-bottom:16px}
+strong{color:#f0f0f0}
+a{color:#60a5fa;text-decoration:none}
+a:hover{text-decoration:underline}
+ul,ol{margin:0 24px 16px 0;padding:0}
+li{margin-bottom:8px}
+
+/* Info cards */
+.card{background:#1a1a2e;border:1px solid #1e3a5f;border-radius:12px;padding:24px;margin:24px 0}
+.card.highlight{border-color:#f59e0b;background:linear-gradient(135deg,#1a1a2e,#2a1a0e)}
+.card.green{border-color:#22c55e;background:linear-gradient(135deg,#1a1a2e,#0a2a1a)}
+.card.red{border-color:#ef4444;background:linear-gradient(135deg,#1a1a2e,#2a0a0a)}
+.card h3{margin-top:0;color:#fff}
+.card-label{font-size:0.75rem;text-transform:uppercase;letter-spacing:2px;color:#9ca3af;margin-bottom:8px}
+
+/* Illustration: ear diagram */
+.illustration{display:flex;justify-content:center;margin:30px 0}
+.ear-diagram{position:relative;width:320px;height:340px}
+.ear-shape{width:240px;height:300px;border:3px solid #475569;border-radius:50% 50% 45% 45%;position:absolute;top:20px;right:40px;background:rgba(30,58,95,0.3)}
+.concha{width:90px;height:80px;border:2px solid #60a5fa;border-radius:50%;position:absolute;top:120px;right:110px;display:flex;align-items:center;justify-content:center;font-size:0.7rem;color:#60a5fa;text-align:center;background:rgba(96,165,250,0.1);animation:glow 3s ease-in-out infinite alternate}
+.scapha{width:60px;height:50px;border:2px dashed #ef4444;border-radius:40%;position:absolute;top:60px;right:90px;display:flex;align-items:center;justify-content:center;font-size:0.65rem;color:#ef4444;text-align:center;opacity:0.7}
+@keyframes glow{0%{box-shadow:0 0 5px rgba(96,165,250,0.3)}100%{box-shadow:0 0 20px rgba(96,165,250,0.5)}}
+.ear-label{position:absolute;font-size:0.75rem;color:#9ca3af}
+.ear-label.vagus{bottom:10px;right:80px;color:#60a5fa;font-weight:bold}
+.ear-label.sham{top:30px;right:30px;color:#ef4444}
+.legend{display:flex;gap:20px;justify-content:center;margin-top:12px;font-size:0.8rem}
+.legend span{display:flex;align-items:center;gap:6px}
+.legend .dot{width:12px;height:12px;border-radius:50%;display:inline-block}
+.dot.blue{background:#60a5fa}
+.dot.red-d{background:#ef4444}
+
+/* Bar chart */
+.chart-container{margin:30px 0}
+.chart-title{text-align:center;color:#93c5fd;font-size:1rem;margin-bottom:16px}
+.bar-group{display:flex;align-items:flex-end;justify-content:center;gap:40px;height:200px;padding:0 20px;margin-bottom:8px}
+.bar-pair{display:flex;flex-direction:column;align-items:center;gap:4px}
+.bar-pair .bars{display:flex;gap:6px;align-items:flex-end;height:180px}
+.bar{width:36px;border-radius:6px 6px 0 0;position:relative;transition:height 0.5s}
+.bar.tavns{background:linear-gradient(to top,#1e40af,#3b82f6)}
+.bar.sham{background:linear-gradient(to top,#374151,#6b7280)}
+.bar .val{position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-size:0.75rem;color:#e0e0e0;white-space:nowrap}
+.bar-pair .label{font-size:0.8rem;color:#9ca3af;margin-top:4px}
+.chart-legend{display:flex;gap:20px;justify-content:center;font-size:0.8rem;margin-top:12px}
+.chart-legend span{display:flex;align-items:center;gap:6px}
+.chart-legend .sq{width:14px;height:14px;border-radius:3px;display:inline-block}
+.sq.bl{background:#3b82f6}
+.sq.gr{background:#6b7280}
+
+/* Timeline */
+.timeline{position:relative;padding:20px 30px 20px 0;margin:30px 0}
+.timeline::before{content:'';position:absolute;right:14px;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,#1e3a5f,#60a5fa,#1e3a5f)}
+.tl-item{position:relative;padding:0 50px 30px 0}
+.tl-item::before{content:'';position:absolute;right:6px;top:4px;width:19px;height:19px;border-radius:50%;background:#60a5fa;border:3px solid #1a1a2e}
+.tl-item .tl-title{font-weight:bold;color:#60a5fa;font-size:0.95rem}
+.tl-item .tl-body{font-size:0.9rem;color:#d1d5db;margin-top:4px}
+
+/* Protocol box */
+.protocol{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin:20px 0}
+.proto-item{background:#111827;border:1px solid #1e3a5f;border-radius:10px;padding:16px;text-align:center}
+.proto-item .num{font-size:1.6rem;font-weight:bold;color:#60a5fa}
+.proto-item .unit{font-size:0.8rem;color:#9ca3af;margin-top:4px}
+
+/* Quote */
+.quote{border-right:4px solid #f59e0b;padding:16px 20px 16px 0;margin:24px 0;background:rgba(245,158,11,0.05);border-radius:0 8px 8px 0;font-style:italic;color:#d1d5db}
+
+/* Nerve animation */
+.nerve-visual{text-align:center;margin:30px 0}
+.nerve-path{display:inline-flex;align-items:center;gap:0;direction:ltr}
+.nerve-node{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.65rem;text-align:center;color:#fff;font-weight:bold;line-height:1.2}
+.nerve-node.ear{background:linear-gradient(135deg,#3b82f6,#1e40af)}
+.nerve-node.vagus{background:linear-gradient(135deg,#8b5cf6,#6d28d9)}
+.nerve-node.brain{background:linear-gradient(135deg,#22c55e,#15803d)}
+.nerve-conn{width:50px;height:3px;background:linear-gradient(to left,#8b5cf6,#3b82f6);position:relative}
+.nerve-conn.v2{background:linear-gradient(to left,#22c55e,#8b5cf6)}
+.nerve-conn::after{content:'◀';position:absolute;left:-6px;top:-8px;color:#8b5cf6;font-size:0.7rem}
+.nerve-conn.v2::after{color:#22c55e}
+.nerve-labels{display:flex;justify-content:center;gap:48px;margin-top:8px;font-size:0.7rem;color:#9ca3af;direction:ltr}
+
+/* Bottom line */
+.bottom-line{background:linear-gradient(135deg,#1a1a2e,#0f3460);border-radius:12px;padding:30px;margin:40px 0;text-align:center}
+.bottom-line h2{border:none;margin-top:0}
+.bottom-line p{max-width:600px;margin:0 auto 12px}
+
+.source{margin-top:50px;padding-top:20px;border-top:1px solid #1e3a5f;font-size:0.8rem;color:#6b7280}
+.disclaimer{margin-top:16px;font-size:0.75rem;color:#4b5563;font-style:italic}
 </style>
 </head>
 <body>
 
-<p class="subtitle">Transcutaneous Auricular Vagus Nerve Stimulation</p>
-<h1>גירוי עצב הוואגוס דרך העור (taVNS) לטיפול בליקוי קוגניטיבי קל (MCI) ודמנציה</h1>
-<p class="meta">מסמך לרופא המטפל — מרץ 2026</p>
-<span class="source-tag">מסמך רפואי מבוסס מחקר</span>
-
-<h2>הקדמה</h2>
-<p>מסמך זה מרכז את המידע המחקרי העדכני ביותר על גירוי לא-פולשני של עצב הוואגוס דרך האוזן (taVNS) ככלי טיפולי בליקוי קוגניטיבי קל (MCI) ובהאטת ירידה קוגניטיבית הקשורה לדמנציה. בשנים האחרונות הצטברו ראיות מחקריות — כולל ניסוי קליני אקראי מבוקר (RCT) שהראה שיפור קוגניטיבי מובהק, ומחקר פורץ דרך מ-Stanford שזיהה את המנגנון הביולוגי המקשר בין המעי, עצב הוואגוס, והמוח.</p>
-<p>המסמך כולל את הרקע המדעי, פרוטוקול הטיפול המדויק שהראה תוצאות, המכשיר המתאים ביותר ליישום, פרופיל הבטיחות, ומידע מעשי על השגתו. המטרה היא לספק בסיס מבוסס-ראיות לדיון קליני עם הרופא המטפל.</p>
-
-<h2>חלק 1: רקע מחקרי</h2>
-
-<h3>1.1 מחקר מרכזי: קשר מעי-מוח וירידה קוגניטיבית (Stanford, Nature 2026)</h3>
-<p>מחקר שפורסם ב-Nature במרץ 2026 על ידי חוקרים מאוניברסיטת Stanford ומכון Arc זיהה מסלול תלת-שלבי מהמעי למוח:</p>
-<p>הזדקנות משנה את הרכב המיקרוביום (עלייה ב-<em>Parabacteroides goldsteinii</em>), שמעלה מטבוליטים של חומצות שומן בינוניות-שרשרת, שמפעילים דלקת של תאי מיאלואיד במעי, שפוגעת בסיגנל של עצב הוואגוס להיפוקמפוס — וכתוצאה, ירידה קוגניטיבית ופגיעה ביצירת זיכרונות.</p>
-
-<div class="highlight">
-<strong>ממצא מרכזי:</strong> גירוי עצב הוואגוס בעכברים זקנים החזיר את הביצועים הקוגניטיביים לרמת עכברים צעירים.
+<div class="hero">
+  <h1>גירוי עצב הוואגוס דרך האוזן:<br>טיפול חדשני בליקוי קוגניטיבי קל</h1>
+  <div class="subtitle">מחקר קליני כפול-סמיות מראה שיפור מובהק בקוגניציה — בלי תרופות, בלי ניתוח, רק קליפ קטן על האוזן</div>
+  <div class="meta">מבוסס על: Wang et al. (2022) · Brain Stimulation · ניסוי אקראי מבוקר</div>
 </div>
 
-<p><strong>קישורים:</strong></p>
-<ul>
-<li>סיכום המחקר (Stanford Medicine): <a href="https://med.stanford.edu/news/all-news/2026/03/gut-brain-cognitive-decline.html">med.stanford.edu</a></li>
-<li>המאמר המלא (Nature): <a href="https://www.nature.com/articles/s41586-026-10191-6">nature.com</a></li>
-</ul>
+<div class="container">
 
-<h3>1.2 הניסוי הקליני המרכזי: Wang et al. 2022 — taVNS לטיפול ב-MCI</h3>
-<p>הניסוי הקליני הראשון בעולם (RCT, כפול-סמיות) שבדק taVNS במטופלים עם ליקוי קוגניטיבי קל (MCI). פורסם ב-Brain Stimulation, 2022.</p>
-<ul>
-<li><strong>משתתפים:</strong> 52 מטופלים עם MCI, גילאי 55–75</li>
-<li><strong>עיצוב:</strong> RCT כפול-סמיות עם קבוצת sham</li>
-<li><strong>מדד תוצאה ראשי:</strong> Montreal Cognitive Assessment Basic (MoCA-B)</li>
-<li><strong>תוצאה:</strong> שיפור ממוצע של 3.24 נקודות ב-MoCA-B בקבוצת הגירוי לעומת ה-sham (p &lt; 0.05). תוצאה משמעותית קלינית.</li>
-</ul>
+<!-- INTRO -->
+<h2>🧠 מה זה MCI ולמה צריך לשים לב?</h2>
+<p><strong>MCI — Mild Cognitive Impairment</strong> (ליקוי קוגניטיבי קל) הוא "אזור אפור" בין הזדקנות נורמלית לדמנציה. האדם מרגיש ירידה בזיכרון, בקשב או בתפקוד — אבל עדיין מתפקד באופן עצמאי ביום-יום.</p>
+<p>הבעיה? <strong>כ-10-15% מהאנשים עם MCI מתקדמים לדמנציה בכל שנה</strong>. בעולם מאובחנים כ-9.9 מיליון מקרי דמנציה חדשים מדי שנה. לכן, כל התערבות שיכולה לעצור או להאט את ההידרדרות — שווה זהב.</p>
 
-<div class="highlight">
-<strong>מה המשמעות בשפה פשוטה?</strong> מבחן MoCA הוא מבחן סטנדרטי שרופאים משתמשים בו לאבחון ירידה קוגניטיבית. הציון המקסימלי הוא 30, וציון מתחת ל-26 מצביע על כלל על ליקוי קוגניטיבי. שיפור של 3.24 נקודות הוא הבדל מאוד משמעותי — הוא יכול להיות ההבדל בין אדם שמתקשה לזכור רשימת קניות, לשכוח שמות של מכרים, או להתבלבל בניווט במקום מוכר, לבין אדם שמתפקד באופן עצמאי לחלוטין במשימות היומיום. באילים אחרות, אנשים שקיבלו את הטיפול חזרו לתפקוד קוגניטיבי קרוב לנורמלי, בעוד שקבוצת הביקורת המשיכה לדרדר.
+<div class="card highlight">
+  <div class="card-label">השאלה המרכזית</div>
+  <h3>💡 האם גירוי חשמלי עדין באוזן יכול לשפר קוגניציה?</h3>
+  <p>חוקרים סינים בדקו את <strong>taVNS</strong> — גירוי לא-פולשני של עצב הוואגוס דרך נקודות ספציפיות באוזן החיצונית — ב-52 מטופלי MCI לאורך 6 חודשים.</p>
 </div>
 
-<p><strong>קישור:</strong> <a href="https://pubmed.ncbi.nlm.nih.gov/36150665/">pubmed.ncbi.nlm.nih.gov/36150665</a></p>
+<!-- WHAT IS taVNS -->
+<h2>👂 מה זה taVNS?</h2>
+<p><strong>taVNS</strong> = Transcutaneous Auricular Vagus Nerve Stimulation. בעברית: גירוי עצב הוואגוס דרך העור באוזן.</p>
+<p>עצב הוואגוס הוא העצב הארוך ביותר בגוף — הוא יוצא מגזע המוח ומגיע עד לאיברים הפנימיים. המקום <strong>היחיד</strong> בגוף שבו הסיבים שלו נגישים על פני השטח הוא <strong>הקונכה (Concha) של האוזן</strong>.</p>
 
-<h3>1.3 סקירות מחקר תומכות</h3>
-<p>סקירת מחקרים (scoping review) שבחנה 10 מחקרים על VNS בדמנציה דיווחה תוצאות עיקריות:</p>
-<ul>
-<li>שיפור בתפקודים קוגניטיביים</li>
-<li>חיבוריות מוגברת באזורי מוח הקשורים ללמידה וזיכרון</li>
-<li>שינויים מבניים במיקרוגליה מתצורה הרסנית למגנת</li>
-<li>ירידה בחלבוני טאו בנוזל השדרה</li>
-</ul>
-<p><strong>קישור:</strong> <a href="https://pubmed.ncbi.nlm.nih.gov/39431268/">pubmed.ncbi.nlm.nih.gov/39431268</a></p>
-
-<h2>חלק 2: פרוטוקול הטיפול — פרמטרים מדויקים</h2>
-<p>הפרמטרים הבאים מבוססים על הפרוטוקול של Wang et al. 2022 — ה-RCT היחיד שהראה תוצאות מובהקות סטטיסטית ב-MCI:</p>
-
-<table>
-<tr><th>פרמטר</th><th>ערך</th></tr>
-<tr><td>מיקום גירוי</td><td>cymba concha (CO15) + CO10 — אוזן שמאל</td></tr>
-<tr><td>עוצמת זרם</td><td>0.6–1.0 mA (מותאם לסבילות המטופל)</td></tr>
-<tr><td>תדרי גירוי</td><td>20Hz ל-10 שניות, אחריו 100Hz ל-50 שניות (מחזורית)</td></tr>
-<tr><td>משך כל טיפול</td><td>30 דקות</td></tr>
-<tr><td>תדירות</td><td>פעמיים ביום</td></tr>
-<tr><td>ימי טיפול</td><td>5 ימים בשבוע</td></tr>
-<tr><td>משך כולל</td><td>6 חודשים (24 שבועות)</td></tr>
-<tr><td>תוצאה</td><td>+3.24 נקודות ב-MoCA-B (מובהק סטטיסטית)</td></tr>
-</table>
-
-<h3>2.1 מיקום הגירוי — למה cymba concha?</h3>
-<p>ה-cymba concha הוא האזור הפנימי של הקונכה באוזן. זהו האזור היחיד בגוף שמעוצבב ב-100% על ידי הענף האוריקולרי של עצב הוואגוס (ABVN). זאת לעומת:</p>
-<ul>
-<li>ה-tragus מעוצבב רק ב-45% על ידי עצב הוואגוס</li>
-<li>אונית האוזן (earlobe) לא מכילה סיבי עצב וואגוס כלל</li>
-</ul>
-<p>מחקרי fMRI הראו שגירוי ב-cymba conchae הפעיל את ה-Nucleus Tractus Solitarius (NTS) וה-Locus Coeruleus (LC) — אזורי מוח קריטיים לוויסות קוגניטיבית.</p>
-
-<h3>2.2 תופעות לוואי ופרופיל בטיחות</h3>
-<p>על פי מטא-אנליזה של 177 מחקרים על 6,322 נבדקים:</p>
-<ul>
-<li><strong>תופעות שכיחות:</strong> כאב ראש, כאב באוזן, תחושת עקצוץ — כולן קלות וחולפות</li>
-<li><strong>תופעות חמורות:</strong> לא נמצא קשר סיבתי לתופעות לוואי חמורות</li>
-<li><strong>סיכונים:</strong> אין להשתמש במכשיר עם קוצב לב או בעיות קרדיאליות ללא אישור רפואי</li>
-</ul>
-<p><strong>קישור לבטיחות (מטא-אנליזה):</strong> <a href="https://www.nature.com/articles/s41598-022-25864-1">nature.com</a></p>
-<p>מחקר מאוגם נוסף על 488 משתתפים מצא ממוצע של 1.86 תופעות לוואי למשתתף בלבד, כולן קלות (ממוצע 1.86, סטיית תקן 1.36).</p>
-<p><strong>קישור:</strong> <a href="https://www.frontiersin.org/journals/human-neuroscience/articles/10.3389/fnhum.2025.1539416/full">frontiersin.org</a></p>
-
-<h2>חלק 2א: תופעות לוואי וסיכונים — פירוט</h2>
-
-<h3>תופעות לוואי שכיחות (קלות, חולפות)</h3>
-<table>
-<tr><th>תופעה</th><th>שכיחות</th><th>הערות</th></tr>
-<tr><td>כאב או אי-נוחות באוזן</td><td>שכיח ביותר</td><td>חולף לאחר הפסקת הגירוי</td></tr>
-<tr><td>כאב ראש</td><td>שכיח</td><td>בדרך כלל קל וחולף תוך שעות</td></tr>
-<tr><td>תחושת עקצוץ במקום הגירוי</td><td>שכיח</td><td>תלוי בעוצמת הזרם — ניתן להתאים</td></tr>
-<tr><td>אודם מקומי בעור האוזן</td><td>לעיתים</td><td>חולף תוך דקות עד שעה</td></tr>
-<tr><td>סחרחורת קלה</td><td>נדיר</td><td>בעיקר בתחילת הטיפול</td></tr>
-<tr><td>בחילה קלה</td><td>נדיר</td><td>קשורה לגירוי וואגאלי — מצריכה הפחתת עוצמה</td></tr>
-</table>
-
-<h3>תופעות לוואי חמורות</h3>
-<p>לא דווחו תופעות לוואי חמורות בשום מחקר קליני של taVNS אוריקולרי. במטא-אנליזה של Kim et al. (2022) שכללה 6,322 נבדקים, לא נמצא קשר סיבתי לאירועים שליליים חמורים. שיעור הנשירה מהמחקרים בשל תופעות לוואי היה אפסי.</p>
-
-<h3>התוויות נגד (Contraindications)</h3>
-<table>
-<tr><th>התוויה נגד</th><th>הסבר</th></tr>
-<tr><td>קוצב לב (pacemaker)</td><td>עצב הוואגוס מווסת את קצב הלב. גירוי חשמלי עלול להפריע לפעולת הקוצב. שימוש אסור ללא אישור קרדיולוג.</td></tr>
-<tr><td>דפיברילטור מושתל (ICD)</td><td>סיכון להפרעה בזיהוי הפרעות קצב. אסור ללא אישור קרדיולוג.</td></tr>
-<tr><td>הפרעות קצב לב ידועות</td><td>בפרט ברדיקרדיה — עצב הוואגוס מאט את קצב הלב. יש לבצע הערכה קרדיולוגית מקדימה.</td></tr>
-<tr><td>הריון</td><td>אין מספיק נתוני בטיחות. לא מומלץ.</td></tr>
-<tr><td>שתלים מתכתיים באזור הראש/האוזן</td><td>סיכון תיאורטי להפרעה חשמלית.</td></tr>
-<tr><td>עור פגום או דלקת באוזן</td><td>יש לטפל בדלקת לפני תחילת הגירוי.</td></tr>
-</table>
-
-<div class="warning">
-<strong>אמצעי זהירות:</strong> מומלץ להתחיל בעוצמה הנמוכה ביותר (0.6 mA) ולעלות בהדרגה לפי סבילות המטופל.
+<!-- Nerve path visual -->
+<div class="nerve-visual">
+  <div class="nerve-path">
+    <div class="nerve-node ear">קליפ<br>באוזן</div>
+    <div class="nerve-conn"></div>
+    <div class="nerve-node vagus">עצב<br>הוואגוס</div>
+    <div class="nerve-conn v2"></div>
+    <div class="nerve-node brain">גזע<br>המוח</div>
+  </div>
+  <div class="nerve-labels">
+    <span>גירוי חשמלי</span>
+    <span>העברת אות</span>
+    <span>שיפור קוגניטיבי</span>
+  </div>
 </div>
 
-<p><strong>מעקב קרדיאלי:</strong> בחולים עם גורמי סיכון קרדיאליים, מומלץ ביצוע ECG בסיסי לפני תחילת הטיפול.</p>
-<p><strong>ביצוע עצמי:</strong> המטופל מפעיל את המכשיר בעצמו, אך מומלץ שההדרכה הראשונית תתבצע בנוכחות איש מקצוע.</p>
-<p><strong>שימוש במטופלי דמנציה:</strong> בחולים עם ירידה קוגניטיבית מתקדמת, נדרש סיוע של מטפל להפעלת המכשיר ומעקב אחר תופעות.</p>
-<p><strong>אינטראקציות תרופתיות:</strong> אין אינטראקציות ידועות עם תרופות. ניתן לשלב עם טיפולים תרופתיים קיימים (מעכבי כולינאסטראז, ממנטין) ללא התאמת מינון.</p>
+<p>הרעיון פשוט: מחברים קליפ קטן לאוזן שמייצר פולסים חשמליים עדינים. הגירוי עובר דרך סיבי הוואגוס אל גזע המוח, ומשם משפיע על אזורים הקשורים לזיכרון, קשב ותפקוד קוגניטיבי.</p>
 
-<h3>השוואת בטיחות: taVNS אוריקולרי מול VNS פולשני (מושתל)</h3>
-<table>
-<tr><th>פרמטר</th><th>taVNS אוריקולרי</th><th>VNS פולשני (מושתל)</th></tr>
-<tr><td>ניתוח</td><td>לא נדרש</td><td>נדרש — הרדמה כללית</td></tr>
-<tr><td>צרידות/שיעול</td><td>לא</td><td>שכיח (&lt;30%)</td></tr>
-<tr><td>זיהום</td><td>לא</td><td>~3%</td></tr>
-<tr><td>ברדיקרדיה</td><td>נדיר מאוד</td><td>אפשרי</td></tr>
-<tr><td>עלות</td><td>€1,500–3,500</td><td>$20,000–50,000</td></tr>
-<tr><td>הפיכות</td><td>מלאה — ניתן להפסיק בכל עת</td><td>דורש ניתוח להסרה</td></tr>
-</table>
-
-<h2>חלק 3: המכשיר המתאים ביותר</h2>
-
-<h3>3.1 tVNS E של tVNS Technologies GmbH (גרמניה)</h3>
-<p>זהו המכשיר המתאים ביותר לפרוטוקול הקליני שהראה תוצאות. הסיבות:</p>
-<ul>
-<li><strong>מגרה את ה-cymba concha:</strong> המכשיר היחיד שממקם את האלקטרודה בדיוק ב-cymba concha, מה שמבטיח 100% עצבוב וואגאלי. אלקטרודות טיטניום-אירידיום לביו-תאימות מיטבית.</li>
-<li><strong>תכנות פרמטרים מלא:</strong> אפשר לכוונן תדרים, עוצמה, ומשך גירוי כך שיתאימו בדיוק לפרוטוקול Wang et al.</li>
-<li><strong>אישור רגולטורי:</strong> מאושר כמכשיר רפואי Class IIa תחת EU-MDR. מאושר לאפילפסיה, אוטיזם, הפרעות שינה, טינטון, ליקוי קוגניטיבי, דיכאון ומיגרנה.</li>
-<li><strong>מוצר מחקרי:</strong> המכשיר המועדף על ידי חוקרים ומוסדות מחקר ברחבי העולם.</li>
-</ul>
-
-<h3>3.2 מכשירים אחרים — למה לא?</h3>
-<table>
-<tr><th>מכשיר</th><th>סוג</th><th>הסיבה שהוא פחות מתאים</th></tr>
-<tr><td>Truvaga / gammaCore</td><td>צוואר (cervical)</td><td>מגרה דרך הצוואר, לא דרך האוזן. מגרה סיבים אפרנטיים שונים. פרמטרים שונים (5,000Hz/25Hz, סשנים של 2 דקות). אין RCT ל-MCI עם הפרמטרים שלהם.</td></tr>
-<tr><td>מכשירי TENS זולים</td><td>אוזן (tragus/earlobe)</td><td>אונית האוזן לא מכילה סיבי עצב וואגוס. ה-tragus מכיל 45% בלבד. אי אפשר לכוונן פרמטרים. לא מכשיר רפואי מאושר.</td></tr>
-<tr><td>Pulsetto</td><td>צוואר (cervical)</td><td>מגרה דרך הצוואר. המחקר התומך מומן על ידי החברה עצמה ולא פורסם בכתבי עת עם שיפוט עמיתים.</td></tr>
-</table>
-
-<h2>חלק 4: איך להשיג את המכשיר, מחירים וקישורים</h2>
-
-<h3>4.1 זמינות</h3>
-<p>המכשיר זמין לרכישה ישירה באיחוד האירופי, שוויץ, בריטניה ונורבגיה. בפולין, טורקיה ואיטליה יש מפיצים מקומיים. לא זמין בארה"ב או בקנדה. ישראל לא מופיעה ברשימה הרשמית, אך החברה מזמינה ליצור קשר למדינות שלא ברשימה.</p>
-
-<h3>4.2 מחירים</h3>
-<table>
-<tr><th>מסלול</th><th>מחיר</th></tr>
-<tr><td>תקופת ניסיון 180 יום ("Try it!")</td><td>€1,500 (כולל VAT)</td></tr>
-<tr><td>רכישה קבועה (לאחר תקופת הניסיון)</td><td>€2,000 נוספים (סה"כ €3,500)</td></tr>
-</table>
-
-<h3>4.3 אפשרויות השגה לישראל</h3>
-<ol>
-<li><strong>פנייה ישירה לחברה:</strong> דרך דף הרכישה באתר (<a href="https://t-vns.com/buy">t-vns.com/buy</a>) יש אפשרות לפנות לצוות המכירות לגבי מדינות שלא ברשימה.</li>
-<li><strong>דרך מפיץ בטורקיה:</strong> המדינה הקרובה ביותר עם מפיץ מקומי (<a href="https://www.t-vnstherapy.com/en/">t-vnstherapy.com</a>).</li>
-<li><strong>דרך כתובת באירופה:</strong> הזמנה דרך החנות המקוונת לכתובת באחת ממדינות האיחוד האירופי.</li>
-<li><strong>ייבוא אישי:</strong> ייבוא מכשיר רפואי לשימוש אישי — ייתכן שידרוש אישור ממשרד הבריאות.</li>
-</ol>
-
-<h3>4.4 קישורים</h3>
-<table>
-<tr><th>משאב</th><th>קישור</th></tr>
-<tr><td>אתר היצרן</td><td><a href="https://t-vns.com/">t-vns.com</a></td></tr>
-<tr><td>דף רכישה</td><td><a href="https://t-vns.com/buy/">t-vns.com/buy</a></td></tr>
-<tr><td>חנות מקוונת</td><td><a href="https://shop.t-vns.com/en/">shop.t-vns.com</a></td></tr>
-<tr><td>מפיץ טורקיה</td><td><a href="https://www.t-vnstherapy.com/en/">t-vnstherapy.com</a></td></tr>
-<tr><td>המחקר הקליני המרכזי (Wang et al. 2022)</td><td><a href="https://pubmed.ncbi.nlm.nih.gov/36150665/">pubmed.ncbi.nlm.nih.gov/36150665</a></td></tr>
-<tr><td>מחקר Stanford/Nature 2026</td><td><a href="https://www.nature.com/articles/s41586-026-10191-6">nature.com</a></td></tr>
-<tr><td>מטא-אנליזה בטיחות</td><td><a href="https://www.nature.com/articles/s41598-022-25864-1">nature.com</a></td></tr>
-<tr><td>סקירת VNS בדמנציה</td><td><a href="https://pubmed.ncbi.nlm.nih.gov/39431268/">pubmed.ncbi.nlm.nih.gov/39431268</a></td></tr>
-</table>
-
-<div class="warning">
-<strong>הערה לרופא המטפל:</strong> מסמך זה מסכם את המידע המחקרי העדכני ביותר על גירוי עצב הוואגוס דרך העור לטיפול בליקוי קוגניטיבי קל. אנו מבקשים את חוות דעתך המקצועית לגבי התאמת הטיפול למקרה הספציפי.
+<!-- EAR DIAGRAM -->
+<h2>📍 איפה בדיוק מגרים?</h2>
+<div class="illustration">
+  <div class="ear-diagram">
+    <div class="ear-shape"></div>
+    <div class="concha">🔵 קונכה<br>CO15 + CO10<br><small>אזור הוואגוס</small></div>
+    <div class="scapha">🔴 SF3+SF4<br><small>אזור דמה</small></div>
+    <div class="ear-label vagus">← אזור טיפול אמיתי (taVNS)</div>
+    <div class="ear-label sham">← אזור דמה (Sham) →</div>
+  </div>
+</div>
+<div class="legend">
+  <span><span class="dot blue"></span> נקודות taVNS — באזור עצב הוואגוס</span>
+  <span><span class="dot red-d"></span> נקודות Sham — מחוץ לעצב הוואגוס</span>
 </div>
 
+<p>בקבוצת הטיפול האמיתי גורו שתי נקודות בקונכה: <strong>"לב" (CO15)</strong> ו<strong>"כליה" (CO10)</strong> — שם עוברים סיבי הוואגוס. בקבוצת הדמה גורו נקודות אחרות באוזן (<strong>SF3, SF4/5</strong>) שנמצאות <strong>מחוץ</strong> לאזור העצבוב של הוואגוס.</p>
+
+<!-- STUDY DESIGN -->
+<h2>🔬 איך המחקר נבנה?</h2>
+
+<div class="card">
+  <div class="card-label">עיצוב המחקר</div>
+  <h3>ניסוי אקראי, כפול-סמיות, מבוקר-דמה (Double-Blind RCT)</h3>
+  <ul>
+    <li><strong>משתתפים:</strong> חולי MCI בגילאי 55-75</li>
+    <li><strong>הקצאה:</strong> אקראית לקבוצת taVNS או קבוצת דמה (Sham)</li>
+    <li><strong>סמיות:</strong> לא המטופלים ולא המעריכים ידעו מי מקבל טיפול אמיתי</li>
+    <li><strong>משך:</strong> 24 שבועות (6 חודשים)</li>
+    <li><strong>ניתוח:</strong> 52 מטופלים הושלמו</li>
+  </ul>
+</div>
+
+<!-- PROTOCOL -->
+<h3>⚡ פרוטוקול הגירוי — "המינון"</h3>
+<div class="protocol">
+  <div class="proto-item"><div class="num">20+100</div><div class="unit">Hz תדר מתחלף</div></div>
+  <div class="proto-item"><div class="num">0.6-1.0</div><div class="unit">mA עוצמה</div></div>
+  <div class="proto-item"><div class="num">30</div><div class="unit">דקות לסשן</div></div>
+  <div class="proto-item"><div class="num">2×</div><div class="unit">ביום (בוקר + ערב)</div></div>
+  <div class="proto-item"><div class="num">5</div><div class="unit">ימים בשבוע</div></div>
+  <div class="proto-item"><div class="num">24</div><div class="unit">שבועות טיפול</div></div>
+</div>
+
+<p>כן, זה פרוטוקול אינטנסיבי: פעמיים ביום, חצי שעה כל פעם, 5 ימים בשבוע, לאורך חצי שנה. המכשיר שהשתמשו בו: <strong>SDZ-IIB</strong> (מכשיר גירוי אלקטרוני סיני).</p>
+
+<!-- TIMELINE -->
+<h2>📅 ציר זמן: מה קרה מתי?</h2>
+<div class="timeline">
+  <div class="tl-item">
+    <div class="tl-title">שבוע 0 — מדידת בסיס</div>
+    <div class="tl-body">כל המטופלים עברו סוללת מבחנים קוגניטיביים: MoCA-B, מבחני זיכרון, קשב, שפה ושינה</div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-title">שבועות 1-24 — טיפול יומי</div>
+    <div class="tl-body">2 סשנים של 30 דקות ביום, 5 ימים בשבוע. המטופלים כתבו יומן ונבדקו באמצעות WeChat לוידוא היענות</div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-title">שבוע 24 — מדידה חוזרת</div>
+    <div class="tl-body">אותם מבחנים בדיוק — ההשוואה שחושפת את ההשפעה</div>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<h2>📊 התוצאות: מה נמצא?</h2>
+
+<h3>המדד העיקרי: MoCA-B (הערכה קוגניטיבית כללית)</h3>
+<div class="chart-container">
+  <div class="chart-title">שיפור בציון MoCA-B אחרי 24 שבועות</div>
+  <div class="bar-group">
+    <div class="bar-pair">
+      <div class="bars">
+        <div class="bar tavns" style="height:162px"><span class="val">+3.24</span></div>
+        <div class="bar sham" style="height:16px"><span class="val">+0.33</span></div>
+      </div>
+      <div class="label">שיפור ממוצע בנקודות</div>
+    </div>
+  </div>
+  <div class="chart-legend">
+    <span><span class="sq bl"></span> קבוצת taVNS</span>
+    <span><span class="sq gr"></span> קבוצת דמה (Sham)</span>
+  </div>
+</div>
+
+<div class="card green">
+  <h3>✅ תוצאה מובהקת סטטיסטית</h3>
+  <p>נמצא הבדל מובהק בציון MoCA-B בין הקבוצות (<strong>p = 0.033</strong>). בקבוצת taVNS הציון עלה משמעותית (<strong>p < 0.001</strong>). בקבוצת הדמה — לא היה שינוי מובהק (p = 0.338).</p>
+</div>
+
+<h3>מדדי זיכרון: AVLT-H</h3>
+<div class="chart-container">
+  <div class="chart-title">שיפור בזיכרון מיידי (N5) וזיכרון מושהה (N7)</div>
+  <div class="bar-group">
+    <div class="bar-pair">
+      <div class="bars">
+        <div class="bar tavns" style="height:96px"><span class="val">+1.60</span></div>
+        <div class="bar sham" style="height:12px"><span class="val">+0.22</span></div>
+      </div>
+      <div class="label">N5 — זיכרון מיידי</div>
+    </div>
+    <div class="bar-pair">
+      <div class="bars">
+        <div class="bar tavns" style="height:148px"><span class="val">+2.48</span></div>
+        <div class="bar sham" style="height:30px"><span class="val">+0.56</span></div>
+      </div>
+      <div class="label">N7 — זיכרון מושהה</div>
+    </div>
+  </div>
+  <div class="chart-legend">
+    <span><span class="sq bl"></span> taVNS</span>
+    <span><span class="sq gr"></span> Sham</span>
+  </div>
+</div>
+
+<p>בשני מדדי הזיכרון נמצא <strong>שיפור מובהק</strong> בקבוצת taVNS בלבד: N5 (זכירה מיידית, p < 0.001) ו-N7 (זכירה מושהית, p < 0.001). ההפרש בין הקבוצות גם הוא מובהק (N5: p=0.047, N7: p=0.005).</p>
+
+<h3>מדדים נוספים</h3>
+<div class="card">
+  <p>במדדים משניים אחרים (מבחני קשב, שפה, שינה, תפקוד יומי) נמצאו שיפורים <strong>בתוך</strong> קבוצת taVNS, אבל ההבדל <strong>בין</strong> הקבוצות לא היה מובהק. החוקרים מציינים שייתכן שנדרש מדגם גדול יותר או זמן טיפול ארוך יותר כדי לזהות הבדלים אלה.</p>
+</div>
+
+<!-- SAFETY -->
+<h2>🛡️ בטיחות: האם זה בטוח?</h2>
+<div class="card green">
+  <h3>פרופיל בטיחות גבוה</h3>
+  <p>לאורך כל 24 שבועות המחקר, דווח על <strong>מקרה אחד בלבד</strong> של תגובה לא רצויה קלה — אצל מטופל עם היסטוריה של <strong>ניקוב עור התוף</strong>. התגובה נעלמה לחלוטין כשבוע לאחר הפסקת הטיפול.</p>
+  <p>לא דווחו תופעות לוואי חמורות בשום קבוצה.</p>
+</div>
+
+<!-- HOW IT WORKS -->
+<h2>🔑 איך זה עובד? המנגנון</h2>
+<p>עצב הוואגוס מגיע ל-<strong>NTS (Nucleus Tractus Solitarius)</strong> — גרעין בגזע המוח שמשמש כמפנה מרכזי לאותות. משם, האות מגיע לאזורים קריטיים:</p>
+<ul>
+  <li><strong>Locus Coeruleus</strong> — שחרור נוראדרנלין → שיפור קשב וערנות</li>
+  <li><strong>הגרעין הבסלי של מיינרט</strong> — שחרור אצטילכולין → שיפור זיכרון ולמידה</li>
+  <li><strong>היפוקמפוס</strong> — מרכז הזיכרון</li>
+  <li><strong>קורטקס פרה-פרונטלי</strong> — תפקוד ביצועי וקבלת החלטות</li>
+</ul>
+<p>למעשה, taVNS "מדליק" את אותם מסלולים שמתדרדרים בהזדקנות ובדמנציה — אבל בצורה לא-פולשנית ובטוחה.</p>
+
+<!-- SIGNIFICANCE -->
+<h2>⚖️ מה זה אומר בפועל? (בלי הייפ)</h2>
+
+<div class="card green">
+  <div class="card-label">החלק המעודד</div>
+  <h3>✅ נקודות חוזק</h3>
+  <ul>
+    <li>מחקר כפול-סמיות עם קבוצת דמה — סטנדרט גבוה</li>
+    <li>שיפור מובהק במדד קוגניטיבי מרכזי (MoCA-B) ובזיכרון</li>
+    <li>שיפור ממוצע של <strong>3.24 נקודות</strong> ב-MoCA — קלינית משמעותי</li>
+    <li>פרופיל בטיחות מצוין</li>
+    <li>טיפול זול ולא-פולשני — לא דורש ניתוח או תרופות</li>
+  </ul>
+</div>
+
+<div class="card red">
+  <div class="card-label">מה עדיין לא ברור</div>
+  <h3>⚠️ מגבלות שחשוב לזכור</h3>
+  <ul>
+    <li>מדגם קטן יחסית — <strong>52 מטופלים</strong> בסך הכל</li>
+    <li>מחקר ממוסד אחד בלבד (סין) — צריך שכפול במקומות נוספים</li>
+    <li>פרוטוקול תובעני מאוד — פעמיים ביום ל-6 חודשים; לא ברור אם מינון נמוך יותר גם יעבוד</li>
+    <li>לא ברור מה קורה אחרי הפסקת הטיפול — האם השיפור נשמר?</li>
+    <li>מדדים משניים רבים לא הראו הבדל בין הקבוצות</li>
+  </ul>
+</div>
+
+<!-- QUOTE -->
+<div class="quote">
+  "שיטה זולה, יעילה וחדשנית זו יכולה להיות מומלצת כטיפול לחולי MCI נוספים, במטרה למנוע או להאריך את הזמן עד להתפתחות דמנציה — אך נדרש מחקר נוסף."
+  <br><small>— מתוך מסקנות המחקר</small>
+</div>
+
+<!-- BOTTOM LINE -->
+<div class="bottom-line">
+  <h2>🎯 השורה התחתונה</h2>
+  <p>taVNS הוא אחד מכלי הנוירומודולציה המבטיחים ביותר כיום עבור MCI. המחקר הזה מוסיף ראיה חזקה — אבל עדיין צריך מחקרים גדולים יותר, רב-מרכזיים, עם מעקב ארוך טווח.</p>
+  <p><strong>אם אתם או קרוביכם מתמודדים עם MCI — שווה לשאול את הנוירולוג על טכנולוגיות נוירומודולציה, כולל taVNS.</strong></p>
+</div>
+
+<!-- SOURCE -->
+<div class="source">
+  <strong>מקור:</strong> Wang L, Zhang J, Guo C, et al. "The efficacy and safety of transcutaneous auricular vagus nerve stimulation in patients with mild cognitive impairment: A double blinded randomized clinical trial." <em>Brain Stimulation</em>, 15 (2022), 1405-1414.<br>
+  DOI: <a href="https://doi.org/10.1016/j.brs.2022.09.003" target="_blank">10.1016/j.brs.2022.09.003</a><br>
+  רישום ניסוי: ChiCTR2000038868
+</div>
+
+<div class="disclaimer">
+  ⚠️ כתבה זו מציגה מידע מחקרי בלבד ואינה מהווה ייעוץ רפואי. לפני כל החלטה טיפולית, יש להתייעץ עם רופא מוסמך.
+</div>
+
+</div>
 </body>
 </html>
