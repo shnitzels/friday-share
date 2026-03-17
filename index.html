@@ -69,6 +69,11 @@ footer {
   .card-title { font-size: 18px; }
 }
 </style>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/friday-share/sw.js');
+}
+</script>
 </head>
 <body>
 
