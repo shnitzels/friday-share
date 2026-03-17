@@ -1,7 +1,14 @@
-const CACHE_NAME = 'friday-share-v1';
+const CACHE_NAME = 'friday-share-v2';
 const FEED_PAGE = '/friday-share/';
 const PRECACHE_ARTICLES = [
   '/friday-share/',
+  '/friday-share/read/nvidia-gtc-2026/',
+  '/friday-share/read/llms-vs-agi-a16z/',
+  '/friday-share/read/morgan-stanley-ai-leap-2026/',
+  '/friday-share/read/thailand-family-guide/',
+  '/friday-share/read/tavns-stroke-rehabilitation/',
+  '/friday-share/read/tavns-multiple-sclerosis/',
+  '/friday-share/read/fermented-food-microbiome-stanford/',
   '/friday-share/read/tech-firms-diverging-ai/',
   '/friday-share/read/how-to-build-startup-2026/',
   '/friday-share/read/immorta-bio-lifespan-84/',
