@@ -71,7 +71,7 @@ footer {
 </style>
 <script>
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/friday-share/sw.js');
+  navigator.serviceWorker.register('/friday-share/sw.js', { updateViaCache: 'none' });
 }
 </script>
 </head>
