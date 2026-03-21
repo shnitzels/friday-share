@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>למה מערכות AI לא לומדות ומה לעשות בנידון — לקחים ממדעי הקוגניציה</title>
+<meta property="og:title" content="למה מערכות AI לא לומדות ומה לעשות בנידון — לקחים ממדעי הקוגניציה">
+<meta property="og:description" content="דופו, לה-קאן ומאליק מ-Meta FAIR מציעים ארכיטקטורה חדשה ללמידה אוטונומית: System A, System B ו-System M — מפת דרכים ל-AI שבאמת לומד אחרי פריסה.">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="למה מערכות AI לא לומדות ומה לעשות בנידון">
+<meta name="twitter:description" content="דופו, לה-קאן ומאליק מ-Meta FAIR מציעים ארכיטקטורה חדשה ללמידה אוטונומית בהשראת מדעי הקוגניציה.">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-size: 18px;
+  line-height: 1.8;
+  color: #1a1a1a;
+  background: #fff;
+  padding: 2rem 1rem;
+}
+.container { max-width: 900px; margin: 0 auto; }
+h1 { font-size: 32px; font-weight: 600; margin-bottom: 0.5rem; line-height: 1.3; }
+h2 { font-size: 24px; font-weight: 600; margin: 2.5rem 0 1rem; color: #1a1a1a; border-bottom: 2px solid #e0e0e0; padding-bottom: 0.5rem; }
+h3 { font-size: 20px; font-weight: 600; margin: 1.5rem 0 0.8rem; }
+.subtitle { font-size: 20px; color: #555; margin-bottom: 1.5rem; line-height: 1.5; }
+.source-box {
+  background: #f7f7f7;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 2.5rem;
+  font-size: 16px;
+}
+.source-box a { color: #0066cc; text-decoration: none; }
+.source-box a:hover { text-decoration: underline; }
+p { margin-bottom: 1.2rem; text-align: right; }
+ul, ol { margin: 0.8rem 1.5rem 1.2rem 0; padding-right: 1.2rem; }
+li { margin-bottom: 0.5rem; }
+.formula {
+  background: #f9f9f9;
+  border: 1px solid #e8e8e8;
+  border-radius: 6px;
+  padding: 1rem 1.5rem;
+  margin: 1rem 0 1.5rem;
+  font-family: 'Courier New', monospace;
+  direction: ltr;
+  text-align: center;
+  font-size: 16px;
+}
+.diagram-container {
+  margin: 2rem 0;
+  text-align: center;
+}
+.diagram-container svg {
+  max-width: 100%;
+  height: auto;
+}
+.diagram-caption {
+  font-size: 15px;
+  color: #666;
+  margin-top: 0.5rem;
+}
+.highlight-box {
+  background: #f0f4ff;
+  border-right: 4px solid #3366cc;
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 6px 6px 0;
+}
+.footer-source {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e0e0e0;
+  font-size: 15px;
+  color: #666;
+}
+.footer-source a { color: #0066cc; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>למה מערכות AI לא לומדות ומה לעשות בנידון</h1>
+<p class="subtitle">לקחים על למידה אוטונומית ממדעי הקוגניציה — מאמר חדש מ-Meta FAIR</p>
+
+<div class="source-box">
+📄 מאמר מקור: <a href="https://arxiv.org/abs/2603.15381" target="_blank">Why AI Systems Don't Learn and What to Do About It: Lessons on Autonomous Learning from Cognitive Science</a><br>
+✍️ מחברים: Emmanuel Dupoux (FAIR/META, EHESS), Yann LeCun (FAIR/META, NYU), Jitendra Malik (UC Berkeley)<br>
+📅 פורסם: 16 במרץ 2026 | arXiv
+</div>
+
+<h2>מבוא: הפרדוקס של הבינה המלאכותית המודרנית</h2>
+
+<p>אנחנו חיים בעידן שבו מערכות בינה מלאכותית מסוגלות לכתוב קוד, לנהל שיחות מורכבות, ליצור תמונות מציאותיות ולנתח מסמכים משפטיים. מודלי שפה גדולים (LLMs) כמו GPT, Claude ו-Llama מדהימים את העולם ביכולות שלהם. אבל מאחורי הברק הזה מסתתר פרדוקס עמוק: ברגע שמערכת AI נפרסת לעולם האמיתי, היא מפסיקה ללמוד. היא לא מסגלת את עצמה לסביבה החדשה, לא מגלה דפוסים חדשים, ולא משפרת את עצמה מניסיון. היא קפואה.</p>
+
+<p>זהו הנושא המרכזי של מאמר חדש ופורץ דרך שפורסם ב-arXiv ב-16 במרץ 2026, מאת שלושה מהחוקרים הבולטים ביותר בתחום: עמנואל דופו (Emmanuel Dupoux) מ-FAIR/META ובית הספר לאנליזה גבוהה (EHESS) בפריז, יאן לה-קאן (Yann LeCun) מ-FAIR/META ואוניברסיטת ניו יורק — חתן פרס טיורינג ואחד ממייסדי הלמידה העמוקה — וג׳יטנדרה מאליק (Jitendra Malik) מאוניברסיטת ברקלי, חלוץ בתחום ראייה ממוחשבת. שלושה ענקים אקדמיים-תעשייתיים שהחליטו לשבת יחד ולשאול שאלה פשוטה אך מטרידה: למה מערכות AI לא באמת לומדות?</p>
+
+<p>המאמר לא מסתפק בביקורת. הוא מציע מסגרת תיאורטית חדשה בהשראת מדעי הקוגניציה — ארכיטקטורה של שלוש מערכות (System A, System B, System M) שיחד יוצרות מפת דרכים לדור הבא של AI: מערכות שלומדות באמת גם אחרי הפריסה, בדיוק כמו שילדים לומדים מרגע הלידה.</p>
+
+<h2>הבעיה המרכזית: מודלים קפואים בעולם דינמי</h2>
+
+<p>כדי להבין את עומק הבעיה, חשבו על ההבדל בין ילד אנושי לבין מודל AI מתקדם. תינוק אנושי מתחיל ללמוד מרגע הלידה — ובעצם כבר לפני כן. הוא לומד לזהות פנים, לפרש צלילים, להבין דפוסי שפה, ולשלוט בתנועות הגוף שלו. כל זה קורה בו-זמנית, באופן גמיש, ובלי שמישהו מתכנת לו "שלב אימון" ואחריו "שלב הסקה".</p>
+
+<p>מערכות AI מודרניות עובדות אחרת לגמרי. יש שלב אימון (training) — תהליך יקר ומורכב שדורש כמויות אדירות של נתונים מאורגנים, כוח חישוב עצום, ומומחיות אנושית רבה. ואז יש שלב פריסה (deployment) — שבו המודל הקפוא משמש את המשתמשים. בשלב הזה, המודל לא לומד דבר. הוא מחיל את מה שלמד, אבל לא מסתגל.</p>
+
+<p>דופו, לה-קאן ומאליק מצביעים על כך שהפער הזה הוא לא סתם מגבלה טכנית — הוא מהווה חסם יסודי בפני התקדמות לעבר בינה מלאכותית כללית. הם מזהים שלושה ביטויים עיקריים לבעיה:</p>
+
+<p><strong>חוסר התאמה לתחום (Domain Mismatch):</strong> הנתונים שעליהם המודל אומן שונים מהנתונים שהוא פוגש בפועל. העולם האמיתי הוא "זנב ארוך" (heavy-tailed) ולא-סטציונרי — כלומר, ההתפלגות משתנה כל הזמן ויש אינסוף מקרי קצה נדירים. הגדלת סט האימון לא פותרת את הבעיה כי תמיד יהיו תרחישים שלא נכללו.</p>
+
+<p><strong>חוסר יכולת הסתגלות:</strong> מודלים לא יכולים לשנות את ההתנהגות שלהם בהתבסס על ניסיון חדש. הם לא לומדים מטעויות בזמן אמת, לא מגלים חוקיות חדשות, ולא מפתחים יכולות שלא אומנו עליהן.</p>
+
+<p><strong>תלות אנושית מוחלטת:</strong> כל שלב בצינור הלמידה — מאיסוף נתונים ועד כוונון עדין — דורש מומחיות אנושית. המערכת עצמה לא יודעת מה היא צריכה ללמוד, איך ללמוד את זה, ומתי עדיף לצפות לעומת לפעול.</p>
+
+<!-- Diagram 1: System A/B/M Architecture -->
+<div class="diagram-container">
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" style="max-width:750px;">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#333"/></marker>
+  </defs>
+  <rect x="50" y="180" width="200" height="140" rx="12" fill="#e8f0fe" stroke="#3366cc" stroke-width="2"/>
+  <text x="150" y="215" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="18" font-weight="600" fill="#1a1a1a">System A</text>
+  <text x="150" y="240" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="14" fill="#555">למידה מתצפית</text>
+  <text x="150" y="265" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#777">SSL, מודלי שפה, CLIP</text>
+  <text x="150" y="285" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#777">מודלים סטטיסטיים/חזויים</text>
+  <text x="150" y="305" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#777">ייצוגים מופשטים</text>
+  <rect x="550" y="180" width="200" height="140" rx="12" fill="#fef3e0" stroke="#e67700" stroke-width="2"/>
+  <text x="650" y="215" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="18" font-weight="600" fill="#1a1a1a">System B</text>
+  <text x="650" y="240" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="14" fill="#555">למידה מפעולה</text>
+  <text x="650" y="265" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#777">למידת חיזוק, תכנון</text>
+  <text x="650" y="285" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#777">אינטראקציה עם הסביבה</text>
+  <text x="650" y="305" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#777">ניסוי וטעייה</text>
+  <rect x="275" y="30" width="250" height="120" rx="12" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2.5"/>
+  <text x="400" y="65" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="20" font-weight="600" fill="#1a1a1a">System M</text>
+  <text x="400" y="90" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="15" fill="#555">מטא-בקרה</text>
+  <text x="400" y="115" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#777">תיאום בין A ו-B | ניהול זרימת מידע</text>
+  <text x="400" y="135" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#777">מתי לצפות? מתי לפעול? מה ללמוד?</text>
+  <line x1="330" y1="150" x2="200" y2="180" stroke="#2e7d32" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="470" y1="150" x2="600" y2="180" stroke="#2e7d32" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="250" y1="240" x2="550" y2="240" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="550" y1="260" x2="250" y2="260" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="400" y="232" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#555">העברת ייצוגים</text>
+  <text x="400" y="278" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#555">משוב מפעולה</text>
+  <rect x="300" y="400" width="200" height="60" rx="8" fill="#f5f5f5" stroke="#999" stroke-width="1.5"/>
+  <text x="400" y="437" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="16" font-weight="600" fill="#555">🌍 העולם</text>
+  <line x1="150" y1="320" x2="340" y2="400" stroke="#3366cc" stroke-width="1.5" stroke-dasharray="5,5" marker-end="url(#arrow)"/>
+  <text x="220" y="370" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#3366cc">תצפית</text>
+  <line x1="650" y1="320" x2="460" y2="400" stroke="#e67700" stroke-width="1.5" stroke-dasharray="5,5" marker-end="url(#arrow)"/>
+  <text x="580" y="370" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#e67700">פעולה</text>
+</svg>
+<div class="diagram-caption">תרשים 1: ארכיטקטורת שלוש המערכות — System A (למידה מתצפית), System B (למידה מפעולה) ו-System M (מטא-בקרה) שמתאמת ביניהן</div>
+</div>
+
+<h2>המסגרת התיאורטית: שלוש מערכות ללמידה אוטונומית</h2>
+
+<p>הלב של המאמר הוא הצגת מסגרת תיאורטית חדשה שמחלקת את הלמידה לשלוש מערכות משלימות. המסגרת מושפעת עמוקות ממדעי הקוגניציה ומהאופן שבו ילדים ובעלי חיים לומדים בטבע. הנחת היסוד היא שלמידה אוטונומית אמיתית דורשת לא רק מנגנוני למידה טובים, אלא גם מנגנון שיודע מתי ואיך להפעיל כל אחד מהם.</p>
+
+<h3>System A — למידה מתצפית</h3>
+
+<p>System A מתאר למידה פסיבית מצפייה בעולם. זהו הצבירה הסטטיסטית של קלט חושי — בניית מודלים חזויים ומודלים סטטיסטיים של הסביבה בלי לבצע פעולות. בעולם ה-AI המודרני, System A כולל את כל הגישות של למידה עצמית-מפוקחת (Self-Supervised Learning — SSL), מודלי שפה גדולים, מודלים כמו CLIP שמחברים טקסט ותמונה, ומודלים גנרטיביים.</p>
+
+<p>הנוסחה המתמטית שמגדירה את System A היא:</p>
+<div class="formula">θ* = argmin E[L(f_θ(x_in), x_tar)]</div>
+<p>כלומר, מצא את הפרמטרים θ שממזערים את הפסד הצפוי בין הפלט של המודל לבין היעד — בין אם זה ניבוי המילה הבאה, שחזור חלק חסר בתמונה, או יישור ייצוגים בין מודאליות שונות.</p>
+
+<p><strong>היתרונות של System A:</strong> הוא מסגל את עצמו היטב (scales well). ככל שנותנים יותר נתונים ויותר חישוב, המודלים נהיים טובים יותר. הוא מגלה ייצוגים מופשטים — תבניות עמוקות בנתונים שלא תוכנתו במפורש. בשנים האחרונות ראינו הצלחה מרשימה של גישה זו: מודלי שפה שמבינים הקשר, מודלי ראייה שמזהים אובייקטים בלי תיוג, ומערכות רב-מודאליות שמחברות בין שפה לתמונה.</p>
+
+<p><strong>החולשות של System A:</strong> ראשית, הוא דורש נתונים מאורגנים ומסודרים (curated data). מישהו צריך לאסוף, לנקות, ולארגן את הנתונים. שנית, אין לו מנגנון להחליט מה ללמוד הלאה — אין סקרנות פנימית, אין תעדוף, אין מוטיבציה עצמית. שלישית, הוא מנותק מפעולה — הלמידה לא מושפעת מאינטראקציה עם העולם. ורביעית, הוא לא יכול להבחין בין מתאם לסיבתיות. מודל שפה יכול לדעת ש"גשם" ו"מטרייה" מופיעים ביחד, אבל הוא לא באמת מבין שהגשם גורם לאנשים לפתוח מטרייה.</p>
+
+<h3>System B — למידה מפעולה</h3>
+
+<p>System B מתאר למידה אקטיבית דרך אינטראקציה עם הסביבה. הסוכן פועל בעולם, מקבל משוב (תגמול או עונש), ומשנה את ההתנהגות שלו בהתאם. זהו התחום של למידת חיזוק (Reinforcement Learning — RL), תכנון (planning), ותורת בקרה (control theory).</p>
+
+<p>הנוסחה המתמטית של System B היא:</p>
+<div class="formula">Maximize J(π) = E[Σ γ^t r(s_t, a_t)]</div>
+<p>כלומר, מצא את המדיניות (policy) π שממקסמת את הצבירה המשוקללת של תגמולים לאורך זמן, כאשר γ הוא גורם הנחה (discount factor) ו-r הוא פונקציית התגמול.</p>
+
+<p><strong>היתרונות של System B:</strong> הוא מעוגן באינטראקציה (grounded in interaction) — הלמידה קורית דרך מגע ישיר עם העולם, מה שמאפשר הבנה סיבתית. הוא יכול לגלות פתרונות חדשניים שאף אחד לא חשב עליהם, דרך חיפוש וניסוי. זה מה שאפשר ל-AlphaGo לגלות מהלכים שאף שחקן אנושי לא שיחק.</p>
+
+<p><strong>החולשות של System B:</strong> הוא חסר יעילות מדגמית (sample-inefficient) — דורש מיליוני ניסיונות כדי ללמוד משימות שילד לומד תוך דקות. הוא מתקשה עם מרחבי פעולה גדולים ורב-ממדיים — בעולם האמיתי יש אינסוף פעולות אפשריות. והוא דורש פונקציית תגמול מוגדרת היטב, שבפועל קשה מאוד לתכנן עבור משימות מורכבות.</p>
+
+<h3>System M — מטא-בקרה: החלק החסר</h3>
+
+<p>וכאן מגיע התובנה המרכזית והחשובה ביותר של המאמר. System M הוא מערכת מטא-בקרה שמייצרת אותות פנימיים ומנהלת את המעבר הגמיש בין מצבי למידה. זהו, לדברי המחברים, החלק החסר המרכזי ב-AI המודרני.</p>
+
+<p>System M לא לומד בעצמו — הוא מתאם את זרימת המידע בין System A ו-System B. הוא מחליט מתי לצפות ומתי לפעול, מה ללמוד עכשיו ומה לדחות, איך לנתב מידע בין המערכות, ואיך ליצור "מתכוני למידה" (learning recipes) באופן אוטומטי במקום לסמוך על צינורות שמתוכננים בידי בני אדם.</p>
+
+<div class="highlight-box">
+<strong>התובנה המפתח:</strong> אורגניזמים ביולוגיים לא לומדים בשיטה אחת. הם עוברים בין מצבי למידה שונים בצורה גמישה — לפעמים צופים, לפעמים פועלים, לפעמים מדמיינים, ולפעמים מקשיבים. היכולת הזו לעבור בין מצבים ולתאם ביניהם היא מה ש-AI חסר לגמרי.
+</div>
+
+<h2>שלושת מחסומי הדרך</h2>
+
+<p>המאמר מזהה שלושה מחסומים מרכזיים (roadblocks) שעומדים בדרכו של AI אוטונומי. אלה לא בעיות טכניות רגילות שייפתרו עם יותר חישוב או יותר נתונים. הם בעיות מבניות שדורשות שינוי בתפיסה.</p>
+
+<!-- Diagram 2: Roadblocks -->
+<div class="diagram-container">
+<svg viewBox="0 0 800 350" xmlns="http://www.w3.org/2000/svg" style="max-width:750px;">
+  <rect x="30" y="40" width="220" height="260" rx="12" fill="#fff5f5" stroke="#cc3333" stroke-width="2"/>
+  <text x="140" y="75" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="40">🧩</text>
+  <text x="140" y="110" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="17" font-weight="600" fill="#cc3333">מחסום 1: פרגמנטציה</text>
+  <text x="140" y="140" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="13" fill="#555">גישות למידה מבודדות</text>
+  <text x="140" y="165" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="13" fill="#555">SSL, מפוקח, RL</text>
+  <text x="140" y="190" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="13" fill="#555">רצפים נוקשים</text>
+  <text x="140" y="220" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#888">pretrain → finetune → RLHF</text>
+  <text x="140" y="245" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#888">ללא אינטגרציה אמיתית</text>
+  <text x="140" y="270" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#888">כל פרדיגמה בממגורה</text>
+  <rect x="290" y="40" width="220" height="260" rx="12" fill="#fff8f0" stroke="#cc7700" stroke-width="2"/>
+  <text x="400" y="75" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="40">👤</text>
+  <text x="400" y="110" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="17" font-weight="600" fill="#cc7700">מחסום 2: החצנה</text>
+  <text x="400" y="140" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="13" fill="#555">למידה מוחצנת לאדם</text>
+  <text x="400" y="165" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="13" fill="#555">מומחים מתכננים הכל</text>
+  <text x="400" y="190" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="13" fill="#555">אוצרים נתונים ידנית</text>
+  <text x="400" y="220" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#888">פונקציות הפסד מעוצבות ידנית</text>
+  <text x="400" y="245" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#888">ארכיטקטורות שנבחרות ע"י אדם</text>
+  <text x="400" y="270" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#888">אין יכולת למידה פנימית</text>
+  <rect x="550" y="40" width="220" height="260" rx="12" fill="#f5f0ff" stroke="#6633cc" stroke-width="2"/>
+  <text x="660" y="75" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="40">📐</text>
+  <text x="660" y="110" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="17" font-weight="600" fill="#6633cc">מחסום 3: קנה מידה</text>
+  <text x="660" y="140" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="13" fill="#555">חסרות שיטות לבנייה</text>
+  <text x="660" y="165" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="13" fill="#555">בקנה מידה גדול</text>
+  <text x="660" y="190" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="13" fill="#555">אופטימיזציה דו-רמתית</text>
+  <text x="660" y="220" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#888">מורכבות חישובית</text>
+  <text x="660" y="245" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#888">אי-יציבות אימון</text>
+  <text x="660" y="270" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#888">חסר מחקר מספיק</text>
+</svg>
+<div class="diagram-caption">תרשים 2: שלושת מחסומי הדרך שמונעים למידה אוטונומית ב-AI</div>
+</div>
+
+<h3>מחסום 1: פרגמנטציה (Fragmentation)</h3>
+
+<p>עולם הלמידה החישובית מפוצל לפרדיגמות נפרדות שכמעט לא מדברות זו עם זו. למידה עצמית-מפוקחת (SSL) היא תחום אחד, למידה מפוקחת (supervised learning) היא תחום שני, ולמידת חיזוק (RL) היא תחום שלישי. לכל אחד מהם כנסים, כתבי עת, ומסורות מחקר משלו.</p>
+
+<p>בפועל, הפרדיגמות האלה מחוברות ברצפים נוקשים: קודם עושים pre-training עם SSL, אחר כך fine-tuning מפוקח, ואז RLHF (Reinforcement Learning from Human Feedback). זהו צינור קשיח שמתוכנן ידנית ולא משתנה לאורך חיי המודל. אין "שיחה" בין השלבים, אין גמישות, ואין מנגנון שמחליט אוטומטית איזה סוג למידה צריך עכשיו.</p>
+
+<p>ביולוגיה עובדת אחרת. מוח של תינוק לא מפריד בין "שלב צפייה" ל"שלב פעולה" ל"שלב תקשורת". כל אלה פועלים בו-זמנית, משפיעים זה על זה, ומשתנים לפי ההקשר. תינוק שמנסה לתפוס צעצוע עובר בין צפייה (איפה הצעצוע?), פעולה (להושיט את היד), וצפייה בתוצאה (מה קרה?) — כל זה בתוך שניות, ללא מעבר מפורש בין "מצבים".</p>
+
+<h3>מחסום 2: החצנה (Externalization)</h3>
+
+<p>אחת הביקורות החדות ביותר במאמר היא שתהליך הלמידה ב-AI הוחצן כמעט לגמרי — הוא עבר מהמערכת אל המומחים האנושיים. בני אדם מחליטים על הארכיטקטורה, בוחרים את פונקציית ההפסד, אוצרים את הנתונים, מתכננים את לוח הזמנים של האימון, מחליטים מתי לעצור, איך לכוונן, ומה לתקן.</p>
+
+<p>זה כאילו שילד לא היה יכול ללמוד בעצמו — אלא שכל צעד של הלמידה שלו היה צריך להיות מתוכנן על ידי הוריו. "עכשיו תלמד צבעים. עכשיו תלמד צלילים. עכשיו תנסה ללכת." זה כמובן לא איך ילדים עובדים. ילדים סקרנים מטבעם, חוקרים בעצמם, ויודעים לכוון את הלמידה שלהם באופן פנימי.</p>
+
+<p>המחברים טוענים שגישת ה-pretrain→finetune המודרנית היא צעד ראשון בכיוון הנכון, אבל היא עדיין דורשת מעורבות אנושית ניכרת. האוטומציה אמנם הוגברה, אבל הנקודה המהותית נשארה: המערכת עצמה לא יודעת מה חסר לה ואיך להשלים את הפער.</p>
+
+<h3>מחסום 3: חוסר שיטות בקנה מידה (Lack of Scalable Methods)</h3>
+
+<p>גם אם הקהילה המדעית תסכים על הצורך ב-System M, אין כיום שיטות מוכחות לבנות מנגנון כזה בקנה מידה. אופטימיזציה דו-רמתית (bilevel optimization) — שבה רמה חיצונית אחת מאמנת את System M ורמה פנימית מאמנת את Systems A ו-B — היא מורכבת חישובית, לא יציבה, ולא הוכחה בסדרי גודל של מודלים מודרניים.</p>
+
+<p>המחברים מודעים לאתגר ומציעים כיוונים, אבל מודים שזה שטח שדורש מחקר משמעותי. הפער בין הרעיון התיאורטי לבין היישום המעשי הוא עדיין גדול.</p>
+
+<h2>הקבלות ממדעי הקוגניציה: איך ילדים באמת לומדים</h2>
+
+<p>אחד ההיבטים המרתקים ביותר של המאמר הוא ההקבלות המפורטות שהוא מציג בין מערכות AI לבין התפתחות קוגניטיבית של תינוקות וילדים. המחברים — ובפרט דופו, שהוא מומחה בפסיכולינגוויסטיקה ומדעי הקוגניציה — שואבים ממחקר עשיר על התפתחות הילד כדי להדגים מה AI חסר.</p>
+
+<!-- Diagram 3: Cognitive Development Timeline -->
+<div class="diagram-container">
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" style="max-width:750px;">
+  <line x1="50" y1="200" x2="750" y2="200" stroke="#ccc" stroke-width="3"/>
+  <circle cx="80" cy="200" r="8" fill="#3366cc"/>
+  <text x="80" y="185" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="13" font-weight="600">לידה</text>
+  <rect x="30" y="220" width="100" height="80" rx="6" fill="#e8f0fe" stroke="#3366cc" stroke-width="1"/>
+  <text x="80" y="240" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#333">זיהוי פנים</text>
+  <text x="80" y="258" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#333">קטגוריות</text>
+  <text x="80" y="276" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#333">פונטיות</text>
+  <text x="80" y="292" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="10" fill="#3366cc">System A</text>
+  <circle cx="230" cy="200" r="8" fill="#e67700"/>
+  <text x="230" y="185" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="13" font-weight="600">6 חודשים</text>
+  <rect x="175" y="100" width="110" height="80" rx="6" fill="#fef3e0" stroke="#e67700" stroke-width="1"/>
+  <text x="230" y="120" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#333">תפיסה ומוטוריקה</text>
+  <text x="230" y="138" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#333">הושטת יד</text>
+  <text x="230" y="156" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#333">ניסוי וטעייה</text>
+  <text x="230" y="172" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="10" fill="#e67700">System B</text>
+  <circle cx="400" cy="200" r="8" fill="#2e7d32"/>
+  <text x="400" y="185" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="13" font-weight="600">12 חודשים</text>
+  <rect x="340" y="220" width="120" height="90" rx="6" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1"/>
+  <text x="400" y="240" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#333">הליכה (B)</text>
+  <text x="400" y="258" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#333">מילים ראשונות (A)</text>
+  <text x="400" y="276" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#333">מעבר גמיש</text>
+  <text x="400" y="294" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="10" fill="#2e7d32">System M מתפתח</text>
+  <circle cx="570" cy="200" r="8" fill="#6633cc"/>
+  <text x="570" y="185" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="13" font-weight="600">2-3 שנים</text>
+  <rect x="510" y="100" width="120" height="80" rx="6" fill="#f5f0ff" stroke="#6633cc" stroke-width="1"/>
+  <text x="570" y="120" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#333">תחביר מורכב</text>
+  <text x="570" y="138" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#333">משחק מעמיק</text>
+  <text x="570" y="156" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#333">דמיון + חיקוי</text>
+  <text x="570" y="172" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="10" fill="#6633cc">A + B + M מלא</text>
+  <circle cx="720" cy="200" r="8" fill="#cc3333"/>
+  <text x="720" y="185" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="13" font-weight="600">5+ שנים</text>
+  <rect x="665" y="220" width="110" height="70" rx="6" fill="#fff5f5" stroke="#cc3333" stroke-width="1"/>
+  <text x="720" y="240" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#333">למידה מכוונת</text>
+  <text x="720" y="258" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#333">מטא-קוגניציה</text>
+  <text x="720" y="276" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#333">תכנון למידה</text>
+</svg>
+<div class="diagram-caption">תרשים 3: ציר זמן של התפתחות קוגניטיבית בילדים — ממופה למערכות A, B ו-M</div>
+</div>
+
+<h3>למידה מתצפית אצל תינוקות (System A)</h3>
+
+<p>תינוקות מתחילים ללמוד מתצפית הרבה לפני שהם מסוגלים לפעול בעולם. בחודשים הראשונים, תינוק לומד לזהות פנים — ובפרט את הפנים של אמו — מהצפייה בלבד. הוא לומד להבחין בין צלילים פונטיים — לזהות את ההבדל בין "ב" ל"פ" למשל — פשוט מהאזנה לשפה שסביבו. הוא מתחיל לבנות מודלים סטטיסטיים של העולם: מה מופיע ביחד, מה עוקב אחרי מה, מה צפוי ומה מפתיע.</p>
+
+<p>מחקרים קלאסיים בפסיכולוגיה התפתחותית הראו שתינוקות בני 6-8 חודשים כבר מסוגלים ללמוד דפוסים סטטיסטיים מורכבים בשפה — למשל, לזהות גבולות מילים בזרם דיבור רציף על בסיס הסתברות המעברים בין הברות. זהו System A בפעולה: למידה סטטיסטית פסיבית, ללא תגמול ועונש, ללא פעולה, פשוט מצפייה וניתוח דפוסים.</p>
+
+<h3>למידה מפעולה אצל תינוקות (System B)</h3>
+
+<p>למידה מוטורית — הליכה, טיפוס, ריצה — קורית בעיקר דרך ניסוי וטעייה. תינוק לא לומד ללכת מצפייה באחרים (גם אם זה עוזר מעט). הוא לומד מעצם הפעולה: לנסות לקום, ליפול, לנסות שוב, להתאים את שיווי המשקל. זהו System B קלאסי — למידת חיזוק ביולוגית שבה הגוף עצמו מספק את המשוב (נפלת = כואב = שנה גישה).</p>
+
+<p>המחברים מדגישים את ההבדל העקרוני: בני אדם לא צריכים פונקציית תגמול מוגדרת מבחוץ. הגוף מספק את המשוב (כאב, הנאה, שיווי משקל), וכך למידה מוטורית קורית בצורה טבעית. זה בניגוד ל-RL מודרני, שבו פונקציית התגמול צריכה להיות מתוכננת בקפידה על ידי מהנדסים.</p>
+
+<h3>הגמישות המטא-קוגניטיבית (System M)</h3>
+
+<p>הדוגמה המרשימה ביותר שהמחברים מביאים היא הגמישות של פעוטות במעבר בין מצבי למידה. חשבו על פעוט בן שנתיים שמשחק עם צעצוע חדש. הוא עשוי:</p>
+
+<ul>
+<li><strong>לחקור אותו אקראית</strong> — לסובב, לזרוק, להכניס לפה (System B — ניסוי וטעייה)</li>
+<li><strong>לצפות בילד אחר משחק עם אותו צעצוע</strong> — ולחקות את הפעולות (System A — למידה מתצפית)</li>
+<li><strong>לעקוב אחרי הוראה מילולית</strong> — "תלחץ על הכפתור האדום" (למידה מתקשורת — שילוב של A ו-B)</li>
+<li><strong>לעבור ביניהם באופן חופשי</strong> — בלי שמישהו אומר לו "עכשיו תעבור ממצב צפייה למצב פעולה"</li>
+</ul>
+
+<p>הגמישות הזו — היכולת לעבור ספונטנית בין מצבי למידה בהתאם למצב — היא בדיוק מה ש-System M אמור לספק. וזה בדיוק מה שמערכות AI מודרניות חסרות לחלוטין. מודל שפה לא "מחליט" לעבור מצפייה לפעולה. הוא תמיד באותו מצב — הסקה מהמשקלות שלו.</p>
+
+<!-- Diagram 4: Learning Modes Taxonomy -->
+<div class="diagram-container">
+<svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" style="max-width:750px;">
+  <circle cx="400" cy="200" r="55" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2.5"/>
+  <text x="400" y="195" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="15" font-weight="600" fill="#1a1a1a">System M</text>
+  <text x="400" y="215" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#555">מטא-בקרה</text>
+  <rect x="50" y="50" width="180" height="100" rx="10" fill="#e8f0fe" stroke="#3366cc" stroke-width="2"/>
+  <text x="140" y="85" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="16" font-weight="600" fill="#3366cc">👁️ תצפית</text>
+  <text x="140" y="108" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#555">צפייה, הקשבה</text>
+  <text x="140" y="128" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#555">למידה סטטיסטית פסיבית</text>
+  <line x1="230" y1="120" x2="350" y2="180" stroke="#3366cc" stroke-width="1.5"/>
+  <rect x="570" y="50" width="180" height="100" rx="10" fill="#fef3e0" stroke="#e67700" stroke-width="2"/>
+  <text x="660" y="85" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="16" font-weight="600" fill="#e67700">🤚 פעולה</text>
+  <text x="660" y="108" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#555">ניסוי וטעייה</text>
+  <text x="660" y="128" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#555">אינטראקציה עם הסביבה</text>
+  <line x1="570" y1="120" x2="450" y2="180" stroke="#e67700" stroke-width="1.5"/>
+  <rect x="50" y="280" width="180" height="100" rx="10" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="2"/>
+  <text x="140" y="315" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="16" font-weight="600" fill="#7b1fa2">💬 תקשורת</text>
+  <text x="140" y="338" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#555">הוראה, חיקוי</text>
+  <text x="140" y="358" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#555">למידה חברתית</text>
+  <line x1="230" y1="310" x2="350" y2="240" stroke="#7b1fa2" stroke-width="1.5"/>
+  <rect x="570" y="280" width="180" height="100" rx="10" fill="#fff3e0" stroke="#ef6c00" stroke-width="2"/>
+  <text x="660" y="315" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="16" font-weight="600" fill="#ef6c00">💭 דמיון</text>
+  <text x="660" y="338" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#555">סימולציה פנימית</text>
+  <text x="660" y="358" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#555">תכנון, חלימה, משחק</text>
+  <line x1="570" y1="310" x2="450" y2="240" stroke="#ef6c00" stroke-width="1.5"/>
+</svg>
+<div class="diagram-caption">תרשים 4: טקסונומיית מצבי למידה — ארבעה מצבים שמתואמים ע"י System M</div>
+</div>
+
+<h2>AI של היום לעומת למידה אוטונומית: השוואה מבנית</h2>
+
+<p>כדי להבין את עומק הפער בין AI מודרני לבין הלמידה האוטונומית שהמחברים מציעים, כדאי לבחון את ההבדלים באופן מבני. ההשוואה חושפת שהבעיה היא לא רק כמותית (צריך יותר נתונים, יותר חישוב) אלא איכותית — חסרה ארכיטקטורה שלמה.</p>
+
+<!-- Diagram 5: Current AI vs Proposed -->
+<div class="diagram-container">
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" style="max-width:750px;">
+  <rect x="30" y="30" width="350" height="440" rx="12" fill="#fff5f5" stroke="#cc3333" stroke-width="2"/>
+  <text x="205" y="65" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="18" font-weight="600" fill="#cc3333">🔴 AI נוכחי</text>
+  <rect x="60" y="90" width="290" height="40" rx="6" fill="#ffe0e0"/>
+  <text x="205" y="116" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="14" fill="#333">1. איסוף נתונים ידני</text>
+  <text x="205" y="148" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="20">⬇️</text>
+  <rect x="60" y="160" width="290" height="40" rx="6" fill="#ffe0e0"/>
+  <text x="205" y="186" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="14" fill="#333">2. Pre-training (SSL)</text>
+  <text x="205" y="218" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="20">⬇️</text>
+  <rect x="60" y="230" width="290" height="40" rx="6" fill="#ffe0e0"/>
+  <text x="205" y="256" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="14" fill="#333">3. Fine-tuning מפוקח</text>
+  <text x="205" y="288" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="20">⬇️</text>
+  <rect x="60" y="300" width="290" height="40" rx="6" fill="#ffe0e0"/>
+  <text x="205" y="326" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="14" fill="#333">4. RLHF</text>
+  <text x="205" y="358" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="20">⬇️</text>
+  <rect x="60" y="370" width="290" height="40" rx="6" fill="#ffcccc" stroke="#cc3333" stroke-width="1.5"/>
+  <text x="205" y="396" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="14" font-weight="600" fill="#cc3333">5. פריסה — מודל קפוא ❄️</text>
+  <text x="205" y="440" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#888">רצף קשיח | תלוי באדם | לא לומד בפריסה</text>
+  <rect x="420" y="30" width="350" height="440" rx="12" fill="#f0fff0" stroke="#2e7d32" stroke-width="2"/>
+  <text x="595" y="65" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="18" font-weight="600" fill="#2e7d32">🟢 למידה אוטונומית מוצעת</text>
+  <circle cx="595" cy="200" r="80" fill="none" stroke="#2e7d32" stroke-width="2" stroke-dasharray="8,4"/>
+  <text x="595" y="195" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="13" font-weight="600" fill="#2e7d32">System M</text>
+  <text x="595" y="215" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#555">מתאם באופן דינמי</text>
+  <rect x="470" y="110" width="90" height="35" rx="6" fill="#e8f0fe" stroke="#3366cc" stroke-width="1"/>
+  <text x="515" y="133" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#333">תצפית (A)</text>
+  <rect x="660" y="110" width="90" height="35" rx="6" fill="#fef3e0" stroke="#e67700" stroke-width="1"/>
+  <text x="705" y="133" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#333">פעולה (B)</text>
+  <rect x="470" y="260" width="90" height="35" rx="6" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="1"/>
+  <text x="515" y="283" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#333">תקשורת</text>
+  <rect x="660" y="260" width="90" height="35" rx="6" fill="#fff3e0" stroke="#ef6c00" stroke-width="1"/>
+  <text x="705" y="283" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#333">דמיון</text>
+  <text x="595" y="340" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="13" fill="#2e7d32">✓ לומד גם אחרי פריסה</text>
+  <text x="595" y="365" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="13" fill="#2e7d32">✓ מעבר גמיש בין מצבים</text>
+  <text x="595" y="390" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="13" fill="#2e7d32">✓ סקרנות פנימית</text>
+  <text x="595" y="415" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="13" fill="#2e7d32">✓ הסתגלות לסביבה</text>
+  <text x="595" y="440" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="13" fill="#2e7d32">✓ אוטונומי — לא תלוי באדם</text>
+</svg>
+<div class="diagram-caption">תרשים 5: השוואה בין צינור AI נוכחי (שמאל) לארכיטקטורת למידה אוטונומית מוצעת (ימין)</div>
+</div>
+
+<p>בצד שמאל של ההשוואה, אנחנו רואים את הצינור המוכר: איסוף נתונים ידני, pre-training, fine-tuning, RLHF, ולבסוף פריסה של מודל קפוא. כל שלב תלוי בשלב הקודם, הסדר נקבע מראש, ואחרי הפריסה לא קורה דבר. בצד ימין, הארכיטקטורה המוצעת — מערכת דינמית שבה System M מתאם בין מצבי למידה שונים בזמן אמת, גם אחרי הפריסה.</p>
+
+<h2>למה הגדלה לבד לא מספיקה</h2>
+
+<p>אחד הטיעונים המרכזיים של המאמר הוא שהגישה הנוכחית של "פשוט תגדיל" (scaling) לא תפתור את הבעיה. בשנים האחרונות, חלק גדול מההתקדמות ב-AI הגיע מהגדלת מודלים: יותר פרמטרים, יותר נתונים, יותר חישוב. אבל המחברים טוענים שהגדלה מתמודדת רק עם חלק מהבעיות, ומשאירה בעיות מהותיות ללא מענה.</p>
+
+<p><strong>העולם הוא "זנב ארוך":</strong> ההתפלגות של אירועים בעולם האמיתי היא heavy-tailed — יש מעט אירועים שכיחים ואינסוף אירועים נדירים. לא משנה כמה נתונים נאסוף, תמיד יהיו מצבים שהמודל לא ראה. ילד שגדל בתל אביב ועובר לאלסקה צריך ללמוד על שלג, קור קיצוני, ודובים. הוא לומד את זה במקום, מניסיון ישיר. מודל AI לא יכול לעשות את זה.</p>
+
+<p><strong>העולם הוא לא-סטציונרי:</strong> ההתפלגות של הנתונים משתנה כל הזמן. מה שהיה נכון לפני שנה עשוי להיות לא רלוונטי היום. מודלי שפה שאומנו על טקסטים מ-2023 לא יודעים על אירועים מ-2026. אורגניזמים ביולוגיים מתמודדים עם זה בכך שהם לומדים כל הזמן, מהנתונים שזמינים להם ישירות בסביבה. מודלים קפואים פשוט מפספסים.</p>
+
+<p><strong>חוסר סיבתיות:</strong> הגדלה מגדילה את היכולת למצוא מתאמים, אבל לא מאפשרת הבנה סיבתית. כדי להבין שדחיפת כוס מהשולחן גורמת לה ליפול ולהישבר, צריך אינטראקציה עם העולם (System B), לא רק צפייה (System A). שום כמות של נתונים לא מחליפה את הניסיון של לדחוף כוס ולראות מה קורה.</p>
+
+<h2>הפתרון המוצע: אופטימיזציה דו-רמתית בהשראה אבולוציונית</h2>
+
+<p>המאמר לא נשאר ברמת הביקורת. המחברים מציעים כיוון טכני קונקרטי: אופטימיזציה דו-רמתית (bilevel optimization) בהשראה אבולוציונית. הרעיון הוא שכמו שהאבולוציה "אימנה" את המוח הביולוגי לאורך מיליוני שנים, כך אפשר להשתמש באופטימיזציה חיצונית שמאמנת את System M.</p>
+
+<p><strong>הרמה הפנימית (Inner Loop):</strong> המערכת לומדת בזמן אמת — System A צופה, System B פועל, System M מתאם ביניהם. זהו חיי הפרט — מה שקורה מרגע ה"לידה" של הסוכן ועד "מותו". המנגנונים הפנימיים של כל מערכת פועלים ומשפרים את הביצועים.</p>
+
+<p><strong>הרמה החיצונית (Outer Loop):</strong> אופטימיזציה שמשנה את הפרמטרים ההתחלתיים של המערכת ואת חוקי System M. זהו האנלוג לאבולוציה — תהליך איטי שבוחר בין "גנוטיפים" שונים (ארכיטקטורות ופרמטרים התחלתיים) על בסיס ההצלחה של ה"פנוטיפ" (הביצועים בפועל של הסוכן). ה-outer loop לא מאמן ישירות את המודל — הוא מאמן את מנגנון הלמידה עצמו.</p>
+
+<p>זהו רעיון עוצמתי שמהדהד עם מחקר קיים ב-meta-learning ו-learning to learn, אבל בקנה מידה ובשאיפה שונים לגמרי. המטרה היא לא סתם ללמוד ללמוד משימה ספציפית מהר יותר, אלא לבנות מערכת שלמה שיודעת ללמוד באופן אוטונומי בכל סביבה.</p>
+
+<h2>ארבעה מצבי למידה</h2>
+
+<p>מעבר לחלוקה הבסיסית ל-A ו-B, המאמר מזהה ארבעה מצבי למידה שקיימים בטבע ושצריכים להיות חלק מארכיטקטורת AI עתידית:</p>
+
+<h3>1. למידה מתצפית (Observation)</h3>
+<p>צפייה פסיבית בעולם, איסוף נתונים סנסוריים, בניית מודלים סטטיסטיים. זה כולל הקשבה לשפה, צפייה בתנועה, זיהוי דפוסים חזותיים. בעולם ה-AI, זה מקביל ל-SSL ולמידת שפה.</p>
+
+<h3>2. למידה מפעולה (Action)</h3>
+<p>אינטראקציה אקטיבית עם הסביבה, קבלת משוב, ושינוי התנהגות. זה כולל ניסוי וטעייה, חקירה, ומשחק. בעולם ה-AI, זה מקביל ל-RL ולתכנון.</p>
+
+<h3>3. למידה מתקשורת (Communication)</h3>
+<p>קבלת מידע מאחרים — הוראה, הדרכה, חיקוי. ילדים לומדים כמויות אדירות מהאזנה להורים, ממעקב אחר מורים, ומחיקוי בני גילם. זהו מצב הלמידה שבו המידע מגיע ממקור חברתי. בעולם ה-AI, זה מקביל חלקית ל-RLHF ול-instruction tuning, אבל בצורה הרבה יותר מוגבלת.</p>
+
+<h3>4. למידה מדמיון (Imagination)</h3>
+<p>סימולציה פנימית של מצבים, תכנון, חלימה, ומשחק דמיוני. מוחות ביולוגיים "מריצים" סימולציות של העולם כדי ללמוד בלי לפעול — חלומות, תכנון פעולות, "מה היה קורה אם...". ב-AI, מודלי עולם (world models) הם צעד ראשון לכיוון הזה, אבל הם עדיין לא משולבים במנגנון למידה אוטונומי.</p>
+
+<p>הנקודה המרכזית היא ש-System M צריך לדעת לנהל את המעברים בין ארבעת המצבים האלה — מתי לצפות, מתי לפעול, מתי להקשיב, ומתי "לחלום". ביולוגיה עושה את זה באלגנטיות. AI עדיין לא מתקרב.</p>
+
+<h2>השלכות על עתיד ה-AI</h2>
+
+<p>המאמר מציג מפת דרכים לדור הבא של בינה מלאכותית — מה שהמחברים מכנים "post-LLM AI". ההשלכות הן רחבות ועמוקות:</p>
+
+<h3>מעבר ממודלים קפואים למערכות חיות</h3>
+<p>העתיד, לפי המחברים, הוא מערכות שממשיכות ללמוד אחרי הפריסה. רובוט ביתי שלומד את מבנה הבית שלכם, את ההרגלים שלכם, ואת המשימות הספציפיות שאתם צריכים. עוזר אישי שמשתפר ככל שאתם משתמשים בו — לא כי מישהו עשה fine-tuning, אלא כי הוא לומד בעצמו מהאינטראקציה. רכב אוטונומי שמסתגל לכביש ספציפי, לתנאי מזג אוויר מקומיים, ולהרגלי נהיגה אזוריים.</p>
+
+<h3>צמצום התלות במומחים אנושיים</h3>
+<p>אם System M יעבוד, הצורך בצוותים ענקיים של מהנדסי ML שמתכננים כל שלב בצינור האימון יפחת דרמטית. המערכת תדע לאמן את עצמה, לבחור מה ללמוד, ולהתאים את עצמה לסביבה. זה לא אומר שמהנדסים לא יהיו צריכים — אלא שהתפקיד שלהם ישתנה מ"אימון מודלים" ל"עיצוב מנגנוני למידה".</p>
+
+<h3>פתרון בעיית ההכללה</h3>
+<p>אחת הבעיות הגדולות ביותר של AI מודרני היא הכללה לתחומים חדשים (domain generalization). מודל שאומן על תמונות מצלמה מסוימת יכול להיכשל כשמשתמשים בצלמה אחרת. מודל שפה שאומן על אנגלית לא בהכרח יעבוד טוב בסלנג של קהילה ספציפית. מערכת שלומדת באופן אוטונומי בסביבה שלה פותרת את הבעיה הזו מהיסוד.</p>
+
+<h3>רובוטיקה ו-Embodied AI</h3>
+<p>המאמר רלוונטי במיוחד לרובוטיקה. רובוטים צריכים לפעול בעולם האמיתי, שהוא מורכב, לא צפוי, ומשתנה כל הזמן. גישת pretrain→deploy לא עובדת שם — כל בית שונה, כל חפץ מתנהג אחרת, כל משתמש יש לו צרכים אחרים. ארכיטקטורה של A+B+M, שבה הרובוט לומד ומסתגל באופן מתמיד, היא הדרך היחידה לעשות רובוטיקה ביתית שבאמת עובדת.</p>
+
+<h2>ביקורת והגבלות</h2>
+
+<p>חשוב לציין שהמאמר הוא בעיקר תיאורטי ומושגי. המחברים עצמם מודים שהמימוש המעשי של System M בקנה מידה הוא אתגר פתוח. כמה סוגיות שנותרות פתוחות:</p>
+
+<ul>
+<li><strong>יציבות:</strong> אופטימיזציה דו-רמתית ידועה כלא יציבה. איך מבטיחים שה-outer loop לא ייצור מנגנוני למידה שמתפרקים?</li>
+<li><strong>בטיחות:</strong> מערכת שלומדת באופן אוטונומי אחרי פריסה מעלה שאלות בטיחות חמורות. מה אם היא לומדת דברים לא רצויים? איך מבטיחים alignment מתמשך?</li>
+<li><strong>חישוב:</strong> ריצת outer loop דורשת לסמלץ אלפי "חיים" של סוכנים. זה יקר חישובית ברמה שעשויה להיות לא פרקטית בטווח הקרוב.</li>
+<li><strong>הערכה:</strong> איך מודדים הצלחה? Benchmarks קיימים לא מתאימים — הם מודדים ביצועים על משימה קבועה, לא יכולת למידה מתמשכת.</li>
+</ul>
+
+<p>בנוסף, האנלוגיה לביולוגיה, למרות שהיא מעוררת השראה, אינה מושלמת. האבולוציה פעלה על מיליארדי שנים עם מיליארדי אורגניזמים. לא ברור שאפשר לדחוס את התהליך הזה לאופטימיזציה חישובית ריאלית.</p>
+
+<h2>הקשר לעבודות קודמות</h2>
+
+<p>המאמר בונה על מסורת מחקרית עשירה. יאן לה-קאן פרסם בעבר את ה-position paper המפורסם שלו על World Models וארכיטקטורת JEPA, שבו הוא טען שמודלים גנרטיביים אוטו-רגרסיביים (כמו LLMs) הם מוגבלים מהותית ושהעתיד שייך למודלים שחוזים ייצוגים במרחב מופשט. המאמר הנוכחי מרחיב את הרעיון הזה ומוסיף את הממד של למידה אוטונומית.</p>
+
+<p>דופו, מצידו, הביא שנים של מחקר על למידה בתינוקות ועל מודלים חישוביים של רכישת שפה. העבודה שלו על ZeroSpeech ו-BabyLM challenge הניחה בסיס לחשיבה על איך מערכות חישוביות יכולות ללמוד כמו תינוקות.</p>
+
+<p>מאליק הביא את הפרספקטיבה של רובוטיקה וראייה ממוחשבת — את ההבנה שמערכות שפועלות בעולם הפיזי צריכות יותר מסתם ייצוגים טובים; הן צריכות יכולת הסתגלות מתמדת.</p>
+
+<p>השילוב של שלוש הפרספקטיבות — מדעי הקוגניציה, למידה עמוקה, ורובוטיקה — הוא שמעניק למאמר את עוצמתו. זו לא ביקורת צרה מתוך תחום אחד, אלא ראייה כוללת של מה צריך להשתנות.</p>
+
+<h2>מה ההשלכות המעשיות?</h2>
+
+<p>למרות שהמאמר הוא תיאורטי, ההשלכות המעשיות שלו ברורות:</p>
+
+<p><strong>לחוקרי AI:</strong> הזמנה לחשוב מעבר לפרדיגמה הנוכחית של pretrain→finetune. לפתח מנגנוני meta-control שיאפשרו מעבר גמיש בין מצבי למידה. להשקיע ב-bilevel optimization ובמנגנונים ביולוגיים-מושראים.</p>
+
+<p><strong>לתעשייה:</strong> האזהרה שהגדלת מודלים לבד לא תפתור את הבעיות העמוקות. השקעה נדרשת גם בארכיטקטורות חדשות, לא רק בחומרה גדולה יותר. חברות שיפתחו מנגנוני למידה אוטונומית יקבלו יתרון תחרותי עצום.</p>
+
+<p><strong>לקהילת הבטיחות:</strong> מערכות שלומדות אחרי פריסה מציבות אתגרי בטיחות חדשים שאין להם פתרון טוב עדיין. חשוב להתחיל לחשוב על alignment מתמשך, מנגנוני פיקוח בזמן אמת, ודרכים לוודא שלמידה אוטונומית לא סוטה לכיוונים לא רצויים.</p>
+
+<p><strong>לחינוך ולמדעי הקוגניציה:</strong> המאמר מדגיש את הצורך בשיתוף פעולה עמוק יותר בין חוקרי AI לחוקרי קוגניציה. הבנה עמוקה יותר של איך ילדים לומדים — ובפרט איך הם מנהלים את המעבר בין מצבי למידה — יכולה להוביל לפריצות דרך ב-AI.</p>
+
+<h2>מבט אל העתיד</h2>
+
+<p>המאמר הזה מגיע ברגע קריטי בהתפתחות של תחום הבינה המלאכותית. אחרי שנים של התמקדות בהגדלת מודלי שפה, הולכת ומתגבשת ההבנה שההגדלה לבד לא תביא אותנו לבינה מלאכותית כללית. יש צורך בשינוי פרדיגמטי — מעבר ממודלים שמאומנים פעם אחת ואז קפואים, למערכות שלומדות באופן מתמשך, אוטונומי, ומסתגלות לסביבה שלהן.</p>
+
+<p>דופו, לה-קאן ומאליק מציעים כאן מפת דרכים ברורה, מעוגנת היטב בביולוגיה ובמדעי הקוגניציה, ועם כיוונים טכניים קונקרטיים. השאלה היא האם הקהילה תאמץ את הכיוון הזה. בהתחשב במשקלם של המחברים — שלושה מהשמות המשפיעים ביותר בתחום — יש סיכוי טוב שהמאמר ישפיע על כיוון המחקר בשנים הקרובות.</p>
+
+<p>אם הם צודקים, אנחנו עומדים בפני מהפכה שנייה ב-AI: אחרי המהפכה של הלמידה העמוקה שלימדה מכונות לזהות דפוסים, תגיע המהפכה של הלמידה האוטונומית שתלמד מכונות ללמוד. וזה עשוי להיות הצעד שבאמת ישנה את כל מה שאנחנו יודעים על מכונות חכמות.</p>
+
+<div class="highlight-box">
+<strong>השורה התחתונה:</strong> מערכות AI מודרניות, למרות היכולות המרשימות שלהן, לא באמת לומדות אחרי שהן נפרסות. המאמר מציג ארכיטקטורה של שלוש מערכות — System A (למידה מתצפית), System B (למידה מפעולה), ו-System M (מטא-בקרה) — כמסגרת לבניית AI שלומד באמת. זוהי לא סתם עוד הצעה אקדמית; זוהי מפת דרכים ממוקדת ממדענים ברמה העולמית שמציעים שינוי כיוון מהותי בתחום.
+</div>
+
+<div class="footer-source">
+<p>📄 מאמר מקור: <a href="https://arxiv.org/abs/2603.15381" target="_blank">Why AI Systems Don't Learn and What to Do About It: Lessons on Autonomous Learning from Cognitive Science</a> — Emmanuel Dupoux, Yann LeCun, Jitendra Malik (מרץ 2026)</p>
+<p>🌐 תרגום ועיבוד: מאמר זה תורגם ועובד לעברית מתוך המאמר המקורי שפורסם ב-arXiv.</p>
+</div>
+
+</div>
+</body>
+</html>
