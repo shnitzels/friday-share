@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>רשימת הדירוג המוחלטת ללוחות Edge AI: הרצת LLM ו-VLM ב-2026</title>
+    <meta property="og:title" content="רשימת הדירוג המוחלטת ללוחות Edge AI: הרצת LLM ו-VLM ב-2026">
+    <meta property="og:description" content="השוואה מקיפה של כל לוח Edge AI להרצת מודלי שפה גדולים (LLM) ומודלי שפה-ראייה (VLM) באופן מקומי ב-2026. מי המלך? מי מת? ומי ההפתעה?">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="רשימת הדירוג המוחלטת ללוחות Edge AI: הרצת LLM ו-VLM ב-2026">
+    <meta name="twitter:description" content="השוואה מקיפה של כל לוח Edge AI להרצת LLM ו-VLM מקומית ב-2026">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans Hebrew', sans-serif;
+            font-size: 18px;
+            line-height: 1.8;
+            color: #1a1a1a;
+            background: #fff;
+            padding: 40px 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 { font-size: 32px; font-weight: 600; margin-bottom: 12px; }
+        h2 { font-size: 24px; font-weight: 600; margin: 48px 0 16px; color: #111; }
+        h3 { font-size: 20px; font-weight: 600; margin: 32px 0 12px; }
+        .subtitle { font-size: 20px; color: #555; margin-bottom: 32px; }
+        p { margin-bottom: 16px; }
+        .source-box {
+            background: #f7f7f7;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-bottom: 40px;
+            font-size: 16px;
+        }
+        .source-box a { color: #0066cc; text-decoration: none; }
+        .source-box a:hover { text-decoration: underline; }
+        .tier-section {
+            border-right: 5px solid;
+            padding-right: 20px;
+            margin-bottom: 40px;
+        }
+        .tier-s { border-color: #ff4444; }
+        .tier-a { border-color: #ff8800; }
+        .tier-b { border-color: #ffcc00; }
+        .tier-c { border-color: #88aa00; }
+        .tier-d { border-color: #666; }
+        .tier-untested { border-color: #aaa; }
+        .tier-badge {
+            display: inline-block;
+            padding: 4px 16px;
+            border-radius: 4px;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        .badge-s { background: #ff4444; }
+        .badge-a { background: #ff8800; }
+        .badge-b { background: #ffcc00; color: #1a1a1a; }
+        .badge-c { background: #88aa00; }
+        .badge-d { background: #666; }
+        .badge-untested { background: #aaa; }
+        ul { margin: 12px 20px 16px 0; }
+        li { margin-bottom: 8px; }
+        strong { font-weight: 600; }
+        .svg-chart {
+            margin: 32px 0;
+            text-align: center;
+        }
+        .svg-chart svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .insight-box {
+            background: #fff8e1;
+            border: 1px solid #ffe082;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 32px 0;
+        }
+        .footer-source {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 16px;
+            color: #666;
+        }
+        .footer-source a { color: #0066cc; }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<h1>רשימת הדירוג המוחלטת ללוחות Edge AI: הרצת LLM ו-VLM ב-2026</h1>
+<p class="subtitle">השוואה מקיפה של כל לוח AI קצה בשוק, מי באמת יכול להריץ מודלי שפה גדולים ומודלי ראייה-שפה, ומי רק מדבר?</p>
+
+<div class="source-box">
+    📄 מאמר זה הוא תרגום והרחבה של המאמר <a href="https://medium.com/@zlodeibaal/the-ultimate-tier-list-for-edge-ai-boards-running-llms-and-vlms-in-2026-da06573efcd5" target="_blank">"The Ultimate Tier List for Edge AI Boards: Running LLMs and VLMs in 2026"</a> מאת <strong>Anton Maltsev</strong> ב-Medium.
+</div>
+
+<h2>מבוא: למה Edge AI חשוב יותר מתמיד?</h2>
+
+<p>העולם של הבינה המלאכותית עובר שינוי מהותי. אם עד לפני שנה-שנתיים השאלה המרכזית סביב לוחות AI קצה (Edge AI boards) הייתה "האם הוא יכול להריץ מודל זיהוי אובייקטים?" או "כמה פריימים בשנייה הוא מוציא ב-YOLO?", הרי שב-2026 השאלה השתנתה לחלוטין: <strong>"האם הלוח הזה יכול להריץ מודלי שפה גדולים (LLM) ומודלי שפה-ראייה (VLM) באופן מקומי?"</strong></p>
+
+<p>השינוי הזה אינו טריוויאלי. מודלי שפה גדולים דורשים כמויות זיכרון ויכולות חישוב שונות לחלוטין ממודלי ראייה ממוחשבת קלאסיים. הרצת LLM דורשת לא רק NPU (Neural Processing Unit) חזק, אלא גם תמיכת תוכנה מוצקה, SDK שעובד, תיעוד טוב, וקהילה פעילה שיכולה לעזור כשדברים נשברים. וב-Edge AI, דברים נשברים הרבה.</p>
+
+<p>Anton Maltsev, יוצר תוכן ומומחה Edge AI שמפרסם סקירות מעמיקות בערוץ היוטיוב שלו ובבלוג ב-Medium, החליט לעשות סדר בבלגן. הוא בנה רשימת דירוג (Tier List) מקיפה שמדרגת כל לוח Edge AI לפי היכולת שלו להריץ LLM ו-VLM. התוצאות מפתיעות, ולפעמים אכזריות.</p>
+
+<p>במאמר הזה נצלול לעומק כל דרגה ברשימה, נסביר למה כל לוח קיבל את הדירוג שלו, נבחן את היתרונות והחסרונות של כל ארכיטקטורה, ונעזור לכם להבין איזה לוח מתאים בדיוק למה שאתם צריכים.</p>
+
+<!-- SVG Chart 1: Tier List Visual Ranking -->
+<div class="svg-chart">
+<svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Noto Sans Hebrew', sans-serif;">
+  <rect x="0" y="0" width="800" height="420" fill="#fafafa" rx="8"/>
+  <text x="400" y="35" text-anchor="middle" font-size="18" font-weight="600" fill="#1a1a1a">דירוג לוחות Edge AI להרצת LLM/VLM - 2026</text>
+  <!-- S Tier -->
+  <rect x="40" y="55" width="80" height="60" fill="#ff4444" rx="4"/>
+  <text x="80" y="92" text-anchor="middle" font-size="24" font-weight="600" fill="white">S</text>
+  <rect x="130" y="55" width="630" height="60" fill="#ff444422" rx="4"/>
+  <text x="445" y="82" text-anchor="middle" font-size="15" fill="#1a1a1a" direction="rtl">NVIDIA Jetson | Intel Core Ultra + NPU</text>
+  <text x="445" y="102" text-anchor="middle" font-size="12" fill="#666">הטובים ביותר - יכולים להריץ כמעט הכל</text>
+  <!-- A Tier -->
+  <rect x="40" y="125" width="80" height="60" fill="#ff8800" rx="4"/>
+  <text x="80" y="162" text-anchor="middle" font-size="24" font-weight="600" fill="white">A</text>
+  <rect x="130" y="125" width="630" height="60" fill="#ff880022" rx="4"/>
+  <text x="445" y="152" text-anchor="middle" font-size="15" fill="#1a1a1a">RockChip RK3588 | Huawei (Ascend) | AMD Ryzen AI</text>
+  <text x="445" y="172" text-anchor="middle" font-size="12" fill="#666">טובים מאוד - תמיכה רחבה עם מגבלות מסוימות</text>
+  <!-- B Tier -->
+  <rect x="40" y="195" width="80" height="60" fill="#ffcc00" rx="4"/>
+  <text x="80" y="232" text-anchor="middle" font-size="24" font-weight="600" fill="#1a1a1a">B</text>
+  <rect x="130" y="195" width="630" height="60" fill="#ffcc0022" rx="4"/>
+  <text x="445" y="222" text-anchor="middle" font-size="15" fill="#1a1a1a">Sophon | SpacemiT (RISC-V)</text>
+  <text x="445" y="242" text-anchor="middle" font-size="12" fill="#666">סבירים - עובדים אבל עם פשרות משמעותיות</text>
+  <!-- C Tier -->
+  <rect x="40" y="265" width="80" height="60" fill="#88aa00" rx="4"/>
+  <text x="80" y="302" text-anchor="middle" font-size="24" font-weight="600" fill="white">C</text>
+  <rect x="130" y="265" width="630" height="60" fill="#88aa0022" rx="4"/>
+  <text x="445" y="292" text-anchor="middle" font-size="15" fill="#1a1a1a">Axelera AI</text>
+  <text x="445" y="312" text-anchor="middle" font-size="12" fill="#666">מוגבל - מהיר אבל תמיכה בודדת ברשתות LLM</text>
+  <!-- D Tier -->
+  <rect x="40" y="335" width="80" height="60" fill="#666" rx="4"/>
+  <text x="80" y="372" text-anchor="middle" font-size="24" font-weight="600" fill="white">D</text>
+  <rect x="130" y="335" width="630" height="60" fill="#66666622" rx="4"/>
+  <text x="445" y="355" text-anchor="middle" font-size="13" fill="#1a1a1a">Google Coral | Texas Instruments | VeriSilicon | Horizon | MemryX | ARM Ethos | MediaTek</text>
+  <text x="445" y="375" text-anchor="middle" font-size="13" fill="#1a1a1a">Renesas | EdgeCortix | DeepX | Blaize | Ambarella</text>
+  <text x="445" y="392" text-anchor="middle" font-size="12" fill="#666">לא עובד / לא נתמך - אין תמיכה ב-LLM/VLM</text>
+</svg>
+</div>
+
+<h2>דרגה D: לא עובד / לא נתמך</h2>
+
+<div class="tier-section tier-d">
+<span class="tier-badge badge-d">D TIER</span>
+
+<p>הדרגה הנמוכה ביותר ברשימה כוללת לוחות וארכיטקטורות שפשוט לא יכולים להריץ LLM או VLM, או שזה כל כך לא מעשי שאין טעם לנסות. זו רשימה ארוכה ומאכזבת, וחלק מהשמות בה יפתיעו אתכם.</p>
+
+<h3>Google Coral</h3>
+<p>Google Coral היה פעם אגדה בעולם ה-Edge AI. ה-TPU הקטן שלו (Tensor Processing Unit) היה פורץ דרך כשיצא, ואפשר הרצה מהירה של מודלי TensorFlow Lite על חומרה זעירה. אבל זהו, הסיפור נגמר. Google הפסיקה לעדכן את המוצר, אין גרסאות חדשות, ותמיכת התוכנה קרסה. ה-TPU של Coral פשוט לא תוכנן להתמודד עם מודלי שפה גדולים. הוא נבנה לעידן של מודלי סיווג וזיהוי אובייקטים קטנים, ושם הוא גם נשאר. אם יש לכם Coral שוכב במגירה, הוא עדיין טוב לפרויקטים קטנים של ראייה ממוחשבת. אבל LLM? שכחו מזה.</p>
+
+<h3>Texas Instruments</h3>
+<p>ל-Texas Instruments יש NPU חזקים, אבל התיעוד שלהם בעייתי. נכון לעכשיו, אין תמיכה ב-LLM בכלל. חבל, כי החומרה עצמה לא רעה, אבל בלי אקוסיסטם תוכנה שתומך במודלים מודרניים, זה חסר תועלת לתחום הזה.</p>
+
+<h3>VeriSilicon (NXP i.MX)</h3>
+<p>VeriSilicon מפעילים הרבה מהלוחות הפופולריים של NXP, כמו i.MX8M Plus ו-i.MX93. הם מציעים תמיכה טובה במשימות AI סטנדרטיות, אבל כרגע אין תמיכה ב-LLM. ייתכן שנראה שינוי בסדרה הבאה שלהם, אבל לעת עתה, חכו שנה ובדקו שוב. בינתיים, לוחות כמו Debix A, Cubie A7A, Cubie A5E, ו-Khadas Vim3, כולם מבוססי VeriSilicon, נשארים מחוץ למשחק של LLM.</p>
+
+<h3>Horizon Robotics (RDK X5)</h3>
+<p>Horizon Robotics בנו לוח נהדר לרובוטיקה, אבל התיעוד שלהם אומר את זה מפורשות: אין תמיכה ב-LLM על ה-NPU. אתם יכולים לנסות להריץ על ה-CPU, אבל זה כמו לנסות להריץ מירוץ פורמולה 1 עם אופני ילדים. טכנית אפשרי, מעשית חסר טעם. הלוח הזה מצוין למה שהוא נבנה בשבילו (רובוטיקה וראייה ממוחשבת), אבל LLM זה לא התחום שלו.</p>
+
+<h3>MemryX</h3>
+<p>MemryX הוא אחד הפרויקטים המעניינים יותר ברשימה. הארכיטקטורה ידידותית למשתמש ויש לה פוטנציאל רציני. אבל בנוסח "עדיין לא שם", הטכנולוגיה פשוט לא מוכנה להסקת LLM/VLM. יכול להיות שהדור הבא ישנה את התמונה, אבל נכון ל-2026, זה לא עובד.</p>
+
+<h3>ARM Ethos</h3>
+<p>ה-NPU של ARM Ethos פשוט קטן מדי. זה כמו לנסות להכניס פיל למכונית מיני. הארכיטקטורה לא תוכננה לעומסי עבודה בסדר גודל של LLM, ואין סיכוי שזה ישתנה ללא שדרוג חומרה מהותי.</p>
+
+<h3>MediaTek</h3>
+<p>Anton Maltsev לא חוסך מילים כאן ומתאר את הלוח של MediaTek כ"אחד הלוחות הגרועים ביותר שבדקתי". תיאורטית, הוא אמור לתמוך ב-LLM. אבל אם אתם משתמשים רגילים ולא מהנדסים עם גישה ישירה ל-MediaTek, זה פשוט לא ריאלי. התיעוד בעייתי, ה-SDK מתסכל, וחוויית המשתמש גרועה.</p>
+
+<h3>עוד שמות ברשימה השחורה</h3>
+<p><strong>Renesas</strong> - NPU קטנים מדי, לא אמורים לעבוד עם LLM/VLM. <strong>EdgeCortix</strong> - גדולים יותר מ-Renesas אבל עדיין ללא תמיכה. <strong>DeepX</strong> - תומכים ב-LLM/VLM בכרטיסי PC גדולים, אבל בפתרונות Edge רגילים (M.2, PCIe) אין תמיכה. <strong>Blaize AI</strong> ו-<strong>Ambarella</strong> - כמעט אין מידע זמין, ומה שידוע מצביע על חוסר תמיכה.</p>
+
+<p>השורה התחתונה של דרגה D: הרבה חומרה, הרבה הבטחות, אפס יכולת להריץ LLM. אם אתם רוצים להריץ מודלי שפה על ה-Edge, תעברו הלאה.</p>
+</div>
+
+<h2>דרגת "לא נבדק / אמור לעבוד"</h2>
+
+<div class="tier-section tier-untested">
+<span class="tier-badge badge-untested">לא נבדק</span>
+
+<p>יש כמה שחקנים מעניינים שנמצאים באזור הדמדומים: הם טוענים שיש להם תמיכה ב-LLM, אבל עדיין לא נבדקו בצורה מספקת. שווה לעקוב אחריהם.</p>
+
+<h3>Kinara AI (כיום חלק מ-NXP)</h3>
+<p>Kinara נרכשה לאחרונה על ידי NXP, ונראה שיש להם תמיכה ב-LLM. אבל כמעט אין מידע זמין, מה שהופך את זה לקשה להמליץ. שווה מעקב.</p>
+
+<h3>Sima AI</h3>
+<p>Sima AI טוענים שיש להם תמיכה, אבל רמת הנוחות והאיכות של ההטמעה עדיין לא ברורה. צריך בדיקה מעמיקה יותר לפני שאפשר לתת דירוג.</p>
+
+<h3>Hailo AI (Hailo-10)</h3>
+<p>עניין מעניין עם Hailo. ה-Hailo-8, שנבדק מספר פעמים, לא תומך ב-LLM. אבל ה-Hailo-10 החדש טוען שיש לו תמיכה ב-LLM ו-VLM. הבעיה? קשה להשיג את הלוח כמשתמש רגיל. עד שזה ייבדק בפועל, Hailo נשאר באזור האפור.</p>
+
+<h3>Qualcomm</h3>
+<p>למה Qualcomm נמצאים ב"לא נבדק" ולא בדירוג רגיל? כי בלוחות ה-Low-tier שלהם (כמו Dragon Q6A ו-Luxonis OAK 4) הם תומכים רק ב-Transformers קטנים. להסקת LLM ו-VLM אמיתית, צריך משהו כמו AIRbox Q900, וזה עדיין לא נבדק. על הנייר, התיעוד נראה ברמה של A או אפילו S, אבל בלי בדיקה מעשית, אי אפשר לדעת.</p>
+</div>
+
+<!-- SVG Chart 2: Performance Comparison -->
+<div class="svg-chart">
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Noto Sans Hebrew', sans-serif;">
+  <rect x="0" y="0" width="800" height="400" fill="#fafafa" rx="8"/>
+  <text x="400" y="30" text-anchor="middle" font-size="18" font-weight="600" fill="#1a1a1a">השוואת יכולות: תמיכה ב-LLM לעומת קלות שימוש</text>
+  <!-- Axes -->
+  <line x1="100" y1="50" x2="100" y2="340" stroke="#ccc" stroke-width="1"/>
+  <line x1="100" y1="340" x2="750" y2="340" stroke="#ccc" stroke-width="1"/>
+  <text x="50" y="200" text-anchor="middle" font-size="13" fill="#666" transform="rotate(-90,50,200)">תמיכה ב-LLM/VLM</text>
+  <text x="425" y="375" text-anchor="middle" font-size="13" fill="#666">קלות שימוש ואיכות SDK</text>
+  <!-- Grid -->
+  <line x1="100" y1="195" x2="750" y2="195" stroke="#eee" stroke-width="1"/>
+  <line x1="425" y1="50" x2="425" y2="340" stroke="#eee" stroke-width="1"/>
+  <!-- Data points -->
+  <circle cx="680" cy="80" r="18" fill="#ff4444" opacity="0.8"/>
+  <text x="680" y="85" text-anchor="middle" font-size="11" fill="white" font-weight="600">Intel</text>
+  <circle cx="600" cy="70" r="18" fill="#ff4444" opacity="0.8"/>
+  <text x="600" y="75" text-anchor="middle" font-size="11" fill="white" font-weight="600">Jetson</text>
+  <circle cx="500" cy="140" r="15" fill="#ff8800" opacity="0.8"/>
+  <text x="500" y="145" text-anchor="middle" font-size="10" fill="white" font-weight="600">RockChip</text>
+  <circle cx="350" cy="130" r="15" fill="#ff8800" opacity="0.8"/>
+  <text x="350" y="135" text-anchor="middle" font-size="10" fill="white" font-weight="600">Huawei</text>
+  <circle cx="550" cy="150" r="15" fill="#ff8800" opacity="0.8"/>
+  <text x="550" y="155" text-anchor="middle" font-size="10" fill="white" font-weight="600">AMD</text>
+  <circle cx="300" cy="210" r="14" fill="#ffcc00" opacity="0.8"/>
+  <text x="300" y="215" text-anchor="middle" font-size="10" fill="#1a1a1a" font-weight="600">Sophon</text>
+  <circle cx="420" cy="240" r="14" fill="#ffcc00" opacity="0.8"/>
+  <text x="420" y="245" text-anchor="middle" font-size="10" fill="#1a1a1a" font-weight="600">SpacemiT</text>
+  <circle cx="250" cy="260" r="13" fill="#88aa00" opacity="0.8"/>
+  <text x="250" y="265" text-anchor="middle" font-size="10" fill="white" font-weight="600">Axelera</text>
+  <circle cx="180" cy="310" r="12" fill="#666" opacity="0.6"/>
+  <text x="180" y="315" text-anchor="middle" font-size="9" fill="white">Coral</text>
+  <circle cx="220" cy="300" r="12" fill="#666" opacity="0.6"/>
+  <text x="220" y="305" text-anchor="middle" font-size="9" fill="white">MemryX</text>
+  <circle cx="150" cy="320" r="12" fill="#666" opacity="0.6"/>
+  <text x="150" y="325" text-anchor="middle" font-size="9" fill="white">MediaTek</text>
+  <!-- Labels -->
+  <text x="720" y="365" text-anchor="middle" font-size="11" fill="#888">טוב</text>
+  <text x="130" y="365" text-anchor="middle" font-size="11" fill="#888">גרוע</text>
+  <text x="75" y="75" text-anchor="middle" font-size="11" fill="#888">גבוה</text>
+  <text x="75" y="330" text-anchor="middle" font-size="11" fill="#888">נמוך</text>
+</svg>
+</div>
+
+<h2>דרגה C: מוגבל</h2>
+
+<div class="tier-section tier-c">
+<span class="tier-badge badge-c">C TIER</span>
+
+<h3>Axelera AI</h3>
+<p>Axelera היא חברה מעניינה. מבחינת מהירות, בתחום ה-Edge, היא אולי המהירה ביותר בטווח המחיר שלה. הבעיה? ב-Model Zoo הרשמי יש רק רשת אחת לתמיכה ב-LLM. רשת. אחת. וזה לא הכל: לייצא רשת אקראית לפורמט שלהם זה קשה ומסובך.</p>
+
+<p>יש הרבה תקווה לדור הבא של Axelera. אבל בדור הנוכחי, הם הרבה יותר טובים ברשתות קלאסיות (זיהוי, סיווג, רגרסיה וכו'). אם אתם צריכים LLM על ה-Edge, Axelera עדיין לא שם. יש הבטחה, אין מימוש.</p>
+
+<p>הדירוג C אומר: "יש פוטנציאל, אבל אל תבנו על זה עכשיו". אם אתם צריכים פתרון עובד היום, תמשיכו למעלה ברשימה.</p>
+</div>
+
+<h2>דרגה B: סביר, עם פשרות</h2>
+
+<div class="tier-section tier-b">
+<span class="tier-badge badge-b">B TIER</span>
+
+<h3>Sophon</h3>
+<p>Sophon הוא אחד הלוחות המעניינים ביותר ברשימה, וגם אחד המתסכלים ביותר. מבחינת מספר הרשתות הנתמכות, הוא מצוין. אולי אפילו ראוי ל-A tier, ואולי אפילו S. יש לו תמיכה רחבה במגוון מודלים, כולל LLM.</p>
+
+<p>אז למה רק B? בגלל שהקוד הוא בלגן. איכות הקוד, כמה קל להשתמש בפלטפורמה, חוויית המפתח, כל אלה ברמה של C tier. אז Maltsev שם אותו באמצע: הרבה יכולת, הרבה סבל. אם אתם מהנדסים סבלניים שלא מפחדים מקוד מבולגן ותיעוד חלקי, Sophon יכול לתת לכם תוצאות טובות. אם אתם מחפשים חוויה חלקה, חפשו במקום אחר.</p>
+
+<h3>SpacemiT</h3>
+<p>SpacemiT הוא אולי הלוח המוזר ביותר ברשימה כולה. למה? כי הוא מבוסס RISC-V. אין לו NPU. אין לו GPU. ה-CPU שלו מותאם להסקת רשתות נוירונים. וזה עובד! הוא איטי. איטי כמו Raspberry Pi 5 להרצת LLM. אבל הוא זול משמעותית.</p>
+
+<p>מה שמעניין ב-SpacemiT הוא שרוב הרשתות עובדות "מהקופסה" (out of the box). לא צריך להמיר מודלים, לא צריך SDK מיוחד, פשוט להריץ. ויש משהו מרענן בגישה הזו. הדור הבא של ה-CPU שלהם יכול להיות מעניין מאוד. RISC-V הוא עדיין בחיתוליו, ואם SpacemiT ימשיכו לשפר ביצועים, יכול להיות שיש לנו כאן שחקן מפתיע בעתיד.</p>
+
+<p>דרגה B אומרת: "עובד, אבל תהיו מוכנים לפשרות". Sophon נותן יכולת עם כאב, SpacemiT נותן פשטות עם איטיות.</p>
+</div>
+
+<!-- SVG Chart 3: Price vs Capability -->
+<div class="svg-chart">
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Noto Sans Hebrew', sans-serif;">
+  <rect x="0" y="0" width="800" height="400" fill="#fafafa" rx="8"/>
+  <text x="400" y="30" text-anchor="middle" font-size="18" font-weight="600" fill="#1a1a1a">מחיר מול יכולת LLM/VLM</text>
+  <!-- Axes -->
+  <line x1="100" y1="50" x2="100" y2="340" stroke="#ccc" stroke-width="1"/>
+  <line x1="100" y1="340" x2="750" y2="340" stroke="#ccc" stroke-width="1"/>
+  <text x="45" y="200" text-anchor="middle" font-size="13" fill="#666" transform="rotate(-90,45,200)">יכולת LLM/VLM</text>
+  <text x="425" y="375" text-anchor="middle" font-size="13" fill="#666">מחיר ($)</text>
+  <!-- Price labels -->
+  <text x="150" y="358" text-anchor="middle" font-size="11" fill="#888">$50</text>
+  <text x="300" y="358" text-anchor="middle" font-size="11" fill="#888">$150</text>
+  <text x="450" y="358" text-anchor="middle" font-size="11" fill="#888">$300</text>
+  <text x="600" y="358" text-anchor="middle" font-size="11" fill="#888">$500</text>
+  <text x="720" y="358" text-anchor="middle" font-size="11" fill="#888">$700+</text>
+  <!-- Bubbles -->
+  <circle cx="200" cy="250" r="20" fill="#ffcc00" opacity="0.7" stroke="#1a1a1a" stroke-width="1"/>
+  <text x="200" y="255" text-anchor="middle" font-size="10" font-weight="600">SpacemiT</text>
+  <circle cx="280" cy="140" r="22" fill="#ff8800" opacity="0.7" stroke="#1a1a1a" stroke-width="1"/>
+  <text x="280" y="145" text-anchor="middle" font-size="10" font-weight="600">RockChip</text>
+  <circle cx="350" cy="170" r="18" fill="#ffcc00" opacity="0.7" stroke="#1a1a1a" stroke-width="1"/>
+  <text x="350" y="175" text-anchor="middle" font-size="10" font-weight="600">Sophon</text>
+  <circle cx="320" cy="260" r="16" fill="#88aa00" opacity="0.7" stroke="#1a1a1a" stroke-width="1"/>
+  <text x="320" y="265" text-anchor="middle" font-size="10" font-weight="600">Axelera</text>
+  <circle cx="500" cy="100" r="24" fill="#ff8800" opacity="0.7" stroke="#1a1a1a" stroke-width="1"/>
+  <text x="500" y="105" text-anchor="middle" font-size="10" font-weight="600">AMD</text>
+  <circle cx="600" cy="75" r="28" fill="#ff4444" opacity="0.7" stroke="#1a1a1a" stroke-width="1"/>
+  <text x="600" y="80" text-anchor="middle" font-size="10" fill="white" font-weight="600">Intel</text>
+  <circle cx="700" cy="65" r="30" fill="#ff4444" opacity="0.7" stroke="#1a1a1a" stroke-width="1"/>
+  <text x="700" y="70" text-anchor="middle" font-size="10" fill="white" font-weight="600">Jetson</text>
+  <circle cx="400" cy="120" r="18" fill="#ff8800" opacity="0.7" stroke="#1a1a1a" stroke-width="1"/>
+  <text x="400" y="125" text-anchor="middle" font-size="10" font-weight="600">Huawei</text>
+  <!-- Value zone -->
+  <rect x="180" y="110" width="200" height="170" fill="none" stroke="#00aa00" stroke-width="2" stroke-dasharray="6,4" rx="8"/>
+  <text x="280" y="300" text-anchor="middle" font-size="12" fill="#00aa00">אזור ערך טוב</text>
+</svg>
+</div>
+
+<h2>דרגה A: טוב מאוד</h2>
+
+<div class="tier-section tier-a">
+<span class="tier-badge badge-a">A TIER</span>
+
+<p>שלוש פלטפורמות נבחרו לדרגה A, וכולן ראויות. הן מספקות תמיכה אמיתית ב-LLM, עם SDK שעובד וקהילה שיכולה לעזור. אבל לכל אחת יש את האכילס שלה שמונע ממנה לעלות ל-S.</p>
+
+<h3>RockChip (RK3588)</h3>
+<p>RockChip הם שם מוכר בעולם ה-Edge AI, ולא בכדי. ה-RK3588 מציע תמיכה טובה ברשתות, קוד איכותי, ומגוון רחב של לוחות שמשתמשים בו (מ-Orange Pi ועד Radxa Rock). Maltsev עצמו העלה עשרות סרטונים על לוחות RockChip, מה שמעיד על הפופולריות שלהם.</p>
+
+<p>אז מה מונע מהם להיות S? המהירות. 6 TOPS זה לא מרשים בסטנדרטים של 2026. זה מספיק כדי להריץ LLM קטנים-בינוניים, אבל לא בקצב שיספק חוויית משתמש חלקה. אם אתם רוצים תשובות מהירות מ-Chatbot מקומי, 6 TOPS יגרמו לכם לחכות. הדור הבא של RockChip אמור לשפר את זה משמעותית, ועם הקוד הטוב שכבר קיים, יכול להיות ש-RockChip יקפוץ ל-S בעתיד.</p>
+
+<p>היתרון הגדול: מחיר נמוך (סביבות $100-150), אקוסיסטם רחב, קהילה ענקית. אם אתם צריכים פתרון Edge AI בתקציב, RockChip הוא בחירה סולידית.</p>
+
+<h3>Huawei (Ascend)</h3>
+<p>Huawei מפתיעים ב-A tier. הלוח שלהם טוב, הם תומכים בהרבה מודלים, ופריימוורק CANN שלהם הוא ברמה נאה. הבעיה? גיאופוליטיקה. Huawei אסורה למכירה בחצי מהעולם. אם אתם בסין או במדינות שלא מיישמות סנקציות, Huawei יכולה להיות בחירה מצוינת. אם אתם בארה"ב, אירופה או ישראל, פשוט אל תטרחו. קשה לקנות, קשה לקבל תמיכה, ואתם תלויים באקוסיסטם סיני בלבד.</p>
+
+<p>מבחינה טכנית טהורה, Huawei יכלו להיות S tier. אבל נגישות וזמינות הם חלק מהציון, ושם הם נכשלים.</p>
+
+<h3>AMD (Ryzen AI)</h3>
+<p>AMD הביאו תצורת NPU/CPU/GPU מושלמת. ארכיטקטורת XDNA שלהם חזקה, והם יכולים להריץ את רוב המודלים. אז למה רק A ולא S? בגלל התמיכה ב-LLM ובמיוחד ב-VLM, שהיא פשוט לא טובה מספיק בהשוואה ל-Intel. ה-VLM איטי, התיעוד חלקי, והתמיכה בסביבת הפיתוח עדיין בוסרית.</p>
+
+<p>AMD הם שחקן רציני עם הרבה פוטנציאל. אם התמיכה בתוכנה תשתפר (ויש סימנים שזה קורה), הם בהחלט יכולים לעלות ל-S בסקירה הבאה. אבל נכון להיום, Intel פשוט עושים את זה יותר טוב.</p>
+</div>
+
+<h2>דרגה S: הטובים ביותר</h2>
+
+<div class="tier-section tier-s">
+<span class="tier-badge badge-s">S TIER</span>
+
+<p>ועכשיו לרגע האמת. שני לוחות בלבד הגיעו לפסגה, ולכל אחד מהם הסיבות שלו. אלה הפלטפורמות שבאמת יכולות להריץ LLM ו-VLM ברמה גבוהה על ה-Edge.</p>
+
+<h3>Intel (Core Ultra + NPU)</h3>
+<p>ההפתעה הגדולה של 2026. Intel, שהרבה אנשים מחקו מהתחרות, חזרו עם פלטפורמה שהיא אולי הטובה ביותר בשוק לשימוש משולב. מה שהופך את Intel למיוחדים הוא שזה לא רק NPU. זה CPU חזק, GPU חזק, <strong>ו-</strong>NPU חזק, הכל בחבילה אחת.</p>
+
+<p>מה זה אומר בפועל? זה אומר שאתם יכולים להריץ כמעט כל דבר. LLM? עובד על ה-NPU. VLM? קצת איטי, אבל עובד. מודלים שדורשים GPU? ה-GPU של Intel תואם ל-Nvidia (אם כי איטי יותר). צריכים fallback ל-CPU? יש CPU חזק. זו גמישות שאף פלטפורמה אחרת לא מציעה ברמה הזו.</p>
+
+<p>ומעבר לחומרה, Intel מביאים את התיעוד הטוב ביותר בשוק. זה משהו שלא מספיק אנשים מדברים עליו: תיעוד טוב שווה לפעמים יותר מ-50% עוד ביצועים. כשמשהו לא עובד (וב-Edge AI, תמיד משהו לא עובד), תיעוד טוב הוא ההבדל בין שעה של דיבאג לשבוע של דיבאג.</p>
+
+<p>OpenVINO, ה-framework של Intel, ממשיך להשתפר ותומך במגוון רחב של מודלים. השילוב בין OpenVINO, ה-NPU החזק, וה-GPU התואם ל-CUDA (דרך oneAPI) הופך את Intel לפלטפורמה הכי אוניברסלית בשוק.</p>
+
+<h3>NVIDIA Jetson</h3>
+<p>ובמקום הראשון, עדיין, אחרי כל השנים: NVIDIA Jetson. כן, עם כל הבעיות. כן, עם כל התסכולים. Jetson הוא עדיין הלוח הטוב ביותר להרצת הכל.</p>
+
+<p>למה? כי CUDA. כי אקוסיסטם GPU שנבנה לאורך עשור. כי כמעט כל מודל AI שנכתב, נכתב קודם כל ל-NVIDIA. כש-LLM חדש יוצא, הוא עובד על NVIDIA. כש-VLM חדש יוצא, הוא עובד על NVIDIA. אין שום פלטפורמה אחרת שיכולה להתחרות ביכולת הגולמית הזו.</p>
+
+<p>אבל, וזה "אבל" גדול: התשתית סביב Jetson היא בלגן. Maltsev מציין שהאדם היחיד שעשה סדר בתשתית (Dustin Franklin) עזב את NVIDIA, ומאז הכל חזר להיות מבולגן. ה-SDK מסובך, ההתקנה לא תמיד חלקה, והתמיכה הרשמית לא עומדת בציפיות לחברה בגודל של NVIDIA.</p>
+
+<p>אז למה S tier ולא פחות? כי כשמדברים על "מה הלוח הזה יכול להריץ?", אין תשובה יותר טובה מ"הכל". וזה בדיוק מה ש-Jetson מציע. אתם תסבלו בדרך לשם, אבל תגיעו.</p>
+</div>
+
+<!-- SVG Chart 4: Use Case Decision Tree -->
+<div class="svg-chart">
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Noto Sans Hebrew', sans-serif;">
+  <rect x="0" y="0" width="800" height="500" fill="#fafafa" rx="8"/>
+  <text x="400" y="30" text-anchor="middle" font-size="18" font-weight="600" fill="#1a1a1a">עץ החלטה: איזה לוח מתאים לכם?</text>
+  
+  <!-- Root -->
+  <rect x="280" y="45" width="240" height="40" fill="#4a90d9" rx="8"/>
+  <text x="400" y="70" text-anchor="middle" font-size="13" fill="white" font-weight="600">צריכים להריץ LLM/VLM?</text>
+  
+  <!-- No branch -->
+  <line x1="320" y1="85" x2="180" y2="120" stroke="#666" stroke-width="1.5"/>
+  <text x="240" y="100" font-size="11" fill="#888">לא</text>
+  <rect x="100" y="120" width="160" height="35" fill="#88aa00" rx="6"/>
+  <text x="180" y="142" text-anchor="middle" font-size="12" fill="white">לוחות ראייה קלאסיים</text>
+  <text x="180" y="172" text-anchor="middle" font-size="11" fill="#666">Coral, Hailo-8, VeriSilicon</text>
+  
+  <!-- Yes branch -->
+  <line x1="480" y1="85" x2="580" y2="120" stroke="#666" stroke-width="1.5"/>
+  <text x="540" y="100" font-size="11" fill="#888">כן</text>
+  <rect x="480" y="120" width="220" height="40" fill="#4a90d9" rx="8"/>
+  <text x="590" y="145" text-anchor="middle" font-size="13" fill="white" font-weight="600">מה התקציב?</text>
+  
+  <!-- Budget: Low -->
+  <line x1="520" y1="160" x2="200" y2="200" stroke="#666" stroke-width="1.5"/>
+  <text x="340" y="180" font-size="11" fill="#888">נמוך ($50-150)</text>
+  <rect x="100" y="200" width="200" height="40" fill="#ff8800" rx="6"/>
+  <text x="200" y="218" text-anchor="middle" font-size="12" fill="white" font-weight="600">RockChip RK3588</text>
+  <text x="200" y="232" text-anchor="middle" font-size="10" fill="white">או SpacemiT (זול יותר, איטי יותר)</text>
+  
+  <!-- Budget: Medium -->
+  <line x1="570" y1="160" x2="450" y2="200" stroke="#666" stroke-width="1.5"/>
+  <text x="500" y="180" font-size="11" fill="#888">בינוני ($200-400)</text>
+  <rect x="340" y="200" width="220" height="40" fill="#4a90d9" rx="8"/>
+  <text x="450" y="225" text-anchor="middle" font-size="13" fill="white" font-weight="600">מה הכי חשוב?</text>
+  
+  <!-- Medium: Max models -->
+  <line x1="400" y1="240" x2="280" y2="280" stroke="#666" stroke-width="1.5"/>
+  <text x="320" y="260" font-size="10" fill="#888">מקסימום מודלים</text>
+  <rect x="180" y="280" width="200" height="35" fill="#ffcc00" rx="6"/>
+  <text x="280" y="302" text-anchor="middle" font-size="12" fill="#1a1a1a" font-weight="600">Sophon</text>
+  
+  <!-- Medium: Ease -->
+  <line x1="490" y1="240" x2="540" y2="280" stroke="#666" stroke-width="1.5"/>
+  <text x="530" y="260" font-size="10" fill="#888">קלות שימוש</text>
+  <rect x="440" y="280" width="200" height="35" fill="#ff8800" rx="6"/>
+  <text x="540" y="302" text-anchor="middle" font-size="12" fill="white" font-weight="600">AMD Ryzen AI</text>
+  
+  <!-- Budget: High -->
+  <line x1="650" y1="160" x2="680" y2="200" stroke="#666" stroke-width="1.5"/>
+  <text x="680" y="180" font-size="11" fill="#888">גבוה ($500+)</text>
+  <rect x="580" y="200" width="200" height="40" fill="#4a90d9" rx="8"/>
+  <text x="680" y="225" text-anchor="middle" font-size="13" fill="white" font-weight="600">מה העדיפות?</text>
+  
+  <!-- High: All-in-one -->
+  <line x1="640" y1="240" x2="560" y2="280" stroke="#666" stroke-width="1.5"/>
+  <text x="580" y="260" font-size="10" fill="#888">פלטפורמה משולבת</text>
+  <rect x="460" y="340" width="200" height="35" fill="#ff4444" rx="6"/>
+  <text x="560" y="362" text-anchor="middle" font-size="12" fill="white" font-weight="600">Intel Core Ultra</text>
+  
+  <!-- High: Max performance -->
+  <line x1="720" y1="240" x2="720" y2="280" stroke="#666" stroke-width="1.5"/>
+  <text x="750" y="260" font-size="10" fill="#888">ביצועים מקסימליים</text>
+  <rect x="620" y="340" width="170" height="35" fill="#ff4444" rx="6"/>
+  <text x="705" y="362" text-anchor="middle" font-size="12" fill="white" font-weight="600">NVIDIA Jetson</text>
+  
+  <!-- China note -->
+  <rect x="100" y="380" width="260" height="50" fill="#fff3e0" rx="6" stroke="#ffe082"/>
+  <text x="230" y="400" text-anchor="middle" font-size="11" fill="#1a1a1a">🇨🇳 אם אתם בסין / אין סנקציות:</text>
+  <text x="230" y="418" text-anchor="middle" font-size="12" fill="#ff8800" font-weight="600">שקלו גם Huawei Ascend (A Tier)</text>
+</svg>
+</div>
+
+<h2>תובנות מפתח: מה למדנו מהדירוג?</h2>
+
+<div class="insight-box">
+<h3>🔑 חמש תובנות שכל מי שעובד עם Edge AI חייב לדעת</h3>
+
+<p><strong>1. Edge AI עדיין בלגן.</strong> אין לוח אחד שעושה הכל טוב. כל פלטפורמה מצטיינת בתחום אחד ונכשלת באחר. זה לא כמו עולם ה-Cloud שם NVIDIA שולטת בכל. ב-Edge, כל בחירה היא פשרה.</p>
+
+<p><strong>2. Intel הם ההפתעה הגדולה.</strong> מי היה מאמין ש-Intel, שהרבה אנשים כבר מחקו מתחרות ה-AI, יהיו הפלטפורמה המשולבת הטובה ביותר? השילוב של CPU+GPU+NPU חזקים, יחד עם תיעוד מצוין ו-OpenVINO, הופך אותם לבחירה הטובה ביותר למי שרוצה פלטפורמה אחת שעושה הכל.</p>
+
+<p><strong>3. Jetson נשאר המלך של ביצועים גולמיים.</strong> למרות כל הבעיות עם התשתית, Jetson הוא עדיין הלוח היחיד שיכול להריץ כל מודל שתזרקו עליו. CUDA הוא יתרון שאי אפשר לערער עליו. אבל NVIDIA חייבים לשפר את חוויית המפתח.</p>
+
+<p><strong>4. Google Coral מת, ו-Hailo עדיין לא שם.</strong> שני השמות הכי מוכרים ב-Edge AI הם גם שני האכזבות הגדולות ביותר. Coral לא מתעדכן, ו-Hailo (לפחות Hailo-8) לא תומך ב-LLM. Hailo-10 מבטיח, אבל טרם נבדק.</p>
+
+<p><strong>5. תמיכת קהילה חשובה לא פחות ממפרט חומרה.</strong> Huawei עם חומרה מצוינת אבל חצי העולם לא יכול לקנות אותם. Sophon עם תמיכת מודלים מדהימה אבל קוד גרוע. SpacemiT עם גישה חדשנית אבל ביצועים איטיים. שוב ושוב, אנחנו רואים שהמפרט הטכני לבד לא מספיק. מה שקובע זה השילוב בין חומרה, תוכנה, תיעוד, קהילה, ונגישות.</p>
+</div>
+
+<h2>ניתוח מעמיק: מה הופך NPU לטוב להרצת LLM?</h2>
+
+<p>כדי להבין למה יש פער כל כך גדול בין הלוחות, חשוב להבין מה בעצם דרוש מ-NPU כדי להריץ LLM ו-VLM ביעילות.</p>
+
+<p><strong>זיכרון (Memory Bandwidth):</strong> LLM הם בעיקר "memory bound" ולא "compute bound". כלומר, צוואר הבקבוק הוא לא כמה חישובים ה-NPU יכול לעשות בשנייה, אלא כמה מהר הוא יכול להעביר נתונים מהזיכרון למעבד. לכן, TOPS (Tera Operations Per Second) לא מספרים את כל הסיפור. NPU עם 100 TOPS אבל bandwidth נמוך יהיה איטי יותר מ-NPU עם 20 TOPS ו-bandwidth גבוה.</p>
+
+<p><strong>תמיכה ב-Transformer Architecture:</strong> מודלי שפה מבוססי Transformer משתמשים ב-Attention mechanisms שדורשים פעולות ספציפיות (כמו Softmax, Layer Normalization, ו-Multi-Head Attention). NPU שלא תוכנן לתמוך בפעולות האלה ביעילות פשוט לא יוכל להריץ LLM, גם אם יש לו את כוח החישוב הנדרש.</p>
+
+<p><strong>גמישות הקוונטיזציה:</strong> על ה-Edge, כמעט תמיד מריצים מודלים ב-Quantization (INT8, INT4, ולפעמים אפילו INT2). NPU שתומך במגוון רחב של quantization options נותן לכם יותר גמישות לבחור בין מהירות ואיכות.</p>
+
+<p><strong>תמיכה בתוכנה (SDK ו-Framework):</strong> וזה אולי הדבר הכי חשוב. NPU מעולה ללא SDK טוב הוא כמו פרארי בלי מפתחות. הסיבה ש-Intel ו-Jetson נמצאים ב-S tier היא לא רק בגלל החומרה, אלא בגלל OpenVINO ו-CUDA/TensorRT שמאפשרים למפתחים באמת להשתמש ביכולות החומרה.</p>
+
+<h2>מבט לעתיד: מה צפוי ב-2027?</h2>
+
+<p>עולם ה-Edge AI נע מהר, וכמה מגמות ברורות:</p>
+
+<p><strong>RockChip דור הבא:</strong> אם RockChip ישיקו chip עם NPU חזק יותר (15+ TOPS) תוך שמירה על המחיר הנמוך והקוד הטוב, הם יכולים לקפוץ ישר ל-S tier. זה אחד השחקנים הכי מעניינים לעקוב אחריהם.</p>
+
+<p><strong>Hailo-10:</strong> אם Hailo-10 באמת יספק את מה שהוא מבטיח ויהיה נגיש למשתמשים רגילים, הוא יכול לשנות את כל הדירוג. Hailo תמיד היו מצוינים בביצועי NPU, וייתכן שהדור הבא יסגור את הפער ב-LLM.</p>
+
+<p><strong>Qualcomm:</strong> אם ה-AIRbox Q900 יתברר כמוצלח כמו שהתיעוד מרמז, Qualcomm יכולים להיכנס ישר ל-A או S tier. יש להם את הניסיון מעולם המובייל, ואם הם יתרגמו את זה ל-Edge AI, זה יהיה משמעותי.</p>
+
+<p><strong>RISC-V:</strong> SpacemiT הוכיחו שגישת RISC-V אפשרית. אם הדור הבא של מעבדי RISC-V ישפר ביצועים פי 3-5 (מה שסביר בקצב הפיתוח הנוכחי), זה יכול להיות מהפכה של ממש. מעבדים פתוחים, זולים, יעילים אנרגטית, שמריצים LLM, זה חלום של כל מהנדס Edge.</p>
+
+<p><strong>Apple:</strong> השחקן הגדול שנעדר מהרשימה. Apple לא ממש משחקים בשוק ה-Edge AI boards, אבל ה-Neural Engine שלהם הוא אחד ה-NPU החזקים בעולם. אם Apple יחליטו לפתוח את הפלטפורמה שלהם למפתחי Edge, זה ישנה את המשחק לחלוטין.</p>
+
+<h2>סיכום: איזה לוח לבחור?</h2>
+
+<p>אחרי כל הניתוח, הנה השורה התחתונה:</p>
+
+<ul>
+<li><strong>רוצים את הביצועים הכי טובים ולא אכפת לכם מהתקציב?</strong> NVIDIA Jetson. אין תחליף.</li>
+<li><strong>רוצים פלטפורמה משולבת שעושה הכל סביר?</strong> Intel Core Ultra. ההפתעה הנעימה של 2026.</li>
+<li><strong>בתקציב מוגבל?</strong> RockChip RK3588. הערך הכי טוב למחיר.</li>
+<li><strong>צריכים ביצועי NPU על לפטופ?</strong> AMD Ryzen AI. טוב מאוד, לא מושלם.</li>
+<li><strong>בסין ורוצים אלטרנטיבה?</strong> Huawei Ascend. חומרה מצוינת, זמינות מוגבלת.</li>
+<li><strong>מחפשים הרפתקה עם טכנולוגיה חדשה?</strong> SpacemiT (RISC-V). איטי אבל מרתק.</li>
+<li><strong>רוצים כמה שיותר מודלים?</strong> Sophon. רק תהיו מוכנים לסבול.</li>
+</ul>
+
+<p>ומה <strong>לא</strong> לקנות? Google Coral (מת), MediaTek Edge boards (חוויה נוראית), VeriSilicon/Horizon/MemryX/ARM Ethos (פשוט לא תומכים ב-LLM).</p>
+
+<p>עולם ה-Edge AI ב-2026 הוא מרתק, מבולגן, ומלא הזדמנויות. אין פתרון מושלם, אבל יש פתרון נכון לכל שימוש. המפתח הוא להבין את הצרכים שלכם, את התקציב, ואת רמת הסבלנות שלכם עם SDK-ים בעייתיים, ולבחור בהתאם.</p>
+
+<p>ולסיום, טיפ אחרון: תמיד, <strong>תמיד</strong>, תבדקו את התיעוד לפני שאתם קונים לוח. חומרה חזקה עם תיעוד גרוע שווה פחות מחומרה בינונית עם תיעוד מעולה. שאלו בפורומים, חפשו סרטונים, קראו reviews. ב-Edge AI, הקהילה היא המשאב הכי חשוב שלכם.</p>
+
+<div class="footer-source">
+    <p>📌 מקור: <a href="https://medium.com/@zlodeibaal/the-ultimate-tier-list-for-edge-ai-boards-running-llms-and-vlms-in-2026-da06573efcd5" target="_blank">The Ultimate Tier List for Edge AI Boards: Running LLMs and VLMs in 2026</a> מאת Anton Maltsev</p>
+    <p>ערוץ היוטיוב של Anton: <a href="https://www.youtube.com/@AntonMaltsev/videos" target="_blank">AntonMaltsev</a> | <a href="https://www.linkedin.com/in/maltsevanton/" target="_blank">LinkedIn</a> | <a href="https://x.com/Serious_WK" target="_blank">Twitter/X</a></p>
+</div>
+
+</div>
+</body>
+</html>
