@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>פרופיילינג של משתמשי Hacker News על סמך התגובות שלהם</title>
+<meta property="og:title" content="פרופיילינג של משתמשי Hacker News על סמך התגובות שלהם">
+<meta property="og:description" content="סיימון וויליסון מתאר ניסוי 'דיסטופי קלות': שימוש במודלי שפה גדולים ליצירת פרופילים של משתמשי Hacker News על סמך 1,000 התגובות האחרונות שלהם.">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="פרופיילינג של משתמשי Hacker News על סמך התגובות שלהם">
+<meta name="twitter:description" content="סיימון וויליסון מתאר ניסוי 'דיסטופי קלות': שימוש במודלי שפה גדולים ליצירת פרופילים של משתמשי Hacker News על סמך 1,000 התגובות האחרונות שלהם.">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-size: 18px;
+  line-height: 1.8;
+  color: #1a1a1a;
+  background: #ffffff;
+  padding: 20px;
+}
+.container { max-width: 900px; margin: 0 auto; padding: 20px 0; }
+h1 { font-size: 32px; font-weight: 600; margin-bottom: 10px; line-height: 1.3; }
+h2 { font-size: 24px; font-weight: 600; margin: 40px 0 16px; color: #1a1a1a; border-bottom: 2px solid #e0e0e0; padding-bottom: 8px; }
+h3 { font-size: 20px; font-weight: 600; margin: 28px 0 12px; }
+.subtitle { font-size: 20px; color: #555; margin-bottom: 24px; }
+.meta { font-size: 15px; color: #777; margin-bottom: 30px; }
+p { margin-bottom: 18px; }
+.source-box {
+  background: #f7f7f7;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 18px 22px;
+  margin-bottom: 36px;
+}
+.source-box a { color: #0066cc; text-decoration: none; }
+.source-box a:hover { text-decoration: underline; }
+blockquote {
+  border-right: 4px solid #0066cc;
+  padding: 12px 20px;
+  margin: 20px 0;
+  background: #f9f9f9;
+  font-style: italic;
+  color: #333;
+}
+ul, ol { margin: 12px 20px 18px; }
+li { margin-bottom: 8px; }
+code {
+  background: #f0f0f0;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.9em;
+  direction: ltr;
+  unicode-bidi: embed;
+}
+.profile-box {
+  background: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 24px;
+  margin: 24px 0;
+}
+.profile-box h3 { margin-top: 0; }
+.chart-container {
+  margin: 30px 0;
+  text-align: center;
+}
+.chart-container svg {
+  max-width: 100%;
+  height: auto;
+}
+.footer-source {
+  margin-top: 50px;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+  font-size: 15px;
+  color: #777;
+}
+.footer-source a { color: #0066cc; }
+@media (max-width: 600px) {
+  body { font-size: 16px; padding: 12px; }
+  h1 { font-size: 26px; }
+  h2 { font-size: 21px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>פרופיילינג של משתמשי Hacker News על סמך התגובות שלהם</h1>
+<p class="subtitle">כשמודלי שפה גדולים הופכים תגובות ציבוריות לתמונת אישיות מפורטת להפליא</p>
+<p class="meta">מאמר מקורי: סיימון וויליסון | 21 במרץ 2026 | תרגום לעברית</p>
+
+<div class="source-box">
+📄 מאמר מקורי באנגלית: <a href="https://simonwillison.net/2026/Mar/21/profiling-hacker-news-users/" target="_blank" rel="noopener">Profiling Hacker News users based on their comments</a> מאת סיימון וויליסון (Simon Willison)
+</div>
+
+<p>סיימון וויליסון, מפתח עצמאי ידוע, יוצר שותף של Django ויוצר Datasette, פרסם לאחרונה ניסוי שהוא עצמו מתאר כ"דיסטופי קלות". הניסוי פשוט בתכלית מבחינה טכנית, אבל התוצאות שלו מטרידות עמוקות: שימוש במודלי שפה גדולים (LLMs) כדי ליצור פרופילים מפורטים של משתמשי Hacker News, אך ורק על סמך 1,000 התגובות האחרונות שלהם באתר.</p>
+
+<p>מה שהופך את הניסוי הזה למשמעותי במיוחד הוא לא רק האפקטיביות המפתיעה שלו, אלא הנגישות המוחלטת שלו. כל אחד יכול לעשות את זה, עכשיו, בחינם כמעט. אין צורך בכלי פריצה מתוחכמים, אין צורך בגישה לבסיסי נתונים סודיים. הכל מבוסס על מידע ציבורי לחלוטין, ממשק API פתוח, ומודל שפה שזמין לכולם.</p>
+
+<p>במאמר הזה נצלול לעומק הניסוי של וויליסון: איך הוא עובד, מה הוא חושף, ומה המשמעויות הרחבות יותר שלו לפרטיות שלנו בעידן שבו הסקת מסקנות (inference) הפכה לזולה כמעט עד לאפס.</p>
+
+<h2>איך זה עובד: הצינור הטכני</h2>
+
+<p>הפרופיילינג שוויליסון מתאר בנוי מצעדים פשוטים להפליא. אין כאן ארכיטקטורה מורכבת, אין pipeline של עשרות שירותים. הכל מתרחש בשלושה שלבים בסיסיים:</p>
+
+<h3>שלב 1: שליפת התגובות דרך Algolia API</h3>
+
+<p>Hacker News משתמש ב-Algolia כמנוע החיפוש שלו, ו-Algolia חושפת API פתוח לחלוטין עם כותרות CORS פתוחות. המשמעות: כל דף אינטרנט, מכל דומיין, יכול לגשת לנתונים האלה ישירות מהדפדפן. לא צריך שרת proxy, לא צריך אימות, לא צריך מפתח API.</p>
+
+<p>פורמט ה-URL פשוט:</p>
+
+<p><code>hn.algolia.com/api/v1/search_by_date?tags=comment,author_{username}&hitsPerPage=1000</code></p>
+
+<p>פשוט מחליפים את <code>{username}</code> בשם המשתמש הרצוי, ומקבלים בחזרה JSON עם עד 1,000 התגובות האחרונות של אותו משתמש. התגובות כוללות את הטקסט המלא, תאריך, הקשר הדיון, וקישור לתגובה המקורית.</p>
+
+<h3>שלב 2: כלי עזר לאיסוף וארגון</h3>
+
+<p>וויליסון בנה כלי פשוט (ליתר דיוק, ביקש מ-ChatGPT לבנות אותו) שנמצא בכתובת <code>tools.simonwillison.net/hn-comments-for-user</code>. הכלי עושה דבר אחד: מושך את התגובות מה-API, מארגן אותן בפורמט נוח, ומציג כפתור "העתק ללוח" (copy to clipboard) שידידותי למובייל. את הכפתור הוא שיפר בעזרת Claude כדי שיעבוד היטב גם במכשירים ניידים.</p>
+
+<p>זה הכל. לא מערכת ענן, לא בסיס נתונים. דף HTML בודד שמתקשר עם API ומעתיק טקסט ללוח.</p>
+
+<h3>שלב 3: הזנה למודל שפה</h3>
+
+<p>השלב האחרון הוא הפשוט ביותר: להדביק את כל התגובות לתוך Claude Opus 4.6, עם הפרומפט הפשוט "profile this user" (צור פרופיל למשתמש הזה). המודל מנתח את אלפי התגובות ומייצר פרופיל מפורט ומקיף של המשתמש.</p>
+
+<p>וויליסון מדגיש שהוא מריץ את הניתוח במצב אינקוגניטו (incognito) של Claude. הסיבה? הוא רוצה למנוע מהמודל לזהות את עצמו באופן מחנף (sycophantic self-identification). אם Claude יודע שהוא מדבר עם סיימון וויליסון, הוא עלול להחמיא יתר על המידה או להטות את הניתוח. מצב אינקוגניטו מבטיח שהמודל מתייחס לתגובות כאל נתונים אנונימיים.</p>
+
+<div class="chart-container">
+<svg viewBox="0 0 800 280" xmlns="http://www.w3.org/2000/svg" style="direction:ltr">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#0066cc"/></marker>
+  </defs>
+  <text x="400" y="30" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="18" font-weight="600" fill="#1a1a1a">צינור הפרופיילינג: משלב איסוף הנתונים ועד לפרופיל המוגמר</text>
+  <rect x="20" y="60" width="170" height="90" rx="10" fill="#e3f2fd" stroke="#1976d2" stroke-width="2"/>
+  <text x="105" y="95" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="14" font-weight="600" fill="#1a1a1a">Algolia API</text>
+  <text x="105" y="115" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#555">1,000 תגובות אחרונות</text>
+  <text x="105" y="135" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#555">API פתוח, ללא אימות</text>
+  <line x1="190" y1="105" x2="240" y2="105" stroke="#0066cc" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <rect x="245" y="60" width="170" height="90" rx="10" fill="#e8f5e9" stroke="#388e3c" stroke-width="2"/>
+  <text x="330" y="95" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="14" font-weight="600" fill="#1a1a1a">כלי איסוף</text>
+  <text x="330" y="115" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#555">ארגון ופורמט</text>
+  <text x="330" y="135" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#555">העתקה ללוח</text>
+  <line x1="415" y1="105" x2="465" y2="105" stroke="#0066cc" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <rect x="470" y="60" width="170" height="90" rx="10" fill="#fff3e0" stroke="#f57c00" stroke-width="2"/>
+  <text x="555" y="95" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="14" font-weight="600" fill="#1a1a1a">Claude Opus 4.6</text>
+  <text x="555" y="115" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#555">"profile this user"</text>
+  <text x="555" y="135" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#555">מצב אינקוגניטו</text>
+  <line x1="640" y1="105" x2="690" y2="105" stroke="#0066cc" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <rect x="695" y="60" width="90" height="90" rx="10" fill="#fce4ec" stroke="#c62828" stroke-width="2"/>
+  <text x="740" y="100" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="14" font-weight="600" fill="#1a1a1a">פרופיל</text>
+  <text x="740" y="120" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#555">מפורט</text>
+  <text x="105" y="175" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#999">נתונים ציבוריים</text>
+  <text x="330" y="175" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#999">דף HTML בודד</text>
+  <text x="555" y="175" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#999">ניתוח AI</text>
+  <text x="740" y="175" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#999">תוצאה</text>
+  <rect x="200" y="210" width="400" height="50" rx="8" fill="#f5f5f5" stroke="#ccc" stroke-width="1"/>
+  <text x="400" y="242" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="14" fill="#555">⏱️ זמן כולל: פחות מ-5 דקות למשתמש בודד</text>
+</svg>
+</div>
+
+<h2>הפרופיל של וויליסון עצמו: מבט מבפנים</h2>
+
+<p>כדי להדגים את האפקטיביות של השיטה, וויליסון הריץ את הכלי על עצמו. התוצאות היו, לדבריו, "מפתיעות ברמת הדיוק שלהן". Claude Opus 4.6 הצליח לחלץ מהתגובות הציבוריות שלו תמונה מקיפה ומדויקת להפליא של זהותו המקצועית, אישיותו, שגרת העבודה שלו, ואפילו תחביביו האישיים.</p>
+
+<p>הנה הפרופיל המלא שנוצר, מתורגם לעברית:</p>
+
+<div class="profile-box">
+<h3>🔍 פרופיל משתמש: simonw</h3>
+
+<h3>זהות מקצועית</h3>
+<p>מפתח עצמאי (independent developer), שותף-יוצר של פריימוורק Django, יוצר Datasette (כלי קוד פתוח לחקירת נתונים ופרסומם), וחבר מועצת המנהלים של Python Software Foundation (PSF). וויליסון הוא דמות מוכרת ומשפיעה בקהילת הקוד הפתוח ובעולם ה-AI, עם נוכחות בולטת ב-Hacker News ובבלוג האישי שלו.</p>
+
+<h3>התזה המרכזית: "הנדסה סוכנית" (Agentic Engineering)</h3>
+<p>וויליסון מקדם באופן עקבי את הרעיון שמודלי שפה גדולים (LLMs) לא מחליפים מתכנתים, אלא מגבירים את המומחיות הקיימת שלהם. הוא מכנה את הגישה הזו "agentic engineering". לפי תפיסתו, מפתח מנוסה שמשתמש ב-LLM יפיק ממנו הרבה יותר ממפתח מתחיל, כי הוא יודע לשאול את השאלות הנכונות, לזהות טעויות, ולכוון את המודל לכיוון הנכון. זו לא אוטומציה שמייתרת אנשים, אלא כלי שמעצים אותם.</p>
+
+<h3>סגנון עבודה</h3>
+<ul>
+<li><strong>תכנות מהאייפון:</strong> וויליסון מתכנת באמצעות Claude Code ישירות מהאייפון שלו. הוא רוכב על רכבת BART או מטייל עם הכלב שלו בזמן שהוא כותב קוד, מבצע ביקורות קוד, ומריץ סוכני AI.</li>
+<li><strong>"מצב YOLO":</strong> הוא עובד במה שהוא מכנה "YOLO mode", שפירושו אישור אוטומטי של פעולות סוכנים. במקום לאשר כל פעולה ידנית, הוא נותן לסוכן חופש פעולה ובודק את התוצאות בסוף.</li>
+<li><strong>סשנים מקבילים:</strong> הוא מריץ 2-3 סשנים של סוכני AI במקביל, כל אחד עובד על משימה שונה.</li>
+<li><strong>בדיקות קודם כל:</strong> כל סשן עבודה מתחיל עם הפקודה <code>run uv run pytest</code>. הבדיקות הן הבסיס לכל דבר.</li>
+<li><strong>מנוי Claude Max:</strong> משלם 200 דולר לחודש על תוכנית Claude Max, שנותנת לו גישה בלתי מוגבלת למודלים המתקדמים ביותר.</li>
+</ul>
+
+<h3>מודעות אבטחה</h3>
+<p>וויליסון הוא אחד הקולות הבולטים ביותר בתעשייה בנושא אבטחת AI. הוא טבע את המונח "prompt injection" (הזרקת פרומפט) ואת מה שהוא מכנה "השלישייה הקטלנית" (lethal trifecta): השילוב המסוכן של נתונים פרטיים, קלט לא מהימן, ויכולת לבצע פעולות. כשלושת האלמנטים האלה קיימים ביחד במערכת AI, יש פוטנציאל ממשי לנזק חמור.</p>
+<p>הוא חוזר על החיזוי שלו שמתקפת prompt injection שתגיע לכותרות ראשיות תתרחש "בששת החודשים הקרובים" כבר יותר משנתיים. לדבריו, זה לא שהחיזוי שגוי, אלא שהתעשייה מקבלת יותר זמן ממה שהוא ציפה.</p>
+
+<h3>אישיות</h3>
+<ul>
+<li><strong>אנרגטי:</strong> סגנון כתיבה נמרץ, מלא התלהבות לטכנולוגיה.</li>
+<li><strong>לוחמני כשמאתגרים אותו:</strong> מגיב בנחישות כשמישהו מפקפק בטענות שלו, עם ציטוטים ומקורות לגיבוי.</li>
+<li><strong>שקוף לגבי הטיות:</strong> מנהל דף גילויים ציבורי (public disclosures page) שבו הוא מפרט את כל הקשרים הפיננסיים והמקצועיים שלו שעלולים להשפיע על דעותיו.</li>
+</ul>
+
+<h3>נושאים חוזרים בתגובות</h3>
+<ul>
+<li><strong>"שני דברים יכולים להיות נכונים בו-זמנית"</strong> (Two things can be true at the same time) - ביטוי שחוזר שוב ושוב, משקף גישה ניואנסית לויכוחים טכנולוגיים.</li>
+<li><strong>מבחנים לפרודוקטיביות:</strong> מאמין שהדרך לבדוק אם AI באמת עוזר היא למדוד תפוקה בפועל, לא להסתמך על תחושות.</li>
+<li><strong>שחרורי המודלים של נובמבר 2025:</strong> מתייחס לתקופה הזו כנקודת מפנה (inflection point) ביכולות של מודלי שפה.</li>
+<li><strong>"חוב קוגניטיבי":</strong> מונח שהוא משתמש בו לתיאור הבעיה שנוצרת כשסוכני AI כותבים קוד שהמפתח לא באמת מבין. הוא רואה בזה בעיה פתוחה שעדיין לא נפתרה.</li>
+</ul>
+
+<h3>חיים אישיים</h3>
+<ul>
+<li><strong>מוזיאונים נישתיים:</strong> מנהל את האתר <code>niche-museums.com</code>, אוסף של מוזיאונים קטנים ומיוחדים.</li>
+<li><strong>תוכי קאקאפו:</strong> חובב של תוכי הקאקאפו מניו זילנד, מין עוף נדיר שלא מעופף.</li>
+<li><strong>תרנגולות בגינה:</strong> מגדל תרנגולות בגינת הבית שלו.</li>
+<li><strong>Half Moon Bay, קליפורניה:</strong> גר ליד מושב של שקנאים (pelicans).</li>
+<li><strong>מבחן ה-SVG של שקנאי על אופניים:</strong> משתמש בציור SVG של שקנאי רוכב על אופניים כ-benchmark לבדיקת יכולות של מודלי AI - פרט אקסצנטרי שמאפיין את הגישה המשעשעת שלו לטכנולוגיה.</li>
+</ul>
+</div>
+
+<p>הפרופיל הזה נוצר אך ורק מתגובות ציבוריות ב-Hacker News. לא מפוסטים בבלוג, לא מפרופיל LinkedIn, לא מראיונות. רק תגובות. והתוצאה היא תמונה מפורטת שמכילה פרטים על שגרת היום שלו, המכשירים שהוא משתמש בהם, הסכום שהוא משלם על שירותים, דעותיו על אבטחת מידע, ואפילו את החיות שהוא מגדל בבית.</p>
+
+<h2>מקורות הנתונים: מה זמין לכולם</h2>
+
+<p>אחד ההיבטים המטרידים ביותר של הניסוי הזה הוא שהנתונים פתוחים לחלוטין. לא מדובר בפריצה, לא ב-scraping לא חוקי, לא בגישה למידע מוגן. ה-API של Algolia עבור Hacker News הוא ציבורי, מתועד, ומיועד לשימוש.</p>
+
+<div class="chart-container">
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+  <text x="400" y="30" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="18" font-weight="600" fill="#1a1a1a">מקורות נתונים ציבוריים הזמינים לפרופיילינג</text>
+  <circle cx="400" cy="210" r="60" fill="#0066cc" opacity="0.15" stroke="#0066cc" stroke-width="2"/>
+  <text x="400" y="205" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="14" font-weight="600" fill="#0066cc">פרופיל</text>
+  <text x="400" y="225" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="14" font-weight="600" fill="#0066cc">משתמש</text>
+  <circle cx="180" cy="120" r="50" fill="#e3f2fd" stroke="#1976d2" stroke-width="2"/>
+  <text x="180" y="115" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" font-weight="600" fill="#1a1a1a">תגובות</text>
+  <text x="180" y="133" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">HN</text>
+  <line x1="225" y1="145" x2="345" y2="190" stroke="#1976d2" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <circle cx="620" cy="120" r="50" fill="#fff3e0" stroke="#f57c00" stroke-width="2"/>
+  <text x="620" y="118" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" font-weight="600" fill="#1a1a1a">Reddit</text>
+  <text x="620" y="136" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#555">API ציבורי</text>
+  <line x1="575" y1="145" x2="455" y2="190" stroke="#f57c00" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <circle cx="180" cy="300" r="50" fill="#e8f5e9" stroke="#388e3c" stroke-width="2"/>
+  <text x="180" y="298" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" font-weight="600" fill="#1a1a1a">Twitter/X</text>
+  <text x="180" y="316" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#555">פוסטים ציבוריים</text>
+  <line x1="225" y1="278" x2="345" y2="235" stroke="#388e3c" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <circle cx="620" cy="300" r="50" fill="#fce4ec" stroke="#c62828" stroke-width="2"/>
+  <text x="620" y="298" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" font-weight="600" fill="#1a1a1a">GitHub</text>
+  <text x="620" y="316" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#555">קוד, issues, PRs</text>
+  <line x1="575" y1="278" x2="455" y2="235" stroke="#c62828" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <circle cx="400" cy="370" r="45" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="2"/>
+  <text x="400" y="368" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" font-weight="600" fill="#1a1a1a">בלוגים</text>
+  <text x="400" y="386" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#555">פוסטים אישיים</text>
+  <line x1="400" y1="325" x2="400" y2="270" stroke="#7b1fa2" stroke-width="1.5" stroke-dasharray="5,3"/>
+</svg>
+</div>
+
+<p>Hacker News הוא רק קצה הקרחון. אותה שיטה בדיוק יכולה לפעול על כל פלטפורמה שבה אנשים משאירים תגובות ציבוריות: Reddit, Twitter/X, פורומים, GitHub issues, ואפילו ביקורות ב-Amazon או Google Maps. כל נקודת נתונים ציבורית הופכת לחתיכה נוספת בפאזל.</p>
+
+<p>מה שמודלי שפה גדולים עושים כאן הוא לא רק לקרוא את מה שכתבתם. הם מסיקים מסקנות ממה שכתבתם. הם מזהים דפוסים, קשרים, ניואנסים. אם הזכרתם את BART פעם אחת ואת Half Moon Bay פעם אחרת, המודל יחבר את הנקודות וידע איפה אתם גרים. אם דיברתם על תוכנית מנוי יקרה, הוא ידע מה המצב הכלכלי שלכם. אם אתם תמיד אגרסיביים בתגובות על נושא מסוים, הוא ידע מה מרגיז אתכם.</p>
+
+<h2>למה זה מפחיד: השלכות הפרטיות</h2>
+
+<p>וויליסון עצמו לא מתחמק מהמשמעויות של מה שהוא בנה. הוא כותב:</p>
+
+<blockquote>"זה יעיל באופן מדהים. קצת מפחיד שאפשר להפיק כל כך הרבה מידע על מישהו בקלות כזו."</blockquote>
+
+<p>בואו נפרק את זה:</p>
+
+<h3>הבעיה של הצטברות (Aggregation Problem)</h3>
+
+<p>כל תגובה בודדת ב-Hacker News היא חסרת משמעות מבחינת פרטיות. אם כתבתם "אני אוהב תוכי קאקאפו" - אז מה? אבל כש-1,000 תגובות כאלה מצטברות, הן יוצרות תמונה מלאה. זה מה שנקרא "בעיית ההצטברות": כל פיסת מידע לבדה היא תמימה, אבל ביחד הן חושפניות.</p>
+
+<h3>חוסר סימטריה במידע</h3>
+
+<p>האדם שכתב את התגובות האלה לא ידע שהוא "נפרופל". הוא כתב תגובה על Django, ותגובה על תוכניות מנוי, ותגובה על הכלב שלו, לאורך חודשים ושנים, בהקשרים שונים לחלוטין. הוא מעולם לא ישב ואמר "הנה, זו תמונה מלאה של החיים שלי". אבל מודל השפה עשה בדיוק את זה, ובשניות.</p>
+
+<h3>הסקת מסקנות זולה (Cheap Inference)</h3>
+
+<p>זה לא חדש שאפשר ללמוד על אנשים מהנתונים שלהם. מה שחדש הוא העלות. וויליסון מציין שעם GPT-5.4 mini או nano, אפשר לפרופל 76,000 משתמשים ב-52 דולר בלבד. חמישים ושניים דולר. עבור פרופילים מפורטים של שבעים ושישה אלף בני אדם.</p>
+
+<p>המשמעות: כל ארגון, כל חוקר, כל stalker עם כרטיס אשראי יכול לבנות בסיס נתונים ענק של פרופילים אישיים מנתונים ציבוריים. זו לא יכולת שמורה למדינות או לחברות ענק. זה כלי שכל אחד יכול להפעיל.</p>
+
+<div class="chart-container">
+<svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg">
+  <text x="400" y="30" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="18" font-weight="600" fill="#1a1a1a">ספקטרום השלכות הפרטיות</text>
+  <defs>
+    <linearGradient id="privGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4caf50"/>
+      <stop offset="50%" style="stop-color:#ff9800"/>
+      <stop offset="100%" style="stop-color:#f44336"/>
+    </linearGradient>
+  </defs>
+  <rect x="80" y="60" width="640" height="30" rx="15" fill="url(#privGrad)"/>
+  <text x="80" y="110" font-family="Noto Sans Hebrew" font-size="13" fill="#4caf50" font-weight="600">סיכון נמוך</text>
+  <text x="400" y="110" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="13" fill="#ff9800" font-weight="600">סיכון בינוני</text>
+  <text x="720" y="110" text-anchor="end" font-family="Noto Sans Hebrew" font-size="13" fill="#f44336" font-weight="600">סיכון גבוה</text>
+  <line x1="130" y1="90" x2="130" y2="140" stroke="#4caf50" stroke-width="2"/>
+  <text x="130" y="158" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">תגובה בודדת</text>
+  <text x="130" y="175" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#777">חסרת הקשר</text>
+  <line x1="280" y1="90" x2="280" y2="140" stroke="#8bc34a" stroke-width="2"/>
+  <text x="280" y="158" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">עשרות תגובות</text>
+  <text x="280" y="175" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#777">נושאי עניין כלליים</text>
+  <line x1="430" y1="90" x2="430" y2="140" stroke="#ff9800" stroke-width="2"/>
+  <text x="430" y="158" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">מאות תגובות</text>
+  <text x="430" y="175" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#777">דפוסי אישיות</text>
+  <line x1="570" y1="90" x2="570" y2="140" stroke="#ff5722" stroke-width="2"/>
+  <text x="570" y="158" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">1,000 תגובות</text>
+  <text x="570" y="175" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#777">פרופיל מקיף</text>
+  <line x1="680" y1="90" x2="680" y2="140" stroke="#f44336" stroke-width="2"/>
+  <text x="680" y="158" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">76K פרופילים</text>
+  <text x="680" y="175" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#777">מעקב המוני</text>
+  <rect x="80" y="200" width="640" height="100" rx="8" fill="#f9f9f9" stroke="#e0e0e0"/>
+  <text x="400" y="225" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="14" font-weight="600" fill="#1a1a1a">מה נחשף בכל רמה:</text>
+  <text x="130" y="255" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#555">דעה על</text>
+  <text x="130" y="270" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#555">נושא בודד</text>
+  <text x="280" y="255" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#555">תחומי עניין,</text>
+  <text x="280" y="270" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#555">רמת מומחיות</text>
+  <text x="430" y="255" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#555">אישיות, ערכים,</text>
+  <text x="430" y="270" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#555">מיקום משוער</text>
+  <text x="570" y="255" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#555">זהות מלאה,</text>
+  <text x="570" y="270" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#555">שגרה, קשרים</text>
+  <text x="680" y="255" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#555">מאגר מעקב</text>
+  <text x="680" y="270" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#555">בקנה מידה</text>
+</svg>
+</div>
+
+<h2>השימוש המעשי: לבדוק חוסר תום לב</h2>
+
+<p>וויליסון מספר שהשימוש העיקרי שלו בכלי הזה הוא למעשה הגנתי: לפני שהוא נכנס לוויכוח ב-Hacker News, הוא מריץ פרופיל מהיר של הצד השני כדי לבדוק אם אותו אדם מנהל דיון בתום לב או שהוא טרול שמחפש התנצחות.</p>
+
+<p>זה שימוש לגיטימי ואפילו סביר. כולנו בזבזנו זמן על ויכוחים עם אנשים שלא היתה להם שום כוונה להקשיב. אבל השאלה היא: אם וויליסון עושה את זה כדי להגן על הזמן שלו, מה עושים אחרים עם אותו כלי בדיוק?</p>
+
+<p>חברות גיוס יכולות לפרופל מועמדים. מעסיקים יכולים לבדוק עובדים. מפרסמים יכולים לבנות פרופילים פסיכוגרפיים. ממשלות יכולות לעקוב אחרי אזרחים. כל זה ללא ידיעת האנשים עצמם, וללא שום הפרה של תנאי שימוש.</p>
+
+<h2>העלות: פרופיילינג המוני ב-52 דולר</h2>
+
+<p>אולי הנתון המפחיד ביותר במאמר הוא נתון העלות. וויליסון מציין ש-GPT-5.4 mini/nano מאפשר לפרופל בקנה מידה עצום בעלויות זניחות.</p>
+
+<div class="chart-container">
+<svg viewBox="0 0 800 350" xmlns="http://www.w3.org/2000/svg">
+  <text x="400" y="30" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="18" font-weight="600" fill="#1a1a1a">עלות פרופיילינג המוני: GPT-5.4 mini/nano</text>
+  <line x1="120" y1="280" x2="720" y2="280" stroke="#ccc" stroke-width="1"/>
+  <line x1="120" y1="60" x2="120" y2="280" stroke="#ccc" stroke-width="1"/>
+  <text x="40" y="170" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="13" fill="#555" transform="rotate(-90,40,170)">עלות בדולרים ($)</text>
+  <text x="220" y="305" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">1,000</text>
+  <text x="370" y="305" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">10,000</text>
+  <text x="520" y="305" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">76,000</text>
+  <text x="670" y="305" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">500,000</text>
+  <text x="420" y="335" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="13" fill="#555">מספר פרופילים</text>
+  <text x="110" y="280" text-anchor="end" font-family="Noto Sans Hebrew" font-size="11" fill="#999">$0</text>
+  <text x="110" y="225" text-anchor="end" font-family="Noto Sans Hebrew" font-size="11" fill="#999">$100</text>
+  <text x="110" y="170" text-anchor="end" font-family="Noto Sans Hebrew" font-size="11" fill="#999">$200</text>
+  <text x="110" y="115" text-anchor="end" font-family="Noto Sans Hebrew" font-size="11" fill="#999">$300</text>
+  <text x="110" y="70" text-anchor="end" font-family="Noto Sans Hebrew" font-size="11" fill="#999">$400</text>
+  <line x1="120" y1="225" x2="720" y2="225" stroke="#eee" stroke-width="1"/>
+  <line x1="120" y1="170" x2="720" y2="170" stroke="#eee" stroke-width="1"/>
+  <line x1="120" y1="115" x2="720" y2="115" stroke="#eee" stroke-width="1"/>
+  <rect x="195" y="276" width="50" height="4" rx="2" fill="#4caf50"/>
+  <text x="220" y="272" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="10" fill="#4caf50">$0.7</text>
+  <rect x="345" y="272" width="50" height="8" rx="2" fill="#4caf50"/>
+  <text x="370" y="268" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="10" fill="#4caf50">$7</text>
+  <rect x="495" y="251" width="50" height="29" rx="2" fill="#4caf50"/>
+  <text x="520" y="247" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" font-weight="600" fill="#4caf50">$52</text>
+  <rect x="645" y="92" width="50" height="188" rx="2" fill="#4caf50"/>
+  <text x="670" y="87" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="10" fill="#4caf50">$342</text>
+  <rect x="420" y="215" width="200" height="45" rx="6" fill="#fff3cd" stroke="#ffc107" stroke-width="1"/>
+  <text x="520" y="235" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" font-weight="600" fill="#1a1a1a">76,000 פרופילים = 52$</text>
+  <text x="520" y="253" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#555">פחות ממנוי Netflix</text>
+</svg>
+</div>
+
+<p>בואו נשים את זה בפרספקטיבה: 52 דולר זה פחות ממנוי חודשי ל-Netflix. זה פחות מארוחה לשניים במסעדה בינונית. וזה קונה לכם פרופילים מפורטים של 76,000 בני אדם. פרופילים שכוללים את תחומי העניין שלהם, העמדות הפוליטיות שלהם, סגנון הטיעון שלהם, רמת המומחיות שלהם, ולפעמים אפילו מיקום גיאוגרפי ופרטים אישיים.</p>
+
+<p>בעלות הזו, ניתן לפרופל את כל המשתמשים הפעילים של Hacker News. כל קהילת Reddit בינונית. כל עובדי חברה שמשאירים תגובות ציבוריות. העלות כבר לא מהווה חסם. החסם היחיד שנותר הוא המוסרי.</p>
+
+<h2>ההקשר הרחב: פרטיות בעידן ההסקה הזולה</h2>
+
+<p>הניסוי של וויליסון הוא חלק ממגמה רחבה יותר שצוברת תאוצה: ההבנה שמודלי שפה גדולים שינו את כללי המשחק בכל הקשור לפרטיות. לא בגלל שהם יוצרים סוגים חדשים של נתונים, אלא בגלל שהם הופכים את ניתוח הנתונים הקיימים לזול, מהיר, ונגיש לכולם.</p>
+
+<p>בעבר, כדי ליצור פרופיל מפורט של אדם מתגובות ציבוריות, היה צריך אנליסט אנושי שיקרא את כל התגובות, יזהה דפוסים, ויכתוב סיכום. זה היה יקר, איטי, ולא סקלבילי. עכשיו, אפשר לעשות את אותו הדבר באופן אוטומטי, בשניות, ובעלות של חלקי סנט למשתמש.</p>
+
+<p>זה מעלה שאלות עמוקות:</p>
+
+<ul>
+<li><strong>הסכמה:</strong> כשכתבנו תגובות ב-Hacker News, האם הסכמנו לכך שמישהו יפרופל אותנו? מבחינה משפטית, כנראה שכן - המידע ציבורי. אבל מבחינה מוסרית? זו שאלה אחרת לגמרי.</li>
+<li><strong>זכות להישכח:</strong> גם אם נמחק את כל התגובות שלנו, מי אומר שמישהו לא כבר שמר עותק? ומי אומר שפרופיל שנוצר מהתגובות לא כבר נשמר במקום אחר?</li>
+<li><strong>אפקט מצנן:</strong> אם אנשים ידעו שכל תגובה שלהם תשמש לפרופיילינג, האם הם ימשיכו לכתוב בגלוי? או שנראה נסיגה לאנונימיות ולצנזורה עצמית?</li>
+<li><strong>שימוש לרעה:</strong> מה עוצר מישהו מלבנות שירות שמוכר פרופילים של משתמשים לכל דורש? מבחינה טכנית, כלום. מבחינה חוקית, זה תלוי במדינה. מבחינה מוסרית, זה ברור שלא בסדר.</li>
+</ul>
+
+<h2>הניואנס החשוב: "שני דברים יכולים להיות נכונים בו-זמנית"</h2>
+
+<p>בנאמנות לאחד הביטויים החוזרים של וויליסון עצמו, חשוב לראות את התמונה המלאה. שני דברים יכולים להיות נכונים בו-זמנית:</p>
+
+<p><strong>מצד אחד,</strong> הכלי הזה שימושי. הוא עוזר לזהות טרולים, להבין עם מי אתה מדבר, ולקבל הקשר על שיח ציבורי. וויליסון עצמו משתמש בו באופן אחראי, כדי לחסוך זמן ולהימנע מוויכוחים חסרי תועלת.</p>
+
+<p><strong>מצד שני,</strong> היכולת לפרופל אנשים בקנה מידה המוני בעלות אפסית היא מטרידה עמוקות. זה כלי שיכול לשרת מעקב, הטרדה, מניפולציה, ואפליה. והוא נגיש לכל אחד.</p>
+
+<p>וויליסון לא מתעלם מהמתח הזה. הוא מתעד את הניסוי בשקיפות מלאה, כולל ההיבטים המטרידים שלו. הוא לא מנסה למכור את זה כמשהו חיובי חד-משמעית. הוא אומר "זה קצת מפחיד", ונותן לנו, הקוראים, להחליט מה לעשות עם המידע הזה.</p>
+
+<h2>"חוב קוגניטיבי" ומודעות לגבולות</h2>
+
+<p>אחד הנושאים שעולים בפרופיל של וויליסון הוא המונח "חוב קוגניטיבי" (cognitive debt) שהוא טבע. זה מתייחס למצב שבו סוכני AI כותבים קוד שהמפתח לא באמת מבין. בניגוד ל"חוב טכני" (technical debt) שהוא בעיה של איכות קוד, חוב קוגניטיבי הוא בעיה של הבנה. אתה עובד עם קוד שרץ ועובד, אבל אתה לא באמת יודע למה.</p>
+
+<p>וויליסון רואה בזה בעיה פתוחה שעדיין לא נפתרה. וזה רלוונטי גם לפרופיילינג: המודלים שמייצרים את הפרופילים האלה עובדים כקופסה שחורה. הם מפיקים תוצאות מרשימות, אבל אנחנו לא תמיד יודעים אילו דפוסים הם זיהו, אילו הנחות הם עשו, ואיפה הם עלולים לטעות. פרופיל שנראה מדויק עלול לכלול הנחות שגויות שאנחנו לא מסוגלים לזהות.</p>
+
+<h2>המבחן של נובמבר 2025: נקודת המפנה</h2>
+
+<p>וויליסון מתייחס שוב ושוב לשחרורי המודלים של נובמבר 2025 כנקודת מפנה (inflection point). מבלי להיכנס לפרטים הטכניים המדויקים, מה שקרה בתקופה ההיא הוא שמודלי שפה קפצו קפיצה משמעותית ביכולות הסקה, הבנת הקשר, ומעקב אחרי הוראות מורכבות.</p>
+
+<p>היכולת לקחת 1,000 תגובות ולהפיק מהן פרופיל קוהרנטי ומדויק היא ישירות תוצאה של השיפורים האלה. לפני נובמבר 2025, מודלים היו מסוגלים לסכם טקסט, אבל לא בהכרח לזהות את הדפוסים העדינים שמגלים מיקום, אישיות, ורגישויות. אחרי? זה הפך לטריוויאלי.</p>
+
+<h2>"השלישייה הקטלנית" בהקשר של פרופיילינג</h2>
+
+<p>וויליסון טבע את המונח "השלישייה הקטלנית" (lethal trifecta) לתיאור הסיכון באבטחת AI: כשמערכת AI יש לה גישה לנתונים פרטיים, מקבלת קלט לא מהימן, ויכולה לבצע פעולות, יש פוטנציאל ממשי לנזק.</p>
+
+<p>בהקשר של פרופיילינג, אנחנו רואים וריאציה של השלישייה הזו:</p>
+
+<ol>
+<li><strong>נתונים ציבוריים בהיקף עצום</strong> - 1,000 תגובות לכל משתמש, עשרות מיליוני משתמשים</li>
+<li><strong>ניתוח AI זול ומהיר</strong> - עלות של פחות מסנט למשתמש</li>
+<li><strong>יכולת פעולה על סמך התוצאות</strong> - החלטות גיוס, פרסום ממוקד, מעקב</li>
+</ol>
+
+<p>כששלושת האלמנטים האלה מתקיימים יחד, נוצרת מערכת מעקב המונית שפועלת כמעט ללא מגבלות.</p>
+
+<h2>prompt injection ופרופיילינג: הקשר המפתיע</h2>
+
+<p>יש היבט נוסף שוויליסון לא מדבר עליו ישירות, אבל שעולה מהקונטקסט: אם מודלי שפה מפרפלים אנשים על סמך תגובות, מה מונע ממישהו לכתוב תגובות שנועדו במכוון להטעות את המודל?</p>
+
+<p>דמיינו מצב שבו אנשים מתחילים להוסיף "רעש" לתגובות שלהם, הצהרות שקריות שנועדו לזהם כל פרופיל שייווצר מהם. "אני גר ביפן," כשבפועל אתם גרים בישראל. "אני מתכנת COBOL," כשבפועל אתם מפתחי React. זו צורה של prompt injection הפוכה: במקום להזריק פקודות למודל, אתם מזריקים נתונים מטעים לתוך ה-corpus שהמודל מנתח.</p>
+
+<p>השאלה אם זו אסטרטגיה אפקטיבית נשארת פתוחה. מודלים מתקדמים עלולים לזהות חוסר עקביות ולסמן מידע כלא אמין. אבל זה מוסיף שכבה נוספת של מורכבות לדיון על פרטיות בעידן ה-AI.</p>
+
+<h2>השימוש האישי של וויליסון: פרגמטיזם מעל פרנויה</h2>
+
+<p>מה שבולט בגישה של וויליסון הוא הפרגמטיזם שלה. הוא לא קורא להחרמת AI, לא דורש חקיקה מיידית, ולא מפחיד אנשים. הוא פשוט מראה מה אפשרי, מסביר למה זה מטריד, ומשתמש בכלי בעצמו באופן שהוא רואה כאחראי.</p>
+
+<p>הגישה הזו, של "שני דברים יכולים להיות נכונים בו-זמנית", היא מרכזית לאופי שלו כפי שעולה מהפרופיל. הוא יכול להיות נלהב מטכנולוגיה ומודאג ממנה באותו הזמן. הוא יכול לבנות כלים ולהזהיר מפניהם. הוא יכול להשתמש ב-AI 200 דולר בחודש ולדבר על הסכנות שב-AI.</p>
+
+<p>זו גם הסיבה שהוא מנהל דף גילויים ציבורי. שקיפות היא לא רק ערך בשבילו, היא אסטרטגיה. אם הכל גלוי, אין מה להסתיר, ואין למי להפתיע אותך.</p>
+
+<h2>מסקנות: מה עושים עם זה</h2>
+
+<p>הניסוי של וויליסון לא פותח דלת חדשה. הוא מראה לנו שהדלת כבר פתוחה לרווחה ואנחנו לא שמנו לב. כל מי שיש לו חשבון פומבי בפלטפורמה כלשהי, שמשאיר תגובות ציבוריות, חשוף לפרופיילינג אוטומטי בעלות אפסית.</p>
+
+<p>מה אפשר לעשות?</p>
+
+<ul>
+<li><strong>מודעות:</strong> הצעד הראשון הוא פשוט לדעת שזה קיים. כל תגובה שאתם כותבים ברשת היא חלק מפאזל שמודל שפה יכול להרכיב.</li>
+<li><strong>שיקול דעת:</strong> לא חייבים להפסיק לכתוב, אבל כדאי לחשוב פעמיים לפני שמשתפים פרטים אישיים בתגובות ציבוריות. מיקום, הרגלים, מנויים, תחביבים - כל אלה הם חתיכות בפאזל.</li>
+<li><strong>הפרדת זהויות:</strong> שימוש בשמות משתמש שונים לפלטפורמות שונות מקשה על חיבור הנקודות.</li>
+<li><strong>דרישה לשקיפות:</strong> כשחברות משתמשות בכלים כאלה, צריך לדרוש שקיפות על כך.</li>
+<li><strong>חקיקה:</strong> ייתכן שצריך רגולציה שמתייחסת לא רק לאיסוף נתונים, אלא גם להסקת מסקנות (inference) מנתונים ציבוריים.</li>
+</ul>
+
+<p>וויליסון סיים את המאמר שלו בנימה של מציאותיות. הוא לא מציע פתרון קסם. הוא פשוט אומר: זה מה שאפשרי עכשיו, עם הכלים שזמינים לכולם, בעלות שכמעט לא קיימת. מה שנעשה עם הידע הזה תלוי בנו.</p>
+
+<p>וכמו שהפרופיל שלו עצמו מראה, לפעמים הדבר הכי מפחיד הוא כמה אנחנו כבר חשופים, בלי שבכלל שמנו לב.</p>
+
+<div class="footer-source">
+<p>📄 מאמר מקורי: <a href="https://simonwillison.net/2026/Mar/21/profiling-hacker-news-users/" target="_blank" rel="noopener">Profiling Hacker News users based on their comments</a> מאת סיימון וויליסון (Simon Willison), 21 במרץ 2026.</p>
+<p>תרגום ועיבוד לעברית. כל הזכויות שמורות למחבר המקורי.</p>
+</div>
+
+</div>
+</body>
+</html>
