@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hyperagents: סוכני AI שמשפרים את עצמם — המאמר פורץ הדרך של Meta FAIR</title>
+<meta property="og:title" content="Hyperagents: סוכני AI שמשפרים את עצמם">
+<meta property="og:description" content="ניתוח מעמיק של מאמר Hyperagents של Meta FAIR — סוכנים רקורסיביים שמשנים את הקוד של עצמם, כולל רמת המטא, ומשתפרים באופן אוטונומי לאורך זמן.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shnitzels.github.io/friday-share/read/meta-hyperagents-self-improving-ai/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hyperagents: סוכני AI שמשפרים את עצמם">
+<meta name="twitter:description" content="ניתוח מעמיק של מאמר Hyperagents של Meta FAIR — סוכנים רקורסיביים שמשנים את הקוד של עצמם ומשתפרים באופן אוטונומי.">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-size: 18px;
+  line-height: 1.8;
+  color: #1a1a1a;
+  background: #fff;
+  padding: 2rem 1rem;
+}
+.container { max-width: 900px; margin: 0 auto; }
+h1 { font-size: 32px; font-weight: 600; margin-bottom: 0.5rem; line-height: 1.3; }
+h2 { font-size: 24px; font-weight: 600; margin: 2.5rem 0 1rem; color: #0a0a0a; border-bottom: 2px solid #e0e0e0; padding-bottom: 0.5rem; }
+h3 { font-size: 20px; font-weight: 600; margin: 1.5rem 0 0.75rem; }
+p { margin-bottom: 1.2rem; }
+.subtitle { font-size: 20px; color: #555; margin-bottom: 2rem; line-height: 1.6; }
+.intro-box {
+  background: #f7f7f7;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+.intro-box a { color: #1a73e8; text-decoration: none; }
+.intro-box a:hover { text-decoration: underline; }
+.intro-box ul { list-style: none; padding: 0; margin: 0.5rem 0 0; }
+.intro-box li { margin-bottom: 0.3rem; }
+.intro-box li::before { content: "🔗 "; }
+a { color: #1a73e8; }
+strong { font-weight: 600; }
+ul, ol { margin: 0.5rem 1.5rem 1.2rem; }
+li { margin-bottom: 0.4rem; }
+.chart-container { margin: 2rem 0; text-align: center; }
+.chart-container svg { max-width: 100%; height: auto; }
+.source-box {
+  background: #f9f9f9;
+  border-top: 2px solid #ddd;
+  margin-top: 3rem;
+  padding: 1.5rem 0;
+}
+.source-box h3 { margin-top: 0; }
+.highlight-box {
+  background: #fff8e1;
+  border-right: 4px solid #ffc107;
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 4px;
+}
+code {
+  background: #f0f0f0;
+  padding: 0.15rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.9em;
+  direction: ltr;
+  unicode-bidi: embed;
+}
+.authors { color: #666; font-size: 16px; margin-bottom: 1rem; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Hyperagents: סוכני AI שמשפרים את עצמם — כשהמכונה משכתבת את הקוד שלה</h1>
+<p class="subtitle">ניתוח מעמיק של מאמר פורץ הדרך מ-Meta FAIR שמציג סוכנים רקורסיביים המסוגלים לשנות לא רק את הפתרון שלהם, אלא את עצם הדרך שבה הם משתפרים</p>
+<p class="authors">מאת: Jenny Zhang, Bingchen Zhao, Wannan Yang, Jakob Foerster, Jeff Clune, Minqi Jiang, Sam Devlin, Tatiana Shavrina — Meta FAIR, מרץ 2026</p>
+
+<div class="intro-box">
+<strong>🔬 מקורות המאמר:</strong>
+<ul>
+<li><a href="https://arxiv.org/abs/2603.19461" target="_blank">המאמר המדעי ב-arXiv</a></li>
+<li><a href="https://github.com/facebookresearch/Hyperagents" target="_blank">קוד מקור ב-GitHub</a></li>
+<li><a href="https://www.emergentmind.com/papers/2603.19461" target="_blank">ניתוח ב-Emergent Mind</a></li>
+</ul>
+</div>
+
+<h2>מבוא: מה קורה כשסוכן AI משנה את עצמו?</h2>
+
+<p>דמיינו מתכנת שלא רק כותב קוד, אלא גם משכתב את הכלים שהוא משתמש בהם לכתיבה, ואז משכתב את הדרך שבה הוא מחליט אילו כלים לשכתב, ואז משכתב את התהליך שבו הוא מחליט מה לשכתב בכלל. זה נשמע כמו רקורסיה אינסופית, אבל בדיוק את זה עושים Hyperagents — המערכת החדשה שפותחה ב-Meta FAIR ופורסמה במרץ 2026.</p>
+
+<p>המאמר "Hyperagents: Self-Referential Self-Improving Agents" מציג גישה חדשה ומהפכנית בתחום סוכני הבינה המלאכותית. במקום הגישה המסורתית שבה מתכנתים אנושיים מעצבים סוכנים, משפרים אותם, ומכוונים את הביצועים שלהם — Hyperagents מאפשרים לסוכן לבצע את כל התהליך הזה בעצמו, כולל שינוי של הדרך שבה הוא משתפר.</p>
+
+<p>זו לא עוד עבודה על Fine-Tuning או Prompt Engineering. המאמר הזה מציג משהו הרבה יותר עמוק: סוכנים שמשנים את <strong>כל הקוד שלהם</strong> — כולל ה"מטא-קוד" שאחראי על ההחלטה מה לשנות. התוצאה: מערכת שמשתפרת באופן מתמשך, חוצה תחומים, ויוצרת התנהגויות שאף אחד לא תכנת לתוכה.</p>
+
+<p>כדי להבין את המשמעות של המאמר הזה, נצטרך לצלול לתוך כמה מושגים מרכזיים: מכונת גדל (Gödel Machine), מטא-קוגניציה (Metacognition), חיפוש מבוסס אוכלוסייה (Population-Based Search), ואופטימיזציה פתוחה (Open-Ended Optimization). נתחיל מהבסיס.</p>
+
+<h2>הרקע התיאורטי: ממכונת גדל ועד DGM</h2>
+
+<h3>מכונת גדל — החלום של שמידהובר</h3>
+
+<p>בשנת 2003 הציע יורגן שמידהובר (Jürgen Schmidhuber), אחד מחלוצי הלמידה העמוקה, רעיון תיאורטי בשם "מכונת גדל" (Gödel Machine). הרעיון מבוסס על הלוגיקן הגדול קורט גדל, שהוכיח ב-1931 שכל מערכת לוגית מספיק חזקה יכולה להתייחס לעצמה — מה שנקרא "התייחסות עצמית" (Self-Reference).</p>
+
+<p>מכונת גדל היא מערכת תיאורטית שמסוגלת לשנות כל חלק מהקוד שלה, כולל את המנגנון שמחליט מה לשנות. בניגוד למערכות למידה רגילות שמשנות רק את הפרמטרים שלהן (כמו משקלות ברשת נוירונית), מכונת גדל יכולה לשנות את <strong>כל</strong> מה שניתן לתיאור — את האלגוריתם, את פונקציית ההערכה, את אסטרטגיית החיפוש, את כל מה שמרכיב אותה.</p>
+
+<p>הקונספט של שמידהובר היה אלגנטי אבל תיאורטי בלבד. הוא דרש הוכחות פורמליות שכל שינוי אכן ישפר את הביצועים — דרישה שנראתה בלתי אפשרית בפועל. במשך יותר מעשרים שנה, מכונת גדל נשארה בגדר חלום פילוסופי.</p>
+
+<h3>מכונת דרווין-גדל (DGM) — הצעד הראשון</h3>
+
+<p>ב-2025 הציגו חוקרים את מכונת דרווין-גדל (Darwin Gödel Machine, בקיצור DGM), שלקחה את הרעיון של שמידהובר וויתרה על הדרישה להוכחות פורמליות. במקום זאת, DGM השתמשה ב<strong>הערכה אמפירית</strong> — פשוט בודקים האם השינוי שיפר את הביצועים בפועל, בלי צורך להוכיח מתמטית שזה יקרה.</p>
+
+<p>DGM שילבה שני רעיונות מרכזיים:</p>
+<ul>
+<li><strong>חיפוש מבוסס אוכלוסייה (Population-Based Search):</strong> במקום לשפר סוכן יחיד, המערכת מתחזקת "אוכלוסייה" שלמה של סוכנים שונים. כל סוכן הוא וריאציה אחרת, וההצלחנים ביותר "מתרבים" — בדומה לאבולוציה ביולוגית.</li>
+<li><strong>שינוי עצמי מבוסס קוד:</strong> הסוכנים לא רק משנים פרמטרים — הם משנים את הקוד של עצמם. תוכנית Python שלמה שאפשר לערוך, לשכתב, ולהריץ מחדש.</li>
+</ul>
+
+<p>DGM הצליחה להראות תוצאות מרשימות בתחום הקידוד (programming), אבל הייתה לה בעיה מהותית: <strong>רמת המטא הייתה קבועה</strong>. המערכת שהחליטה <em>איך</em> לשנות את הסוכנים הייתה מתוכנתת ידנית ולא השתנתה. כדי להפעיל DGM בתחום חדש, היה צריך לכתוב מחדש את כל הלוגיקה ברמת המטא — תהליך ידני ומייגע.</p>
+
+<h3>הבעיה: קיבעון מטא-רמתי (Meta-Level Rigidification)</h3>
+
+<p>הבעיה המרכזית של DGM, ושל רוב מערכות ה-AI המשפרות עצמן, היא מה שהחוקרים מכנים "קיבעון מטא-רמתי". תארו לעצמכם מפעל שבו הרובוטים בקו הייצור יכולים לשפר את עצמם, אבל המנהל שמחליט <em>איך</em> לשפר אותם — המנהל הזה קפוא, אינו משתנה, ותמיד עובד לפי אותן הוראות. גם אם הרובוטים ישתפרו, בשלב מסוים ההנחיות הקבועות של המנהל יגבילו את ההתקדמות.</p>
+
+<p>זה בדיוק מה שקרה ב-DGM. רמת המטא — הלוגיקה שבוחרת אילו שינויים לעשות, איך להעריך אותם, ואיך לבחור את הסוכנים הטובים — הייתה קבועה. וכשהסוכנים ברמת המשימה (Task Level) התקדמו, רמת המטא הקבועה הפכה לצוואר הבקבוק.</p>
+
+<h2>מה זה Hyperagent? הפתרון של Meta FAIR</h2>
+
+<p>Hyperagent הוא הפתרון שמציע המאמר של Meta FAIR לבעיית הקיבעון המטא-רמתי. הרעיון בסיסי אך עוצמתי: במקום להפריד בין "סוכן המשימה" (Task Agent) ל"סוכן המטא" (Meta Agent), הם מאוחדים ל<strong>תוכנית Python אחת ניתנת לעריכה</strong>.</p>
+
+<p>ב-Hyperagent, אין הפרדה מלאכותית בין "מי שעושה את העבודה" לבין "מי שמחליט איך לעשות את העבודה". הכל נמצא באותו קובץ קוד, והכל ניתן לשינוי. סוכן המטא יכול לשנות את סוכן המשימה, את עצמו, את הדרך שבה הוא מעריך ביצועים, את אסטרטגיית החיפוש, ואת כל מנגנון אחר שמרכיב את ה-Hyperagent.</p>
+
+<div class="highlight-box">
+<strong>💡 המפתח להבנה:</strong> ב-DGM המקורי, סוכן המטא הוא "קבוע" — הוא יכול לשנות את סוכן המשימה, אבל לא את עצמו. ב-DGM-H (Darwin Gödel Machine with Hyperagents), אין הפרדה — הכל ניתן לעריכה, כולל רמת המטא עצמה. זה מה שמאפשר "שינוי עצמי מטא-קוגניטיבי" — metacognitive self-modification.
+</div>
+
+<p>המערכת המלאה נקראת <strong>DGM-H</strong> — Darwin Gödel Machine with Hyperagents. היא משלבת את היתרונות של האבולוציה (חיפוש מבוסס אוכלוסייה) עם היתרונות של ההתייחסות העצמית (שינוי עצמי של כל הרמות, כולל המטא).</p>
+
+<h3>מטא-קוגניציה: לחשוב על החשיבה</h3>
+
+<p>מונח מפתח במאמר הוא "מטא-קוגניציה" (Metacognition) — היכולת לחשוב על החשיבה עצמה. בפסיכולוגיה, מטא-קוגניציה מתארת את המודעות של אדם לתהליכי החשיבה שלו: האם אני לומד ביעילות? האם האסטרטגיה שלי עובדת? האם אני צריך לשנות גישה?</p>
+
+<p>ב-Hyperagents, מטא-קוגניציה מקבלת ביטוי קונקרטי: הסוכן לא רק פותר בעיות — הוא גם מנתח <em>איך</em> הוא פותר בעיות, מזהה חולשות בגישה שלו, ומשנה את עצמו בהתאם. וכאמור, מכיוון שרמת המטא ניתנת לעריכה, הוא יכול גם לשנות את הדרך שבה הוא מנתח ומשנה את עצמו — רקורסיה אמיתית.</p>
+
+<p>ההבדל בין מטא-קוגניציה אמיתית לבין "שיפור עצמי רגיל" הוא קריטי. שיפור עצמי רגיל אומר: "אני פותר את המשימה טוב יותר." מטא-קוגניציה אומרת: "אני <strong>משתפר בלהשתפר</strong>." זה ההבדל בין ללמוד עוד עובדות לבין ללמוד ללמוד.</p>
+
+<h2>ארכיטקטורת DGM-H: איך זה עובד בפועל</h2>
+
+<p>הבה נצלול לתוך המנגנון הטכני של DGM-H. המערכת בנויה מכמה רכיבים מרכזיים שעובדים יחד במחזוריות:</p>
+
+<h3>1. הארכיון (Archive)</h3>
+<p>DGM-H מתחזקת ארכיון של Hyperagents — אוסף של גרסאות שונות של הסוכן. כל גרסה היא תוכנית Python שלמה עם קוד שונה. הארכיון הזה מאפשר גיוון — המערכת לא "שוכחת" גישות ישנות שאולי יהיו שימושיות בהמשך.</p>
+
+<h3>2. חיפוש מבוסס אוכלוסייה</h3>
+<p>חיפוש מבוסס אוכלוסייה (Population-Based Search) הוא מנגנון השאול מהביולוגיה האבולוציונית. במקום לנסות לשפר סוכן יחיד צעד אחר צעד, המערכת מתחזקת "אוכלוסייה" של סוכנים מגוונים. כל "דור" כולל:</p>
+<ul>
+<li><strong>בחירת הורה (Parent Selection):</strong> סוכן נבחר מהארכיון על סמך ביצועים וגיוון. המערכת לא בוחרת תמיד את הטוב ביותר — היא מעודדת <strong>גיוון</strong>, כדי לחקור אפשרויות שונות ולא להיתקע באופטימום מקומי.</li>
+<li><strong>מוטציה/שינוי (Modification):</strong> ה-Hyperagent שנבחר כהורה עובר שינוי. השינוי הזה לא אקראי כמו מוטציה ביולוגית — הוא מונחה על ידי מודל שפה (Foundation Model) כמו Claude או GPT-4o שמנתח את הקוד הקיים ומציע שיפורים.</li>
+<li><strong>הערכה (Evaluation):</strong> ה-Hyperagent החדש מוערך אמפירית — הוא מורץ על המשימה ומדדי הביצועים שלו נמדדים. לא נדרשת הוכחה פורמלית שהשינוי טוב — רק תוצאות בפועל.</li>
+<li><strong>ארכוב (Archiving):</strong> אם ה-Hyperagent החדש מספיק טוב או מספיק שונה, הוא מתווסף לארכיון.</li>
+</ul>
+
+<h3>3. המטא-רמה הניתנת לעריכה</h3>
+<p>וזהו החידוש המרכזי: כל מה שתואר למעלה — בחירת ההורה, אסטרטגיית השינוי, שיטת ההערכה, קריטריוני הארכוב — כל זה חלק מהקוד של ה-Hyperagent עצמו, וניתן לשינוי. ה-Hyperagent יכול להחליט, למשל, לשנות את הדרך שבה הוא בוחר הורים, או ליצור מנגנון זיכרון חדש שעוזר לו לנתח ביצועים בצורה טובה יותר.</p>
+
+<p>בשפה טכנית: ה-Hyperagent הוא תוכנית טיורינג-שלמה (Turing-Complete) שיכולה לשנות כל חלק מעצמה. זה כולל את הקוד שאחראי על שינוי עצמי — מה שמאפשר שינוי עצמי רקורסיבי שרירותי (arbitrary recursive self-modification).</p>
+
+<div class="chart-container">
+<svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Noto Sans Hebrew', sans-serif;">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#555"/>
+    </marker>
+  </defs>
+  <text x="400" y="30" text-anchor="middle" font-size="18" font-weight="600" fill="#1a1a1a">השוואת ארכיטקטורה: DGM מול DGM-H</text>
+
+  <!-- DGM Side -->
+  <text x="200" y="65" text-anchor="middle" font-size="16" font-weight="600" fill="#d32f2f">DGM (מקורי)</text>
+  <rect x="70" y="80" width="260" height="60" rx="8" fill="#ffcdd2" stroke="#d32f2f" stroke-width="2"/>
+  <text x="200" y="105" text-anchor="middle" font-size="14" font-weight="600" fill="#b71c1c">סוכן מטא (קבוע 🔒)</text>
+  <text x="200" y="125" text-anchor="middle" font-size="12" fill="#b71c1c">לא ניתן לשינוי</text>
+
+  <line x1="200" y1="140" x2="200" y2="165" stroke="#555" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <rect x="70" y="170" width="260" height="60" rx="8" fill="#c8e6c9" stroke="#388e3c" stroke-width="2"/>
+  <text x="200" y="195" text-anchor="middle" font-size="14" font-weight="600" fill="#1b5e20">סוכן משימה (ניתן לעריכה ✏️)</text>
+  <text x="200" y="215" text-anchor="middle" font-size="12" fill="#1b5e20">משתנה על ידי סוכן המטא</text>
+
+  <rect x="100" y="260" width="200" height="40" rx="6" fill="#e0e0e0" stroke="#757575" stroke-width="1"/>
+  <text x="200" y="285" text-anchor="middle" font-size="13" fill="#424242">⚠️ קיבעון מטא-רמתי</text>
+
+  <!-- DGM-H Side -->
+  <text x="600" y="65" text-anchor="middle" font-size="16" font-weight="600" fill="#1565c0">DGM-H (Hyperagent)</text>
+  <rect x="470" y="80" width="260" height="150" rx="8" fill="#bbdefb" stroke="#1565c0" stroke-width="2"/>
+  <text x="600" y="110" text-anchor="middle" font-size="15" font-weight="600" fill="#0d47a1">Hyperagent — תוכנית אחת</text>
+
+  <rect x="490" y="125" width="220" height="40" rx="6" fill="#e3f2fd" stroke="#42a5f5" stroke-width="1.5"/>
+  <text x="600" y="150" text-anchor="middle" font-size="13" fill="#1565c0">סוכן מטא (ניתן לעריכה ✏️)</text>
+
+  <rect x="490" y="175" width="220" height="40" rx="6" fill="#e8f5e9" stroke="#66bb6a" stroke-width="1.5"/>
+  <text x="600" y="200" text-anchor="middle" font-size="13" fill="#2e7d32">סוכן משימה (ניתן לעריכה ✏️)</text>
+
+  <path d="M 730 155 C 770 155, 775 175, 730 175" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrowhead)"/>
+  <text x="780" y="170" font-size="11" fill="#1565c0">שינוי עצמי</text>
+
+  <rect x="500" y="260" width="200" height="40" rx="6" fill="#c8e6c9" stroke="#388e3c" stroke-width="1"/>
+  <text x="600" y="285" text-anchor="middle" font-size="13" fill="#2e7d32">✅ שיפור מתמשך ופתוח</text>
+
+  <text x="200" y="340" text-anchor="middle" font-size="13" fill="#757575">שינוי חד-כיווני בלבד</text>
+  <text x="600" y="340" text-anchor="middle" font-size="13" fill="#757575">שינוי רקורסיבי מלא</text>
+  <text x="200" y="370" text-anchor="middle" font-size="12" fill="#999">מטא → משימה</text>
+  <text x="600" y="370" text-anchor="middle" font-size="12" fill="#999">מטא ↔ משימה ↔ מטא</text>
+  <text x="400" y="410" text-anchor="middle" font-size="12" fill="#aaa">הארכיטקטורה של DGM-H מאחדת את שתי הרמות לתוכנית אחת ניתנת לעריכה מלאה</text>
+</svg>
+</div>
+
+<h3>4. תהליך האיטרציה</h3>
+<p>כל איטרציה של DGM-H עוברת את השלבים הבאים:</p>
+<ol>
+<li><strong>בחירת הורה מהארכיון:</strong> על סמך ביצועים וגיוון, נבחר Hyperagent שישמש כבסיס.</li>
+<li><strong>ניתוח ותכנון שינוי:</strong> ה-Hyperagent (באמצעות מודל השפה שלו) מנתח את הקוד שלו ואת ביצועיו הקודמים, ומחליט מה לשנות.</li>
+<li><strong>ביצוע השינוי:</strong> הקוד מעודכן — זה יכול להיות שינוי בלוגיקת המשימה, בשיטת ההערכה, במנגנון הזיכרון, או בכל רכיב אחר.</li>
+<li><strong>הרצה והערכה:</strong> ה-Hyperagent המעודכן רץ על המשימה, והביצועים נמדדים.</li>
+<li><strong>עדכון הארכיון:</strong> אם ה-Hyperagent מספיק טוב או ייחודי, הוא מתווסף לארכיון.</li>
+<li><strong>חזרה לשלב 1.</strong></li>
+</ol>
+
+<p>התהליך הזה חוזר על עצמו מאות פעמים, וה-Hyperagents משתפרים בהדרגה — לא רק בפתרון המשימה, אלא בעצם היכולת שלהם להשתפר.</p>
+
+<h3>5. מודל הבסיס (Foundation Model) — הליבה הקפואה</h3>
+<p>נקודה חשובה: ה-Hyperagent משתמש במודל שפה "קפוא" (frozen) כמו Claude או GPT-4o. המודל עצמו לא משתנה — מה שמשתנה הוא <strong>הקוד שעוטף אותו</strong>. ה-Hyperagent משנה את הפרומפטים שהוא שולח למודל, את הכלים שהוא משתמש בהם, את הלוגיקה שמחליטה מתי לקרוא למודל ומה לעשות עם התשובה. חישבו על זה כמו ההבדל בין לשנות את המוח לבין לשנות את האסטרטגיות שהמוח משתמש בהן.</p>
+
+<p>הכלים הבסיסיים שה-Hyperagent מקבל הם מינימליים: גישה ל-bash (שורת פקודה) ועורך קבצים. זה הכל. כל השאר — מנגנוני זיכרון, ניתוח ביצועים, תבניות פרומפט — נוצר על ידי ה-Hyperagent עצמו, תוך כדי תהליך השיפור העצמי.</p>
+
+<h2>תוצאות אמפיריות: שיפור עצמי חוצה תחומים</h2>
+
+<p>המאמר מציג תוצאות מרשימות בארבעה תחומים שונים לחלוטין. העובדה שאותה מערכת משתפרת <strong>בכל ארבעת התחומים</strong> ללא התאמה ידנית לכל תחום היא אחד ההישגים המרכזיים.</p>
+
+<h3>תחום 1: קידוד פוליגלוט (Polyglot Coding)</h3>
+<p>בתחום הקידוד, ה-Hyperagents התחילו עם ביצועי pass@1 של 0.140 על מערך האימון ו-0.084 על מערך הבדיקה. לאחר מאות איטרציות של שיפור עצמי, הביצועים עלו ל-<strong>0.340</strong> על מערך האימון ו-<strong>0.267</strong> על מערך הבדיקה. זהו שיפור של פי 2.4 באימון ופי 3.2 בבדיקה — שיפור משמעותי שמעיד על למידה אמיתית ולא רק התאמת יתר (overfitting).</p>
+
+<h3>תחום 2: סקירת מאמרים מדעיים (Paper Review)</h3>
+<p>בתחום סקירת מאמרים — משימה שדורשת הבנה עמוקה של מחקר מדעי — ה-Hyperagents התחילו מדיוק של <strong>0.0</strong> (!) על מערך הבדיקה והגיעו ל-<strong>0.71</strong>. התוצאה הזו עולה על AI-Scientist-v2, מערכת מתקדמת שפותחה במיוחד לסקירת מאמרים, שהגיעה לדיוק של 0.63. כלומר, Hyperagent שהתחיל מאפס, בלי שום ידע מוקדם על סקירת מאמרים, הגיע לביצועים טובים יותר ממערכת ייעודית.</p>
+
+<h3>תחום 3: עיצוב פונקציות תגמול לרובוטיקה (Robotics Reward Design)</h3>
+<p>בתחום הרובוטיקה, ה-Hyperagents נדרשו לעצב פונקציות תגמול (reward functions) שמכוונות רובוטים מדומים ללמוד התנהגויות מורכבות. התוצאות היו מרשימות: הסוכנים גילו פונקציות תגמול שאיפשרו לרובוטים ללמוד התנהגויות מורכבות כמו קפיצה — בניגוד לפונקציות פשוטות שרק הובילו לעמידה במקום.</p>
+
+<h3>תחום 4: דירוג מתמטיקה ברמת אולימפיאדה (Olympiad Math Grading)</h3>
+<p>בתחום המתמטיקה ברמת אולימפיאדה, ה-Hyperagents למדו לדרג פתרונות מתמטיים מורכבים. תחום זה שימש גם כמבחן להעברת מיומנויות מטא (meta-level skill transfer), כפי שנפרט בהמשך.</p>
+
+<div class="chart-container">
+<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Noto Sans Hebrew', sans-serif;">
+  <text x="400" y="30" text-anchor="middle" font-size="18" font-weight="600" fill="#1a1a1a">תוצאות ביצועים בארבעת התחומים</text>
+  <text x="400" y="52" text-anchor="middle" font-size="13" fill="#888">ביצועי התחלה (אפור) מול ביצועי סוף (כחול) לאחר שיפור עצמי</text>
+
+  <line x1="100" y1="380" x2="750" y2="380" stroke="#ccc" stroke-width="1"/>
+  <line x1="100" y1="380" x2="100" y2="80" stroke="#ccc" stroke-width="1"/>
+
+  <text x="90" y="384" text-anchor="end" font-size="12" fill="#888">0.0</text>
+  <text x="90" y="314" text-anchor="end" font-size="12" fill="#888">0.2</text>
+  <text x="90" y="244" text-anchor="end" font-size="12" fill="#888">0.4</text>
+  <text x="90" y="174" text-anchor="end" font-size="12" fill="#888">0.6</text>
+  <text x="90" y="104" text-anchor="end" font-size="12" fill="#888">0.8</text>
+
+  <line x1="100" y1="310" x2="750" y2="310" stroke="#eee" stroke-width="1"/>
+  <line x1="100" y1="240" x2="750" y2="240" stroke="#eee" stroke-width="1"/>
+  <line x1="100" y1="170" x2="750" y2="170" stroke="#eee" stroke-width="1"/>
+  <line x1="100" y1="100" x2="750" y2="100" stroke="#eee" stroke-width="1"/>
+
+  <!-- Coding (train) -->
+  <rect x="130" y="332" width="50" height="48" rx="4" fill="#bdbdbd"/>
+  <rect x="185" y="262" width="50" height="118" rx="4" fill="#1565c0"/>
+  <text x="182" y="410" text-anchor="middle" font-size="12" fill="#1a1a1a">קידוד (אימון)</text>
+  <text x="155" y="326" text-anchor="middle" font-size="11" fill="#fff">0.14</text>
+  <text x="210" y="256" text-anchor="middle" font-size="11" fill="#fff">0.34</text>
+
+  <!-- Coding (test) -->
+  <rect x="280" y="351" width="50" height="29" rx="4" fill="#bdbdbd"/>
+  <rect x="335" y="280" width="50" height="100" rx="4" fill="#1565c0"/>
+  <text x="332" y="410" text-anchor="middle" font-size="12" fill="#1a1a1a">קידוד (מבחן)</text>
+  <text x="305" y="346" text-anchor="middle" font-size="11" fill="#fff">0.08</text>
+  <text x="360" y="274" text-anchor="middle" font-size="11" fill="#fff">0.27</text>
+
+  <!-- Paper Review -->
+  <rect x="430" y="376" width="50" height="4" rx="4" fill="#bdbdbd"/>
+  <rect x="485" y="117" width="50" height="263" rx="4" fill="#1565c0"/>
+  <text x="482" y="410" text-anchor="middle" font-size="12" fill="#1a1a1a">סקירת מאמרים</text>
+  <text x="455" y="372" text-anchor="middle" font-size="11" fill="#888">0.0</text>
+  <text x="510" y="137" text-anchor="middle" font-size="11" fill="#fff">0.71</text>
+
+  <line x1="478" y1="143" x2="542" y2="143" stroke="#ff9800" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="560" y="147" font-size="10" fill="#ff9800">AI-Scientist-v2: 0.63</text>
+
+  <!-- Robotics -->
+  <rect x="600" y="345" width="50" height="35" rx="4" fill="#bdbdbd"/>
+  <rect x="655" y="170" width="50" height="210" rx="4" fill="#1565c0"/>
+  <text x="652" y="410" text-anchor="middle" font-size="12" fill="#1a1a1a">רובוטיקה</text>
+  <text x="625" y="340" text-anchor="middle" font-size="11" fill="#fff">בסיסי</text>
+  <text x="680" y="190" text-anchor="middle" font-size="11" fill="#fff">מתקדם</text>
+
+  <rect x="260" y="435" width="15" height="10" rx="2" fill="#bdbdbd"/>
+  <text x="280" y="445" font-size="12" fill="#666">ביצועי התחלה</text>
+  <rect x="400" y="435" width="15" height="10" rx="2" fill="#1565c0"/>
+  <text x="420" y="445" font-size="12" fill="#666">לאחר שיפור עצמי</text>
+</svg>
+</div>
+
+<h3>הנקודה המכרעת: כל התחומים, מערכת אחת</h3>
+<p>מה שמרשים במיוחד הוא לא רק גודל השיפור בכל תחום, אלא העובדה ש<strong>אותה מערכת בדיוק</strong> — DGM-H — עבדה בכל ארבעת התחומים ללא שום התאמה ידנית ספציפית לתחום. ה-DGM המקורי דרש התאמה ידנית מקיפה לכל תחום חדש, ובלעדיה ביצועיו היו בלתי תחרותיים. DGM-H, לעומת זאת, מגלה את האסטרטגיות הנכונות בעצמו.</p>
+
+<h2>למה מטא-קוגניציה הכרחית: ניתוח האבלציות</h2>
+
+<p>אחד החלקים החשובים ביותר במאמר הוא ניסויי האבלציה (Ablation Studies) — ניסויים שמסירים רכיבים מהמערכת כדי לבדוק מה באמת חיוני. התוצאות ברורות ומשמעותיות:</p>
+
+<h3>ניסוי 1: הסרת שינוי עצמי מטא-קוגניטיבי</h3>
+<p>כאשר "קופאים" את סוכן המטא ומאפשרים רק שינוי ברמת המשימה (כמו ב-DGM המקורי), המערכת <strong>נתקעת</strong> (stagnation). אחרי מספר מצומצם של שיפורים, ההתקדמות נעצרת. זה מאשש את התיאוריה: בלי יכולת מטא-קוגניטיבית, השיפור העצמי מוגבל מטבעו.</p>
+
+<h3>ניסוי 2: הסרת חיפוש מבוסס אוכלוסייה</h3>
+<p>כאשר מסירים את הארכיון ומנגנון הגיוון ומשאירים רק שיפור של סוכן יחיד, המערכת שוב נתקעת. חיפוש מבוסס אוכלוסייה הוא חיוני כדי לחקור את מרחב הפתרונות ולהימנע מ"אופטימום מקומי" — נקודות שנראות טובות מקומית אבל לא מובילות לפתרון האופטימלי.</p>
+
+<h3>ניסוי 3: DGM מול DGM-H</h3>
+<p>ה-DGM המקורי, בלי התאמה ידנית לכל תחום, הראה ביצועים בלתי תחרותיים. רק DGM-H — עם המטא-רמה הניתנת לעריכה — הצליח להכליל שיפור עצמי <strong>לכל התחומים</strong>. זו אולי המסקנה החשובה ביותר של המאמר: המטא-קוגניציה היא לא רק שיפור נחמד, היא <strong>הכרחית</strong> לשיפור עצמי כללי.</p>
+
+<div class="highlight-box">
+<strong>🔑 מסקנת מפתח:</strong> DGM-H היא המערכת <strong>היחידה</strong> שמכלילה שיפור עצמי על פני כל התחומים שנבדקו. כל הגישות האחרות — כולל DGM המקורי, סוכנים ללא מטא-קוגניציה, וסוכנים ללא חיפוש מבוסס אוכלוסייה — נכשלו בהכללה חוצת תחומים.
+</div>
+
+<h2>העברת מיומנויות מטא: התגלית פורצת הדרך</h2>
+
+<p>אם יש תוצאה אחת במאמר הזה שעשויה לשנות את כיוון המחקר בשנים הקרובות, זו תוצאת <strong>העברת מיומנויות מטא</strong> (Meta-Level Skill Transfer). הרעיון פשוט אבל עמוק: האם שיפורים ברמת המטא שנלמדו בתחום אחד יכולים לעזור בתחום אחר לגמרי?</p>
+
+<p>התשובה חד-משמעית: <strong>כן</strong>.</p>
+
+<p>החוקרים לקחו Hyperagents שעברו אופטימיזציה על תחומי סקירת מאמרים ורובוטיקה, והשתמשו בהם כנקודת התחלה לתחום חדש לגמרי — דירוג מתמטיקה ברמת אולימפיאדה. התוצאות היו מדהימות:</p>
+
+<ul>
+<li>Hyperagents שעברו העברה הגיעו לציון imp@50 (שיפור לאחר 50 איטרציות) של <strong>0.63</strong></li>
+<li>מערכות עם מטא-רמה קבועה (לא ניתנת לעריכה) הגיעו ל-imp@50 של <strong>~0</strong> — כלומר <strong>אפס העברה</strong></li>
+<li>ה-Hyperagents שהועברו לא רק התחילו טוב יותר — הם המשיכו להשתפר מהר יותר ולהגיע לביצועים אסימפטוטיים גבוהים יותר</li>
+</ul>
+
+<p>מה זה אומר? שהשיפורים ברמת המטא הם <strong>כלליים ומורכבים</strong> (general and compositional). Hyperagent שלמד ברובוטיקה ליצור מנגנוני זיכרון טובים, לנתח הטיות בהערכה, ולתכנן שינויים אסטרטגיים — כל המיומנויות האלה רלוונטיות גם במתמטיקה. זה כמו שבנאדם שלמד ללמוד — שפיתח טכניקות למידה טובות, ניהול זמן, ואסטרטגיות פתרון בעיות — יצליח בכל תחום חדש, לא רק בתחום שבו למד את הטכניקות האלה.</p>
+
+<div class="chart-container">
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Noto Sans Hebrew', sans-serif;">
+  <defs>
+    <marker id="arr2" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#1565c0"/>
+    </marker>
+    <marker id="arr3" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#388e3c"/>
+    </marker>
+  </defs>
+  <text x="400" y="30" text-anchor="middle" font-size="18" font-weight="600" fill="#1a1a1a">העברת מיומנויות מטא בין תחומים</text>
+
+  <rect x="50" y="70" width="180" height="70" rx="10" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/>
+  <text x="140" y="100" text-anchor="middle" font-size="14" font-weight="600" fill="#0d47a1">סקירת מאמרים</text>
+  <text x="140" y="120" text-anchor="middle" font-size="12" fill="#1565c0">מטא-מיומנויות נלמדות</text>
+
+  <rect x="50" y="160" width="180" height="70" rx="10" fill="#e8f5e9" stroke="#388e3c" stroke-width="2"/>
+  <text x="140" y="190" text-anchor="middle" font-size="14" font-weight="600" fill="#1b5e20">רובוטיקה</text>
+  <text x="140" y="210" text-anchor="middle" font-size="12" fill="#388e3c">מטא-מיומנויות נלמדות</text>
+
+  <rect x="300" y="100" width="200" height="120" rx="10" fill="#fff3e0" stroke="#ff9800" stroke-width="2"/>
+  <text x="400" y="130" text-anchor="middle" font-size="14" font-weight="600" fill="#e65100">מיומנויות מטא כלליות</text>
+  <text x="400" y="155" text-anchor="middle" font-size="12" fill="#f57c00">ניתוח הטיות ✓</text>
+  <text x="400" y="175" text-anchor="middle" font-size="12" fill="#f57c00">תשתית זיכרון ✓</text>
+  <text x="400" y="195" text-anchor="middle" font-size="12" fill="#f57c00">תכנון שינויים ✓</text>
+
+  <line x1="230" y1="105" x2="295" y2="140" stroke="#1565c0" stroke-width="2" marker-end="url(#arr2)"/>
+  <line x1="230" y1="195" x2="295" y2="175" stroke="#388e3c" stroke-width="2" marker-end="url(#arr3)"/>
+
+  <rect x="570" y="80" width="190" height="80" rx="10" fill="#fce4ec" stroke="#c62828" stroke-width="2"/>
+  <text x="665" y="110" text-anchor="middle" font-size="14" font-weight="600" fill="#b71c1c">מתמטיקה (אולימפיאדה)</text>
+  <text x="665" y="130" text-anchor="middle" font-size="12" fill="#c62828">תחום חדש לגמרי</text>
+
+  <line x1="500" y1="145" x2="565" y2="120" stroke="#ff9800" stroke-width="2.5" marker-end="url(#arr2)"/>
+
+  <rect x="540" y="200" width="100" height="80" rx="8" fill="#1565c0"/>
+  <text x="590" y="230" text-anchor="middle" font-size="13" font-weight="600" fill="#fff">עם העברה</text>
+  <text x="590" y="260" text-anchor="middle" font-size="20" font-weight="600" fill="#fff">0.63</text>
+
+  <rect x="660" y="200" width="100" height="80" rx="8" fill="#bdbdbd"/>
+  <text x="710" y="230" text-anchor="middle" font-size="13" font-weight="600" fill="#fff">ללא העברה</text>
+  <text x="710" y="260" text-anchor="middle" font-size="20" font-weight="600" fill="#fff">~0</text>
+
+  <text x="650" y="310" text-anchor="middle" font-size="12" fill="#888">imp@50 — שיפור לאחר 50 איטרציות</text>
+  <text x="400" y="370" text-anchor="middle" font-size="13" fill="#666">מיומנויות מטא שנלמדו בתחום אחד מועברות ומאיצות שיפור בתחומים חדשים</text>
+  <text x="400" y="392" text-anchor="middle" font-size="12" fill="#999">מערכות עם מטא-רמה קבועה מעבירות אפס מיומנות מטא</text>
+</svg>
+</div>
+
+<h2>התנהגויות מטא-קוגניטיביות שצצות מעצמן</h2>
+
+<p>אחד ההיבטים המרתקים ביותר של Hyperagents הוא ההתנהגויות שצצות <strong>ספונטנית</strong>, בלי שאף אחד תכנת אותן. כשנותנים ל-Hyperagent את החופש לשנות כל חלק מהקוד שלו, הוא מתחיל ליצור מבנים ותשתיות שלא היו בתוכנית המקורית:</p>
+
+<h3>1. תשתית לוגינג ורישום תוצאות</h3>
+<p>Hyperagents יוצרים בעצמם מערכות לרישום והערכת תוצאות. הם מזהים שכדי להשתפר, הם צריכים לדעת <em>איפה</em> הם נכשלים, ויוצרים קוד שמתעד את הביצועים בצורה מפורטת.</p>
+
+<h3>2. זיהוי הטיות בהערכה (Label Bias Detection)</h3>
+<p>בתחום סקירת מאמרים, Hyperagents גילו בעצמם שיש הטיות בנתוני ההערכה ויצרו מנגנונים לזיהוי ותיקון ההטיות האלה. אף אחד לא אמר להם שיש הטיות — הם גילו את זה בעצמם באמצעות ניתוח של דפוסי הצלחה וכישלון.</p>
+
+<h3>3. זיכרון פרסיסטנטי וכלי ניתוח</h3>
+<p>Hyperagents יצרו מנגנוני זיכרון שמאפשרים להם לשמור מידע בין הרצות — דפוסים שעובדים, שגיאות נפוצות, אסטרטגיות שנכשלו. הם בנו "ספריות" של כלי ניתוח שעוזרים להם להבין את הביצועים שלהם.</p>
+
+<h3>4. מערכות תבניות פרומפט (Prompt Template Systems)</h3>
+<p>הסוכנים פיתחו מערכות לניהול ועריכה של תבניות פרומפט — במקום פרומפט אחד קבוע, הם יצרו ספריות של תבניות שמותאמות למצבים שונים.</p>
+
+<h3>5. חקירה אדפטיבית לפי משאבים</h3>
+<p>Hyperagents למדו להתאים את אסטרטגיית החקירה שלהם למשאבי החישוב הזמינים. כשנשאר הרבה חישוב, הם חוקרים יותר (exploration); כשהמשאבים מתמעטים, הם מתמקדים במה שעובד (exploitation). זהו איזון exploration-exploitation שנלמד באופן ספונטני.</p>
+
+<div class="chart-container">
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Noto Sans Hebrew', sans-serif;">
+  <text x="400" y="30" text-anchor="middle" font-size="18" font-weight="600" fill="#1a1a1a">טקסונומיה של התנהגויות מטא-קוגניטיביות שצצות ספונטנית</text>
+
+  <circle cx="400" cy="200" r="60" fill="#1565c0" opacity="0.9"/>
+  <text x="400" y="193" text-anchor="middle" font-size="13" font-weight="600" fill="#fff">Hyperagent</text>
+  <text x="400" y="212" text-anchor="middle" font-size="11" fill="#bbdefb">שינוי עצמי</text>
+
+  <line x1="340" y1="170" x2="160" y2="90" stroke="#e65100" stroke-width="2"/>
+  <rect x="50" y="60" width="210" height="55" rx="10" fill="#fff3e0" stroke="#e65100" stroke-width="1.5"/>
+  <text x="155" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="#e65100">📊 תשתית לוגינג</text>
+  <text x="155" y="102" text-anchor="middle" font-size="11" fill="#bf360c">רישום אוטומטי של תוצאות הערכה</text>
+
+  <line x1="460" y1="170" x2="640" y2="90" stroke="#6a1b9a" stroke-width="2"/>
+  <rect x="540" y="60" width="210" height="55" rx="10" fill="#f3e5f5" stroke="#6a1b9a" stroke-width="1.5"/>
+  <text x="645" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="#6a1b9a">🔍 זיהוי הטיות</text>
+  <text x="645" y="102" text-anchor="middle" font-size="11" fill="#4a148c">גילוי וטיפול בהטיות בנתונים</text>
+
+  <line x1="345" y1="230" x2="140" y2="310" stroke="#00695c" stroke-width="2"/>
+  <rect x="30" y="285" width="220" height="55" rx="10" fill="#e0f2f1" stroke="#00695c" stroke-width="1.5"/>
+  <text x="140" y="307" text-anchor="middle" font-size="13" font-weight="600" fill="#00695c">🧠 זיכרון פרסיסטנטי</text>
+  <text x="140" y="327" text-anchor="middle" font-size="11" fill="#004d40">שמירת דפוסים ולקחים בין הרצות</text>
+
+  <line x1="455" y1="230" x2="640" y2="310" stroke="#c62828" stroke-width="2"/>
+  <rect x="540" y="285" width="220" height="55" rx="10" fill="#ffebee" stroke="#c62828" stroke-width="1.5"/>
+  <text x="650" y="307" text-anchor="middle" font-size="13" font-weight="600" fill="#c62828">📝 תבניות פרומפט</text>
+  <text x="650" y="327" text-anchor="middle" font-size="11" fill="#b71c1c">ספריות תבניות מותאמות למצבים</text>
+
+  <line x1="400" y1="260" x2="400" y2="380" stroke="#2e7d32" stroke-width="2"/>
+  <rect x="270" y="385" width="260" height="55" rx="10" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.5"/>
+  <text x="400" y="407" text-anchor="middle" font-size="13" font-weight="600" fill="#2e7d32">⚡ חקירה אדפטיבית</text>
+  <text x="400" y="427" text-anchor="middle" font-size="11" fill="#1b5e20">התאמת exploration/exploitation לפי משאבים</text>
+
+  <text x="400" y="480" text-anchor="middle" font-size="12" fill="#999">כל ההתנהגויות נוצרו ספונטנית — ללא תכנות מפורש</text>
+</svg>
+</div>
+
+<p>ההתנהגויות הספונטניות האלה הן אולי החלק המרתק ביותר של המחקר. הן מראות שכשנותנים לסוכן AI את <strong>החופש</strong> לשנות את עצמו, הוא מגלה פתרונות ותשתיות שמתכנתים אנושיים אולי לא היו חושבים עליהם — או שהיו חושבים עליהם, אבל לא בהכרח מיישמים אותם בצורה הזו.</p>
+
+<h2>מסלול השיפור העצמי: מה קורה לאורך מאות איטרציות</h2>
+
+<p>אחד הגרפים המעניינים ביותר שאפשר להפיק מהנתונים הוא מסלול השיפור העצמי לאורך זמן. מה קורה כשנותנים ל-Hyperagent מאות איטרציות להשתפר?</p>
+
+<p>בשלב הראשון — בערך 50 האיטרציות הראשונות — רואים שיפור מהיר. ה-Hyperagent מבצע את השיפורים ה"קלים": תיקון באגים בסיסיים, שיפור פרומפטים, הוספת טיפול בשגיאות. אלה שיפורים שמתכנת אנושי היה עושה גם בסבב ראשון של Code Review.</p>
+
+<p>בשלב השני — איטרציות 50-150 — קצב השיפור מאט מעט, אבל ההתנהגויות נעשות מתוחכמות יותר. זה השלב שבו ה-Hyperagent מתחיל ליצור תשתיות מטא: מנגנוני זיכרון, כלי ניתוח, ומערכות לוגינג. השיפורים כאן הם לא ישירים — הם "השקעה" שתשפר את היכולת להשתפר בהמשך.</p>
+
+<p>בשלב השלישי — איטרציות 150-300 — רואים תשואה על ההשקעות של השלב השני. ה-Hyperagent משתמש בתשתיות שבנה כדי לבצע שיפורים מדויקים יותר ויעילים יותר. זה המקום שבו המטא-קוגניציה באמת מבריקה — הסוכן לא רק משתפר, הוא משתפר <strong>מהר יותר</strong> בגלל הכלים שיצר לעצמו.</p>
+
+<p>בשלבים מתקדמים, הביצועים ממשיכים לעלות אבל בקצב הולך ופוחת — מה שצפוי בכל תהליך אופטימיזציה. עם זאת, בניגוד למערכות ללא מטא-קוגניציה שנתקעות מוקדם, DGM-H ממשיך להשתפר לאורך זמן רב יותר.</p>
+
+<div class="chart-container">
+<svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Noto Sans Hebrew', sans-serif;">
+  <text x="400" y="30" text-anchor="middle" font-size="18" font-weight="600" fill="#1a1a1a">מסלול שיפור עצמי לאורך איטרציות</text>
+
+  <line x1="100" y1="350" x2="730" y2="350" stroke="#ccc" stroke-width="1"/>
+  <line x1="100" y1="350" x2="100" y2="60" stroke="#ccc" stroke-width="1"/>
+
+  <text x="100" y="375" text-anchor="middle" font-size="11" fill="#888">0</text>
+  <text x="226" y="375" text-anchor="middle" font-size="11" fill="#888">50</text>
+  <text x="352" y="375" text-anchor="middle" font-size="11" fill="#888">100</text>
+  <text x="478" y="375" text-anchor="middle" font-size="11" fill="#888">150</text>
+  <text x="604" y="375" text-anchor="middle" font-size="11" fill="#888">200</text>
+  <text x="730" y="375" text-anchor="middle" font-size="11" fill="#888">250+</text>
+  <text x="415" y="400" text-anchor="middle" font-size="13" fill="#666">מספר איטרציות</text>
+
+  <text x="55" y="210" text-anchor="middle" font-size="13" fill="#666" transform="rotate(-90, 55, 210)">ביצועים</text>
+
+  <line x1="100" y1="275" x2="730" y2="275" stroke="#f0f0f0" stroke-width="1"/>
+  <line x1="100" y1="200" x2="730" y2="200" stroke="#f0f0f0" stroke-width="1"/>
+  <line x1="100" y1="125" x2="730" y2="125" stroke="#f0f0f0" stroke-width="1"/>
+
+  <path d="M 100 340 C 160 310, 200 260, 250 220 C 300 185, 370 155, 440 130 C 510 112, 590 100, 680 90 L 730 87" fill="none" stroke="#1565c0" stroke-width="3"/>
+  <text x="735" y="82" font-size="12" font-weight="600" fill="#1565c0">DGM-H</text>
+
+  <path d="M 100 340 C 160 315, 200 290, 250 275 C 300 265, 370 260, 440 258 C 510 257, 590 256, 680 255 L 730 255" fill="none" stroke="#ff9800" stroke-width="2.5" stroke-dasharray="8,4"/>
+  <text x="735" y="250" font-size="12" font-weight="600" fill="#ff9800">ללא מטא-קוגניציה</text>
+
+  <path d="M 100 340 C 160 320, 200 305, 250 295 C 300 290, 370 288, 440 287 C 510 287, 590 286, 680 286 L 730 286" fill="none" stroke="#bdbdbd" stroke-width="2" stroke-dasharray="4,4"/>
+  <text x="735" y="281" font-size="12" fill="#999">ללא אוכלוסייה</text>
+
+  <rect x="110" y="55" width="120" height="22" rx="4" fill="#e3f2fd"/>
+  <text x="170" y="71" text-anchor="middle" font-size="10" fill="#1565c0">שלב 1: שיפורים מהירים</text>
+
+  <rect x="275" y="55" width="140" height="22" rx="4" fill="#fff3e0"/>
+  <text x="345" y="71" text-anchor="middle" font-size="10" fill="#e65100">שלב 2: בניית תשתיות מטא</text>
+
+  <rect x="460" y="55" width="140" height="22" rx="4" fill="#e8f5e9"/>
+  <text x="530" y="71" text-anchor="middle" font-size="10" fill="#2e7d32">שלב 3: תשואה על השקעה</text>
+
+  <text x="550" y="245" font-size="10" fill="#ff9800">← נתקעים</text>
+</svg>
+</div>
+
+<h2>המשמעות התיאורטית: ממכונת גדל לאמיתה</h2>
+
+<p>המאמר הזה מסמן רגע היסטורי במדעי המחשב ובמחקר הבינה המלאכותית. הנה למה:</p>
+
+<h3>החלום הופך למציאות</h3>
+<p>במשך יותר מעשרים שנה, מכונת גדל של שמידהובר הייתה רעיון תיאורטי — קונספט אלגנטי שנראה בלתי ישים בפועל. DGM-H הוא הניסיון המוצלח הראשון ליישם את הרעיון בצורה שעובדת ומכלילה על פני תחומים שונים. המעבר מ"בלתי ישים" ל"עובד בפועל בארבעה תחומים" הוא צעד ענק.</p>
+
+<h3>למידה של למידה</h3>
+<p>יש הבדל מהותי בין "ללמוד לבצע משימה" לבין "ללמוד להשתפר בביצוע משימות". DGM-H מציג את הגישה השנייה בצורה קונקרטית. הסוכנים לא רק משתפרים — הם <strong>משתפרים בלהשתפר</strong>. וכפי שתוצאות העברת מיומנויות מטא מראות, הלמידה הזו של למידה היא כללית — היא לא קשורה לתחום ספציפי.</p>
+
+<h3>שילוב של מטא-קוגניציה וחיפוש פתוח</h3>
+<p>DGM-H משלב שני עקרונות חזקים: מטא-קוגניציה (היכולת לחשוב על החשיבה) וחיפוש פתוח מבוסס אוכלוסייה (הגישה האבולוציונית). השילוב הזה מאפשר למערכת לחרוג מאופטימום מקומי — להימנע מלהיתקע בפתרונות שנראים טובים מקומית אבל לא מגיעים למקסימום האמיתי.</p>
+
+<p>חיפוש מבוסס אוכלוסייה מספק את <strong>הגיוון</strong> — הוא מבטיח שהמערכת בודקת מגוון רחב של גישות. המטא-קוגניציה מספקת את <strong>הכיוון</strong> — היא מבטיחה שהשינויים לא אקראיים, אלא מונחים על ידי ניתוח מעמיק של מה עובד ומה לא.</p>
+
+<h3>ביטול הקיבעון של פרוטוקולים קבועים</h3>
+<p>אחת הבעיות הגדולות של מערכות AI הנוכחיות היא שה"פרוטוקול" — הדרך שבה המערכת עובדת — מוגדר מראש על ידי בני אדם ולא משתנה. גם אם המערכת "לומדת", היא לומדת בתוך מסגרת קשיחה. DGM-H שובר את הקשיחות הזו: המסגרת עצמה היא חלק ממה שניתן ללמידה ושינוי.</p>
+
+<h2>בטיחות: הפיל בחדר</h2>
+
+<p>כל מי שקורא על מערכת AI שמשנה את עצמה ומשתפרת באופן אוטונומי צריך לשאול שאלה אחת ברורה: <strong>מה עם הבטיחות?</strong></p>
+
+<p>המאמר לא מתעלם מהשאלה הזו, והחוקרים מודעים לחשיבות הנושא. הנה הנקודות המרכזיות:</p>
+
+<h3>ארגז חול (Sandboxing)</h3>
+<p>כל הניסויים בוצעו בסביבה מבודדת — "ארגז חול" — עם פיקוח ומגבלות משאבים. ה-Hyperagents לא יכלו לגשת לאינטרנט הפתוח, לא יכלו ליצור קשרים חיצוניים, ולא יכלו לצרוך משאבי חישוב ללא הגבלה.</p>
+
+<h3>הגנה על מנגנוני ההערכה</h3>
+<p>בניסויים הראשיים, מנגנוני ההערכה ובחירת ההורים נשמרו מחוץ לטווח השינוי העצמי. זה אמצעי בטיחות חשוב — אם הסוכן יכול לשנות את הדרך שבה הוא מוערך, הוא עלול "לרמות" ולשנות את הקריטריונים כך שהוא תמיד נראה מוצלח.</p>
+
+<h3>חוק גודהרט (Goodhart's Law)</h3>
+<p>החוקרים מזהירים במפורש מפני חוק גודהרט: "כשמדד הופך למטרה, הוא מפסיק להיות מדד טוב." מערכת שמשפרת את עצמה תנצל כל הטיה או חולשה במדדי ההערכה שניתנו לה. זה לא "רוע" — זו פשוט אופטימיזציה. אבל זה אומר שהמדדים חייבים להיות חזקים ומהימנים, ושצריך לנטר בקפידה מה בדיוק המערכת מאופטמת.</p>
+
+<h3>האתגר הגדול: פיקוח על מערכות שמשתפרות</h3>
+<p>ככל שמערכות DGM-H יהפכו חזקות יותר, הן יהיו גם פחות קריאות לבני אדם. הקוד שה-Hyperagent כותב לעצמו עשוי להיות מורכב, לא אינטואיטיבי, ולפעמים בלתי מובן לבני אדם. זה יוצר אתגר בטיחותי מהותי: <strong>איך מפקחים על מערכת שמשנה את עצמה בדרכים שלא תמיד מובנות?</strong></p>
+
+<p>החוקרים מציינים שנדרשים:</p>
+<ul>
+<li><strong>כלי פרשנות (Interpretability):</strong> היכולת להבין <em>מה</em> ה-Hyperagent שינה ו<em>למה</em></li>
+<li><strong>מדדים אמינים (Trustworthy Benchmarks):</strong> מדדי הערכה שעמידים בפני "משחקי" אופטימיזציה</li>
+<li><strong>מנגנוני עצירה (Kill Switches):</strong> היכולת לעצור את המערכת בכל שלב</li>
+<li><strong>ביקורת שוטפת (Ongoing Auditing):</strong> בדיקה קבועה של השינויים שהמערכת מבצעת</li>
+</ul>
+
+<div class="highlight-box">
+<strong>⚠️ אזהרת בטיחות:</strong> המאמר מדגיש שככל שמערכות שיפור עצמי הופכות חזקות יותר ופחות ניתנות לביקורת אנושית, הצורך בכלי פרשנות ומדדים אמינים הופך קריטי. זה לא סיכון תיאורטי — זה אתגר הנדסי שצריך לפתור <strong>לפני</strong> שמערכות כאלה מופעלות מחוץ לסביבות מבודדות.
+</div>
+
+<h2>ההקשר הרחב: איפה Hyperagents עומדים במפה</h2>
+
+<h3>מכונת גדל של שמידהובר (2003)</h3>
+<p>כאמור, זהו הבסיס התיאורטי. שמידהובר הציע את הרעיון של מערכת שמשנה את כל חלק מעצמה, כולל מנגנון השינוי העצמי. אבל הוא דרש הוכחות פורמליות לכל שינוי — דרישה שהפכה את המימוש לבלתי אפשרי בפועל.</p>
+
+<h3>מכונת דרווין-גדל (DGM)</h3>
+<p>DGM היא מימוש קודם שוויתר על ההוכחות הפורמליות לטובת הערכה אמפירית. היא הוכיחה שהגישה עובדת בתחום הקידוד, אבל הייתה מוגבלת על ידי רמת מטא קבועה.</p>
+
+<h3>DGM-H — הצעד הבא</h3>
+<p>DGM-H פותר את המגבלה של DGM על ידי הפיכת רמת המטא לניתנת לעריכה. התוצאה: מערכת שמכלילה לתחומים שונים, מעבירה מיומנויות מטא בין תחומים, ויוצרת התנהגויות מתוחכמות ספונטנית.</p>
+
+<h3>ההבדל ממערכות אחרות</h3>
+<p>חשוב להבחין בין Hyperagents לבין גישות אחרות לשיפור סוכני AI:</p>
+<ul>
+<li><strong>Fine-Tuning:</strong> משנה את הפרמטרים של מודל השפה עצמו. Hyperagents לא משנים את המודל — הם משנים את הקוד שעוטף אותו.</li>
+<li><strong>Prompt Engineering:</strong> משפר את הפרומפטים שנשלחים למודל. Hyperagents עושים הרבה יותר — הם משנים את כל הלוגיקה, כולל מתי ואיך לשלוח פרומפטים.</li>
+<li><strong>AutoML / Neural Architecture Search:</strong> מחפשים ארכיטקטורות אופטימליות לרשתות נוירונים. Hyperagents עובדים ברמת הקוד, לא ברמת הארכיטקטורה הנוירונית.</li>
+<li><strong>Self-Play:</strong> סוכנים שמשחקים נגד עצמם כדי להשתפר (כמו AlphaGo). Hyperagents שונים — הם משנים את עצם הקוד שלהם, לא רק לומדים מניסיון.</li>
+</ul>
+
+<h2>מה זה אומר לעתיד?</h2>
+
+<p>המאמר הזה פותח שאלות מרתקות על העתיד של AI:</p>
+
+<h3>1. קנה מידה (Scaling)</h3>
+<p>מה יקרה כשנריץ DGM-H עם יותר חישוב? האם נראה שיפורים נמשכים, או שיש תקרה? התוצאות הנוכחיות מראות שיפור מתמשך לאורך מאות איטרציות, אבל עדיין לא ברור מה קורה באלפי או עשרות אלפי איטרציות.</p>
+
+<h3>2. שיפור עצמי רב-מודלי</h3>
+<p>מה אם ה-Hyperagent ישנה לא רק את הקוד שעוטף את המודל, אלא גם את המודל עצמו? כרגע מודל הבסיס "קפוא", אבל אפשר לדמיין גרסאות עתידיות שבהן ה-Hyperagent גם מבצע Fine-Tuning על המודל כחלק מתהליך השיפור העצמי.</p>
+
+<h3>3. שיפור עצמי ללא סוף (Open-Ended Self-Improvement)</h3>
+<p>האם ניתן ליצור מערכת שמשתפרת ללא הגבלה? או שתמיד יהיה "תקרה"? התיאוריה אומרת שבגלל שה-Hyperagent הוא טיורינג-שלם, הוא יכול — עקרונית — לייצג כל אלגוריתם שאפשר לכתוב. אבל "יכול עקרונית" לא אומר "ימצא בפועל".</p>
+
+<h3>4. השפעה על פיתוח תוכנה</h3>
+<p>אם סוכני AI יכולים לשפר את הקוד של עצמם בהצלחה, מה זה אומר על פיתוח תוכנה בכלל? האם נראה מערכות שמפתחות ומתחזקות את עצמן? האם תפקיד המתכנת ישתנה מ"כותב קוד" ל"מפקח על מערכות שכותבות קוד"?</p>
+
+<h3>5. בטיחות ברמת התעשייה</h3>
+<p>ככל שמערכות כאלה יהפכו חזקות יותר ויותקרבו ליישום מסחרי, שאלות הבטיחות יהפכו דחופות. מי אחראי כשמערכת שמשנה את עצמה גורמת נזק? איך מגדירים "שליטה" על מערכת שיכולה לשנות את עצמה בדרכים בלתי צפויות?</p>
+
+<h2>סיכום: הרגע שמכונת גדל הפכה למציאות</h2>
+
+<p>מאמר Hyperagents של Meta FAIR הוא ציון דרך משמעותי במחקר הבינה המלאכותית. הוא מציג את DGM-H — מערכת שמיישמת בפועל את החלום התיאורטי של מכונת גדל: סוכנים שמשנים את כל חלק מעצמם, כולל את הדרך שבה הם משנים את עצמם.</p>
+
+<p>התרומות המרכזיות של המאמר:</p>
+<ol>
+<li><strong>Hyperagent כקונספט:</strong> איחוד סוכן המשימה וסוכן המטא לתוכנית אחת ניתנת לעריכה מלאה.</li>
+<li><strong>הכללה חוצת תחומים:</strong> אותה מערכת בדיוק עובדת בקידוד, סקירת מאמרים, רובוטיקה, ומתמטיקה — בלי התאמה ידנית.</li>
+<li><strong>העברת מיומנויות מטא:</strong> שיפורים ברמת המטא הם כלליים ומועברים בין תחומים שונים.</li>
+<li><strong>התנהגויות ספונטניות:</strong> Hyperagents יוצרים בעצמם מנגנוני זיכרון, ניתוח הטיות, ותשתיות שלא תוכנתו מראש.</li>
+<li><strong>הכרחיות המטא-קוגניציה:</strong> ניסויי אבלציה מוכיחים שהמטא-קוגניציה הכרחית לשיפור עצמי כללי.</li>
+</ol>
+
+<p>האם זה הצעד הראשון לעבר AI שמשתפר באופן בלתי מוגבל? מוקדם מדי לדעת. אבל ברור שזה צעד משמעותי. לראשונה, יש לנו מערכת שלא רק משתפרת בביצוע משימות, אלא <strong>משתפרת בלהשתפר</strong> — ועושה את זה בצורה כללית שעובדת על פני תחומים שונים.</p>
+
+<p>הרעיון של שמידהובר מ-2003 כבר לא רק פילוסופיה. הוא קוד שרץ, משתנה, ומשתפר. ואנחנו רק בהתחלה.</p>
+
+<div class="source-box">
+<h3>🔗 מקורות ולקריאה נוספת</h3>
+<ul>
+<li><a href="https://arxiv.org/abs/2603.19461" target="_blank">המאמר המקורי ב-arXiv: "Hyperagents: Self-Referential Self-Improving Agents"</a></li>
+<li><a href="https://github.com/facebookresearch/Hyperagents" target="_blank">קוד מקור ב-GitHub — facebookresearch/Hyperagents</a></li>
+<li><a href="https://www.emergentmind.com/papers/2603.19461" target="_blank">ניתוח מורחב ב-Emergent Mind</a></li>
+</ul>
+<p style="margin-top: 1rem; color: #888; font-size: 14px;">המאמר פורסם במרץ 2026 על ידי Meta FAIR. המחברים: Jenny Zhang, Bingchen Zhao, Wannan Yang, Jakob Foerster, Jeff Clune, Minqi Jiang, Sam Devlin, Tatiana Shavrina.</p>
+</div>
+
+</div>
+</body>
+</html>
