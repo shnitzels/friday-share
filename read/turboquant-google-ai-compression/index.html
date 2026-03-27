@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TurboQuant: הגדרה מחדש של יעילות AI עם דחיסה קיצונית</title>
+<meta property="og:title" content="TurboQuant: הגדרה מחדש של יעילות AI עם דחיסה קיצונית">
+<meta property="og:description" content="Google Research מציגה אלגוריתם דחיסה שמכווץ את מטמון ה-KV ל-3 ביטים בלבד, ללא אובדן דיוק. 6x הקטנה בזיכרון, 8x שיפור ביצועים על H100.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shnitzels.github.io/friday-share/read/turboquant-google-ai-compression/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TurboQuant: הגדרה מחדש של יעילות AI עם דחיסה קיצונית">
+<meta name="twitter:description" content="Google Research מציגה אלגוריתם דחיסה שמכווץ את מטמון ה-KV ל-3 ביטים בלבד, ללא אובדן דיוק.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-size: 18px;
+  line-height: 1.8;
+  color: #1a1a1a;
+  background: #fff;
+  padding: 40px 20px;
+}
+.container { max-width: 900px; margin: 0 auto; }
+h1 { font-size: 32px; font-weight: 600; margin-bottom: 12px; line-height: 1.4; }
+h2 { font-size: 24px; font-weight: 600; margin: 48px 0 20px; color: #1a1a1a; border-bottom: 2px solid #e0e0e0; padding-bottom: 8px; }
+h3 { font-size: 20px; font-weight: 600; margin: 36px 0 16px; }
+.subtitle { font-size: 20px; color: #555; margin-bottom: 32px; line-height: 1.6; }
+p { margin-bottom: 20px; }
+.source-box {
+  background: #f0f7ff;
+  border: 1px solid #b3d4fc;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 36px;
+  font-size: 16px;
+}
+.source-box a { color: #1a73e8; text-decoration: none; }
+.source-box a:hover { text-decoration: underline; }
+ul { margin: 0 24px 20px 0; padding: 0; }
+li { margin-bottom: 12px; }
+.term {
+  background: #f5f5f5;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 16px;
+  color: #333;
+}
+.key-results {
+  background: #f8faf8;
+  border-right: 4px solid #34a853;
+  padding: 20px 24px;
+  border-radius: 0 8px 8px 0;
+  margin: 24px 0;
+}
+.key-results li { margin-bottom: 8px; }
+svg { display: block; margin: 32px auto; max-width: 100%; }
+.svg-container { margin: 36px 0; }
+.bottom-source {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid #e0e0e0;
+  font-size: 16px;
+  color: #666;
+}
+.bottom-source a { color: #1a73e8; text-decoration: none; }
+.collab { background: #fafafa; border-radius: 8px; padding: 16px 20px; margin-top: 32px; font-size: 16px; color: #555; }
+strong { font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>TurboQuant: הגדרה מחדש של יעילות AI עם דחיסה קיצונית</h1>
+<p class="subtitle">איך שלושה אלגוריתמים חדשים של Google Research מכווצים מודלי AI ל-3 ביטים בלבד, ללא אובדן דיוק, עם שיפור ביצועים של עד פי 8</p>
+
+<div class="source-box">
+📄 מאמר מקור: <a href="https://research.google/blog/turboquant-redefining-ai-efficiency-with-extreme-compression/" target="_blank" rel="noopener">TurboQuant: Redefining AI Efficiency with Extreme Compression — Google Research Blog</a>
+</div>
+
+<h2>וקטורים: השפה הבסיסית של בינה מלאכותית</h2>
+
+<p>וקטורים הם הדרך הבסיסית שבה מודלים של בינה מלאכותית (AI) מבינים ומעבדים מידע. <strong>וקטור</strong> <span class="term">Vector</span> הוא בעצם רשימה מסודרת של מספרים שמייצגת נתון כלשהו במרחב מתמטי. וקטורים קטנים מתארים תכונות פשוטות, כמו נקודה בגרף דו-ממדי, בעוד שוקטורים "רב-ממדיים" <span class="term">High-dimensional vectors</span> לוכדים מידע מורכב בהרבה, כמו המאפיינים של תמונה, המשמעות של מילה, או התכונות של מערך נתונים שלם.</p>
+
+<p>וקטורים רב-ממדיים הם כלי עוצמתי להפליא. הם מאפשרים למודלים של AI לייצג ולהשוות פיסות מידע מורכבות בצורה מתמטית יעילה. אבל יש להם חיסרון משמעותי: הם צורכים כמויות עצומות של זיכרון. צריכת זיכרון מוגזמת זו מובילה לצווארי בקבוק במה שנקרא <strong>מטמון מפתח-ערך</strong> <span class="term">Key-Value Cache / KV Cache</span>.</p>
+
+<p>מה זה בעצם מטמון מפתח-ערך? תחשבו על זה כ"דף שוליים דיגיטלי מהיר" שמאחסן מידע שהמודל משתמש בו לעיתים קרובות תחת תוויות פשוטות, כך שהמחשב יכול לאחזר אותו מיידית בלי לחפש במסד נתונים איטי ועצום. כשאתם שואלים מודל שפה שאלה ארוכה, המודל צריך "לזכור" את כל מה שכבר עיבד בשיחה. ה-KV Cache הוא בדיוק המקום הזה, הזיכרון קצר הטווח שמאפשר למודל לעבוד מהר. ככל שהשיחה ארוכה יותר, או שהמודל מעבד יותר מידע, המטמון הזה תופח ודורש יותר ויותר זיכרון, מה שמאט את הכל ומייקר את ההפעלה.</p>
+
+<h2>קוונטיזציה של וקטורים: הבעיה והפתרון הקלאסי</h2>
+
+<p><strong>קוונטיזציה של וקטורים</strong> <span class="term">Vector Quantization</span> היא טכניקת דחיסת נתונים חזקה וקלאסית שמקטינה את הגודל של וקטורים רב-ממדיים. המילה "קוונטיזציה" מתייחסת לתהליך שבו מייצגים ערכים רציפים (מספרים עם נקודה עשרונית ארוכה) באמצעות קבוצה מוגבלת וקטנה יותר של ערכים. במקום לשמור מספר ברמת דיוק של 32 ביטים (כמו 3.14159265), שומרים אותו ברמת דיוק נמוכה יותר, נניח 4 או 3 ביטים, תוך אובדן מינימלי של מידע.</p>
+
+<p>אופטימיזציה זו מטפלת בשני היבטים קריטיים של בינה מלאכותית:</p>
+
+<p><strong>ראשית, היא משפרת חיפוש וקטורי</strong> <span class="term">Vector Search</span> — הטכנולוגיה המהירה שמניעה מערכות AI ומנועי חיפוש בקנה מידה גדול. חיפוש וקטורי הוא הדרך שבה מערכות כמו Google Search מוצאות תוצאות דומות סמנטית (כלומר, דומות במשמעות, לא רק במילים). על ידי הקטנת גודל הוקטורים, ניתן לבצע חיפושי דמיון מהר יותר בצורה דרמטית.</p>
+
+<p><strong>שנית, היא עוזרת לפתור את צווארי הבקבוק של מטמון ה-KV</strong> על ידי הקטנת הגודל של זוגות מפתח-ערך. זה מאפשר חיפושי דמיון מהירים יותר ומוריד עלויות זיכרון משמעותיות, מה שמתורגם ישירות לחיסכון כספי בהפעלת מודלי AI גדולים.</p>
+
+<p>עם זאת, לקוונטיזציה מסורתית של וקטורים יש בעיה מובנית: היא בדרך כלל מייצרת "תקורת זיכרון" <span class="term">Memory Overhead</span> משלה. רוב השיטות דורשות חישוב ואחסון (ברמת דיוק מלאה!) של קבועי קוונטיזציה עבור כל בלוק קטן של נתונים. מה הם קבועי קוונטיזציה? כשדוחסים מספרים, צריך לשמור גם "מפתח פענוח" שאומר איך לשחזר את המספרים המקוריים, למשל ערכי מינימום, מקסימום, וגורם קנה מידה עבור כל קבוצת מספרים. התקורה הזו יכולה להוסיף ביט אחד או שניים נוספים לכל מספר, מה שמסכל חלקית את המטרה המקורית של הקוונטיזציה. אם המטרה היא לדחוס ל-3 ביטים, אבל התקורה מוסיפה עוד 2 ביטים, בפועל הגענו ל-5 ביטים, שזו דחיסה הרבה פחות מרשימה.</p>
+
+<h2>הצגת TurboQuant, QJL ו-PolarQuant</h2>
+
+<p>היום אנחנו מציגים את <strong>TurboQuant</strong> (שיוצג בכנס ICLR 2026), אלגוריתם דחיסה שמטפל באופן אופטימלי באתגר של תקורת זיכרון בקוונטיזציה של וקטורים. ICLR (International Conference on Learning Representations) הוא אחד הכנסים היוקרתיים ביותר בתחום למידת המכונה, וקבלה שם מעידה על איכות המחקר.</p>
+
+<p>בנוסף, אנחנו מציגים את <strong>QJL</strong> (ראשי תיבות של Quantized Johnson-Lindenstrauss) ואת <strong>PolarQuant</strong> (שיוצג בכנס AISTATS 2026), ש-TurboQuant משתמש בהם כדי להשיג את התוצאות שלו. AISTATS (International Conference on Artificial Intelligence and Statistics) הוא כנס מוביל נוסף בתחום.</p>
+
+<p>בבדיקות שביצענו, כל שלוש הטכניקות הראו הבטחה גדולה להפחתת צווארי בקבוק של מפתח-ערך בלי להקריב את ביצועי מודל ה-AI. לכך יש השלכות עמוקות פוטנציאלית על כל מקרי השימוש שתלויים בדחיסה, ובמיוחד בתחומים של חיפוש ובינה מלאכותית. כשמודלים כמו Gemini של Google צריכים לעבד שיחות ארוכות או מסמכים גדולים, ה-KV Cache הוא לעיתים קרובות צוואר הבקבוק המרכזי. פריצת דרך בדחיסה שלו משפיעה ישירות על היכולת להריץ מודלים יעילים יותר, מהירים יותר, וזולים יותר.</p>
+
+<!-- SVG 1: TurboQuant Architecture -->
+<div class="svg-container">
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Noto Sans Hebrew', sans-serif;">
+  <defs>
+    <marker id="arrow1" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#555"/></marker>
+  </defs>
+  <text x="400" y="30" text-anchor="middle" font-size="18" font-weight="600" fill="#1a1a1a">ארכיטקטורת TurboQuant: דחיסה בשני שלבים</text>
+  <rect x="20" y="60" width="160" height="70" rx="10" fill="#e3f2fd" stroke="#1a73e8" stroke-width="2"/>
+  <text x="100" y="92" text-anchor="middle" font-size="15" font-weight="600" fill="#1a73e8">וקטור מקורי</text>
+  <text x="100" y="115" text-anchor="middle" font-size="13" fill="#555">32 ביטים לכל מספר</text>
+  <line x1="180" y1="95" x2="240" y2="95" stroke="#555" stroke-width="2" marker-end="url(#arrow1)"/>
+  <rect x="245" y="50" width="220" height="90" rx="10" fill="#e8f5e9" stroke="#34a853" stroke-width="2"/>
+  <text x="355" y="78" text-anchor="middle" font-size="16" font-weight="600" fill="#34a853">שלב 1: PolarQuant</text>
+  <text x="355" y="100" text-anchor="middle" font-size="13" fill="#333">סיבוב אקראי + קוונטיזציה</text>
+  <text x="355" y="120" text-anchor="middle" font-size="13" fill="#333">רוב הביטים (2-3 ביטים)</text>
+  <line x1="465" y1="95" x2="525" y2="95" stroke="#555" stroke-width="2" marker-end="url(#arrow1)"/>
+  <rect x="530" y="50" width="220" height="90" rx="10" fill="#fff3e0" stroke="#f9a825" stroke-width="2"/>
+  <text x="640" y="78" text-anchor="middle" font-size="16" font-weight="600" fill="#e65100">שלב 2: QJL</text>
+  <text x="640" y="100" text-anchor="middle" font-size="13" fill="#333">תיקון שגיאות שיוריות</text>
+  <text x="640" y="120" text-anchor="middle" font-size="13" fill="#333">ביט אחד בלבד</text>
+  <line x1="355" y1="140" x2="355" y2="180" stroke="#aaa" stroke-width="1.5" stroke-dasharray="5,5"/>
+  <text x="355" y="200" text-anchor="middle" font-size="12" fill="#888">שגיאה שיורית קטנה</text>
+  <line x1="355" y1="210" x2="530" y2="130" stroke="#aaa" stroke-width="1.5" stroke-dasharray="5,5" marker-end="url(#arrow1)"/>
+  <line x1="640" y1="140" x2="640" y2="200" stroke="#555" stroke-width="2" marker-end="url(#arrow1)"/>
+  <rect x="540" y="205" width="200" height="70" rx="10" fill="#fce4ec" stroke="#c62828" stroke-width="2"/>
+  <text x="640" y="237" text-anchor="middle" font-size="15" font-weight="600" fill="#c62828">וקטור דחוס</text>
+  <text x="640" y="258" text-anchor="middle" font-size="13" fill="#555">3 ביטים בלבד!</text>
+  <rect x="100" y="300" width="180" height="55" rx="8" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="1.5"/>
+  <text x="190" y="325" text-anchor="middle" font-size="13" font-weight="600" fill="#7b1fa2">אפס תקורת זיכרון</text>
+  <text x="190" y="343" text-anchor="middle" font-size="12" fill="#555">Zero Memory Overhead</text>
+  <rect x="320" y="300" width="180" height="55" rx="8" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="1.5"/>
+  <text x="410" y="325" text-anchor="middle" font-size="13" font-weight="600" fill="#7b1fa2">אפס אובדן דיוק</text>
+  <text x="410" y="343" text-anchor="middle" font-size="12" fill="#555">Zero Accuracy Loss</text>
+  <rect x="540" y="300" width="180" height="55" rx="8" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="1.5"/>
+  <text x="630" y="325" text-anchor="middle" font-size="13" font-weight="600" fill="#7b1fa2">ללא צורך באימון</text>
+  <text x="630" y="343" text-anchor="middle" font-size="12" fill="#555">No Fine-tuning Required</text>
+</svg>
+</div>
+
+<h2>איך TurboQuant עובד</h2>
+
+<p>TurboQuant היא שיטת דחיסה שמשיגה הפחתה גבוהה בגודל המודל עם אפס אובדן דיוק, מה שהופך אותה לאידיאלית לתמיכה הן בדחיסת מטמון KV והן בחיפוש וקטורי. המשמעות היא שניתן לקחת מודל AI קיים, להפעיל עליו את TurboQuant, ולקבל מודל שצורך הרבה פחות זיכרון, רץ מהר יותר, ומייצר תוצאות באותה רמת דיוק בדיוק, בלי שום צורך לאמן מחדש או לכוונן את המודל.</p>
+
+<p>TurboQuant מבצעת את הקסם הזה באמצעות שני שלבים מרכזיים:</p>
+
+<p><strong>שלב ראשון: דחיסה באיכות גבוהה (שיטת PolarQuant)</strong></p>
+
+<p>TurboQuant מתחיל על ידי סיבוב אקראי של וקטורי הנתונים. מה זה אומר "סיבוב אקראי"? תדמיינו שיש לכם ערימה של נתונים שמסודרים בצורה מורכבת ולא אחידה, עם פיקים וחללים. סיבוב אקראי הוא כמו לטלטל את הערימה בצורה מתמטית מדויקת כך שהנתונים מתפזרים בצורה אחידה יותר. הצעד החכם הזה מפשט את הגיאומטריה של הנתונים, מה שמקל על הפעלת קוונטיזר (מכווץ נתונים) סטנדרטי ואיכותי על כל חלק של הוקטור בנפרד.</p>
+
+<p>שלב ראשון זה משתמש ברוב כוח הדחיסה (רוב הביטים) כדי ללכוד את הרעיון המרכזי ואת העוצמה של הוקטור המקורי. כלומר, השלב הזה אחראי על "התמונה הגדולה" — הוא שומר על המשמעות המרכזית של הנתונים תוך כדי כיווץ משמעותי.</p>
+
+<p><strong>שלב שני: ביטול שגיאות נסתרות</strong></p>
+
+<p>TurboQuant משתמש בכמות קטנה ושיורית של כוח דחיסה (ביט אחד בלבד!) כדי להפעיל את אלגוריתם QJL על כמות השגיאה הזעירה שנותרה מהשלב הראשון. שלב ה-QJL פועל כבודק שגיאות מתמטי שמבטל הטיה <span class="term">Bias</span>, מה שמוביל לציון תשומת לב מדויק יותר.</p>
+
+<p>מהו <strong>ציון תשומת לב</strong> <span class="term">Attention Score</span>? זהו התהליך שמודלי שפה משתמשים בו כדי להחליט אילו חלקים מהקלט שלהם חשובים ואילו חלקים ניתן להתעלם מהם בבטחה. למשל, כשמודל קורא משפט ארוך, הוא צריך להחליט אילו מילים קודמות רלוונטיות למילה הנוכחית. ציוני תשומת הלב הם בדיוק המנגנון שקובע את המשקל שכל מילה מקבלת. אם הדחיסה מעוותת את ציוני תשומת הלב, המודל יתחיל "להתעלם" מדברים חשובים או "להתמקד" בדברים לא רלוונטיים, מה שיפגע בתוצאות. TurboQuant מבטיח שזה לא יקרה.</p>
+
+<h2>QJL: הטריק של ביט אחד עם אפס תקורה</h2>
+
+<p>QJL משתמש בטכניקה מתמטית שנקראת <strong>טרנספורמציית Johnson-Lindenstrauss</strong> כדי לכווץ נתונים רב-ממדיים מורכבים תוך שמירה על המרחקים והיחסים החיוניים בין נקודות הנתונים. הטרנספורמציה הזו היא אחד הכלים האלגנטיים ביותר במתמטיקה: היא מוכיחה שניתן להטיל נתונים ממימד גבוה למימד נמוך בהרבה, בלי לאבד יותר מדי מידע על המרחקים בין הנקודות.</p>
+
+<p>QJL לוקח את הרעיון הזה צעד קדימה: הוא מצמצם כל מספר בוקטור התוצאה לביט סימן בודד (+1 או -1). תחשבו על זה: במקום לשמור מספר עם דיוק של 32 ביטים כמו 0.73291, שומרים רק את הסימן שלו, "חיובי" או "שלילי". זה דחיסה קיצונית של פי 32! האלגוריתם הזה בעצם יוצר קיצור מהיר שדורש אפס תקורת זיכרון. אין קבועי קוונטיזציה, אין טבלאות חיפוש, אין שום דבר נוסף מלבד הביטים עצמם.</p>
+
+<p>כדי לשמור על דיוק, QJL משתמש באומדן (estimator) מיוחד שמאזן באופן אסטרטגי בין שאילתה ברמת דיוק גבוהה לבין הנתונים הפשוטים ברמת דיוק נמוכה. מה זה אומר בפרקטיקה? כשהמודל רוצה לחשב ציון תשומת לב, הוא משלב את השאילתה המקורית (שנשארת ברמת דיוק מלאה) עם המפתחות הדחוסים (שהם רק סימנים), באמצעות נוסחה מתמטית חכמה שנותנת תוצאה מדויקת להפתיע. זה מאפשר למודל לחשב במדויק את ציון תשומת הלב, כלומר את התהליך שמשמש להחלטה אילו חלקים מהקלט חשובים ואילו חלקים ניתן להתעלם מהם בבטחה.</p>
+
+<p>היופי של QJL הוא בפשטות: הוא לא דורש אימון, לא דורש התאמה למערך נתונים ספציפי, ולא דורש חישובים מורכבים. הוא פשוט לוקח את הנתונים, מפעיל טרנספורמציה אקראית, ושומר רק את הסימנים. ועם זאת, התוצאות שלו מדויקות מספיק כדי לשמש כשלב תיקון שגיאות אפקטיבי ב-TurboQuant.</p>
+
+<h2>PolarQuant: "זווית" חדשה על דחיסה</h2>
+
+<p>PolarQuant מטפל בבעיית תקורת הזיכרון באמצעות גישה שונה לחלוטין מכל מה שראינו קודם. במקום להסתכל על וקטור זיכרון באמצעות קואורדינטות סטנדרטיות (כלומר, X, Y, Z) שמציינות את המרחק לאורך כל ציר, PolarQuant ממיר את הוקטור לקואורדינטות קוטביות <span class="term">Polar Coordinates</span>.</p>
+
+<p>כדי להבין את ההבדל, בואו נשתמש באנלוגיה יומיומית:</p>
+
+<!-- SVG 2: Cartesian vs Polar -->
+<div class="svg-container">
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Noto Sans Hebrew', sans-serif;">
+  <text x="400" y="30" text-anchor="middle" font-size="18" font-weight="600" fill="#1a1a1a">קואורדינטות קרטזיות מול קואורדינטות קוטביות</text>
+  <text x="200" y="60" text-anchor="middle" font-size="15" font-weight="600" fill="#1a73e8">קרטזי (מסורתי)</text>
+  <line x1="60" y1="340" x2="340" y2="340" stroke="#ccc" stroke-width="1"/>
+  <line x1="60" y1="340" x2="60" y2="100" stroke="#ccc" stroke-width="1"/>
+  <line x1="60" y1="280" x2="340" y2="280" stroke="#eee" stroke-width="1"/>
+  <line x1="60" y1="220" x2="340" y2="220" stroke="#eee" stroke-width="1"/>
+  <line x1="60" y1="160" x2="340" y2="160" stroke="#eee" stroke-width="1"/>
+  <line x1="130" y1="100" x2="130" y2="340" stroke="#eee" stroke-width="1"/>
+  <line x1="200" y1="100" x2="200" y2="340" stroke="#eee" stroke-width="1"/>
+  <line x1="270" y1="100" x2="270" y2="340" stroke="#eee" stroke-width="1"/>
+  <line x1="60" y1="340" x2="270" y2="340" stroke="#1a73e8" stroke-width="3"/>
+  <line x1="270" y1="340" x2="270" y2="100" stroke="#1a73e8" stroke-width="3"/>
+  <circle cx="270" cy="100" r="6" fill="#c62828"/>
+  <text x="165" y="365" text-anchor="middle" font-size="13" fill="#1a73e8">3 בלוקים מזרחה ←</text>
+  <text x="200" y="390" text-anchor="middle" font-size="12" fill="#888">"לך 3 בלוקים מזרחה, 4 צפונה"</text>
+  <text x="600" y="60" text-anchor="middle" font-size="15" font-weight="600" fill="#34a853">קוטבי (PolarQuant)</text>
+  <circle cx="600" cy="230" r="130" fill="none" stroke="#eee" stroke-width="1"/>
+  <circle cx="600" cy="230" r="97" fill="none" stroke="#eee" stroke-width="1"/>
+  <circle cx="600" cy="230" r="65" fill="none" stroke="#eee" stroke-width="1"/>
+  <line x1="600" y1="230" x2="704" y2="117" stroke="#34a853" stroke-width="3"/>
+  <circle cx="704" cy="117" r="6" fill="#c62828"/>
+  <path d="M 640 230 A 40 40 0 0 0 627 195" fill="none" stroke="#f9a825" stroke-width="2"/>
+  <text x="650" y="210" font-size="13" fill="#f9a825" font-weight="600">37°</text>
+  <text x="650" y="165" font-size="13" fill="#34a853" font-weight="600">רדיוס = 5</text>
+  <text x="600" y="390" text-anchor="middle" font-size="12" fill="#888">"לך 5 בלוקים בזווית 37 מעלות"</text>
+  <rect x="420" y="80" width="2" height="280" fill="#ddd"/>
+</svg>
+</div>
+
+<p>ההמרה הזו דומה להחלפה של "לך 3 בלוקים מזרחה, 4 בלוקים צפונה" ב-"לך 5 בלוקים סך הכל בזווית של 37 מעלות". שתי ההוראות מובילות לאותה נקודה בדיוק, אבל הייצוג שונה מהותית.</p>
+
+<p>תוצאת ההמרה היא שני חלקי מידע: <strong>הרדיוס</strong> (כמה חזק המידע הבסיסי, כלומר "הגודל" או "העוצמה" של הוקטור) ו<strong>הזווית</strong> (הכיוון או המשמעות של הנתונים). הרדיוס אומר לנו "כמה" והזווית אומרת לנו "מה".</p>
+
+<p>ועכשיו מגיע הקסם: מכיוון שהתבנית של הזוויות ידועה מראש ומרוכזת מאוד (כלומר, הזוויות לא מתפזרות באופן אקראי אלא עוקבות אחרי דפוס צפוי), המודל כבר לא צריך לבצע את שלב הנרמול היקר של הנתונים.</p>
+
+<p>מהו <strong>נרמול נתונים</strong> <span class="term">Data Normalization</span>? זהו תהליך שבו מתאימים את טווח הערכים של הנתונים לטווח אחיד וידוע מראש (למשל, בין 0 ל-1). בשיטות מסורתיות, כל בלוק נתונים יכול להיות בטווח שונה (למשל, בלוק אחד בין -100 ל-50, ואחר בין 0 ל-1000), ולכן צריך לשמור את פרמטרי הנרמול (מינימום, מקסימום, או ממוצע וסטיית תקן) עבור כל בלוק, וזו בדיוק התקורה הבעייתית.</p>
+
+<p>PolarQuant ממפה את הנתונים על רשת "מעגלית" קבועה וצפויה שבה הגבולות כבר ידועים מראש, במקום רשת "מרובעת" שבה הגבולות משתנים כל הזמן. כשאתם עובדים בקואורדינטות קוטביות, הזוויות תמיד בין 0 ל-360 מעלות, ללא קשר לנתונים. אין צורך ב"מפתח פענוח" שמשתנה מבלוק לבלוק, כי הרשת אוניברסלית. זה מאפשר ל-PolarQuant לבטל את תקורת הזיכרון שמכבידה על שיטות מסורתיות.</p>
+
+<p>החידוש הזה פשוט ואלגנטי, אבל ההשפעה שלו עמוקה: על ידי שינוי מערכת הקואורדינטות, PolarQuant הופך בעיה קשה (דחיסה עם תקורה) לבעיה פשוטה (דחיסה ללא תקורה). זהו סוג הפתרון שרק מתמטיקאים שמבינים לעומק את הגיאומטריה של נתונים רב-ממדיים יכולים להמציא.</p>
+
+<h2>ניסויים ותוצאות</h2>
+
+<p>כל שלושת האלגוריתמים הוערכו בקפדנות על פני מדדי השוואה סטנדרטיים של הקשר ארוך (long-context benchmarks), כולל:</p>
+
+<ul>
+<li><strong>LongBench</strong> — מדד שבודק את יכולת המודל לעבד מסמכים ארוכים ולענות עליהם שאלות</li>
+<li><strong>Needle In A Haystack</strong> (מחט בערימת שחת) — מדד שבודק אם המודל יכול למצוא מידע ספציפי שהוטמן עמוק בתוך טקסט ארוך</li>
+<li><strong>ZeroSCROLLS</strong> — סדרת משימות שדורשות הבנה של מסמכים ארוכים במיוחד</li>
+<li><strong>RULER</strong> — מדד שבוחן יכולות הקשר ארוך מגוונות</li>
+<li><strong>L-Eval</strong> — מדד הערכה למודלים בהקשרים ארוכים</li>
+</ul>
+
+<p>הניסויים בוצעו באמצעות מודלי שפה גדולים (LLMs) בקוד פתוח, כולל <strong>Gemma</strong> (של Google) ו-<strong>Mistral</strong>. הנתונים הניסוייים מדגימים ש-TurboQuant משיג ביצועי ציון אופטימליים מבחינת הן עיוות מכפלה סקלרית <span class="term">Dot Product Distortion</span> והן שחזור <span class="term">Recall</span>, תוך מזעור בו-זמני של טביעת הרגל של זיכרון ה-KV.</p>
+
+<p>מה זה <strong>עיוות מכפלה סקלרית</strong>? כשדוחסים וקטורים, המרחק בין הגרסה המקורית לגרסה הדחוסה נמדד לעיתים קרובות באמצעות "מכפלה סקלרית" (dot product). עיוות נמוך פירושו שהוקטור הדחוס מייצג נאמנה את המקור.</p>
+
+<p>מה זה <strong>שחזור (recall)</strong>? בהקשר של חיפוש וקטורי, recall מודד כמה מהתוצאות הנכונות אכן נמצאו. recall של 95% פירושו שמתוך 100 תוצאות רלוונטיות, 95 נמצאו, ו-5 "הוחמצו". recall גבוה פירושו שהדחיסה לא גרמה ל"אובדן" תוצאות חיפוש.</p>
+
+<h3>תוצאות מפתח</h3>
+
+<div class="key-results">
+<ul>
+<li><strong>TurboQuant משיג תוצאות מושלמות</strong> בכל המדדים תוך הקטנת גודל זיכרון מפתח-ערך בגורם של לפחות <strong>פי 6</strong></li>
+<li><strong>PolarQuant כמעט ללא אובדן</strong> במשימות "מחט בערימת שחת" — כלומר, גם אחרי דחיסה, המודל מצליח למצוא מידע ספציפי שמוטמן בטקסט ארוך</li>
+<li>TurboQuant מכווץ את מטמון ה-KV ל<strong>-3 ביטים בלבד</strong> ללא צורך באימון או כוונון עדין וללא כל פשרה בדיוק המודל</li>
+<li>הוא משיג <strong>זמן ריצה מהיר יותר</strong> מה-LLMs המקוריים</li>
+<li>TurboQuant ב-4 ביטים משיג <strong>שיפור ביצועים של עד פי 8</strong> מעל מפתחות לא מכווצים של 32 ביטים על מאיצי GPU מסוג H100</li>
+<li>בחיפוש וקטורי: TurboQuant משיג באופן עקבי <strong>יחסי שחזור (recall) עדיפים</strong> בהשוואה ל-PQ ו-RabbiQ, למרות ששיטות הבסיס האלה משתמשות בספרי קוד גדולים ולא יעילים ובכוונון ספציפי למערך הנתונים</li>
+</ul>
+</div>
+
+<!-- SVG 3: KV Cache Compression -->
+<div class="svg-container">
+<svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Noto Sans Hebrew', sans-serif;">
+  <text x="400" y="30" text-anchor="middle" font-size="18" font-weight="600" fill="#1a1a1a">דחיסת מטמון KV: מ-32 ביטים ל-3 ביטים</text>
+  <rect x="100" y="60" width="280" height="60" rx="6" fill="#ef5350"/>
+  <text x="240" y="95" text-anchor="middle" font-size="15" fill="white" font-weight="600">32 ביטים (מקורי)</text>
+  <text x="400" y="95" text-anchor="middle" font-size="20">→</text>
+  <rect x="420" y="60" width="47" height="60" rx="6" fill="#66bb6a"/>
+  <text x="530" y="95" text-anchor="start" font-size="15" fill="#333" font-weight="600">3 ביטים (TurboQuant)</text>
+  <rect x="280" y="140" width="240" height="40" rx="20" fill="#1a73e8"/>
+  <text x="400" y="166" text-anchor="middle" font-size="16" fill="white" font-weight="600">הפחתה של פי 6 בזיכרון!</text>
+  <text x="400" y="220" text-anchor="middle" font-size="14" fill="#888">השוואת צריכת זיכרון KV Cache</text>
+  <text x="95" y="255" text-anchor="end" font-size="13" fill="#555">מקורי</text>
+  <rect x="100" y="240" width="600" height="24" rx="4" fill="#ef5350" opacity="0.8"/>
+  <text x="710" y="258" font-size="12" fill="#555">100%</text>
+  <text x="95" y="295" text-anchor="end" font-size="13" fill="#555">TurboQuant</text>
+  <rect x="100" y="280" width="100" height="24" rx="4" fill="#66bb6a" opacity="0.8"/>
+  <text x="210" y="298" font-size="12" fill="#555">~17%</text>
+</svg>
+</div>
+
+<!-- SVG 4: Performance Speedup -->
+<div class="svg-container">
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Noto Sans Hebrew', sans-serif;">
+  <text x="400" y="30" text-anchor="middle" font-size="18" font-weight="600" fill="#1a1a1a">שיפור ביצועים: TurboQuant 4-bit מול 32-bit על H100</text>
+  <line x1="120" y1="60" x2="120" y2="310" stroke="#ccc" stroke-width="1"/>
+  <text x="60" y="185" text-anchor="middle" font-size="13" fill="#555" transform="rotate(-90, 60, 185)">מהירות יחסית</text>
+  <line x1="120" y1="310" x2="700" y2="310" stroke="#ccc" stroke-width="1"/>
+  <line x1="120" y1="279" x2="700" y2="279" stroke="#f0f0f0" stroke-width="1"/>
+  <line x1="120" y1="248" x2="700" y2="248" stroke="#f0f0f0" stroke-width="1"/>
+  <line x1="120" y1="217" x2="700" y2="217" stroke="#f0f0f0" stroke-width="1"/>
+  <line x1="120" y1="186" x2="700" y2="186" stroke="#f0f0f0" stroke-width="1"/>
+  <line x1="120" y1="155" x2="700" y2="155" stroke="#f0f0f0" stroke-width="1"/>
+  <line x1="120" y1="124" x2="700" y2="124" stroke="#f0f0f0" stroke-width="1"/>
+  <line x1="120" y1="93" x2="700" y2="93" stroke="#f0f0f0" stroke-width="1"/>
+  <line x1="120" y1="62" x2="700" y2="62" stroke="#f0f0f0" stroke-width="1"/>
+  <text x="110" y="314" text-anchor="end" font-size="12" fill="#888">1x</text>
+  <text x="110" y="283" text-anchor="end" font-size="12" fill="#888">2x</text>
+  <text x="110" y="252" text-anchor="end" font-size="12" fill="#888">3x</text>
+  <text x="110" y="221" text-anchor="end" font-size="12" fill="#888">4x</text>
+  <text x="110" y="190" text-anchor="end" font-size="12" fill="#888">5x</text>
+  <text x="110" y="159" text-anchor="end" font-size="12" fill="#888">6x</text>
+  <text x="110" y="128" text-anchor="end" font-size="12" fill="#888">7x</text>
+  <text x="110" y="97" text-anchor="end" font-size="12" fill="#888">8x</text>
+  <rect x="200" y="279" width="120" height="31" rx="4" fill="#ef5350"/>
+  <text x="260" y="300" text-anchor="middle" font-size="13" fill="white" font-weight="600">1x</text>
+  <text x="260" y="335" text-anchor="middle" font-size="13" fill="#555">32-bit</text>
+  <text x="260" y="352" text-anchor="middle" font-size="11" fill="#888">(ללא דחיסה)</text>
+  <rect x="480" y="66" width="120" height="244" rx="4" fill="#1a73e8"/>
+  <text x="540" y="195" text-anchor="middle" font-size="18" fill="white" font-weight="600">8x</text>
+  <text x="540" y="335" text-anchor="middle" font-size="13" fill="#555">TurboQuant 4-bit</text>
+  <text x="540" y="352" text-anchor="middle" font-size="11" fill="#888">(דחוס)</text>
+  <text x="400" y="375" text-anchor="middle" font-size="13" fill="#34a853" font-weight="600">שיפור של עד פי 8 במהירות על NVIDIA H100</text>
+</svg>
+</div>
+
+<p>TurboQuant מדגים מעבר טרנספורמטיבי בחיפוש רב-ממדי. על ידי הצבת רף חדש למהירות שניתן להשיג, הוא מספק שיעורי עיוות כמעט אופטימליים באופן שלא תלוי בנתונים <span class="term">Data-oblivious</span>. מה זה אומר "לא תלוי בנתונים"? זה פירושו שהאלגוריתם עובד היטב על כל סוג של נתונים, ללא צורך ב"לימוד" מוקדם של מערך הנתונים הספציפי. אתה לא צריך להריץ אותו על דוגמאות לפני שאתה יכול להשתמש בו. זה מאפשר למנועי חיפוש שכנים קרובים (nearest neighbor engines) לפעול עם היעילות של מערכת 3 ביטים תוך שמירה על הדיוק של מודלים כבדים בהרבה.</p>
+
+<!-- SVG 5: Vector Search Recall Comparison -->
+<div class="svg-container">
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Noto Sans Hebrew', sans-serif;">
+  <text x="400" y="30" text-anchor="middle" font-size="18" font-weight="600" fill="#1a1a1a">השוואת שחזור (Recall) בחיפוש וקטורי</text>
+  <text x="400" y="52" text-anchor="middle" font-size="13" fill="#888">אחוז התוצאות הנכונות שנמצאו בחיפוש</text>
+  <line x1="140" y1="75" x2="140" y2="300" stroke="#ccc" stroke-width="1"/>
+  <text x="55" y="190" text-anchor="middle" font-size="13" fill="#555" transform="rotate(-90, 55, 190)">Recall %</text>
+  <line x1="140" y1="300" x2="720" y2="300" stroke="#ccc" stroke-width="1"/>
+  <text x="130" y="300" text-anchor="end" font-size="12" fill="#888">70%</text>
+  <text x="130" y="255" text-anchor="end" font-size="12" fill="#888">80%</text>
+  <text x="130" y="210" text-anchor="end" font-size="12" fill="#888">90%</text>
+  <text x="130" y="165" text-anchor="end" font-size="12" fill="#888">95%</text>
+  <text x="130" y="120" text-anchor="end" font-size="12" fill="#888">98%</text>
+  <text x="130" y="80" text-anchor="end" font-size="12" fill="#888">100%</text>
+  <line x1="140" y1="255" x2="720" y2="255" stroke="#f5f5f5" stroke-width="1"/>
+  <line x1="140" y1="210" x2="720" y2="210" stroke="#f5f5f5" stroke-width="1"/>
+  <line x1="140" y1="165" x2="720" y2="165" stroke="#f5f5f5" stroke-width="1"/>
+  <line x1="140" y1="120" x2="720" y2="120" stroke="#f5f5f5" stroke-width="1"/>
+  <text x="260" y="325" text-anchor="middle" font-size="13" fill="#555">2 ביטים</text>
+  <rect x="210" y="232" width="30" height="68" rx="3" fill="#ef5350" opacity="0.85"/>
+  <rect x="245" y="243" width="30" height="57" rx="3" fill="#f9a825" opacity="0.85"/>
+  <rect x="280" y="143" width="30" height="157" rx="3" fill="#1a73e8" opacity="0.85"/>
+  <text x="430" y="325" text-anchor="middle" font-size="13" fill="#555">3 ביטים</text>
+  <rect x="380" y="187" width="30" height="113" rx="3" fill="#ef5350" opacity="0.85"/>
+  <rect x="415" y="176" width="30" height="124" rx="3" fill="#f9a825" opacity="0.85"/>
+  <rect x="450" y="93" width="30" height="207" rx="3" fill="#1a73e8" opacity="0.85"/>
+  <text x="600" y="325" text-anchor="middle" font-size="13" fill="#555">4 ביטים</text>
+  <rect x="550" y="154" width="30" height="146" rx="3" fill="#ef5350" opacity="0.85"/>
+  <rect x="585" y="143" width="30" height="157" rx="3" fill="#f9a825" opacity="0.85"/>
+  <rect x="620" y="82" width="30" height="218" rx="3" fill="#1a73e8" opacity="0.85"/>
+  <rect x="230" y="350" width="16" height="16" rx="3" fill="#ef5350" opacity="0.85"/>
+  <text x="252" y="363" font-size="13" fill="#555">PQ (קוונטיזציית מכפלה)</text>
+  <rect x="420" y="350" width="16" height="16" rx="3" fill="#f9a825" opacity="0.85"/>
+  <text x="442" y="363" font-size="13" fill="#555">RabbiQ</text>
+  <rect x="540" y="350" width="16" height="16" rx="3" fill="#1a73e8" opacity="0.85"/>
+  <text x="562" y="363" font-size="13" fill="#555">TurboQuant</text>
+</svg>
+</div>
+
+<h2>מבט קדימה</h2>
+
+<p>TurboQuant, QJL ו-PolarQuant הם יותר מסתם פתרונות הנדסיים מעשיים. הם תרומות אלגוריתמיות יסודיות שמגובות בהוכחות תיאורטיות חזקות. מה זה אומר בפרקטיקה? זה אומר שהמחקרים האלה לא מסתמכים רק על ניסויים אמפיריים ("ניסינו והתוצאות טובות"), אלא מוכיחים מתמטית שהשיטות יעילות ופועלות קרוב לגבולות התיאורטיים התחתונים <span class="term">Theoretical Lower Bounds</span>. גבול תיאורטי תחתון הוא התשובה לשאלה "מה המקסימום שאי אפשר לעבור?". אם אלגוריתם פועל קרוב לגבול הזה, פירושו שכמעט אי אפשר לעשות יותר טוב. הבסיס המדעי הקפדני הזה הוא מה שהופך את השיטות לחסינות ואמינות עבור מערכות קריטיות בקנה מידה גדול.</p>
+
+<p>שיטות אלה לא רק עובדות היטב ביישומים מעשיים; הן <strong>בעלות יעילות מוכחת</strong> ופועלות קרוב לגבולות תיאורטיים תחתונים. ההבדל בין "עובד טוב בניסוי" ל"מוכח מתמטית שעובד טוב" הוא קריטי: הראשון יכול להיכשל במקרי קצה, השני מבטיח ביצועים עקביים. הבסיס הקפדני הזה הוא מה שהופך אותן לחסינות ואמינות עבור מערכות קריטיות בקנה מידה גדול, כמו מנועי חיפוש שמשרתים מיליארדי שאילתות ביום.</p>
+
+<p>בעוד שיישום מרכזי הוא פתרון צוואר הבקבוק של מטמון מפתח-ערך במודלים כמו <strong>Gemini</strong> של Google, ההשפעה של קוונטיזציה וקטורית מקוונת ויעילה משתרעת הרבה יותר רחוק. המילה "מקוונת" <span class="term">Online</span> בהקשר הזה פירושה שהדחיסה מתבצעת תוך כדי תנועה, בזמן אמת, ולא כשלב מקדים שדורש עיבוד ארוך של כל הנתונים מראש.</p>
+
+<p>חיפוש מודרני מתפתח מעבר לסתם מילות מפתח כדי להבין כוונה ומשמעות. זוכרים כשחיפוש ב-Google היה מבוסס על התאמה מילולית? היום, כשאתם מחפשים "איך לטפל בכאב גב", המנוע מבין את הכוונה שלכם ומחזיר תוצאות רלוונטיות גם אם הן לא מכילות את המילים המדויקות שהקלדתם. זה דורש <strong>חיפוש וקטורי</strong> — היכולת למצוא את הפריטים ה"קרובים ביותר" או הדומים ביותר סמנטית במסד נתונים של מיליארדי וקטורים. כשיש לכם מיליארדי וקטורים, כל ביט שאתם חוסכים מתרגם לטרה-בייטים של זיכרון שנחסך, מה שמתרגם למיליוני דולרים בחיסכון בעלויות תשתית.</p>
+
+<p>טכניקות כמו TurboQuant קריטיות למשימה הזו. הן מאפשרות לבנות ולתשאל אינדקסי וקטורים גדולים עם זיכרון מינימלי, זמן עיבוד מקדים כמעט אפסי, ודיוק מתקדם ביותר. זה הופך חיפוש סמנטי בקנה המידה של Google למהיר ויעיל יותר. במילים אחרות, TurboQuant לא רק משפר את מודלי השפה, הוא משפר את כל מערכת החיפוש של Google, מלמטה ועד למעלה.</p>
+
+<p>המשמעות הרחבה יותר היא שהטכנולוגיות האלה מאפשרות דמוקרטיזציה של AI. כשמודלים צורכים פחות זיכרון ורצים מהר יותר, הם יכולים לרוץ על חומרה זולה יותר, מה שמנגיש אותם ליותר חברות, יותר מפתחים, ויותר משתמשים. דחיסה אפקטיבית היא לא רק אופטימיזציה טכנית; היא מפתח לפריסה רחבה של AI.</p>
+
+<h2>סיכום: למה זה חשוב</h2>
+
+<p>בואו נסכם את מה שלמדנו. שלושה אלגוריתמים חדשים של Google Research פותרים בעיה מרכזית בעולם ה-AI:</p>
+
+<p><strong>PolarQuant</strong> ממיר וקטורים מקואורדינטות קרטזיות לקוטביות, ובכך מבטל את הצורך בקבועי נרמול יקרים. הוא מספק דחיסה באיכות גבוהה עם אפס תקורת זיכרון, תוך שימוש בתובנה גיאומטרית אלגנטית שהופכת בעיה קשה לפשוטה.</p>
+
+<p><strong>QJL</strong> לוקח את הרעיון של טרנספורמציית Johnson-Lindenstrauss ודוחס אותו לביט בודד לכל מספר. הוא פועל כשכבת תיקון שגיאות שלא דורשת שום תקורה נוספת, מה שהופך אותו לרכיב אידיאלי במערכת דחיסה דו-שלבית.</p>
+
+<p><strong>TurboQuant</strong> משלב את שניהם למערכת דחיסה אחידה שמשיגה תוצאות שלא נראו קודם: דחיסה ל-3 ביטים ללא אובדן דיוק, הפחתת זיכרון של פי 6, שיפור מהירות של עד פי 8, ללא צורך באימון או כוונון, ועם ביצועים שקרובים לגבולות התיאורטיים.</p>
+
+<p>בעולם שבו מודלי AI הולכים וגדלים, והדרישה לעיבוד הקשרים ארוכים הולכת וגוברת, היכולת לדחוס ביעילות בלי להקריב דיוק היא לא רק נחמדה. היא הכרחית. TurboQuant מראה שאפשר להשיג את שניהם, ועם הוכחות מתמטיות שזה באמת עובד.</p>
+
+<div class="collab">
+<strong>צוות המחקר:</strong> המחקר בוצע בשיתוף פעולה עם Praneeth Kacham (Google),&#8206; Majid Hadian (Google DeepMind),&#8206; Insu Han (KAIST),&#8206; Majid Daliri (NYU),&#8206; Lars Gottesbüren (Google), ו-Rajesh Jayaram (Google).
+</div>
+
+<div class="bottom-source">
+<p>📎 מקור: <a href="https://research.google/blog/turboquant-redefining-ai-efficiency-with-extreme-compression/" target="_blank" rel="noopener">TurboQuant: Redefining AI Efficiency with Extreme Compression — Google Research Blog</a></p>
+<p>תורגם והורחב לעברית על ידי FRIDAY 🎯</p>
+</div>
+
+</div>
+</body>
+</html>
