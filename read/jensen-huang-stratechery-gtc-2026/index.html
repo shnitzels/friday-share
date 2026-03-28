@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ראיון עם ג׳נסן הואנג, מנכ״ל NVIDIA — על מחשוב מואץ, סוכני AI, ורכישת Groq | GTC 2026</title>
+    <meta property="og:title" content="ראיון עם ג׳נסן הואנג, מנכ״ל NVIDIA — על מחשוב מואץ, סוכני AI, ורכישת Groq">
+    <meta property="og:description" content="תרגום מלא לעברית של ראיון בן תומפסון (Stratechery) עם מנכ״ל NVIDIA ג׳נסן הואנג לאחר הרצאת הפתיחה של GTC 2026. על CUDA, סוכני AI, מעבדי Vera, רכישת Groq, סין, והדוּמרים.">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ראיון עם ג׳נסן הואנג, מנכ״ל NVIDIA — GTC 2026">
+    <meta name="twitter:description" content="תרגום מלא לעברית של הראיון של בן תומפסון עם ג׳נסן הואנג על מחשוב מואץ, סוכני AI, Groq, סין והדוּמרים.">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Noto Sans Hebrew', sans-serif; font-size: 18px; line-height: 1.8; color: #1a1a1a; background: #fff; padding: 2rem 1rem; }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 { font-size: 32px; font-weight: 600; margin-bottom: 0.5rem; line-height: 1.3; }
+        h2 { font-size: 24px; font-weight: 600; margin: 2.5rem 0 1rem; color: #76b900; border-bottom: 2px solid #76b900; padding-bottom: 0.5rem; }
+        .subtitle { font-size: 20px; color: #555; margin-bottom: 1.5rem; }
+        .intro-box { background: #f7f7f7; border-right: 4px solid #76b900; padding: 1.2rem 1.5rem; margin-bottom: 2rem; border-radius: 4px; }
+        .intro-box a { color: #76b900; text-decoration: none; font-weight: 600; }
+        .intro-box a:hover { text-decoration: underline; }
+        .qa { margin-bottom: 1.5rem; }
+        .speaker { font-weight: 600; }
+        .speaker-bt { color: #2563eb; }
+        .speaker-jh { color: #76b900; }
+        .svg-chart { margin: 2rem auto; text-align: center; }
+        .svg-chart svg { max-width: 100%; height: auto; }
+        .source-link { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #ddd; font-size: 16px; color: #666; }
+        .source-link a { color: #76b900; text-decoration: none; font-weight: 600; }
+        .source-link a:hover { text-decoration: underline; }
+        @media (max-width: 600px) { body { padding: 1rem 0.75rem; font-size: 16px; } h1 { font-size: 26px; } h2 { font-size: 20px; } }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<h1>ראיון עם ג׳נסן הואנג, מנכ״ל NVIDIA, על מחשוב מואץ</h1>
+<p class="subtitle">בן תומפסון (Stratechery) מראיין את הואנג מיד לאחר הרצאת הפתיחה של GTC 2026 בסן חוזה</p>
+
+<div class="intro-box">
+    📝 זהו תרגום מלא לעברית של הראיון שפורסם ב-Stratechery ב-27 במרץ 2026. הראיון נערך באופן אישי מיד לאחר הרצאת הפתיחה של ג׳נסן הואנג בכנס GTC 2026.<br>
+    <a href="https://stratechery.com/2026/an-interview-with-nvidia-ceo-jensen-huang-about-accelerated-computing/" target="_blank">קראו את המקור באנגלית ב-Stratechery →</a>
+</div>
+
+<p>בראיון הזה אנו מדברים על הרצאת פתיחה שנראתה כמו שיעור היסטוריה, ומה זה אומר על חברה שעדיין מרגישה קטנה למרות שהיא היקרה ביותר בעולם, וגם על מה שהשתנה ב-AI בשנה האחרונה. לאחר מכן אנו דנים במספר הכרזות שעשויות להרגיש כשינוי גישה (למרות שהואנג לא מסכים), כולל עסקי המעבדים (CPU) הצומחים של NVIDIA ורכישת Groq. לבסוף אנו דנים במחסור בשרשרת ה-AI ואיך הוא משפיע על NVIDIA, שאלת סין, ותסכולו של הואנג מהדוּמרים והשפעתם בוושינגטון.</p>
+
+<h2>ליבת CUDA של NVIDIA</h2>
+
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> ג׳נסן הואנג, ברוך השב ל-Stratechery.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> שמח להיות כאן איתך.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> אתה ממש ירדת עכשיו מהבמה, קצת חרגת מהזמן, אני חושב, אבל הקדשת חלק נכבד מהרצאת הפתיחה הזו, שנהניתי ממנה מאוד, להסביר מה זה NVIDIA, החל מההיסטוריה של ה-programmable shader, השקת CUDA לפני 20 שנה. אנחנו לא צריכים להקדיש יותר מדי זמן לסיפור הזה, עשית עבודה טובה, וקוראי Stratechery בהחלט מכירים את זה. אני זוכר בדיוק, מישהו ביקש ממני להסביר איך NVIDIA יכולה להכריז על כל כך הרבה דברים ב-GTC יחיד, לפני שש, שבע שנים, אולי אפילו יותר, והסברתי את כל העניין עם CUDA וכל הספריות, שזה פשוט לעשות את אותו הדבר שוב ושוב, אבל לתעשיות ספציפיות. זה הסיפור שסיפרת היום, וזה קצת רגע של "חזרה לעתיד" אחרי שכנסי ה-GTC האחרונים היו ממוקדים מאוד ב-AI, גם CES היה ממוקד מאוד ב-AI. למה הרגשת צורך לספר את הסיפור הזה עכשיו? לחזור ולהציג את CUDA ולמה זה חשוב?</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> ובכן, כי אנחנו נכנסים להמון תעשיות חדשות, וכי AI הולך להשתמש בכלים, וכשה-AI משתמש בכלים, אלה כלים שיצרנו לבני אדם. <strong>AI הולך להשתמש ב-Excel, AI הולך להשתמש ב-Photoshop, AI הולך להשתמש בכלי סינתזה לוגית, בכלים של Synopsis ו-Cadence. הכלים האלה חייבים להיות מואצים בצורה אדירה, הם ישתמשו במסדי נתונים, ואלה חייבים להיות מואצים כי ה-AI מהיר.</strong> ולכן אני חושב שבעידן הזה, אנחנו צריכים להאיץ את כל התוכנות בעולם כמה שיותר מהר, ואז לשים אותן מול ה-AI כדי שהוא יוכל להשתמש בהן כסוכן.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> אז זה קצת כמו "כבר עשינו את זה למגוון מגזרים ועכשיו הולכים לעשות את זה להרבה עוד"?</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> כן, להמון עוד. לדוגמה, עיבוד נתונים.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> ובכן, זה היה סוג של הפתעה. לא ציפיתי שתפתח עם שותפות עם IBM.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> כן, נכון, זה שם את הדברים בפרספקטיבה. כלומר, הם ממש התחילו את הכל.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> כתבת בשבוע שעבר ש-AI הוא "עוגת חמש שכבות": חשמל, שבבים, תשתית, מודלים ואפליקציות. האם יש חשש שבארבע-חמש השנים האחרונות, שאתה מודאג מלהידחס לקופסה של "שבבים", ולכן חשוב גם להזכיר לאנשים וגם לעצמכם שאתם חברה משולבת אנכית, לא רק מבחינת בניית מערכות, אלא לאורך כל מחסנית התוכנה, אתם לא רק חברת שבבים?</p>
+</div>
+
+<!-- SVG Chart 1: Five Layer Cake -->
+<div class="svg-chart">
+<svg viewBox="0 0 500 380" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="layer1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4CAF50"/><stop offset="100%" stop-color="#388E3C"/></linearGradient>
+        <linearGradient id="layer2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#66BB6A"/><stop offset="100%" stop-color="#4CAF50"/></linearGradient>
+        <linearGradient id="layer3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#81C784"/><stop offset="100%" stop-color="#66BB6A"/></linearGradient>
+        <linearGradient id="layer4" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#A5D6A7"/><stop offset="100%" stop-color="#81C784"/></linearGradient>
+        <linearGradient id="layer5" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C8E6C9"/><stop offset="100%" stop-color="#A5D6A7"/></linearGradient>
+    </defs>
+    <text x="250" y="30" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="18" font-weight="600" fill="#1a1a1a">עוגת חמש השכבות של AI</text>
+    <rect x="100" y="50" width="300" height="55" rx="6" fill="url(#layer5)"/>
+    <text x="250" y="83" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="16" font-weight="600" fill="#1a1a1a">אפליקציות</text>
+    <rect x="80" y="115" width="340" height="55" rx="6" fill="url(#layer4)"/>
+    <text x="250" y="148" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="16" font-weight="600" fill="#1a1a1a">מודלים</text>
+    <rect x="60" y="180" width="380" height="55" rx="6" fill="url(#layer3)"/>
+    <text x="250" y="213" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="16" font-weight="600" fill="#1a1a1a">תשתית</text>
+    <rect x="40" y="245" width="420" height="55" rx="6" fill="url(#layer2)"/>
+    <text x="250" y="278" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="16" font-weight="600" fill="#1a1a1a">שבבים</text>
+    <rect x="20" y="310" width="460" height="55" rx="6" fill="url(#layer1)"/>
+    <text x="250" y="343" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="16" font-weight="600" fill="#fff">חשמל ואנרגיה ⚡</text>
+</svg>
+</div>
+
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> אני מניח שהראש שלי לא מתחיל מ"מה אנחנו לא", אלא מ"מה אנחנו צריכים להיות?". ואז, הבנו שמחשוב מואץ הוא בעיה של מחסנית מלאה (full stack), אתה חייב להבין את האפליקציה כדי להאיץ אותה. הבנו שאנחנו צריכים להבין את האפליקציה, שצריך שיהיה לנו אקוסיסטם של מפתחים, שאנחנו צריכים מומחיות מצוינת בפיתוח אלגוריתמים, כי האלגוריתמים הישנים שפותחו עבור מעבדי CPU לא עובדים טוב על GPU, אז היינו צריכים לשכתב ולמבנה מחדש אלגוריתמים כדי שהם יואצו על ידי ה-GPU שלנו.</p>
+<p>אם אנחנו עושים את זה, אתה מקבל האצה פי 50, פי 100, פי 10, אז זה לגמרי שווה את זה. אני חושב שמההתחלה, הבנו, "אוקיי, מה אנחנו רוצים לעשות, ומה צריך כדי להשיג את זה?".</p>
+<p>עכשיו, היום אנחנו בונים מפעלי AI, אנחנו בונים תשתית AI בכל העולם. זה הרבה יותר מבניית שבבים, ובניית שבבים היא כמובן חשובה, היא הבסיס של הכל.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> נכון, זה כמו full stack אחד שלם, עם הרשת והאחסון, ועכשיו גם מעבדי CPU.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> עכשיו אתה צריך להרכיב את הכל ביחד למערכות ענק. מפעל של ג׳יגה-וואט זה כנראה 50, 60 מיליארד דולר. מתוך ה-50-60 מיליארד, בערך 15-17 מיליארד זה תשתית: קרקע, חשמל ומבנה. השאר זה מחשוב ורשת ואחסון ודברים כאלה, ורמת ההשקעה הזו, אלא אם אתה עוזר ללקוחות להשיג את רמת הביטחון שהם הולכים להצליח לבנות את זה, אין לך סיכוי, אף אחד לא הולך להסתכן ב-50 מיליארד דולר.</p>
+<p>אז אני חושב שזה הרעיון הגדול, שאנחנו צריכים לעזור ללקוחות לא רק לבנות שבבים, אלא לבנות מערכות, ואחרי שבנינו מערכות, לא רק לבנות מערכות, אלא לבנות מפעלי AI. מפעלי AI כוללים המון תוכנה בפנים, זו לא רק התוכנה שלנו, יש טונות של תוכנה לניהול קירור וחשמל ויתירויות (redundancies) והרבה מזה מתוכנן ביתר (over-designed), מתוכנן ביתר כי אף אחד לא דיבר אחד עם השני.</p>
+<p>כשיש הרבה אנשים שלא מדברים ביניהם ומשלבים מערכות, אתה חייב, בהגדרה, לתכנן ביתר את החלק שלך. אבל אם אנחנו עובדים ביחד כצוות אחד, נוודא שנוכל לדחוף את הגבולות ולהוציא יותר תפוקה מהחשמל שיש לנו, או לחסוך כסף עבור כל תפוקה שרוצים.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> חזרה לנושא התוכנה, הזכרת ש-Excel לא תוכנן לשימוש על ידי AI. יש לך דברים כמו Claude שיש לו עכשיו פונקציונליות חדשה לשימוש ב-Excel, אז כשאתה מדבר על זה, שאתם רוצים להשקיע בספריות האלה, זה כדי לאפשר למודלים כאלה לעבוד טוב יותר? או שזה משהו ל-Microsoft או למפעלים, שאתם רוצים להשתמש בזה ולא להיות תלויים בשחקן אחר?</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> ובכן, SQL זו דוגמה טובה. SQL משמש אנשים, ואנחנו עובדים קשה על מערכות SQL כמו כולם, וזהו מקור האמת של עסקים. ובכן, זה לא יהיה רק אנשים שמכים על מסד הנתונים SQL שלנו עכשיו, זה הולך להיות חבורה שלמה של סוכנים שמכים עליו.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> נכון, הם הולכים לעשות את זה הרבה יותר מהר.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> הם הולכים לצרוך את זה הרבה יותר מהר. ולכן הדבר הראשון שאנחנו צריכים לעשות הוא להאיץ את SQL, זה סוג של הלוגיקה הפשוטה.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> זה הגיוני. מבחינת מודלים, ציינת שמודלי שפה הם רק קטגוריה אחת. "חלק מהעבודה הכי טרנספורמטיבית קורה ב-AI לחלבונים, AI כימי, סימולציה פיזית, רובוטים ומערכות אוטונומיות", וזה מהמאמר שכתבת בשבוע שעבר. בעבר העלית את הנקודה הזו תוך שציינת בהרצאות אחרות, "הכל הוא טוקן", אני חושב שזה ביטוי שהשתמשת בו. האם אתה רואה בטרנספורמרים את המפתח לכל דבר, או שאנחנו צריכים פריצות דרך חדשות כדי לאפשר את היישומים האלה?</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> אנחנו צריכים כל מיני סוגי מודלים חדשים. לדוגמה, טרנספורמרים, היכולת שלהם לעשות attention גדלה באופן ריבועי (quadratic), אז איך יש לך זיכרון ארוך מאוד? איך אתה יכול לנהל שיחה שנמשכת מאוד הרבה זמן בלי שה-KV cache יהפוך, עם הזמן, לזבל?</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> או שיהיו לך ארונות שלמים של כונני SSD שמחזיקים KV cache.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> וכמובן, נגיד שאתה מצליח להקליט את כל השיחה שלנו, כשאתה חוזר ומתייחס לחלק כלשהו מהשיחה, איזה חלק מהייחוס הוא הכי חשוב? צריכה להיות ארכיטקטורה חדשה שחושבת על attention כמו שצריך ומסוגלת לעבד את זה מאוד מהר.</p>
+<p>המצאנו ארכיטקטורה היברידית של transformer עם SSM, וזה מה שמאפשר ל-Nemotron 3 להיות סופר אינטליגנטי וסופר יעיל בו זמנית, זו דוגמה.</p>
+<p>דוגמה נוספת היא פיתוח מודלים שמודעים לגאומטריה, כלומר הרבה דברים בחיים, בטבע, הם סימטריים. וכשאתה מייצר את המודלים האלה, אתה לא רוצה שהוא ייצר מה שסטטיסטית סביר, זה חייב להיות גם מבוסס פיזית, ולכן זה חייב לצאת סימטרי. ו-cuEquivariance, לדוגמה, מאפשר לך לעשות דברים כאלה.</p>
+<p>אז יש לנו את כל הטכנולוגיות השונות האלה שתוכננו... או, לדוגמה, כשאנחנו מייצרים טוקנים במילים, זה יוצא בנתחים, ביטים קטנים, טוקנים בכל פעם, אבל כשאתה מייצר תנועה, אתה צריך שזה יהיה רציף (continuous). אז יש מידע דיסקרטי שאתה מייצר ומבין, ויש מידע רציף שאתה רוצה לייצר ולהבין. טרנספורמרים לא אידיאליים לשניהם.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> נכון, זה הגיוני.</p>
+</div>
+
+<h2>חשיבה (Reasoning) וקוד</h2>
+
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> עוד ציטוט מהמאמר, אתה כותב: "בשנה האחרונה, AI חצה סף חשוב. מודלים הפכו טובים מספיק כדי להיות שימושיים בהיקף גדול. יכולת החשיבה (reasoning) השתפרה. הזיות פחתו. הארקה (grounding) השתפרה דרמטית. לראשונה, אפליקציות שנבנו על AI החלו לייצר ערך כלכלי אמיתי". מה בדיוק היה השינוי? כי אני חושב על התזמון, אני מרגיש שהשנה הקרובה היא בהחלט על סוכנים, כתבתי על זה היום, אבל לגבי השנה שעברה, האם זו היתה יכולת החשיבה? האם זו היתה פריצת הדרך הגדולה?</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> גנרטיבי, כמובן, היה פריצת דרך גדולה, אבל הוא הזה הרבה ולכן היינו צריכים להארקה (ground) אותו, והדרך להארקה היא חשיבה (reasoning), רפלקציה, אחזור (retrieval), חיפוש, אז עזרנו לו להתארקע. בלי חשיבה, לא יכולת לעשות שום דבר מזה, ולכן חשיבה אפשרה לנו להארקע את ה-AI הגנרטיבי.</p>
+<p>וברגע שהארקעת אותו, אז אתה יכול להשתמש במערכת הזו כדי לחשוב דרך בעיות ולפרק אותן, ולפרק אותן לדברים שאפשר באמת לעשות איתם משהו, ולכן הדור הבא היה שימוש בכלים (tool use). מסתבר שזה כנראה אומר לך משהו שחיפוש היה שירות שאף אחד לא שילם עליו, והסיבה לכך היא שלקבל מידע זה חשוב מאוד ושימושי מאוד אבל זה לא משהו שמשלמים עליו. "איפה מסעדה טובה?" — מידע הוא פשוט, אני לא חושב שהוא שווה מספיק כדי לשלם עליו. חלק מהאנשים משלמים, אני משלם.</p>
+<p>עכשיו אנחנו יודעים שחצינו את הסף. לא רק שהוא מסוגל לשוחח איתנו ולייצר מידע בשבילנו, הוא יכול עכשיו, כמובן, לעשות דברים בשבילנו. קוד זו פשוט דוגמה מושלמת לכך. אם חושבים על זה לרגע, מבינים את זה: קוד הוא לא באמת אותו מודליות כמו שפה, אתה צריך ללמד אותו רווחים ריקים והזחות וסמלים, זה כמעט כמו מודליות חדשה, ואתה לא יכול לייצר קוד טוקן אחד בכל פעם, אתה חייב לעשות רפלקציה על גוש הקוד. גוש הקוד הזה חייב להיות מפוקטר (factored) כמו שצריך וחייב להיות אופטימלי וחייב כמובן להתקמפל, הוא חייב להתארקע לא על אמת סבירה, אלא על הרצה (execution).</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> נכון, האם הוא רץ או לא?</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> הוא חייב לרוץ או לא. ולכן אני חושב שהקוד, ללמוד את המודליות הזו היה עניין גדול. ברגע שאתה מסוגל עכשיו לעשות... אנחנו משלמים למהנדסים כמה מאות אלפי דולרים בשנה על קוד, ועכשיו יש להם עוזר קוד. הם יכולים לחשוב על ארכיטקטורה. במקום לתאר תוכניות בקוד, מה שמאוד מפרך, הם יכולים עכשיו לתאר תוכנה במפרט (specification), מה שהרבה יותר מופשט ומאפשר להם להיות הרבה יותר פרודוקטיביים. אז הם מתארים מפרט, ארכיטקטורה, הם מסוגלים להשתמש בזמן שלהם כדי לפתור ולחדש, ולכן <strong>מהנדסי התוכנה שלנו 100% משתמשים בסוכני קוד עכשיו. רבים מהם לא כתבו שורת קוד כבר תקופה, אבל הם סופר פרודוקטיביים וסופר עסוקים.</strong></p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> אתה חושב שיש פיתוי להסיק מסקנות מוגזמות מקוד, דווקא בגלל שהוא ניתן לאימות (verifiable)? יש לך את הרעיון הזה של סוכנים שלא רק מייצרים קוד, אלא יכולים באמת לאמת אותו, לראות אם הוא עובד, ואם לא, הם יכולים לחזור ולעשות את זה שוב, וכל זה יכול לקרות בלי בני אדם כי יש "האם זה עובד או לא?" ברור.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> ובכן, בגלל שאתה יכול לעשות רפלקציה, אתה יכול, נגיד, לעצב בית. עיצוב בית או עיצוב מטבח היה פעם העבודה של אדריכלים, מעצבים, אבל עכשיו אתה יכול לגרום לנגרים לעשות את זה. אז עכשיו שידרגת את היכולת של נגר, עכשיו אתה משתמש בסוכן בשביל הנגר הזה כדי לעצב בית, לעצב מטבח, להמציא כמה סגנונות מעניינים. לסוכן אין כלי כלשהו להרצה.</p>
+<p>עם זאת, אתה יכול לתת דוגמה. אתה אומר, "אלה הסגנונות שאני מחפש, אני רוצה שזה יהיה אסתטי ככה". כי הסוכן מסוגל לעשות רפלקציה, מסוגל להשוות את איכות הקוד שלו, את איכות התוצאה שלו מול ייחוס כלשהו, הוא יכול לומר, "אתה יודע מה, זה לא יצא טוב כמו שקיוויתי, אני הולך לנסות שוב", ואז הוא חוזר. זה לא חייב להיות ניתן להרצה מלאה, למעשה, ככל שזה יותר הסתברותי, יותר אסתטי, יותר סובייקטיבי, אם תרצה, AI באמת עושה טוב יותר.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> נכון, וזו הסיבה שיש לך כמעט שני קצוות. יש לך יצירת תמונות שבהן אין תשובה נכונה ואז יש לך קוד שבו יש תשובה נכונה ו-AI נראה שעושה טוב בשני הצדדים והשאלה היא עד כמה זה יתכנס לאמצע.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> אנחנו די בטוחים שהוא יכול לעשות ארכיטקטורה עכשיו, אנחנו די בטוחים שהוא יכול לעצב מטבחים וסלונים.</p>
+</div>
+
+<h2>תפקיד המעבדים (CPU) במחשוב מואץ</h2>
+
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> ובכן, לנקודה הזו, אחד הדברים הגדולים עם הגעת סוכנים הוא, דיברת הרבה על מחשוב מואץ, אני חושב שביקרת, אם לומר כך, אולי את ה-CPU, שהם הולכים להיות מוסרים, שהכל הולך להיות מואץ. פתאום מעבדי CPU חמים שוב. מסתבר שהם די שימושיים וחשובים, בהתחשב בכך שאתה מוכר CPU עכשיו, <strong>איך מרגישים בתור איש מכירות CPU?</strong></p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> אין שאלה שחוק מור מת. מחשוב מואץ הוא לא מחשוב מקבילי. תחזור אחורה בזמן, לפני 30 שנה, היו כנראה 10, 20, 30 חברות מחשוב מקבילי, רק אחת שרדה, NVIDIA, והסיבה היא שהיתה לנו החוכמה לזהות שהמטרה היא לא להיפטר מה-CPU, המטרה היא להאיץ את האפליקציה.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> אז מה שזה עתה האשמתי אותך בו בעצם היה נכון לגבי כל השאר.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> מעולם לא היינו נגד מעבדי CPU, אנחנו לא רוצים להפר את חוק אמדאהל (Amdahl's Law). מחשוב מואץ, למעשה, בתוך המערכות שלנו, אנחנו בוחרים את המעבדים הטובים ביותר, אנחנו קונים את המעבדים היקרים ביותר, והסיבה היא שהמעבד הזה, אם הוא לא הטוב ביותר ולא הכי ביצועי, מעכב מיליוני דולרים של שבבים.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> כש-branch prediction מדאיג, פעם דאגת מבזבוז זמן CPU, עכשיו אתה דואג מבזבוז זמן GPU.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> בדיוק, אתה פשוט אף פעם לא יכול לאפשר ל-GPU להתבזבז, שזמן GPU יהיה בטל. ולכן אנחנו תמיד משתמשים במעבדים הטובים ביותר, עד כדי כך שהלכנו ובנינו את Grace כדי שיהיה לנו ה-CPU הכי ביצועי ב-single-threaded ונעביר נתונים הרבה יותר מהר. ולכן מחשוב מואץ מעולם לא היה נגד מעבדים, הבסיס שלי עדיין נכון שחוק אמדאהל מת, הרעיון שתשתמש במחשוב כללי ופשוט תמשיך להוסיף טרנזיסטורים, זה כל כך מת, ולכן ביסודו אנחנו לא נגד מעבדים.</p>
+<p>עם זאת, הסוכנים האלה מסוגלים עכשיו לעשות שימוש בכלים, והכלים שהם רוצים להשתמש בהם הם כלים שנוצרו לבני אדם ויש בעצם שני סוגים. יש את הדברים שאנחנו מריצים במרכזי נתונים ורובם SQL, רובם קשורים למסדי נתונים, והסוג השני הוא מחשבים אישיים. עכשיו הולכים להיות לנו AI שמסוגלים ללמוד שימוש לא-מובנה בכלים (unstructured tool use), הסוג הראשון של שימוש בכלים הוא מובנה. ממשקי שורת פקודה (CLI) הם שימוש בכלים, API, הם כולם שימוש מובנה בכלים, הפקודות מאוד מפורשות, הארגומנטים מפורשים, הדרך שבה אתה מדבר עם האפליקציה מאוד ספציפית.</p>
+<p>עם זאת, יש חבורה שלמה של אפליקציות שמעולם לא תוכננו עם CLI ו-API והכלים האלה דורשים מה-AI ללמוד מולטי-מודליות, לא-מובנה, והוא חייב ללכת ולהיות מסוגל לגלוש באתר ולזהות כפתורים ותפריטים נפתחים ופשוט לעבוד דרכם כמו שאנחנו עושים. שימוש בכלים כזה הולך לרצות להשתמש במחשבים אישיים ויש לנו את שני הצדדים, יש לנו מערכות עיבוד נתונים מדהימות, וכידוע, המחשבים האישיים של NVIDIA הם הכי ביצועיים בעולם.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> אז מה הופך CPU שממוקד בסוכנים לשונה מ-CPU אחרים? אז יהיה לך ארון שלם של רק מעבדי Vera.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> אה, שאלה ממש טובה, מצוין. אז הדרך שבה מעבדי CPU תוכננו בעשור האחרון, כולם תוכננו עבור ענן hyperscale והדרך שבה ענן hyperscale ממנטז מעבדים היא לפי ליבת CPU. אז אתה רוצה לעצב מעבדים שיש להם כמה שיותר ליבות שניתנות להשכרה, הביצועים הם סוג של משניים.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> אתה מתמודד עם השהיית רשת (web latency) בעיקר.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> בדיוק, בדיוק ככה. ולכן מספר מופעי ה-CPU (instances) הוא מה שאתה מייעל. לכן אתה רואה את המעבדים האלה עם כמה מאות, 300, 400 ליבות שמגיעים. ובכן, הם לא ביצועיים ולשימוש בכלים, כשיש לך GPU שמחכה לשימוש בכלי...</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> ואתה עובר דרך NVLink.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> בדיוק, אתה רוצה את המחשב הכי מהיר ב-single-threaded שאתה יכול להשיג.</p>
+</div>
+
+<!-- SVG Chart 3: Vera CPU vs Hyperscale CPUs -->
+<div class="svg-chart">
+<svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg">
+    <text x="260" y="28" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="17" font-weight="600" fill="#1a1a1a">Vera CPU מול מעבדי Hyperscale</text>
+    <text x="260" y="58" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="13" fill="#555">ביצועי Single-Thread</text>
+    <rect x="50" y="70" width="380" height="35" rx="4" fill="#76b900"/>
+    <text x="60" y="93" font-family="Noto Sans Hebrew, sans-serif" font-size="13" font-weight="600" fill="#fff">Vera CPU — מותאם למהירות מקסימלית</text>
+    <rect x="50" y="115" width="190" height="35" rx="4" fill="#bbb"/>
+    <text x="60" y="138" font-family="Noto Sans Hebrew, sans-serif" font-size="13" font-weight="600" fill="#333">Hyperscale CPU — מותאם למס׳ ליבות</text>
+    <text x="260" y="178" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="13" fill="#555">רוחב פס לליבה</text>
+    <rect x="50" y="190" width="420" height="35" rx="4" fill="#76b900"/>
+    <text x="60" y="213" font-family="Noto Sans Hebrew, sans-serif" font-size="13" font-weight="600" fill="#fff">Vera — פי 3 יותר רוחב פס לליבה מכל CPU שנבנה</text>
+    <rect x="50" y="235" width="140" height="35" rx="4" fill="#bbb"/>
+    <text x="60" y="258" font-family="Noto Sans Hebrew, sans-serif" font-size="13" font-weight="600" fill="#333">Hyperscale — רוחב פס סטנדרטי</text>
+    <rect x="150" y="285" width="16" height="16" rx="2" fill="#76b900"/>
+    <text x="170" y="298" font-family="Noto Sans Hebrew, sans-serif" font-size="12" fill="#1a1a1a">Vera CPU</text>
+    <rect x="270" y="285" width="16" height="16" rx="2" fill="#bbb"/>
+    <text x="290" y="298" font-family="Noto Sans Hebrew, sans-serif" font-size="12" fill="#1a1a1a">Hyperscale CPU</text>
+</svg>
+</div>
+
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> אז זה רק המהירות? או שהמעבד עצמו צריך להיות יותר מקבילי כך שלא יהיו לו פספוסים (misses) וכאלה? או שזה כמו כל הדרך למטה ב-pipeline, שונה לגמרי?</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> כן, הדבר הכי חשוב הוא ביצועי single-threaded וה-I/O חייב להיות ממש מעולה. כי עכשיו הוא במרכז נתונים, מספר ה-instances של single-threaded שרצים הולך להיות גבוה למדי ולכן הוא הולך להכות במערכת ה-I/O, הוא הולך להכות ב-memory controller ממש חזק. <strong>רוחב הפס של Vera לליבת CPU הוא פי שלושה יותר גבוה מכל CPU שתוכנן אי פעם</strong>, ולכן הוא מתוכנן כך שיש לו המון רוחב פס I/O והמון רוחב פס זיכרון, כדי שהוא לעולם לא יחנוק את ה-CPU. אם ה-CPU נחנק, אז אנחנו מעכבים חבורה שלמה של GPU.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> ארון ה-Vera הזה, הוא עדיין, דיברת על זה שהוא מקושר בצורה הדוקה לארון ה-GPU, אבל הוא עדיין מפורק (disaggregated) כך שה-GPU יכולים לשרת מספר ליבות Vera שונות? בעוד שיש לך ליבת Vera על לוח עם...</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> כן.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> אוקיי, הבנתי, זה הגיוני. איך השותפות שלכם עם Intel ועניין ה-NVLink משתלבים בזה, אם בכלל?</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> מצוין. חלק מהעולם מרוצה מ-Arm, חלק מהעולם עדיין צריך, במיוחד, אתה יודע, מחשוב ארגוני, חבורה שלמה של מחסניות שאנשים לא רוצים להזיז ולכן x86 ממש חשוב לזה.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> האם העמידות של קוד x86 הפתיעה אותך?</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> לא. המחשב האישי של NVIDIA הוא עדיין x86, כל תחנות העבודה שלנו הם x86.</p>
+</div>
+
+<h2>Groq</h2>
+
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> רציתי לברך אותך, כמו שדיברת בהרצאה היום, אתה "מלך הטוקנים" (token king). אז במאמר שלך, דיברת גם על כך שאנרגיה היא העיקרון הראשון של תשתית AI והמגבלה על כמה אינטליגנציה המערכת יכולה לייצר. אם זה המצב, אם מדובר בכמות הטוקנים שאתה יכול לייצר ואתה מוגבל על ידי כמה אנרגיה יש במרכז הנתונים, למה חברות בכלל מנסות להתחרות עם מלך הטוקנים?</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> זה הולך להיות קשה כי זה לא סביר לבנות שבב ואיכשהו להשיג תוצאות שהן די דרמטיות. אפילו במקרה של Groq, Groq לא יכלה לספק את התוצאות אלא אם שילבנו אותה עם Vera Rubin.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> ובכן ספר לי על זה, השאלה הבאה שלי היתה על Groq.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> אז אם מסתכלים על כל המעטפת של inference, מצד אחד, אתה רוצה לספק כמה שיותר תפוקה (throughput), מצד שני, אתה רוצה לספק כמה שיותר טוקנים חכמים (smart tokens), ככל שהטוקן חכם יותר, מחיר גבוה יותר אתה יכול לגבות. שני הדברים האלה מאזנים, המתח הזה של למקסם תפוקה מצד אחד, למקסם אינטליגנציה מצד שני, הוא ממש, ממש קשה לפתרון.</p>
+</div>
+
+<!-- SVG Chart 2: Inference Pareto Frontier -->
+<div class="svg-chart">
+<svg viewBox="0 0 520 380" xmlns="http://www.w3.org/2000/svg">
+    <text x="260" y="25" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="17" font-weight="600" fill="#1a1a1a">חזית פארטו של Inference: תפוקה מול אינטליגנציה</text>
+    <line x1="70" y1="320" x2="490" y2="320" stroke="#1a1a1a" stroke-width="2"/>
+    <line x1="70" y1="50" x2="70" y2="320" stroke="#1a1a1a" stroke-width="2"/>
+    <text x="280" y="360" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="13" fill="#555">תפוקת טוקנים (Throughput) →</text>
+    <text x="25" y="185" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="13" fill="#555" transform="rotate(-90 25 185)">אינטליגנציה (Smart Tokens) →</text>
+    <path d="M 100 80 Q 200 90, 280 150 Q 350 210, 430 300" stroke="#76b900" stroke-width="3" fill="none"/>
+    <circle cx="100" cy="80" r="5" fill="#76b900"/>
+    <circle cx="280" cy="150" r="5" fill="#76b900"/>
+    <circle cx="430" cy="300" r="5" fill="#76b900"/>
+    <path d="M 100 80 Q 150 75, 200 72 Q 300 80, 380 120 Q 430 180, 470 280" stroke="#ff6b00" stroke-width="3" fill="none" stroke-dasharray="8,4"/>
+    <circle cx="200" cy="72" r="6" fill="#ff6b00"/>
+    <text x="215" y="62" font-family="Noto Sans Hebrew, sans-serif" font-size="12" font-weight="600" fill="#ff6b00">Groq + Vera Rubin</text>
+    <text x="105" y="72" font-family="Noto Sans Hebrew, sans-serif" font-size="11" fill="#76b900">אינטליגנציה מקסימלית</text>
+    <text x="435" y="295" font-family="Noto Sans Hebrew, sans-serif" font-size="11" fill="#76b900">תפוקה מקסימלית</text>
+    <line x1="130" y1="340" x2="160" y2="340" stroke="#76b900" stroke-width="3"/>
+    <text x="165" y="344" font-family="Noto Sans Hebrew, sans-serif" font-size="12" fill="#1a1a1a">GPU של NVIDIA</text>
+    <line x1="300" y1="340" x2="330" y2="340" stroke="#ff6b00" stroke-width="3" stroke-dasharray="8,4"/>
+    <text x="335" y="344" font-family="Noto Sans Hebrew, sans-serif" font-size="12" fill="#1a1a1a">הרחבה עם Groq LPU</text>
+</svg>
+</div>
+
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> אני חייב לומר, בשנה שעברה היה לך שקף שדיבר על עקומת הפארטו הזו, ודיברת על, אני חושב שזה היה כשהצגת את Dynamo, איך ה-GPU שלכם יכולים לכסות את כל הקשת, ולכן לא צריך לחשוב על זה, פשוט תקנו GPU של NVIDIA, ו-Dynamo יעשה את שניהם. אבל עכשיו אתה כאן ואומר, "ובכן, זה לא ממש מכסה את הכל".</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> אנחנו מכסים את הכל עדיין טוב יותר מכל מערכת שיכולה לעשות את זה. איפה אנחנו יכולים להרחיב את הפארטו הזה זה במיוחד בקצבי טוקנים גבוהים במיוחד והשהיה נמוכה במיוחד, אבל זה גם מפחית את התפוקה. עם זאת, בגלל סוכני קוד, כי יש עכשיו סוכני AI שמייצרים כלכלה ממש, ממש טובה, וכי הסוכנים מחוברים לבני אדם שהם בעצם שווים מאוד, כלומר, הם שווים מאוד.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> נכון, הם אפילו יותר יקרים מ-GPU.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> <strong>ולכן אני רוצה לתת למהנדסי התוכנה שלי את שירות קצב הטוקנים הגבוה ביותר, ולכן אם ל-Anthropic יש רמה של Anthropic Claude Code שמגדילה את קצב הקידוד פי 10, הייתי משלם על זה, הייתי בהחלט משלם על זה.</strong></p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> אז אתה בונה את המוצר הזה בשביל עצמך?</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> אני חושב שרוב המוצרים הגדולים נוצרים כי אתה רואה נקודת כאב ומרגיש את נקודת הכאב ויודע שלשם השוק הולך. היינו שמחים שסוכני הקוד שלנו ירוצו פי 10 יותר מהר, אבל כדי לעשות את זה, זה מאוד, מאוד קשה לעשות את זה במערכת תפוקה גבוהה ולכן החלטנו להוסיף את מערכת ההשהיה הנמוכה של Groq ואז אנחנו בעצם מריצים ביחד, מעבדים ביחד (co-process).</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> נכון. וזה פשוט להפריד decode ו-prefill?</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> אנחנו הולכים לעשות אפילו את החלק של עיבוד גבוה, FLOPS גבוה של decode, חלק ה-attention של decode.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> אז אתם מפרקים (disaggregating) אפילו עד לרמת ה-decode.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> בדיוק, וזה דורש צימוד הדוק מאוד ואינטגרציה מאוד, מאוד קרובה של תוכנה.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> אז איך אתם מסוגלים לעשות את זה? אתה אומר שאתם שולחים בהמשך השנה, העסקה הזו הוכרזה רק לפני חודשיים.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> ובכן, התחלנו לעבוד על inferencing מפורק (disaggregated), Dynamo באמת שם את הרעיונות של NVIDIA על השולחן. ביום שבו הכרזתי על Dynamo, כולם היו צריכים להפנים שכבר חשבתי על, "איך אנחנו מפרקים inference על פני תשתית הטרוגנית בצורה עדינה יותר?", והארכיטקטורה של Groq היא גרסה כל כך קיצונית של שלנו, הם התקשו מאוד.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> Dynamo היה לפני שנה, ו-Groq פשוט קרה סביב חג המולד. האם היה אירוע שגרם לך לחשוב שזה צריך לקרות?</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> ובכן תזכור, הכרזתי על Dynamo לפני שנה, עבדנו על Dynamo כבר שנתיים, אז חשבנו על inferencing מפורק שנתיים-שלוש, והתחלנו לעבוד עם Groq אולי לפני שהכרזנו על העסקה, אולי שישה חודשים קודם. אז חשבנו על עבודה איתם על איחוד Grace Blackwell ו-Groq די מוקדם.</p>
+<p>אז האינטראקציה איתם, אני ממש אוהב את הצוות ואנחנו לא רוצים את שירות הענן שלהם. היה להם עסק אחר שהם באמת מאמינים בו ועדיין מאמינים בו, הם מצליחים ממש טוב איתו וזה לא היה החלק בעסק שרצינו, אז החלטנו לרכוש את הצוות ולרשות את הטכנולוגיה. אז ניקח את הארכיטקטורה הבסיסית ונפתח אותה מכאן.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> אז זה היה סתם צירוף מקרים מאושר או לא צירוף מקרים מאושר, אולי לא צירוף מקרים מאושר.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> <strong>סרנדיפיטי אסטרטגית.</strong></p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> כי ל-OpenAI, אתה יודע, יש עכשיו instance עם Cerebras שהכריזו עליו בינואר.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> זה נעשה לחלוטין בלי קשר אלינו ובגילוי לב, אפילו לא ידעתי על זה, אבל זה לא היה משנה שום דבר. אני חושב שהארכיטקטורה של Groq היא זו שהייתי בוחר בכל מקרה, היא הרבה יותר הגיונית עבורנו.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> האם זו היתה הפעם הראשונה שגישת ASIC גרמה לך להרים גבה כמו, "אוה, זה באמת שונה מהותית"?</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> לא, Mellanox.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> זו דוגמה טובה.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> כן, Mellanox. לקחנו חלק ממחסנית המחשוב שלנו ושמנו אותה במחסנית של Mellanox. NVLink לא היה אפשרי, אתה יודע, בקנה המידה שאנחנו מדברים עליו בלי ה-in-network fabric computing שעשינו עם Mellanox. לקחת את מחסנית התוכנה, לפרק אותה, ולשים אותה היכן שצריך, זו התמחות של NVIDIA. אנחנו לא אובססיביים לגבי היכן מתבצע חישוב, אנחנו פשוט רוצים להאיץ את האפליקציה. תזכור, NVIDIA היא חברת מחשוב מואץ, לא חברת GPU.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> נכון. אז אתה מדבר על חשמל כמגבלה. כשהלקוחות שלך חושבים מה לקנות, אנחנו יכולים לקנות כל מיני GPU מסורתיים, או שנוכל לקנות את ארונות ה-LPU האלה. זה פשוט, הם צריכים לחשוב על זה מבחינת שאתה פשוט בטוח שהם יכולים להניע הרבה יותר הכנסות?</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> זה באמת תלוי בסוג המוצרים שיש להם. נגיד שאין לך באמת שימושים ארגוניים ברגע, אני לא באמת חושב שהוספת Groq הגיונית, והסיבה היא שרוב הלקוחות שלך הם לקוחות רמה חינמית (free tier), והם מתקרבים לשלם. אז אולי שני שלישים רמה חינמית, שליש משלם, במקרה הזה, להוסיף Groq, אתה מוסיף הרבה הוצאות. אתה לוקח קצת חשמל, זה לא שווה את זה.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> מורכבות. ואתה לוקח שרתים, עלות ההזדמנות.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> מה שאתה באמת יכול לשרת את הרמה החינמית, כן. עם זאת, אם יש לך עסק כמו Anthropic ויש לך עסק כמו OpenAI שבו Codex תופס כלכלה ממש טובה, אבל אתה פשוט מאחל שתוכל לייצר יותר טוקנים, כאן הוספת המאיץ הזה יכולה באמת להגביר את ההכנסות שלך.</p>
+</div>
+
+<h2>סין והדוּמרים</h2>
+
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> האם אנחנו בעצם מוגבלים על ידי חשמל עכשיו ב-2026 או על ידי קיבולת פאב או מה? כולם אומרים שאין מספיק היצע. מה הגורם המגביל בפועל?</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> אני חושב שזה כנראה קרוב על הכל. לא יכולת להכפיל שום דבר, באמת.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> כי תיתקל באיזה אילוץ אחר.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> כן.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> זה כן מרגיש, לעומת זאת, שארה"ב עשתה עבודה די טובה בגיוס חשמל, אולי יותר ממה שאנשים ציפו לפני כמה שנים, מרגיש כאילו שבבים הם באמת יותר מגבילים עכשיו.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> שרשרת האספקה שלנו מתוכננת היטב. אתה יודע, תכננו לשנה מאוד, מאוד גדולה, ואנחנו מתכננים לשנה גדולה מאוד בשנה הבאה.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> ראינו את כל שתיית הסוג׳ו והעוף המטוגן.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> (צוחק) כן, נכון. אנחנו מתכננים, בשרשרת האספקה שלנו יש לנו כמה מאות שותפים ויש לנו שותפויות ארוכות טווח איתם. אז אני מרגיש די טוב לגבי החלק הזה.</p>
+<p>אני לא חושב שיש לנו פי שניים חשמל ממה שאנחנו צריכים, אני לא חושב שיש לנו פי שניים אספקת שבבים ממה שאנחנו צריכים, אני לא חושב שיש לנו כפליים מכלום ממה שאנחנו צריכים. אבל אני חושב שהכל, כל מה שאני רואה באופק, נוכל לתמוך מבחינת שרשרת אספקה והדבר שהייתי מאחל יותר מכל דבר הוא שכל הקרקע, החשמל והמבנים פשוט יוקמו מהר יותר.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> האם הוגן לומר, יש קצת עניין שב-NVIDIA היא בעצם הנהנית הגדולה ביותר ממחסור, ככל שהוא קיים? כמו, אם יש מחסור בחשמל, אתם השבב הכי יעיל, אז תנצלו את החשמל הזה טוב יותר. או אם יש קיבולת פאב, כמו שזה עתה אמרת, יצאתם להבטיח את שרשרת האספקה, סידרתם את זה, האם אתם המנצחים הגדולים בהקשר הזה?</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> ובכן, אנחנו החברה הגדולה ביותר בתחום הזה, ועשינו עבודה טובה בתכנון. ואנחנו מתכננים מעלה בשרשרת האספקה, אנחנו מתכננים מטה בשרשרת האספקה ולכן אני חושב שעשינו עבודה ממש טובה בלהכין את כולם לצמיחה.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> נכון, אבל יש כאן קצת עניין שבבסיסו, למה אי גישה לשוק הסיני אולי מהווה איום? כמו אם סין בסוף תהיה עם הרבה חשמל והרבה שבבים, למרות שהשבבים האלה הם רק 7nm, יש להם את הקיבולת לבנות אקוסיסטם שעלול להתחרות ב-CUDA בטווח הארוך, זה החשש שלך?</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> <strong>אין שאלה שאנחנו צריכים מחסנית טכנולוגית אמריקאית בסין</strong>, והייתי מאוד עקבי לגבי זה מההתחלה, כשהכרתי בכך שתוכנת קוד פתוח תגיע. <strong>אף מדינה לא תורמת יותר לתוכנת קוד פתוח מסין</strong>, ואנחנו גם יודעים ש-50% מחוקרי ה-AI בעולם באים מסין, ואנחנו גם יודעים שהם ממש ממציאים. <strong>DeepSeek הוא לא טכנולוגיה שולית, הוא ממש, ממש טוב. ו-Kimi ממש טוב, ו-Qwen ממש טוב</strong> והם עושים תרומות ייחודיות לארכיטקטורה, ותרומות ייחודיות למחסנית ה-AI אז אני חושב שאנחנו צריכים לקחת את החברות האלה ברצינות.</p>
+<p>במידה שמחסנית טכנולוגית אמריקאית היא מה שהעולם בונה מעליו, אז כשהטכנולוגיה הזו מתפשטת מסין, מה שיקרה, כי היא קוד פתוח, וכשהיא יוצאת מסין, היא הולכת לתעשיות אמריקאיות, היא הולכת לדרום מזרח אסיה, היא הולכת לאירופה, המחסנית הטכנולוגית האמריקאית תהיה מוכנה לקלוט אותן. הייתי מאוד עקבי שזו כנראה הסוגיה הגיאופוליטית-אסטרטגית היחידה הכי חשובה לתעשיית הטכנולוגיה האמריקאית.</p>
+</div>
+
+<!-- SVG Chart 5: China AI Ecosystem -->
+<div class="svg-chart">
+<svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg">
+    <text x="260" y="28" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="17" font-weight="600" fill="#1a1a1a">אקוסיסטם ה-AI של סין</text>
+    <circle cx="260" cy="155" r="45" fill="#DE2910" opacity="0.15" stroke="#DE2910" stroke-width="2"/>
+    <text x="260" y="152" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="14" font-weight="600" fill="#DE2910">אקוסיסטם</text>
+    <text x="260" y="170" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="14" font-weight="600" fill="#DE2910">AI סיני</text>
+    <circle cx="110" cy="80" r="35" fill="#1a73e8" opacity="0.15" stroke="#1a73e8" stroke-width="2"/>
+    <text x="110" y="84" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#1a73e8">DeepSeek</text>
+    <line x1="145" y1="95" x2="220" y2="135" stroke="#999" stroke-width="1.5"/>
+    <circle cx="410" cy="80" r="35" fill="#9c27b0" opacity="0.15" stroke="#9c27b0" stroke-width="2"/>
+    <text x="410" y="84" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#9c27b0">Kimi</text>
+    <line x1="375" y1="95" x2="300" y2="135" stroke="#999" stroke-width="1.5"/>
+    <circle cx="110" cy="230" r="35" fill="#ff6b00" opacity="0.15" stroke="#ff6b00" stroke-width="2"/>
+    <text x="110" y="234" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#ff6b00">Qwen</text>
+    <line x1="145" y1="215" x2="220" y2="175" stroke="#999" stroke-width="1.5"/>
+    <circle cx="410" cy="230" r="35" fill="#c10000" opacity="0.15" stroke="#c10000" stroke-width="2"/>
+    <text x="410" y="228" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#c10000">Huawei</text>
+    <text x="410" y="244" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="10" fill="#c10000">שנת שיא</text>
+    <line x1="375" y1="215" x2="300" y2="175" stroke="#999" stroke-width="1.5"/>
+    <rect x="190" y="260" width="140" height="28" rx="14" fill="#333"/>
+    <text x="260" y="279" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="12" font-weight="600" fill="#fff">5-6 הנפקות שבבי AI 🚀</text>
+</svg>
+</div>
+
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> כן, כשדיברנו בפעם הקודמת, ממשל טראמפ אסר את ה-H20. הופתעת שהצלחת לגרום לממשל טראמפ לראות את הנקודה שלך? ואז הופתעת אפילו יותר שעכשיו אתה נחסם על ידי הממשלה הסינית?</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> אני לא מופתע מלהיחסם על ידם והסיבה היא כי כמובן, סין תרצה שהמחסנית הטכנולוגית שלה תתפתח. בזמן שעזבנו את השוק הזה, אתה יודע כמה מהר התעשייה הסינית זזה, ו-Huawei השיגה שנת שיא בהיסטוריה של החברה. זו חברה ותיקה מאוד, והיתה להם שנת שיא. היו להם, מה, חמש, שש הנפקות של חברות שבבים שמכוונות לתעשיית ה-AI.</p>
+<p>אני חושב שאנחנו צריכים להיות יותר אסטרטגיים באיך שאנחנו חושבים על מנהיגות אמריקאית ומנהיגות גיאופוליטית וטכנולוגית אמריקאית. AI הוא לא רק מודל, וזו אי-הבנה עמוקה. AI, כמו שאמרתי וכמו שהזכרת בהתחלה, הוא עוגת חמש שכבות ואנחנו חייבים לנצח בשכבת התשתית, אנחנו חייבים לנצח בשכבת השבבים, אנחנו חייבים לנצח בשכבת הפלטפורמה, אנחנו חייבים לנצח בשכבת המודלים ואנחנו חייבים לנצח בשכבת האפליקציות.</p>
+<p>חלק מהדברים שאנחנו עושים מסכנים את היכולת שלנו כמדינה להוביל בכל אחת מחמש השכבות. אני חושב שזו טעות נוראית לחשוב שהדרך לנצח היא לחבר את הכל מלמעלה למטה ולקשור כל חברה ביחד למחסנית הוליסטית אחת כדי שנוכל רק לנצח או לנצח בגבולות של מה שכל אחת מהשכבות יכולה לנצח. אנחנו חייבים לתת לכל השכבות לצאת ולנסות לנצח את השוק.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> האם השכבות האחרות אולי נהנו מהניסיון הארוך יותר שלהן בוושינגטון ואתה הגעת קצת מאוחר לזירה?</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> כן, אולי.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> מה למדת? מה הדבר הכי גדול שלמדת על וושינגטון?</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> ובכן, <strong>הדבר שהפתיע אותי הוא כמה עמוק הדוּמרים היו משולבים בוושינגטון</strong> ואיך המסרים של הדוּמרים השפיעו על הפסיכולוגיה של מקבלי ההחלטות.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> כולם היו מפוחדים במקום אופטימיים.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> בדיוק, ואני חושב שיש לזה שתי בעיות יסודיות. במהפכה התעשייתית הזו, אם לא נאפשר לטכנולוגיה להתפשט ברחבי ארצות הברית ולא ננצל אותה בעצמנו, מה שיקרה לנו הוא מה שקרה לאירופה במהפכה התעשייתית הקודמת — השארנו אותם מאחור. והם, בהרבה מובנים, המציאו את כל הטכנולוגיות של המהפכה התעשייתית האחרונה ואנחנו פשוט ניצלנו אותן. אני מקווה שיש לנו את החוכמה ההיסטורית, שיש לנו את ההבנה הטכנולוגית ולא ניכנס למלכודת של מדע בדיוני, דוּמריזם, הסיפורים המדהימים האלה שמומצאים כדי להפחיד את קובעי המדיניות שלא מבינים טכנולוגיה כל כך טוב ונותנים להם את הגלגולים האלה של מדע בדיוני שפשוט לא מועילים.</p>
+<p>אחד המצבים שהכי מטרידים אותי הוא שכשעושים סקרים בארצות הברית, באוכלוסייה, הפופולריות של AI יורדת, וזו בעיה אמיתית. זה לא שונה מהפופולריות של חשמל, הפופולריות של מנועים חשמליים, הפופולריות של מנועי בנזין, במהפכה התעשייתית הקודמת שהפכו פחות פופולריים. הפופולריות של האינטרנט, אתה יכול לדמיין? מדינות אחרות ניצלו אותו הרבה יותר מהר ממה שאנחנו עשינו ואז הטכנולוגיה חדרה לתעשיות ולחברה שלהם הרבה יותר מהר ולכן אנחנו פשוט חייבים להיות הרבה, הרבה יותר מודאגים שלא ניתן לטכנולוגיה הזו איזשהו גלגול מיסטי של מדע בדיוני שפשוט לא מועיל ומפחיד אנשים.</p>
+<p><strong>ולכן אני לא אוהב כשדוּמרים מפחידים אנשים</strong>, אני חושב שיש הבדל בין לדאוג באמת ולהזהיר אנשים לבין ליצור רטוריקה שמפחידה אנשים.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> אני חושב שמאפיין שרואים כל הזמן הוא שאנשים שמים את הכובעי חשיבה הגדולים שלהם ומנסים לשלוף את כל הניואנסים ושוכחים את העובדה שתקשורת פופולרית בפועל נעשית במשיכות רחבות. אתה לא מצליח לומר, "אה, אתה קצת מפוחד מזה, אבל לא מזה", אתה פשוט מתקשר פחד במקום אופטימיות.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> כן, ואיכשהו זה גורם להם להישמע חכמים יותר.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> אנשים אוהבים להישמע חכמים.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> לפעמים זה אולי, ואנחנו יודעים עכשיו, עוזר להם עם גיוס הכספים ולפעמים זה עוזר להם להשיג לכידה רגולטורית (regulatory capture). אז יש הרבה סיבות שונות למה הם עושים את זה, ואלה אנשים מדהימים בחוכמתם אבל הייתי פשוט מזהיר אותם שרוב הדברים האלה כנראה יחזרו כבומרנג וכנראה יחזרו והם כנראה יתאכזבו שעשו את זה יום אחד.</p>
+</div>
+
+<h2>טבעה של NVIDIA</h2>
+
+<!-- SVG Chart 4: NVIDIA Vertical Integration Stack -->
+<div class="svg-chart">
+<svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg">
+    <text x="260" y="28" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="17" font-weight="600" fill="#1a1a1a">אינטגרציה אנכית של NVIDIA: בנייה אנכית, פתיחה אופקית</text>
+    <defs><marker id="arrowRight" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#2563eb"/></marker><marker id="arrowDown" markerWidth="6" markerHeight="8" refX="3" refY="8" orient="auto"><path d="M0,0 L3,8 L6,0" fill="#76b900"/></marker></defs>
+    <line x1="480" y1="55" x2="480" y2="280" stroke="#76b900" stroke-width="3" marker-end="url(#arrowDown)"/>
+    <text x="500" y="170" font-family="Noto Sans Hebrew, sans-serif" font-size="11" fill="#76b900" transform="rotate(90 500 170)">בנייה אנכית</text>
+    <rect x="80" y="50" width="380" height="40" rx="6" fill="#76b900" opacity="0.2" stroke="#76b900" stroke-width="2"/>
+    <text x="270" y="75" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="14" font-weight="600" fill="#1a1a1a">אפליקציות תעשייתיות</text>
+    <rect x="80" y="100" width="380" height="40" rx="6" fill="#76b900" opacity="0.3" stroke="#76b900" stroke-width="2"/>
+    <text x="270" y="125" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="14" font-weight="600" fill="#1a1a1a">Frameworks — PyTorch, TensorRT</text>
+    <rect x="80" y="150" width="380" height="40" rx="6" fill="#76b900" opacity="0.4" stroke="#76b900" stroke-width="2"/>
+    <text x="270" y="175" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="14" font-weight="600" fill="#1a1a1a">ספריות — cuDNN, NCCL, cuEquivariance</text>
+    <rect x="80" y="200" width="380" height="40" rx="6" fill="#76b900" opacity="0.6" stroke="#76b900" stroke-width="2"/>
+    <text x="270" y="225" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="14" font-weight="600" fill="#1a1a1a">CUDA-X פלטפורמת</text>
+    <rect x="80" y="250" width="380" height="40" rx="6" fill="#76b900" opacity="0.8" stroke="#76b900" stroke-width="2"/>
+    <text x="270" y="275" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="14" font-weight="600" fill="#fff">GPU + NVLink + Vera CPU חומרה</text>
+    <text x="30" y="175" font-family="Noto Sans Hebrew, sans-serif" font-size="11" fill="#2563eb">← פתיחה אופקית</text>
+</svg>
+</div>
+
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> אני הולך לקשור כמה שאלות ביחד כי אני יודע שאנחנו קצת קצרים בזמן. בתחום הרכב האוטונומי, אתם עובדים עם מספר יצרני רכב, יש לכם את מודל Alpamayo, תוך כדי שאתם עדיין מספקים שבבים ל-Tesla. היה לכם חלק גדול על OpenClaw היום במצגת, בינתיים, דבר ענק שמניע את שבבי Vera, לדוגמה, כשמדברים על סוכנים, הוא מה שקורה עם, נגיד, Claude Code ומה שקורה עם Codex של OpenAI.</p>
+<p>האם אני צודק בלחלץ מרכיב עקבי כאן, וההשקעה שלכם במודלי הקוד הפתוח שלכם הולכת עם זה, שבה אתם שמחים לספק לספק המוביל, או לממציא בתחום, שבבים, אבל אז אתם הולכים לעשות fast follow של מה שהם עשו לכל השאר שמאוימים מהם? אז אתם בו זמנית מרחיבים את בסיס הלקוחות, אתם לא רק תלויים במובילים, אבל גם המובילים עוזרים לכם למכור לכל השאר כי הם מודאגים מלהישאר מאחור.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> לא, שום דבר כזה. אנחנו בחזית בכל כך הרבה תחומים שונים. בהרבה מובנים, אנחנו המובילים בהרבה מהתחומים האלה, אבל אנחנו לעולם לא הופכים אותם למוצרים. אנחנו מחסנית טכנולוגית ולכן אנחנו חייבים להיות בחזית, אנחנו חייבים להיות המובילים בעולם של המחסנית הטכנולוגית, אבל <strong>אנחנו לא יצרן פתרונות, אנחנו לא ספק שירותים. ולעולם לא נהיה.</strong></p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> זה תמיד יהיה המצב?</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> כן, תמיד יהיה המצב. אין סיבה ל-, ואנחנו מאושרים שלא. ולכן אנחנו יוצרים את כל הטכנולוגיה הזו, אנחנו עושים אותה זמינה לכולם.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> ובכן, זה מצחיק לעומת זאת, אם חוזרים ללוחות שלכם, לדוגמה, כמו המוצרים ששולחים, יותר ויותר מזה, יש מה, 30,000 SKU ספציפיים בארון היום או משהו כזה. יותר ויותר מאלה מוגדרים על ידכם, "ככה זה יהיה", חלקית כדי להקל על ההרכבה, כל החלקים האלה. יש קצת עניין שזה הולך לקרות גם בצד התוכנה, כשמדברים על החלקים האנכיים ומודל הקוד הפתוח שלכם?</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> <strong>אנחנו יוצרים דבר אנכית ואז פותחים אותו אופקית</strong> וכולם יכולים להשתמש בכל חלק שהם רוצים.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> כל עוד הם רצים על שבבי NVIDIA?</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> כל חלק שהם רוצים, הם לא חייבים להשתמש בכל שבבי NVIDIA, הם לא חייבים להשתמש בכל תוכנת NVIDIA. אנחנו חייבים לבנות את זה אנכית, אנחנו חייבים לשלב את זה אנכית ולייעל את זה אנכית. אבל אחרי זה, אנחנו נותנים להם קוד מקור, אנחנו נותנים להם — הם פשוט מחליטים איך הם רוצים לעשות את זה.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> אתה חושב ש-NVIDIA באמת יכולה לייצר ולהדביק קצב מבחינת מודל חזית שיכול לנצח את התחום או להיות ספק הכרחי של התחום בהתחשב בכך שגופים כמו Meta נראים שנפלו מאחור או האלטרנטיבה היא, נראית שהיא בעיקר מודלים סיניים.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> לנצח את התחום הזה זה לא חשוב לנו.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> נכון, ובכן חשוב לא במובן של לנצח, אלא במובן של שצריך להיות מודל חזית בקוד פתוח, אז אם לא אתם, אז מי?</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> בדיוק, בדיוק, מישהו צריך ליצור מודלים בקוד פתוח ול-NVIDIA יש יכולת אמיתית בכך. בכל פעם שאנחנו יוצרים את המודלים האלה בקוד פתוח, אנחנו גם לומדים הרבה על החישוב.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> האם זה היה קצת בעיה עם Blackwell? שמעתי מלמולים שהריצות האימון אולי היו קצת יותר קשות ממה שהן היו סוג של קודם לכן.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> <strong>האתגר עם Blackwell היה 100% NVLink 72, NVLink 72 היתה עבודה שוברת גב.</strong> וזו הפעם היחידה שהודיתי לקהל על שעבדו איתנו.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> כן, שמתי לב שכשאמרת את זה היום, זה נשמע מאוד כנה.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> כן, <strong>כי עינינו את כולם</strong>, אבל כולם אוהבים את זה עכשיו.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> זו הפעם השנייה שיש לנו הזדמנות לדבר באופן אישי, והמסקנה שלי כשפגשתי אותך קודם בטייפה היתה המידה שבה NVIDIA עדיין מרגישה כמו חברה קטנה. אתה מודאג ממתיחת יתר, או שאתה עדיין חושב שיש לכם את גלגל התנופה (flywheel) בסגנון CUDA שבו, "זה נראה כאילו אנחנו עושים הרבה, אנחנו סוג של פשוט עושים את אותו הדבר שוב ושוב"?</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> הסיבה ש-NVIDIA יכולה לזוז כל כך מהר היא שתמיד יש לנו תיאוריה מאחדת לחברה, וזו העבודה שלי, אני צריך להמציא תיאוריה מאחדת למה חשוב ולמה דברים מתחברים ואיך הם מתחברים ואז ליצור ארגון, אורגניזם שממש, ממש טוב בלספק על התיאוריה המאחדת הזו.</p>
+<p>ולכן התיאוריה המאחדת של NVIDIA היא בעצם די פשוטה. מצד אחד, יש לנו את פלטפורמת המחשוב, פלטפורמת התוכנה שקשורה ל-CUDA-X. מצד שני, אנחנו חברת מערכות מחשוב, אנחנו מייעלים דברים אנכית, אנחנו מפעילים co-design קיצוני לאורך המחסנית וכל הרכיבים השונים של מחשב ועכשיו המחשב הזה הוא פלטפורמה שלנו ואנחנו משלבים את הפלטפורמה הזו בכל הענן ובכל ה-OEM ואז יש לנו עוד פלטפורמה שהיא עכשיו פלטפורמת מרכז הנתונים, או פלטפורמת מפעל ה-AI.</p>
+<p>אז ברגע שיש לך תיאוריה מאחדת על מה NVIDIA בונה ואיך היא עושה את זה — והשתמשתי בהרצאה כדי סוג של לספר את הסיפור הזה אפילו חלקית לעובדים שלנו.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> ככה זה הרגיש. כל השעה הראשונה של ההרצאה הרגישה כאילו אתה מדבר לעובדים שלך, מזכיר להם מה אתם עושים.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> זה חשוב שאנחנו תמיד מוזכרים מחדש מה חשוב לנו ו-AI חשוב לנו, אבל כמובן ש-CUDA-X וכל הפותרים וכל האפליקציות שאנחנו יכולים להאיץ חשובים לנו מאוד.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-bt">BT:</span> תודה רבה.</p>
+</div>
+<div class="qa">
+<p><span class="speaker speaker-jh">JH:</span> תודה לך. שמח לראות אותך, בן. המשך בעבודה הטובה.</p>
+</div>
+
+<div class="source-link">
+    <p>📌 מקור: <a href="https://stratechery.com/2026/an-interview-with-nvidia-ceo-jensen-huang-about-accelerated-computing/" target="_blank">An Interview with Nvidia CEO Jensen Huang About Accelerated Computing — Stratechery, מרץ 2026</a></p>
+    <p>תרגום: FRIDAY 🎯 | <a href="https://shnitzels.github.io/friday-share/">friday-share</a></p>
+</div>
+
+</div>
+</body>
+</html>
