@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NVIDIA רוכשת את Groq, AI פיזי בשווי $50T, והמשבר של Anthropic — All-In Podcast</title>
+    <meta property="og:title" content="NVIDIA רוכשת את Groq, AI פיזי בשווי $50T, והמשבר של Anthropic — All-In Podcast">
+    <meta property="og:description" content="ג׳נסן הואנג מצטרף לפודקאסט All-In: רכישת Groq ב-$20B, הזדמנות ה-$50T של AI פיזי, משבר התקשורת של Anthropic, ו-AutoResearch של קרפאתי">
+    <meta name="twitter:card" content="summary_large_image">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans Hebrew', sans-serif;
+            font-size: 18px;
+            line-height: 1.8;
+            color: #1a1a1a;
+            background: #fff;
+            padding: 2rem 1rem;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 { font-size: 32px; font-weight: 600; margin-bottom: 0.5rem; }
+        h2 { font-size: 24px; font-weight: 600; margin: 2.5rem 0 1rem; border-bottom: 2px solid #e0e0e0; padding-bottom: 0.5rem; }
+        .subtitle { font-size: 20px; color: #555; margin-bottom: 2rem; }
+        .intro-box {
+            background: #f7f7f7;
+            border-right: 4px solid #1a1a1a;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 4px;
+        }
+        .intro-box a { color: #0066cc; }
+        p { margin-bottom: 1.2rem; }
+        .chart-container { margin: 2rem 0; text-align: center; }
+        .chart-container svg { max-width: 100%; height: auto; }
+        .source-link { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #e0e0e0; font-size: 16px; }
+        .source-link a { color: #0066cc; }
+        blockquote {
+            border-right: 3px solid #ccc;
+            padding-right: 1.5rem;
+            margin: 1.5rem 0;
+            color: #444;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<h1>NVIDIA רוכשת את Groq, AI פיזי בשווי $50T, והמשבר של Anthropic</h1>
+<p class="subtitle">All-In Podcast — מרץ 2026</p>
+
+<div class="intro-box">
+    <strong>פודקאסט:</strong> All-In Podcast, מרץ 2026<br>
+    <strong>מארחים:</strong> שאמאת פאליהפיטייה, ג׳ייסון קלקניס, דייויד סאקס, דייויד פרידברג<br>
+    <strong>אורח מיוחד:</strong> ג׳נסן הואנג, CEO של NVIDIA<br>
+    <strong>מקור:</strong> <a href="https://podcasts.apple.com/us/podcast/all-in-with-chamath-jason-sacks-friedberg/id1502871393" target="_blank">Apple Podcasts</a>
+</div>
+
+<p>כשג׳נסן הואנג, המנכ"ל של החברה היקרה ביותר בעולם, מצטרף לפרק של All-In, אתה יודע שזה הולך להיות גדול. והפרק הזה לא מאכזב. בשעתיים צפופות, הארבעה (פלוס ג׳נסן) עוברים על רכישת Groq ב-20 מיליארד דולר, ההזדמנות של $50 טריליון ב-AI פיזי, המשבר הציבורי של Anthropic, AutoResearch של קרפאתי, גיאופוליטיקה של קוד פתוח, ועוד.</p>
+
+<p>זה פרק שדורש פירוק מעמיק. יש כאן רעיונות בשווי טריליונים, ויש גם ביקורת חריפה שלא מכסים אותה בשום מקום אחר.</p>
+
+<h2>רכישת Groq: מהלך ה-$20B של NVIDIA</h2>
+
+<p>ג׳נסן הואנג פותח את הדיון ברכישת Groq, שהפכה לאחד המהלכים הכי מדוברים בתעשייה. "רכשנו את הצוות של Groq כי הם הבינו משהו שאנחנו לא הבנו מספיק טוב — inference at the edge," הוא אומר. "Training זה שלנו. Inference — שם הייתה חולשה, ו-Groq מילאו אותה."</p>
+
+<div class="chart-container">
+<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+    <rect width="800" height="450" fill="#fafafa" rx="8"/>
+    <text x="400" y="30" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="16" font-weight="600" fill="#1a1a1a">מבנה עסקת NVIDIA-Groq: $20B</text>
+    <!-- NVIDIA box -->
+    <rect x="250" y="55" width="300" height="60" rx="8" fill="#76B900" opacity="0.9"/>
+    <text x="400" y="90" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="16" font-weight="600" fill="#fff">NVIDIA — $3.5T שווי שוק</text>
+    <!-- Arrow down -->
+    <line x1="400" y1="115" x2="400" y2="145" stroke="#76B900" stroke-width="3"/>
+    <polygon points="392,145 400,160 408,145" fill="#76B900"/>
+    <!-- Deal box -->
+    <rect x="150" y="165" width="500" height="50" rx="8" fill="#fff" stroke="#76B900" stroke-width="2"/>
+    <text x="400" y="195" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="14" font-weight="600" fill="#1a1a1a">Acqui-hire + IP: $20 מיליארד (דצמבר 2025)</text>
+    <!-- What NVIDIA got -->
+    <rect x="50" y="240" width="320" height="180" rx="8" fill="#fff" stroke="#76B900" stroke-width="1"/>
+    <text x="210" y="265" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="13" font-weight="600" fill="#76B900">מה NVIDIA קיבלה</text>
+    <text x="210" y="295" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">🧠 צוות Inference מוביל בעולם</text>
+    <text x="210" y="320" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">⚡ טכנולוגיית LPU (Language Processing Unit)</text>
+    <text x="210" y="345" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">📊 500+ פטנטים על inference</text>
+    <text x="210" y="370" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">🔧 Groq 3 LPX — שבב inference חדש</text>
+    <text x="210" y="395" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">🌐 אינטגרציה ב-AI Factory architecture</text>
+    <!-- Strategic value -->
+    <rect x="430" y="240" width="320" height="180" rx="8" fill="#fff" stroke="#F57C00" stroke-width="1"/>
+    <text x="590" y="265" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="13" font-weight="600" fill="#F57C00">ערך אסטרטגי</text>
+    <text x="590" y="295" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">Training + Inference = Full stack</text>
+    <text x="590" y="320" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">חסימת AMD ו-Intel מ-inference</text>
+    <text x="590" y="345" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">Latency: 10x שיפור (300→30 tokens/s)</text>
+    <text x="590" y="370" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">שוק inference: $100B+ עד 2028</text>
+    <text x="590" y="395" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">שליטה מלאה ב-AI compute stack</text>
+    <text x="400" y="440" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#999">מבוסס על דיון All-In, מרץ 2026</text>
+</svg>
+</div>
+
+<p>שאמאת מגיב כצפוי בסגנון שלו: "זו לא רכישה. זו הצהרת מלחמה. NVIDIA אומרת לכולם — training שלנו, inference שלנו, הכל שלנו." סאקס מוסיף: "זה כמו שגוגל קנתה את YouTube. כולם חשבו שזה יקר. חמש שנים אחרי, זה נראה כמו הגניבה של המאה."</p>
+
+<p>ג׳נסן מסביר את הלוגיקה: "Inference הוא המקום שבו הערך יהיה. Training הוא one-time cost. Inference הוא recurring revenue — כל שאילתה, כל סוכן, כל שנייה. שוק ה-inference יהיה גדול פי 10 משוק ה-training עד 2030."</p>
+
+<p>פרידברג שואל את השאלה הביקורתית: "אבל Groq היו בבעיות פיננסיות. הם שרפו מזומנים בקצב מטורף. למה לשלם $20B על חברה שנכשלת?" ג׳נסן: "הם לא נכשלו. הטכנולוגיה שלהם עבדה. מה שלא עבד הוא המודל העסקי כחברה עצמאית. בתוך NVIDIA, הטכנולוגיה הזו מייצרת ערך מהיום הראשון."</p>
+
+<p>קלקניס מסכם: "$20 מיליארד נשמע כמו הרבה כסף. אבל כשאתה חברה של $3.5 טריליון, זה 0.6%. זו הוצאה על קפה. ובתמורה אתה מקבל שליטה מלאה על כל ה-AI compute stack."</p>
+
+<h2>AI פיזי: ההזדמנות של $50 טריליון</h2>
+
+<p>ג׳נסן עובר לנושא שהוא הכי נלהב ממנו: Physical AI. "עד עכשיו, AI היה דיגיטלי — טקסט, תמונות, קוד. הגל הבא הוא AI שמבין ופועל בעולם הפיזי. רובוטיקה, רכבים אוטונומיים, ייצור, לוגיסטיקה, חקלאות."</p>
+
+<div class="chart-container">
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+    <rect width="800" height="500" fill="#fafafa" rx="8"/>
+    <text x="400" y="30" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="16" font-weight="600" fill="#1a1a1a">שוק ה-AI הפיזי: $50T הזדמנות</text>
+    <!-- Pie-ish visualization -->
+    <!-- Center circle -->
+    <circle cx="400" cy="250" r="80" fill="#76B900" opacity="0.15"/>
+    <text x="400" y="240" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="20" font-weight="600" fill="#1a1a1a">$50T</text>
+    <text x="400" y="265" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#666">שוק כולל עד 2035</text>
+    <!-- Segments around -->
+    <!-- Manufacturing -->
+    <rect x="50" y="60" width="200" height="90" rx="8" fill="#fff" stroke="#76B900" stroke-width="2"/>
+    <text x="150" y="85" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" font-weight="600" fill="#76B900">ייצור ותעשייה</text>
+    <text x="150" y="110" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="20" font-weight="600" fill="#1a1a1a">$15T</text>
+    <text x="150" y="135" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#666">רובוטים, אוטומציה, QC</text>
+    <line x1="250" y1="105" x2="330" y2="200" stroke="#76B900" stroke-width="1" stroke-dasharray="4"/>
+    <!-- Autonomous vehicles -->
+    <rect x="550" y="60" width="200" height="90" rx="8" fill="#fff" stroke="#1976D2" stroke-width="2"/>
+    <text x="650" y="85" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" font-weight="600" fill="#1976D2">רכבים אוטונומיים</text>
+    <text x="650" y="110" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="20" font-weight="600" fill="#1a1a1a">$12T</text>
+    <text x="650" y="135" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#666">נהיגה, הובלה, משלוחים</text>
+    <line x1="550" y1="105" x2="470" y2="200" stroke="#1976D2" stroke-width="1" stroke-dasharray="4"/>
+    <!-- Healthcare -->
+    <rect x="50" y="200" width="200" height="90" rx="8" fill="#fff" stroke="#f44336" stroke-width="2"/>
+    <text x="150" y="225" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" font-weight="600" fill="#f44336">בריאות ורפואה</text>
+    <text x="150" y="250" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="20" font-weight="600" fill="#1a1a1a">$8T</text>
+    <text x="150" y="275" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#666">רובוטים כירורגיים, אבחון</text>
+    <line x1="250" y1="245" x2="320" y2="245" stroke="#f44336" stroke-width="1" stroke-dasharray="4"/>
+    <!-- Energy & Infrastructure -->
+    <rect x="550" y="200" width="200" height="90" rx="8" fill="#fff" stroke="#FF9800" stroke-width="2"/>
+    <text x="650" y="225" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" font-weight="600" fill="#FF9800">אנרגיה ותשתיות</text>
+    <text x="650" y="250" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="20" font-weight="600" fill="#1a1a1a">$8T</text>
+    <text x="650" y="275" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#666">רשתות חכמות, בנייה</text>
+    <line x1="550" y1="245" x2="480" y2="245" stroke="#FF9800" stroke-width="1" stroke-dasharray="4"/>
+    <!-- Agriculture -->
+    <rect x="50" y="340" width="200" height="90" rx="8" fill="#fff" stroke="#4CAF50" stroke-width="2"/>
+    <text x="150" y="365" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" font-weight="600" fill="#4CAF50">חקלאות ומזון</text>
+    <text x="150" y="390" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="20" font-weight="600" fill="#1a1a1a">$4T</text>
+    <text x="150" y="415" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#666">רובוטים חקלאיים, precision</text>
+    <line x1="250" y1="385" x2="330" y2="300" stroke="#4CAF50" stroke-width="1" stroke-dasharray="4"/>
+    <!-- Logistics -->
+    <rect x="550" y="340" width="200" height="90" rx="8" fill="#fff" stroke="#9C27B0" stroke-width="2"/>
+    <text x="650" y="365" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" font-weight="600" fill="#9C27B0">לוגיסטיקה ומחסנים</text>
+    <text x="650" y="390" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="20" font-weight="600" fill="#1a1a1a">$3T</text>
+    <text x="650" y="415" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#666">מחסנים אוטונומיים, drones</text>
+    <line x1="550" y1="385" x2="470" y2="300" stroke="#9C27B0" stroke-width="1" stroke-dasharray="4"/>
+    <text x="400" y="485" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#999">הערכות ג׳נסן הואנג ושאמאת פאליהפיטייה, All-In מרץ 2026</text>
+</svg>
+</div>
+
+<p>שאמאת קופץ: "תסתכלו על המספרים. כל שוק הסופטוור הוא $600 מיליארד. שוק הייצור העולמי הוא $16 טריליון. כשAI נכנס לעולם הפיזי, זו לא תוספת של 10% — זו מהפכה של 10x." פרידברג מסכים: "Physical AI הוא לא השלב הבא. זה the main event. כל מה שראינו עד עכשיו עם LLMs ו-chatbots — זה רק חימום."</p>
+
+<p>ג׳נסן מתאר את הטכנולוגיה: "Omniverse של NVIDIA מאפשרת לאמן רובוטים בסימולציה לפני שהם נכנסים לעולם האמיתי. אתה יכול לאמן מיליון רובוט במקביל ב-simulation, ואז לטעון את המודל לרובוט פיזי אחד. הרובוט הזה כבר 'חי' מיליון חיים לפני שהוא עושה צעד ראשון."</p>
+
+<blockquote>
+"AI דיגיטלי שינה את מה שאנחנו כותבים. AI פיזי ישנה את מה שאנחנו בונים, איך אנחנו נוסעים, מה אנחנו אוכלים, ואיך אנחנו מטפלים בחולים. זה לא אותו סדר גודל — זה מספר אחר לגמרי." — ג׳נסן הואנג
+</blockquote>
+
+<h2>משבר התקשורת של Anthropic</h2>
+
+<p>הדיון עובר לנושא רגיש: הבעיות הציבוריות של Anthropic. סאקס פותח: "Anthropic יש בעיית תקשורת רצינית. הם מנסים להיות 'חברת ה-AI האחראית' ובאותו הזמן בונים מערכות שהם עצמם אומרים שהן מסוכנות. המסר הכפול הזה מתחיל להכות בהם."</p>
+
+<p>הרקע: בשבועות האחרונים, Anthropic נקלעו למספר מחלוקות ציבוריות. דוח פנימי שדלף הראה שהחברה מודעת לסיכונים מסוימים אבל ממשיכה בפיתוח. תגובת החברה נתפסה כמתחמקת.</p>
+
+<p>קלקניס: "הבעיה של Anthropic היא שהם תפסו את הפוזיציה של 'אנחנו הטובים'. וכשאתה הטוב, כל טעות נראית פי עשר. OpenAI יכולה להיות אגרסיבית כי כולם מצפים לזה. Anthropic לא יכולה כי זה סותר את הסיפור שלה."</p>
+
+<div class="chart-container">
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+    <rect width="800" height="400" fill="#fafafa" rx="8"/>
+    <text x="400" y="30" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="16" font-weight="600" fill="#1a1a1a">מירוץ ההכנסות: Anthropic מול OpenAI</text>
+    <!-- Y axis -->
+    <line x1="80" y1="60" x2="80" y2="340" stroke="#ccc" stroke-width="1"/>
+    <line x1="80" y1="340" x2="720" y2="340" stroke="#ccc" stroke-width="1"/>
+    <!-- Y labels -->
+    <text x="75" y="70" text-anchor="end" font-family="Noto Sans Hebrew" font-size="11" fill="#999">$15B</text>
+    <text x="75" y="130" text-anchor="end" font-family="Noto Sans Hebrew" font-size="11" fill="#999">$12B</text>
+    <text x="75" y="190" text-anchor="end" font-family="Noto Sans Hebrew" font-size="11" fill="#999">$8B</text>
+    <text x="75" y="250" text-anchor="end" font-family="Noto Sans Hebrew" font-size="11" fill="#999">$4B</text>
+    <text x="75" y="340" text-anchor="end" font-family="Noto Sans Hebrew" font-size="11" fill="#999">$0</text>
+    <!-- Grid -->
+    <line x1="80" y1="130" x2="720" y2="130" stroke="#eee" stroke-width="1"/>
+    <line x1="80" y1="190" x2="720" y2="190" stroke="#eee" stroke-width="1"/>
+    <line x1="80" y1="250" x2="720" y2="250" stroke="#eee" stroke-width="1"/>
+    <!-- X labels -->
+    <text x="160" y="360" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#999">Q1 2025</text>
+    <text x="290" y="360" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#999">Q2 2025</text>
+    <text x="420" y="360" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#999">Q3 2025</text>
+    <text x="550" y="360" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#999">Q4 2025</text>
+    <text x="680" y="360" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#999">Q1 2026*</text>
+    <!-- OpenAI line -->
+    <path d="M 160,265 L 290,230 L 420,185 L 550,140 L 680,90" fill="none" stroke="#10a37f" stroke-width="3"/>
+    <circle cx="160" cy="265" r="4" fill="#10a37f"/>
+    <circle cx="290" cy="230" r="4" fill="#10a37f"/>
+    <circle cx="420" cy="185" r="4" fill="#10a37f"/>
+    <circle cx="550" cy="140" r="4" fill="#10a37f"/>
+    <circle cx="680" cy="90" r="4" fill="#10a37f"/>
+    <text x="690" y="85" font-family="Noto Sans Hebrew" font-size="11" fill="#10a37f" font-weight="600">OpenAI</text>
+    <text x="690" y="100" font-family="Noto Sans Hebrew" font-size="10" fill="#10a37f">~$14B ARR</text>
+    <!-- Anthropic line -->
+    <path d="M 160,310 L 290,285 L 420,250 L 550,215 L 680,175" fill="none" stroke="#d97706" stroke-width="3"/>
+    <circle cx="160" cy="310" r="4" fill="#d97706"/>
+    <circle cx="290" cy="285" r="4" fill="#d97706"/>
+    <circle cx="420" cy="250" r="4" fill="#d97706"/>
+    <circle cx="550" cy="215" r="4" fill="#d97706"/>
+    <circle cx="680" cy="175" r="4" fill="#d97706"/>
+    <text x="690" y="170" font-family="Noto Sans Hebrew" font-size="11" fill="#d97706" font-weight="600">Anthropic</text>
+    <text x="690" y="185" font-family="Noto Sans Hebrew" font-size="10" fill="#d97706">~$6B ARR</text>
+    <!-- Google line -->
+    <path d="M 160,300 L 290,275 L 420,240 L 550,200 L 680,155" fill="none" stroke="#4285F4" stroke-width="2" stroke-dasharray="6"/>
+    <circle cx="680" cy="155" r="4" fill="#4285F4"/>
+    <text x="690" y="150" font-family="Noto Sans Hebrew" font-size="11" fill="#4285F4" font-weight="600">Google AI</text>
+    <text x="690" y="165" font-family="Noto Sans Hebrew" font-size="10" fill="#4285F4">~$8B ARR*</text>
+    <text x="400" y="390" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#999">* הערכה | הכנסות AI annualized run rate | מבוסס על דיון All-In</text>
+</svg>
+</div>
+
+<p>שאמאת מוסיף פרספקטיבה כלכלית: "Anthropic מגייסת בשווי $60 מיליארד, עם $6 מיליארד הכנסות. OpenAI בשווי $300 מיליארד עם $14 מיליארד. מבחינת multiples, Anthropic בעצם יקרה יותר. והשאלה היא — האם המשבר הציבורי הזה ישפיע על הסבב הבא?"</p>
+
+<p>סאקס, שכמייסד שותף ב-Craft Ventures יש לו הבנה עמוקה של דינמיקת סטארטאפים, אומר: "הבעיה האמיתית היא לא ה-PR. זה שבתוך Anthropic יש מתח בין הצד המסחרי שרוצה לרוץ מהר, לצד הבטיחות שרוצה לעצור. וכש-PR גרוע, זה מזין את המתח הפנימי."</p>
+
+<h2>AutoResearch של קרפאתי: 630 שורות שינו את המחקר</h2>
+
+<p>אחד הרגעים הכי מלהיבים בפרק הוא הדיון על AutoResearch של אנדריי קרפאתי. קרפאתי, שעבד ב-Tesla ו-OpenAI, כתב סקריפט פייתון של 630 שורות שמפעיל ניסויי מחקר אוטומטיים. הוא הלך לישון, והתעורר ל-50 ניסויים שהושלמו — עם תוצאות, ניתוחים סטטיסטיים, וגרפים.</p>
+
+<blockquote>
+"קרפאתי כתב 630 שורות פייתון. הלך לישון. קם בבוקר ל-50 ניסויים מושלמים. זה שווה ערך לשנה של עבודת מעבדה. בלילה אחד. עם סקריפט אחד." — ג׳ייסון קלקניס
+</blockquote>
+
+<p>פרידברג, שהוא עצמו מדען, מגיב: "זה לא סתם אוטומציה. זה שינוי מהותי במהירות המחקר המדעי. עד עכשיו, bottleneck במחקר היה הזמן של חוקרים — להריץ ניסויים, לנתח תוצאות, לחזור על ניסויים שנכשלו. AutoResearch הופך את ה-bottleneck מזמן אנושי לזמן חישוב. ומחשוב זמין אינסופית."</p>
+
+<p>שאמאת רואה את ההשלכות הכלכליות: "אם כל חוקר יכול להכפיל פי 50 את הפרודוקטיביות שלו, מה זה אומר לקצב של תגליות מדעיות? מה זה אומר לפארמה, לחומרי בנייה, לאנרגיה? אנחנו יכולים לדחוס 50 שנות מחקר לשנה אחת."</p>
+
+<p>ג׳נסן מוסיף: "זו בדיוק הסיבה שאנחנו בונים DGX Cloud. חוקרים צריכים גישה ל-compute ברמה שלא הייתה זמינה קודם. AutoResearch הוא רק ההתחלה — בקרוב יהיו מערכות שלא רק מריצות ניסויים, אלא מגדירות אילו ניסויים לעשות."</p>
+
+<h2>גיאופוליטיקה של קוד פתוח: סין מול ארה"ב</h2>
+
+<p>הדיון על קוד פתוח ב-AI הופך מהר מאוד לגיאופוליטי. סאקס פותח: "DeepSeek הוכיחה שסין יכולה לייצר מודלים ברמה עולמית בקוד פתוח. השאלה היא — האם ארה"ב צריכה לסגור את הקוד כדי לשמור על יתרון, או לפתוח אותו כדי לבנות אקוסיסטם?"</p>
+
+<p>שאמאת, שבדרך כלל נוטה לצד הפתוח, מפתיע: "אני משנה את הדעה שלי. לפני שנה הייתי 100% open source. עכשיו אני חושב ש-80% צריך להיות פתוח ו-20% — הדברים הכי מתקדמים — צריכים להיות סגורים. לא מסיבות עסקיות, אלא מסיבות של ביטחון לאומי."</p>
+
+<div class="chart-container">
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+    <rect width="800" height="400" fill="#fafafa" rx="8"/>
+    <text x="400" y="30" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="16" font-weight="600" fill="#1a1a1a">האקוסיסטם של AI קוד פתוח: ארה"ב מול סין</text>
+    <!-- US side -->
+    <rect x="50" y="55" width="330" height="300" rx="8" fill="#fff" stroke="#1976D2" stroke-width="2"/>
+    <text x="215" y="80" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="14" font-weight="600" fill="#1976D2">🇺🇸 ארה"ב</text>
+    <text x="215" y="110" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">Meta — Llama 4 (open weights)</text>
+    <text x="215" y="135" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">Google — Gemma 3 (open)</text>
+    <text x="215" y="160" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">Microsoft — Phi-4 (open)</text>
+    <text x="215" y="185" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">Mistral — Mixtral (EU/open)</text>
+    <rect x="70" y="200" width="290" height="2" fill="#eee"/>
+    <text x="215" y="225" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#f44336">OpenAI — GPT-5 (סגור)</text>
+    <text x="215" y="250" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#f44336">Anthropic — Claude 4 (סגור)</text>
+    <text x="215" y="275" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#f44336">Google — Gemini Ultra (סגור)</text>
+    <text x="215" y="305" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#999">אסטרטגיה: dual track</text>
+    <text x="215" y="325" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#999">פתוח לאימוץ, סגור ליתרון</text>
+    <!-- China side -->
+    <rect x="420" y="55" width="330" height="300" rx="8" fill="#fff" stroke="#f44336" stroke-width="2"/>
+    <text x="585" y="80" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="14" font-weight="600" fill="#f44336">🇨🇳 סין</text>
+    <text x="585" y="110" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">DeepSeek — V3/R2 (open)</text>
+    <text x="585" y="135" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">Alibaba — Qwen 3 (open)</text>
+    <text x="585" y="160" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">Baidu — ERNIE 5 (semi-open)</text>
+    <text x="585" y="185" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">01.AI — Yi-Lightning (open)</text>
+    <rect x="440" y="200" width="290" height="2" fill="#eee"/>
+    <text x="585" y="225" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">ממשלת סין: compute ריבוני</text>
+    <text x="585" y="250" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">סובסידיות ענק לחומרה</text>
+    <text x="585" y="275" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">עקיפת סנקציות על שבבים</text>
+    <text x="585" y="305" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#999">אסטרטגיה: flood the market</text>
+    <text x="585" y="325" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#999">פתוח כנשק אסטרטגי</text>
+    <text x="400" y="385" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#999">מבוסס על דיון All-In, מרץ 2026</text>
+</svg>
+</div>
+
+<p>ג׳נסן, שנשאל ישירות, מגיב בזהירות: "NVIDIA מוכרת לכולם. אנחנו מספקים compute. מה שהלקוחות עושים עם ה-compute — זו ההחלטה שלהם. אבל ברור שהמגבלות על ייצוא שבבים לסין יוצרות מצב שבו סין מפתחת אלטרנטיבות. וזה לא בהכרח טוב לארה"ב בטווח הארוך."</p>
+
+<p>קלקניס: "הסנקציות על שבבים לא עובדות. סין מוצאת דרכים לעקוף. ובמקביל, הן דוחפות את סין להשקיע טריליונים בייצור שבבים מקומי. בעוד חמש שנים, הם לא יצטרכו את NVIDIA. ואז מה?"</p>
+
+<h2>חברות AI מגדילות הכנסות מהר מכל חברה בהיסטוריה</h2>
+
+<p>שאמאת מציג סטטיסטיקה שמשאירה את כולם בשתיקה: "OpenAI הגיעה מ-$0 ל-$14 מיליארד ARR בשלוש שנים. Google הגיעה ל-$14 מיליארד הכנסות אחרי 8 שנים. Facebook — 9 שנים. Amazon — 12 שנים. אנחנו עדים לקצב צמיחה שלא היה קיים מעולם."</p>
+
+<p>פרידברג מוסיף: "וזה לא רק OpenAI. Anthropic הגיעה ל-$6 מיליארד ARR בשנתיים וחצי. Cursor, שנבנתה על API של אחרים, הגיעה ל-$300 מיליון ARR בשנה. Perplexity — $150 מיליון. הדפוסים האלה חסרי תקדים."</p>
+
+<p>סאקס מסביר למה: "ההסבר הוא פשוט — ה-time to value קרוב לאפס. אתה נרשם ל-Claude, ובעוד 30 שניות הוא עושה לך משהו שימושי. אין onboarding, אין implementation, אין training. זו הסיבה שחברות האלה צומחות כל כך מהר — כי ה-friction לאימוץ כמעט לא קיים."</p>
+
+<h2>שוק ה-IPO ומה שלא נראה</h2>
+
+<p>הדיון עובר ל-IPO market, שנמצא ברגע מעניין. שאמאת: "יש pipeline של חברות AI שרוצות לצאת לבורסה, אבל הן ממתינות. למה? כי הן צומחות כל כך מהר שכל רבעון שהן מחכות, השווי שלהן עולה. אז למה למכור מניות היום ב-$60 מיליארד אם בעוד חצי שנה אתה יכול ב-$100 מיליארד?"</p>
+
+<div class="chart-container">
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+    <rect width="800" height="400" fill="#fafafa" rx="8"/>
+    <text x="400" y="30" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="16" font-weight="600" fill="#1a1a1a">ה-Pipeline של IPOs בתחום ה-AI</text>
+    <!-- Companies -->
+    <rect x="50" y="60" width="700" height="50" rx="8" fill="#fff" stroke="#76B900" stroke-width="2"/>
+    <text x="100" y="90" font-family="Noto Sans Hebrew" font-size="13" font-weight="600" fill="#76B900">🟢 מוכנות ל-IPO</text>
+    <text x="300" y="90" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">Databricks ($62B) | Stripe ($90B) | SpaceX ($350B)</text>
+
+    <rect x="50" y="125" width="700" height="50" rx="8" fill="#fff" stroke="#FF9800" stroke-width="2"/>
+    <text x="100" y="155" font-family="Noto Sans Hebrew" font-size="13" font-weight="600" fill="#FF9800">🟡 בדרך (12–18 חודש)</text>
+    <text x="300" y="155" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">Anthropic ($60B) | OpenAI ($300B) | Scale AI ($14B)</text>
+
+    <rect x="50" y="190" width="700" height="50" rx="8" fill="#fff" stroke="#1976D2" stroke-width="2"/>
+    <text x="100" y="220" font-family="Noto Sans Hebrew" font-size="13" font-weight="600" fill="#1976D2">🔵 עתידי (2027+)</text>
+    <text x="300" y="220" font-family="Noto Sans Hebrew" font-size="12" fill="#1a1a1a">Perplexity ($9B) | Cursor ($9B) | Groq (in NVIDIA) | xAI ($50B)</text>
+
+    <!-- Key stats -->
+    <rect x="50" y="265" width="220" height="100" rx="8" fill="#fafafa" stroke="#e0e0e0"/>
+    <text x="160" y="290" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" font-weight="600" fill="#1a1a1a">ערך כולל Pipeline</text>
+    <text x="160" y="320" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="24" font-weight="600" fill="#76B900">$900B+</text>
+    <text x="160" y="345" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#999">private valuations</text>
+
+    <rect x="290" y="265" width="220" height="100" rx="8" fill="#fafafa" stroke="#e0e0e0"/>
+    <text x="400" y="290" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" font-weight="600" fill="#1a1a1a">IPOs צפויים 2026</text>
+    <text x="400" y="320" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="24" font-weight="600" fill="#FF9800">5–8</text>
+    <text x="400" y="345" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#999">tech IPOs</text>
+
+    <rect x="530" y="265" width="220" height="100" rx="8" fill="#fafafa" stroke="#e0e0e0"/>
+    <text x="640" y="290" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="12" font-weight="600" fill="#1a1a1a">Avg Time to IPO</text>
+    <text x="640" y="320" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="24" font-weight="600" fill="#1976D2">3–5 שנים</text>
+    <text x="640" y="345" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#999">מול 7–10 בעבר</text>
+
+    <text x="400" y="390" text-anchor="middle" font-family="Noto Sans Hebrew" font-size="11" fill="#999">הערכות מבוססות על דיון All-In, מרץ 2026</text>
+</svg>
+</div>
+
+<p>סאקס, שכשר Treasury בתקופת טראמפ, מוסיף: "הממשל מעודד IPOs. יש לחץ רגולטורי להפחית את ה-friction. ה-SEC מקלה על דרישות הגילוי לחברות AI. אנחנו נראה גל IPOs ב-2026-2027 שיהיה דומה לדוט-קום, אבל הפעם עם חברות שבאמת מרוויחות כסף."</p>
+
+<h2>מלחמת איראן וההשלכות הכלכליות</h2>
+
+<p>הארבעה מקדישים זמן גם לנושאים גיאופוליטיים. שאמאת פותח: "ההשלכות הכלכליות של המתח עם איראן הן ענקיות. מחירי אנרגיה, שרשראות אספקה, ביטחון סייבר — כל אלה מושפעים."</p>
+
+<p>פרידברג, שיש לו רקע באנרגיה, מפרט: "אם מצר הורמוז נחסם — ואפילו באופן חלקי — אתה מדבר על 20% מהנפט העולמי שנתקע. המחירים קופצים ב-50-80% ביום. זה recession מיידי."</p>
+
+<p>סאקס מקשר לטכנולוגיה: "ובגלל זה, חברות טכנולוגיה שתלויות בשרשרת אספקה אסייתית — כולל NVIDIA — צריכות לגוון. זו עוד סיבה שמרכזי נתונים בארה"ב ובאירופה הופכים לקריטיים."</p>
+
+<p>ג׳נסן מגיב: "אנחנו כבר מגוונים. ייצור ב-TSMC זה חלק מהסיפור, אבל אנחנו גם עובדים עם Samsung, Intel Foundry, ו-GlobalFoundries. אין חברה רצינית שסומכת על מקור יחיד."</p>
+
+<h2>רגולציית שווקי חיזוי (Prediction Markets)</h2>
+
+<p>קלקניס מעלה את נושא שווקי החיזוי: "Polymarket הוכיחה שהקהל יודע לחזות טוב יותר מכל פרשן. עכשיו השאלה היא — האם הרגולטורים ייתנו לזה לצמוח, או יהרגו את זה?"</p>
+
+<p>שאמאת: "שווקי חיזוי הם המוצר הכי חשוב שנבנה מאז הבורסה. הם מאפשרים לתמחר מידע בזמן אמת. אם הם מותרים, הם ישנו את איך שממשלות מקבלות החלטות, איך חברות מתכננות, ואיך אנשים מבינים סיכונים."</p>
+
+<p>סאקס, עם הניסיון שלו בממשל: "הרגולציה תגיע, אבל היא תהיה מאוזנת. CFTC כבר נתנה אור ירוק ל-Kalshi. Polymarket פועלת מחוץ לארה"ב, אבל אמריקאים משתמשים בה. הגישה תהיה 'רגולציה, לא איסור'. וזה הדבר הנכון."</p>
+
+<h2>סיכום: שלושה דברים לזכור</h2>
+
+<p>הפרק הזה של All-In הוא אחד הטובים ביותר שיצאו לאחרונה, בעיקר בזכות הנוכחות של ג׳נסן הואנג שמוסיפה שכבה של אמינות ותובנה שאי אפשר לקבל ממקום אחר. הנה שלושה דברים מרכזיים:</p>
+
+<p><strong>1. NVIDIA הולכת על הכל.</strong> רכישת Groq היא לא סתם acquihire — זו הצהרת כוונות. NVIDIA רוצה לשלוט בכל ה-AI compute stack, מ-training ועד inference. מי שמהמר נגדם צריך סיבה טובה מאוד.</p>
+
+<p><strong>2. Physical AI הוא ה-main event.</strong> כל מה שראינו עם chatbots ו-LLMs — זה רק הקדמה. כש-AI נכנס לרובוטיקה, ייצור, ורכבים אוטונומיים, המספרים קופצים מטריליונים בודדים לעשרות טריליונים. מי שלא משקיע ב-physical AI מפספס את הגל הכי גדול.</p>
+
+<p><strong>3. הגיאופוליטיקה של AI רק מתחילה.</strong> סין מול ארה"ב, קוד פתוח מול סגור, סנקציות על שבבים — כל אלה ישפיעו על מי ינצח במרוץ ה-AI. וההחלטות שמתקבלות היום ישפיעו על עשרות שנים קדימה.</p>
+
+<p>All-In ממשיכים להיות האוזן הכי טובה למה שקורה באמת בטכנולוגיה ובגיאופוליטיקה. הפרק הזה שווה כל דקה.</p>
+
+<div class="source-link">
+    <strong>מקור:</strong> <a href="https://podcasts.apple.com/us/podcast/all-in-with-chamath-jason-sacks-friedberg/id1502871393" target="_blank">All-In Podcast — Apple Podcasts</a><br>
+    <a href="https://podcasts.apple.com/ca/podcast/jensen-huang-live-nvidias-future-physical-ai-rise-of/id1502871393?i=1000756188610" target="_blank">פרק עם ג׳נסן הואנג</a>
+</div>
+
+</div>
+</body>
+</html>
