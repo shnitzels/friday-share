@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Google Gemma 4: המודלים הפתוחים החכמים ביותר</title>
+<meta property="og:title" content="Google Gemma 4: המודלים הפתוחים החכמים ביותר">
+<meta property="og:description" content="Google DeepMind שחררה את Gemma 4 - ארבעה מודלים פתוחים שנבנו מהמחקר של Gemini 3, עם קפיצה של פי 13 ביכולות אגנטיות ופי 4.3 במתמטיקה">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Google Gemma 4: המודלים הפתוחים החכמים ביותר">
+<meta name="twitter:description" content="Google DeepMind שחררה את Gemma 4 - ארבעה מודלים פתוחים שנבנו מהמחקר של Gemini 3, עם קפיצה של פי 13 ביכולות אגנטיות ופי 4.3 במתמטיקה">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Noto Sans Hebrew', sans-serif; font-size: 18px; line-height: 1.8; color: #1a1a1a; background: #fff; }
+.container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+h1 { font-size: 32px; font-weight: 600; margin-bottom: 8px; }
+h2 { font-size: 24px; font-weight: 600; margin: 48px 0 16px; border-bottom: 2px solid #e5e5e5; padding-bottom: 8px; }
+h3 { font-size: 20px; font-weight: 600; margin: 32px 0 12px; }
+.subtitle { font-size: 20px; color: #555; margin-bottom: 32px; }
+p { margin-bottom: 16px; }
+.intro-box { background: #f7f7f7; border-right: 4px solid #4285f4; padding: 20px 24px; border-radius: 8px; margin-bottom: 40px; }
+.intro-box a { color: #4285f4; text-decoration: none; font-weight: 600; }
+.intro-box a:hover { text-decoration: underline; }
+.source-link { margin-top: 48px; padding: 20px; background: #f7f7f7; border-radius: 8px; text-align: center; }
+.source-link a { color: #4285f4; text-decoration: none; font-weight: 600; }
+svg { width: 100%; max-width: 800px; margin: 24px auto; display: block; }
+.chart-title { text-anchor: middle; font-size: 16px; font-weight: 600; fill: #1a1a1a; }
+.highlight { background: #e8f0fe; padding: 2px 6px; border-radius: 4px; }
+code { background: #f0f0f0; padding: 2px 8px; border-radius: 4px; font-size: 0.9em; direction: ltr; display: inline-block; }
+blockquote { border-right: 3px solid #4285f4; padding-right: 16px; margin: 24px 0; color: #444; font-style: italic; }
+ul, ol { margin: 12px 24px 16px 0; }
+li { margin-bottom: 8px; }
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 24px 0; }
+.stat-card { background: #f7f7f7; padding: 20px; border-radius: 8px; text-align: center; }
+.stat-number { font-size: 28px; font-weight: 600; color: #4285f4; }
+.stat-label { font-size: 14px; color: #666; margin-top: 4px; }
+.multiplier { color: #ea4335; font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Google Gemma 4: המודלים הפתוחים החכמים ביותר</h1>
+<p class="subtitle">ארבעה מודלים פתוחים מבית Google DeepMind, עם קפיצות ביצועים חסרות תקדים במתמטיקה, קוד ויכולות אגנטיות</p>
+
+<div class="intro-box">
+Google DeepMind שחררה את Gemma 4, דור חדש של מודלי שפה פתוחים (Apache 2.0) שנבנו ישירות מהמחקר והטכנולוגיה של Gemini 3. הקפיצה מ-Gemma 3 ל-Gemma 4 היא אחת הגדולות שנראו אי פעם בין דורות של מודלים פתוחים: פי 4.3 במתמטיקה, פי 2.75 בקוד, ופי 13 ביכולות אגנטיות.<br><br>
+<a href="https://deepmind.google/models/gemma/gemma-4/" target="_blank">קראו את ההכרזה המלאה באתר Google DeepMind ←</a>
+</div>
+
+<h2>מ-Gemma 3 ל-Gemma 4: קפיצת מדרגה</h2>
+
+<p>כשמדברים על שיפור בין דורות של מודלי AI, השיפור הטיפוסי הוא 10-20%. שיפור של 50% נחשב משמעותי. אבל מה שקורה בין Gemma 3 27B לבין Gemma 4 31B הוא לא שיפור רגיל. זו קפיצת מדרגה שמשנה את מה שמודל פתוח יכול לעשות.</p>
+
+<p>ניקח את המתמטיקה כדוגמה. במבחן AIME 2026, מבחן מתמטיקה ברמת תחרויות שנחשב לאחד הקשים ביותר בתחום, Gemma 3 27B הגיע ל-20.8%. Gemma 4 31B? <span class="highlight">89.2%</span>. זו קפיצה של <span class="multiplier">פי 4.3</span>. מודל שקודם לכן בקושי פתר אחת מכל חמש שאלות עכשיו פותר כמעט תשע מתוך עשר.</p>
+
+<p>ביכולות אגנטיות (agentic), ההבדל עוד יותר דרמטי. במבחן τ2-bench שמודד את היכולת של מודלים לבצע משימות מורכבות באופן עצמאי, Gemma 3 הגיע ל-6.6% בלבד. Gemma 4 הגיע ל-<span class="highlight">86.4%</span>. זו קפיצה של <span class="multiplier">פי 13</span>. ממודל שכמעט לא יכול לבצע משימות אגנטיות למודל שמצליח ברובן המוחלט.</p>
+
+<p>גם בקוד, בתרגום רב-לשוני, וביכולות מולטימודאליות (ראייה + שמיעה), השיפורים הם מרשימים. Gemma 4 היא לא עדכון אינקרמנטלי. היא מודל חדש שנבנה מהיסוד על בסיס הטכנולוגיה של Gemini 3, המודל הסגור של Google.</p>
+
+<div class="stat-grid">
+<div class="stat-card">
+<div class="stat-number">×4.3</div>
+<div class="stat-label">שיפור במתמטיקה (AIME 2026)</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">×13</div>
+<div class="stat-label">שיפור ביכולות אגנטיות</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">×2.75</div>
+<div class="stat-label">שיפור בקוד (LiveCodeBench)</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">140</div>
+<div class="stat-label">שפות נתמכות</div>
+</div>
+</div>
+
+<h2>ארבעה מודלים, ארבע נקודות מחיר</h2>
+
+<p>Gemma 4 מגיעה בארבעה גדלים, כל אחד מותאם לשימושים שונים:</p>
+
+<p><strong>Gemma 4 31B IT Thinking</strong> הוא הדגל. עם 31 מיליארד פרמטרים, הוא המודל הגדול ביותר במשפחה ומציע את הביצועים הגבוהים ביותר בכל הקטגוריות. הוא כולל יכולת "חשיבה" (thinking) שמאפשרת לו לפרק בעיות מורכבות לשלבים לפני שהוא מגיע לתשובה, בדומה למודלים כמו o1 ו-Claude Thinking.</p>
+
+<p><strong>Gemma 4 26B A4B IT Thinking</strong> הוא מודל Mixture-of-Experts (MoE) עם 26 מיליארד פרמטרים, אבל רק 4 מיליארד פעילים בכל רגע נתון. זה אומר שהוא דורש הרבה פחות חישוב בזמן ריצה, מה שהופך אותו ליעיל יותר עבור deployment בפרודקשן.</p>
+
+<p><strong>Gemma 4 E4B IT Thinking</strong> הוא גרסה קומפקטית עם כ-4 מיליארד פרמטרים, מותאמת למכשירים ניידים ו-edge computing. הוא מספק ביצועים מרשימים ביחס לגודלו ויכול לרוץ על חומרה צנועה.</p>
+
+<p><strong>Gemma 4 E2B IT Thinking</strong> הוא הקטן ביותר, עם כ-2 מיליארד פרמטרים. מיועד למקרים שבהם המשאבים מוגבלים ביותר אבל עדיין נדרשת יכולת חשיבה.</p>
+
+<p>כל הגדלים משוחררים תחת רישיון Apache 2.0, מה שאומר שאפשר להשתמש בהם לכל מטרה, כולל מטרות מסחריות, בלי שום מגבלה. זה הבדל משמעותי ממודלים כמו Llama של Meta שמגיעים עם רישיון מותאם שמגביל שימוש מסחרי מעל סף מסוים.</p>
+
+<svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg">
+<text x="400" y="30" class="chart-title">Gemma 3 לעומת Gemma 4: השוואת ביצועים</text>
+<!-- Benchmark labels -->
+<text x="95" y="80" text-anchor="end" font-size="12" fill="#1a1a1a">Arena AI (טקסט)</text>
+<text x="95" y="130" text-anchor="end" font-size="12" fill="#1a1a1a">MMLU רב-לשוני</text>
+<text x="95" y="180" text-anchor="end" font-size="12" fill="#1a1a1a">MMMU Pro מולטימודאלי</text>
+<text x="95" y="230" text-anchor="end" font-size="12" fill="#1a1a1a">AIME 2026 מתמטיקה</text>
+<text x="95" y="280" text-anchor="end" font-size="12" fill="#1a1a1a">LiveCodeBench v6</text>
+<text x="95" y="330" text-anchor="end" font-size="12" fill="#1a1a1a">GPQA Diamond</text>
+<text x="95" y="380" text-anchor="end" font-size="12" fill="#1a1a1a">τ2-bench אגנטי</text>
+<!-- Gemma 3 bars (lighter) -->
+<rect x="110" y="65" width="374" height="14" rx="3" fill="#fbbc04" opacity="0.5"/>
+<text x="490" y="77" font-size="11" fill="#f9a825">1365</text>
+<rect x="110" y="115" width="277" height="14" rx="3" fill="#fbbc04" opacity="0.5"/>
+<text x="393" y="127" font-size="11" fill="#f9a825">67.6%</text>
+<rect x="110" y="165" width="204" height="14" rx="3" fill="#fbbc04" opacity="0.5"/>
+<text x="320" y="177" font-size="11" fill="#f9a825">49.7%</text>
+<rect x="110" y="215" width="85" height="14" rx="3" fill="#fbbc04" opacity="0.5"/>
+<text x="201" y="227" font-size="11" fill="#f9a825">20.8%</text>
+<rect x="110" y="265" width="119" height="14" rx="3" fill="#fbbc04" opacity="0.5"/>
+<text x="235" y="277" font-size="11" fill="#f9a825">29.1%</text>
+<rect x="110" y="315" width="174" height="14" rx="3" fill="#fbbc04" opacity="0.5"/>
+<text x="290" y="327" font-size="11" fill="#f9a825">42.4%</text>
+<rect x="110" y="365" width="27" height="14" rx="3" fill="#fbbc04" opacity="0.5"/>
+<text x="143" y="377" font-size="11" fill="#f9a825">6.6%</text>
+<!-- Gemma 4 bars -->
+<rect x="110" y="80" width="398" height="14" rx="3" fill="#4285f4" opacity="0.85"/>
+<text x="514" y="92" font-size="11" fill="#4285f4" font-weight="600">1452</text>
+<rect x="110" y="130" width="350" height="14" rx="3" fill="#4285f4" opacity="0.85"/>
+<text x="466" y="142" font-size="11" fill="#4285f4" font-weight="600">85.2%</text>
+<rect x="110" y="180" width="316" height="14" rx="3" fill="#4285f4" opacity="0.85"/>
+<text x="432" y="192" font-size="11" fill="#4285f4" font-weight="600">76.9%</text>
+<rect x="110" y="230" width="366" height="14" rx="3" fill="#ea4335" opacity="0.85"/>
+<text x="482" y="242" font-size="11" fill="#ea4335" font-weight="600">89.2% (×4.3!)</text>
+<rect x="110" y="280" width="328" height="14" rx="3" fill="#4285f4" opacity="0.85"/>
+<text x="444" y="292" font-size="11" fill="#4285f4" font-weight="600">80.0% (×2.75)</text>
+<rect x="110" y="330" width="346" height="14" rx="3" fill="#4285f4" opacity="0.85"/>
+<text x="462" y="342" font-size="11" fill="#4285f4" font-weight="600">84.3%</text>
+<rect x="110" y="380" width="355" height="14" rx="3" fill="#ea4335" opacity="0.85"/>
+<text x="471" y="392" font-size="11" fill="#ea4335" font-weight="600">86.4% (×13!)</text>
+<!-- Legend -->
+<rect x="550" y="60" width="14" height="14" rx="3" fill="#fbbc04" opacity="0.5"/>
+<text x="570" y="72" font-size="12" fill="#666">Gemma 3 27B</text>
+<rect x="550" y="82" width="14" height="14" rx="3" fill="#4285f4" opacity="0.85"/>
+<text x="570" y="94" font-size="12" fill="#666">Gemma 4 31B</text>
+</svg>
+
+<h2>הבנצ'מרקים בפירוט</h2>
+
+<p>בואו נצלול לעומק הנתונים, כי המספרים כאן מספרים סיפור מרתק על הקצב שבו מודלים פתוחים מתקרבים למודלים סגורים.</p>
+
+<h3>Arena AI (טקסט): 1452 לעומת 1365</h3>
+<p>Arena AI הוא דירוג ELO שמבוסס על העדפות משתמשים אמיתיים בשיחות עיוורות (blind). שיפור של 87 נקודות ELO הוא משמעותי ומציב את Gemma 4 31B ברמה תחרותית מול מודלים סגורים הרבה יותר גדולים. בהקשר של דירוג ELO, כל 100 נקודות מייצגות הבדל ניכר באיכות.</p>
+
+<h3>MMLU Multilingual: 85.2% לעומת 67.6%</h3>
+<p>MMLU רב-לשוני מודד ידע כללי ב-140 שפות. הקפיצה מ-67.6% ל-85.2% (שיפור של 26%) מראה שהמודל לא רק משתפר באנגלית, אלא מספק שיפור דרמטי בשפות אחרות. זה קריטי עבור deployment גלובלי ועבור שפות שבעבר קיבלו תמיכה חלשה במודלים פתוחים, כולל עברית וערבית.</p>
+
+<h3>MMMU Pro Multimodal: 76.9% לעומת 49.7%</h3>
+<p>MMMU Pro מודד הבנה מולטימודאלית, כולל ניתוח תמונות, דיאגרמות וטקסט ויזואלי. הקפיצה מ-49.7% (מטבע הוגן) ל-76.9% (הבנה אמיתית) מראה ש-Gemma 4 מסוגלת לא רק "לראות" תמונות, אלא להבין אותן ברמה עמוקה. זה חיוני לשימושים כמו ניתוח מסמכים, הבנת גרפים, ועבודה עם ממשקי משתמש ויזואליים.</p>
+
+<h3>AIME 2026 Math: 89.2% לעומת 20.8%</h3>
+<p>זו הקפיצה הכי דרמטית. AIME הוא מבחן מתמטיקה ברמת תחרויות בינלאומיות, עם שאלות שדורשות חשיבה מתמטית עמוקה, הוכחות, ופתרון בעיות שלא נראו קודם. המעבר מ-20.8% ל-89.2% הוא לא שיפור, זו מהפכה. Gemma 4 עם יכולת Thinking מסוגלת לפרק בעיות מתמטיות מורכבות לשלבים, לזהות דפוסים, ולהגיע לפתרונות שהיו מעבר ליכולת של דורות קודמים.</p>
+
+<h3>LiveCodeBench v6: 80.0% לעומת 29.1%</h3>
+<p>LiveCodeBench מודד יכולת כתיבת קוד על בעיות חדשות שלא היו בנתוני האימון. הקפיצה פי 2.75 מראה ש-Gemma 4 היא כלי קידוד רציני. מודל פתוח שפותר 80% מבעיות הקידוד יכול לשמש ככלי עזר משמעותי למפתחים, כולל לכתיבת קוד, דיבוג, ורפקטורינג.</p>
+
+<h3>GPQA Diamond: 84.3% לעומת 42.4%</h3>
+<p>GPQA Diamond מודד ידע מדעי ברמה גבוהה, עם שאלות שנכתבו על ידי מומחים בפיזיקה, כימיה וביולוגיה. שיפור כפול (מ-42% ל-84%) מציב את Gemma 4 ברמה של PhD בתחומים מדעיים רבים.</p>
+
+<h3>τ2-bench Agentic: 86.4% לעומת 6.6%</h3>
+<p>זו הקפיצה שהכי משנה את התמונה. τ2-bench מודד את היכולת של מודלים לתפקד כסוכנים אוטונומיים: לתכנן, לבצע פעולות, להתמודד עם שגיאות, ולהגיע ליעד. המעבר מ-6.6% (כמעט חסר תועלת) ל-86.4% (אפקטיבי מאוד) אומר ש-Gemma 4 יכולה לשמש כבסיס לסוכני AI שמבצעים משימות מורכבות באופן עצמאי. זה פותח את הדלת לשימושים כמו אוטומציה של DevOps, ניהול מערכות, ואינטגרציה עם כלים חיצוניים.</p>
+
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg">
+<text x="400" y="30" class="chart-title">משפחת מודלי Gemma 4: גודל ומיקוד</text>
+<!-- Model cards -->
+<rect x="40" y="60" width="160" height="260" rx="12" fill="#4285f4" opacity="0.1" stroke="#4285f4" stroke-width="2"/>
+<text x="120" y="90" text-anchor="middle" font-size="14" font-weight="600" fill="#4285f4">31B IT</text>
+<text x="120" y="110" text-anchor="middle" font-size="11" fill="#666">Thinking</text>
+<rect x="65" y="125" width="110" height="8" rx="4" fill="#4285f4"/>
+<text x="120" y="155" text-anchor="middle" font-size="11" fill="#1a1a1a">דגל המשפחה</text>
+<text x="120" y="175" text-anchor="middle" font-size="10" fill="#666">ביצועים מקסימליים</text>
+<text x="120" y="200" text-anchor="middle" font-size="10" fill="#666">מולטימודאלי</text>
+<text x="120" y="220" text-anchor="middle" font-size="10" fill="#666">140 שפות</text>
+<text x="120" y="245" text-anchor="middle" font-size="10" fill="#666">חשיבה מעמיקה</text>
+<text x="120" y="290" text-anchor="middle" font-size="12" fill="#4285f4" font-weight="600">GPU: A100/H100</text>
+
+<rect x="225" y="60" width="160" height="260" rx="12" fill="#34a853" opacity="0.1" stroke="#34a853" stroke-width="2"/>
+<text x="305" y="90" text-anchor="middle" font-size="14" font-weight="600" fill="#34a853">26B A4B IT</text>
+<text x="305" y="110" text-anchor="middle" font-size="11" fill="#666">MoE Thinking</text>
+<rect x="250" y="125" width="95" height="8" rx="4" fill="#34a853"/>
+<text x="305" y="155" text-anchor="middle" font-size="11" fill="#1a1a1a">יעיל במיוחד</text>
+<text x="305" y="175" text-anchor="middle" font-size="10" fill="#666">26B כולל, 4B פעיל</text>
+<text x="305" y="200" text-anchor="middle" font-size="10" fill="#666">Mixture-of-Experts</text>
+<text x="305" y="220" text-anchor="middle" font-size="10" fill="#666">Production-ready</text>
+<text x="305" y="245" text-anchor="middle" font-size="10" fill="#666">עלות חישוב נמוכה</text>
+<text x="305" y="290" text-anchor="middle" font-size="12" fill="#34a853" font-weight="600">GPU: T4/L4</text>
+
+<rect x="410" y="60" width="160" height="260" rx="12" fill="#fbbc04" opacity="0.1" stroke="#fbbc04" stroke-width="2"/>
+<text x="490" y="90" text-anchor="middle" font-size="14" font-weight="600" fill="#f9a825">E4B IT</text>
+<text x="490" y="110" text-anchor="middle" font-size="11" fill="#666">Thinking</text>
+<rect x="445" y="125" width="60" height="8" rx="4" fill="#fbbc04"/>
+<text x="490" y="155" text-anchor="middle" font-size="11" fill="#1a1a1a">קומפקטי</text>
+<text x="490" y="175" text-anchor="middle" font-size="10" fill="#666">~4B פרמטרים</text>
+<text x="490" y="200" text-anchor="middle" font-size="10" fill="#666">Edge computing</text>
+<text x="490" y="220" text-anchor="middle" font-size="10" fill="#666">מכשירים ניידים</text>
+<text x="490" y="245" text-anchor="middle" font-size="10" fill="#666">זמן תגובה מהיר</text>
+<text x="490" y="290" text-anchor="middle" font-size="12" fill="#f9a825" font-weight="600">מכשיר / CPU</text>
+
+<rect x="595" y="60" width="160" height="260" rx="12" fill="#ea4335" opacity="0.1" stroke="#ea4335" stroke-width="2"/>
+<text x="675" y="90" text-anchor="middle" font-size="14" font-weight="600" fill="#ea4335">E2B IT</text>
+<text x="675" y="110" text-anchor="middle" font-size="11" fill="#666">Thinking</text>
+<rect x="645" y="125" width="35" height="8" rx="4" fill="#ea4335"/>
+<text x="675" y="155" text-anchor="middle" font-size="11" fill="#1a1a1a">מינימלי</text>
+<text x="675" y="175" text-anchor="middle" font-size="10" fill="#666">~2B פרמטרים</text>
+<text x="675" y="200" text-anchor="middle" font-size="10" fill="#666">IoT / Embedded</text>
+<text x="675" y="220" text-anchor="middle" font-size="10" fill="#666">משאבים מוגבלים</text>
+<text x="675" y="245" text-anchor="middle" font-size="10" fill="#666">Latency קריטי</text>
+<text x="675" y="290" text-anchor="middle" font-size="12" fill="#ea4335" font-weight="600">Mobile / IoT</text>
+
+<text x="400" y="355" text-anchor="middle" font-size="13" fill="#666">כל המודלים תחת רישיון Apache 2.0 - שימוש חופשי לכל מטרה</text>
+</svg>
+
+<h2>מאפיינים מרכזיים</h2>
+
+<h3>יכולות אגנטיות (Function Calling)</h3>
+<p>Gemma 4 נבנתה עם תמיכה מובנית ב-function calling, שזו היכולת המרכזית שנדרשת לסוכני AI. מודל שיודע לקרוא לפונקציות חיצוניות יכול לחפש באינטרנט, לגשת לבסיסי נתונים, לשלוח הודעות, ולבצע פעולות בעולם האמיתי. הקפיצה מ-6.6% ל-86.4% ב-τ2-bench אומרת ש-Gemma 4 מסוגלת לעשות את זה באופן אמין.</p>
+
+<p>זה פותח את הדלת ל-agentic workflows מלאים על בסיס מודל פתוח. במקום לשלם ל-OpenAI או Anthropic עבור כל קריאת API, ארגונים יכולים להריץ Gemma 4 על התשתית שלהם ולבנות סוכנים אוטונומיים בלי תלות בספק חיצוני. זה קריטי לארגונים שדורשים ריבונות נתונים או שרוצים להפחית עלויות.</p>
+
+<h3>חשיבה מולטימודאלית: שמיעה וראייה</h3>
+<p>Gemma 4 לא מעבדת רק טקסט. היא מסוגלת לעבד אודיו וויזואל (תמונות, דיאגרמות, מסמכים), ולשלב מידע ממקורות שונים בתהליך חשיבה אחד. זה אומר שסוכן AI שמבוסס על Gemma 4 יכול "לשמוע" שיחה טלפונית, "לראות" צילום מסך, ולתת תשובה שמשלבת את שני מקורות המידע.</p>
+
+<p>היכולת הזו חשובה במיוחד לתחומים כמו שירות לקוחות (הבנת צילומי מסך שלקוחות שולחים), רפואה (ניתוח תמונות רפואיות), וחינוך (הבנת דיאגרמות ושרטוטים).</p>
+
+<h3>תמיכה ב-140 שפות</h3>
+<p>רוב המודלים הפתוחים מתמקדים באנגלית ומספקים תמיכה חלקית בשפות אחרות. Gemma 4 תומכת ב-140 שפות ברמה גבוהה, כפי שמשתקף בציון MMLU Multilingual של 85.2%. זה לא רק תרגום, אלא הבנת תרבות, הקשר, ודקויות שפתיות.</p>
+
+<p>עבור חברות שפועלות בשווקים גלובליים, זה אומר שמודל אחד יכול לשרת לקוחות בכל העולם, בלי צורך במודלים נפרדים לכל שפה. והעובדה שזה מודל פתוח אומרת שאפשר לבצע fine-tuning לשפה ספציפית אם נדרשים ביצועים עוד יותר גבוהים.</p>
+
+<h3>Fine-tuning וארכיטקטורה יעילה</h3>
+<p>כל מודלי Gemma 4 תומכים ב-fine-tuning, מה שמאפשר לארגונים להתאים את המודל לתחום הספציפי שלהם. בנוסף, הארכיטקטורה תוכננה ליעילות מקסימלית. העיקרון המנחה הוא "maximum intelligence-per-parameter", כלומר לסחוט את המקסימום מכל פרמטר.</p>
+
+<p>הגרסה MoE (26B A4B) היא דוגמה מצוינת: עם 26B פרמטרים כולל אבל רק 4B פעילים, היא מציעה ביצועים קרובים ל-31B אבל בעלות חישוב הרבה יותר נמוכה. זה מה שמאפשר להריץ מודלים ברמת state-of-the-art על חומרה נגישה.</p>
+
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+<text x="400" y="30" class="chart-title">לוח מודלים פתוחים מובילים (2025-2026)</text>
+<!-- Table header -->
+<rect x="40" y="50" width="720" height="35" rx="4" fill="#4285f4" opacity="0.15"/>
+<text x="160" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="#1a1a1a">מודל</text>
+<text x="310" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="#1a1a1a">AIME Math</text>
+<text x="430" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="#1a1a1a">LiveCode</text>
+<text x="550" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="#1a1a1a">Agentic</text>
+<text x="670" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="#1a1a1a">רישיון</text>
+<!-- Gemma 4 31B (highlighted) -->
+<rect x="40" y="90" width="720" height="35" rx="4" fill="#4285f4" opacity="0.08"/>
+<text x="160" y="113" text-anchor="middle" font-size="13" font-weight="600" fill="#4285f4">Gemma 4 31B</text>
+<text x="310" y="113" text-anchor="middle" font-size="13" fill="#ea4335" font-weight="600">89.2%</text>
+<text x="430" y="113" text-anchor="middle" font-size="13" fill="#1a1a1a">80.0%</text>
+<text x="550" y="113" text-anchor="middle" font-size="13" fill="#ea4335" font-weight="600">86.4%</text>
+<text x="670" y="113" text-anchor="middle" font-size="13" fill="#34a853">Apache 2.0</text>
+<!-- Llama 4 -->
+<rect x="40" y="130" width="720" height="35" rx="4" fill="transparent"/>
+<text x="160" y="153" text-anchor="middle" font-size="13" fill="#1a1a1a">Llama 4 Scout</text>
+<text x="310" y="153" text-anchor="middle" font-size="13" fill="#1a1a1a">~75%</text>
+<text x="430" y="153" text-anchor="middle" font-size="13" fill="#1a1a1a">~65%</text>
+<text x="550" y="153" text-anchor="middle" font-size="13" fill="#1a1a1a">~60%</text>
+<text x="670" y="153" text-anchor="middle" font-size="13" fill="#f9a825">Llama License</text>
+<!-- Qwen 3 -->
+<rect x="40" y="170" width="720" height="35" rx="4" fill="#f0f0f0" opacity="0.5"/>
+<text x="160" y="193" text-anchor="middle" font-size="13" fill="#1a1a1a">Qwen 3 32B</text>
+<text x="310" y="193" text-anchor="middle" font-size="13" fill="#1a1a1a">~72%</text>
+<text x="430" y="193" text-anchor="middle" font-size="13" fill="#1a1a1a">~60%</text>
+<text x="550" y="193" text-anchor="middle" font-size="13" fill="#1a1a1a">~45%</text>
+<text x="670" y="193" text-anchor="middle" font-size="13" fill="#34a853">Apache 2.0</text>
+<!-- DeepSeek V3 -->
+<rect x="40" y="210" width="720" height="35" rx="4" fill="transparent"/>
+<text x="160" y="233" text-anchor="middle" font-size="13" fill="#1a1a1a">DeepSeek V3</text>
+<text x="310" y="233" text-anchor="middle" font-size="13" fill="#1a1a1a">~70%</text>
+<text x="430" y="233" text-anchor="middle" font-size="13" fill="#1a1a1a">~62%</text>
+<text x="550" y="233" text-anchor="middle" font-size="13" fill="#1a1a1a">~50%</text>
+<text x="670" y="233" text-anchor="middle" font-size="13" fill="#34a853">MIT</text>
+<!-- Gemma 3 27B (for reference) -->
+<rect x="40" y="250" width="720" height="35" rx="4" fill="#fbbc04" opacity="0.08"/>
+<text x="160" y="273" text-anchor="middle" font-size="13" fill="#888">Gemma 3 27B</text>
+<text x="310" y="273" text-anchor="middle" font-size="13" fill="#888">20.8%</text>
+<text x="430" y="273" text-anchor="middle" font-size="13" fill="#888">29.1%</text>
+<text x="550" y="273" text-anchor="middle" font-size="13" fill="#888">6.6%</text>
+<text x="670" y="273" text-anchor="middle" font-size="13" fill="#888">Apache 2.0</text>
+<!-- Note -->
+<text x="400" y="320" text-anchor="middle" font-size="11" fill="#888">* ציוני מתחרים הם הערכות מבוססות בנצ'מרקים פומביים. הנתונים עשויים להשתנות.</text>
+<text x="400" y="340" text-anchor="middle" font-size="12" fill="#4285f4" font-weight="600">Gemma 4 מובילה בכל הקטגוריות בקרב המודלים הפתוחים</text>
+</svg>
+
+<h2>אינטליגנציה-פר-פרמטר: האבולוציה</h2>
+
+<p>אחד המדדים המעניינים ביותר בתחום מודלי AI הוא "intelligence-per-parameter", כלומר כמה אינטליגנציה מצליחים לסחוט מכל פרמטר. זה המדד שבסופו של דבר קובע מי יכול להריץ מודלים על חומרה נגישה ומי צריך data center.</p>
+
+<p>בדורות הראשונים של מודלי שפה, הגישה הייתה פשוטה: יותר פרמטרים = יותר אינטליגנציה. GPT-3 עם 175B פרמטרים היה חכם יותר מ-GPT-2 עם 1.5B. אבל הגישה הזו מגיעה לגבולות פיזיים וכלכליים: אי אפשר להגדיל מודלים עד אינסוף.</p>
+
+<p>Gemma 4 מייצגת את הכיוון החדש: מודל עם 31B פרמטרים שמשיג ביצועים שלפני שנה דרשו מאות מיליארדי פרמטרים. הגרסה MoE עם 4B פרמטרים פעילים מרחיקה לכת עוד יותר: היא משיגה ביצועים מרשימים עם fraction קטן מהחישוב.</p>
+
+<p>ההשלכות הן ברורות: מודלים חכמים מספיק לשימושים רציניים ירוצו על מכשירים ניידים, מחשבים אישיים, ושרתי edge. זה משנה את הדינמיקה של שוק ה-AI מריכוזיות (כולם שולחים קריאות API ל-OpenAI) לפיזור (כל אחד מריץ מודל מקומי).</p>
+
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg">
+<text x="400" y="30" class="chart-title">אבולוציית אינטליגנציה-פר-פרמטר</text>
+<line x1="100" y1="300" x2="720" y2="300" stroke="#ccc" stroke-width="1.5"/>
+<line x1="100" y1="60" x2="100" y2="300" stroke="#ccc" stroke-width="1.5"/>
+<text x="90" y="300" text-anchor="end" font-size="11" fill="#888">0</text>
+<text x="90" y="220" text-anchor="end" font-size="11" fill="#888">25</text>
+<text x="90" y="140" text-anchor="end" font-size="11" fill="#888">50</text>
+<text x="90" y="65" text-anchor="end" font-size="11" fill="#888">90</text>
+<text x="55" y="180" text-anchor="middle" font-size="11" fill="#888" transform="rotate(-90, 55, 180)">AIME Score %</text>
+<line x1="100" y1="220" x2="720" y2="220" stroke="#eee" stroke-width="1"/>
+<line x1="100" y1="140" x2="720" y2="140" stroke="#eee" stroke-width="1"/>
+<!-- Bubbles: x=params (log scale), y=AIME, size=efficiency -->
+<!-- GPT-3 175B ~5% -->
+<circle cx="650" cy="287" r="18" fill="#999" opacity="0.3"/>
+<text x="650" y="291" text-anchor="middle" font-size="9" fill="#666">GPT-3</text>
+<text x="650" y="275" text-anchor="middle" font-size="8" fill="#888">175B</text>
+<!-- Llama 2 70B ~15% -->
+<circle cx="500" cy="275" r="20" fill="#5b4fa0" opacity="0.4"/>
+<text x="500" y="279" text-anchor="middle" font-size="9" fill="#fff">Llama 2</text>
+<text x="500" y="263" text-anchor="middle" font-size="8" fill="#5b4fa0">70B</text>
+<!-- Gemma 3 27B 20.8% -->
+<circle cx="300" cy="260" r="22" fill="#fbbc04" opacity="0.5"/>
+<text x="300" y="264" text-anchor="middle" font-size="9" fill="#fff">Gemma 3</text>
+<text x="300" y="248" text-anchor="middle" font-size="8" fill="#f9a825">27B</text>
+<!-- Gemma 4 31B 89.2% -->
+<circle cx="320" cy="78" r="28" fill="#4285f4" opacity="0.8"/>
+<text x="320" y="75" text-anchor="middle" font-size="10" fill="white" font-weight="600">Gemma 4</text>
+<text x="320" y="90" text-anchor="middle" font-size="9" fill="white">31B</text>
+<!-- Gemma 4 MoE 4B active -->
+<circle cx="180" cy="110" r="24" fill="#34a853" opacity="0.7"/>
+<text x="180" y="107" text-anchor="middle" font-size="9" fill="white" font-weight="600">Gemma 4</text>
+<text x="180" y="122" text-anchor="middle" font-size="9" fill="white">MoE 4B</text>
+<!-- Arrow showing efficiency improvement -->
+<path d="M 300 245 Q 310 170 318 95" fill="none" stroke="#ea4335" stroke-width="2" stroke-dasharray="6" marker-end="url(#arrowhead)"/>
+<defs><marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#ea4335"/></marker></defs>
+<text x="370" y="170" font-size="11" fill="#ea4335" font-weight="600">×4.3 קפיצה!</text>
+<!-- X axis label -->
+<text x="400" y="340" text-anchor="middle" font-size="12" fill="#888">פרמטרים (גודל המודל) →</text>
+<text x="150" y="340" font-size="11" fill="#888">קטן</text>
+<text x="680" y="340" font-size="11" fill="#888">גדול</text>
+<text x="400" y="365" text-anchor="middle" font-size="12" fill="#4285f4" font-weight="600">יותר אינטליגנציה בפחות פרמטרים = דמוקרטיזציה של AI</text>
+</svg>
+
+<h2>Gemma 4 מול המתחרים</h2>
+
+<p>שוק המודלים הפתוחים ב-2026 הוא תחרותי מתמיד. Llama 4 של Meta, Qwen 3 של Alibaba, ו-DeepSeek V3 של DeepSeek כולם מתחרים על תואר "המודל הפתוח הטוב ביותר". אז איך Gemma 4 מתמודדת?</p>
+
+<p>בבנצ'מרקים הקשים ביותר, Gemma 4 31B מובילה בפער משמעותי. במתמטיקה (AIME), ביכולות אגנטיות (τ2-bench), ובמולטימודאליות (MMMU Pro), היא פשוט מקטגוריה אחרת. הפער במיוחד ביכולות אגנטיות הוא כזה שקשה להתעלם ממנו.</p>
+
+<p>מבחינת רישיון, Gemma 4 ו-DeepSeek V3 הם הפתוחים ביותר (Apache 2.0 ו-MIT בהתאמה). Llama 4 של Meta מגיע עם רישיון מותאם שכולל מגבלות לשימוש מסחרי מעל 700 מיליון משתמשים. Qwen 3 תחת Apache 2.0 כמו Gemma.</p>
+
+<p>מבחינת המערכת האקולוגית, ל-Google יש יתרון משמעותי: Gemma 4 מותאמת לחומרה של Google (TPUs), לפלטפורמת Google Cloud, ולכלים כמו Vertex AI. אבל היא עובדת מצוין גם על NVIDIA GPUs ועל פלטפורמות אחרות כמו Hugging Face, Ollama, ו-vLLM.</p>
+
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg">
+<text x="400" y="30" class="chart-title">Gemma 4 לעומת מתחרים: ראדאר ביצועים</text>
+<!-- Radar chart simplified as bar comparison -->
+<text x="130" y="70" text-anchor="end" font-size="12" fill="#1a1a1a" font-weight="600">מתמטיקה</text>
+<rect x="140" y="58" width="535" height="16" rx="3" fill="#4285f4" opacity="0.8"/>
+<text x="680" y="70" font-size="11" fill="white">Gemma 4: 89.2%</text>
+<rect x="140" y="78" width="450" height="10" rx="3" fill="#5b4fa0" opacity="0.4"/>
+<text x="595" y="87" font-size="10" fill="#5b4fa0">Llama 4: ~75%</text>
+
+<text x="130" y="120" text-anchor="end" font-size="12" fill="#1a1a1a" font-weight="600">קוד</text>
+<rect x="140" y="108" width="480" height="16" rx="3" fill="#4285f4" opacity="0.8"/>
+<text x="625" y="120" font-size="11" fill="white">Gemma 4: 80%</text>
+<rect x="140" y="128" width="390" height="10" rx="3" fill="#5b4fa0" opacity="0.4"/>
+<text x="535" y="137" font-size="10" fill="#5b4fa0">Llama 4: ~65%</text>
+
+<text x="130" y="170" text-anchor="end" font-size="12" fill="#1a1a1a" font-weight="600">אגנטי</text>
+<rect x="140" y="158" width="518" height="16" rx="3" fill="#ea4335" opacity="0.8"/>
+<text x="663" y="170" font-size="11" fill="white">Gemma 4: 86.4%</text>
+<rect x="140" y="178" width="360" height="10" rx="3" fill="#5b4fa0" opacity="0.4"/>
+<text x="505" y="187" font-size="10" fill="#5b4fa0">Llama 4: ~60%</text>
+
+<text x="130" y="220" text-anchor="end" font-size="12" fill="#1a1a1a" font-weight="600">מולטימודאלי</text>
+<rect x="140" y="208" width="461" height="16" rx="3" fill="#4285f4" opacity="0.8"/>
+<text x="606" y="220" font-size="11" fill="white">Gemma 4: 76.9%</text>
+<rect x="140" y="228" width="360" height="10" rx="3" fill="#5b4fa0" opacity="0.4"/>
+<text x="505" y="237" font-size="10" fill="#5b4fa0">Llama 4: ~60%</text>
+
+<text x="130" y="270" text-anchor="end" font-size="12" fill="#1a1a1a" font-weight="600">רב-לשוני</text>
+<rect x="140" y="258" width="511" height="16" rx="3" fill="#4285f4" opacity="0.8"/>
+<text x="656" y="270" font-size="11" fill="white">Gemma 4: 85.2%</text>
+<rect x="140" y="278" width="420" height="10" rx="3" fill="#5b4fa0" opacity="0.4"/>
+<text x="565" y="287" font-size="10" fill="#5b4fa0">Llama 4: ~70%</text>
+
+<!-- Legend -->
+<rect x="250" y="320" width="14" height="14" rx="3" fill="#4285f4" opacity="0.8"/>
+<text x="270" y="332" font-size="12" fill="#666">Gemma 4 31B</text>
+<rect x="400" y="320" width="14" height="14" rx="3" fill="#5b4fa0" opacity="0.4"/>
+<text x="420" y="332" font-size="12" fill="#666">Llama 4 Scout (הערכה)</text>
+<text x="400" y="360" text-anchor="middle" font-size="12" fill="#4285f4" font-weight="600">Gemma 4 מובילה בכל הקטגוריות</text>
+</svg>
+
+<h2>מה זה אומר לתעשייה</h2>
+
+<p>הקפיצה מ-Gemma 3 ל-Gemma 4 היא יותר מסתם שדרוג מודל. היא מסמנת שינוי מהותי בנוף ה-AI:</p>
+
+<p><strong>מודלים פתוחים מגיעים לרמת פרודקשן.</strong> עם 89.2% ב-AIME ו-86.4% ביכולות אגנטיות, Gemma 4 היא לא "מודל פתוח שטוב ל-playground". היא מודל שאפשר לבנות עליו מוצרים אמיתיים. הפער בין מודלים פתוחים לסגורים מצטמצם בקצב מואץ.</p>
+
+<p><strong>הדמוקרטיזציה של AI מתגברת.</strong> כשמודל בגודל 31B (או 4B active עם MoE) משיג ביצועים ברמת state-of-the-art, יותר ויותר ארגונים יכולים להריץ AI על התשתית שלהם. זה מפחית את התלות ב-APIs סגורים ונותן שליטה מלאה על הנתונים.</p>
+
+<p><strong>סוכני AI פתוחים הופכים למציאות.</strong> הקפיצה פי 13 ביכולות אגנטיות אומרת שלראשונה, אפשר לבנות סוכנים אוטונומיים אמינים על בסיס מודל פתוח. זה ישנה את הדינמיקה בשוק, כי עד עכשיו יכולות אגנטיות היו כמעט בלעדיות למודלים סגורים כמו GPT-5 ו-Claude.</p>
+
+<p><strong>Fine-tuning הופך לנשק סודי.</strong> כשמודל בסיס חזק כל כך זמין בחינם, הערך המוסף עובר ל-fine-tuning על נתונים ספציפיים. ארגון שעושה fine-tuning ל-Gemma 4 על נתוני התחום שלו יכול לבנות מודל שמתחרה במודלים סגורים הרבה יותר יקרים.</p>
+
+<h2>סיכום</h2>
+
+<p>Gemma 4 היא לא סתם עוד דור של מודלים פתוחים. היא נקודת מפנה. עם קפיצה של פי 4.3 במתמטיקה, פי 13 ביכולות אגנטיות, ופי 2.75 בקוד, היא מראה שמודלים פתוחים יכולים להתחרות ראש בראש עם מודלים סגורים.</p>
+
+<p>ארבעת הגדלים (31B, 26B MoE, E4B, E2B) מספקים מענה לכל שימוש, מ-data center ועד מכשיר נייד. רישיון Apache 2.0 מבטיח חופש שימוש מלא. והתמיכה ביכולות אגנטיות, מולטימודאליות, ו-140 שפות הופכת את Gemma 4 לכלי רב-תכליתי שמתאים למגוון רחב של שימושים.</p>
+
+<p>ב-Google DeepMind הגדירו את היעד כ-"maximum intelligence-per-parameter". עם Gemma 4, הם מגיעים קרוב מאוד ליעד הזה. ובעולם שבו מודלים פתוחים רצים על מכשירים אישיים, זה המטריקה שחשובה באמת.</p>
+
+<div class="source-link">
+<a href="https://deepmind.google/models/gemma/gemma-4/" target="_blank">📖 קראו את ההכרזה המלאה באתר Google DeepMind</a>
+</div>
+
+</div>
+</body>
+</html>

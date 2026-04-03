@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מחקר: AGENTS.md חוסך 29% מזמן הריצה של סוכני AI</title>
+<meta property="og:title" content="מחקר: AGENTS.md חוסך 29% מזמן הריצה של סוכני AI">
+<meta property="og:description" content="מחקר חדש בוחן את ההשפעה של קבצי AGENTS.md על יעילות סוכני קוד AI. הממצאים: 28.64% פחות זמן ריצה ו-16.58% פחות צריכת טוקנים">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="מחקר: AGENTS.md חוסך 29% מזמן הריצה של סוכני AI">
+<meta name="twitter:description" content="מחקר חדש בוחן את ההשפעה של קבצי AGENTS.md על יעילות סוכני קוד AI. הממצאים: 28.64% פחות זמן ריצה ו-16.58% פחות צריכת טוקנים">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Noto Sans Hebrew', sans-serif; font-size: 18px; line-height: 1.8; color: #1a1a1a; background: #fff; }
+.container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+h1 { font-size: 32px; font-weight: 600; margin-bottom: 8px; }
+h2 { font-size: 24px; font-weight: 600; margin: 48px 0 16px; border-bottom: 2px solid #e5e5e5; padding-bottom: 8px; }
+h3 { font-size: 20px; font-weight: 600; margin: 32px 0 12px; }
+.subtitle { font-size: 20px; color: #555; margin-bottom: 32px; }
+p { margin-bottom: 16px; }
+.intro-box { background: #f7f7f7; border-right: 4px solid #6c5ce7; padding: 20px 24px; border-radius: 8px; margin-bottom: 40px; }
+.intro-box a { color: #6c5ce7; text-decoration: none; font-weight: 600; }
+.intro-box a:hover { text-decoration: underline; }
+.source-link { margin-top: 48px; padding: 20px; background: #f7f7f7; border-radius: 8px; text-align: center; }
+.source-link a { color: #6c5ce7; text-decoration: none; font-weight: 600; }
+svg { width: 100%; max-width: 800px; margin: 24px auto; display: block; }
+.chart-title { text-anchor: middle; font-size: 16px; font-weight: 600; fill: #1a1a1a; }
+.highlight { background: #f0edff; padding: 2px 6px; border-radius: 4px; }
+code { background: #f0f0f0; padding: 2px 8px; border-radius: 4px; font-size: 0.9em; direction: ltr; display: inline-block; }
+blockquote { border-right: 3px solid #6c5ce7; padding-right: 16px; margin: 24px 0; color: #444; font-style: italic; }
+ul, ol { margin: 12px 24px 16px 0; }
+li { margin-bottom: 8px; }
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 24px 0; }
+.stat-card { background: #f7f7f7; padding: 20px; border-radius: 8px; text-align: center; }
+.stat-number { font-size: 28px; font-weight: 600; color: #6c5ce7; }
+.stat-label { font-size: 14px; color: #666; margin-top: 4px; }
+.authors { font-size: 14px; color: #888; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>מחקר: AGENTS.md חוסך 29% מזמן הריצה של סוכני AI</h1>
+<p class="subtitle">מחקר אמפירי על השפעת קבצי AGENTS.md על יעילות סוכני קוד, עם 124 בקשות משיכה ב-10 מאגרי קוד</p>
+<p class="authors">Lulla, Mohsenimofidi, Galster, Zhang, Baltes, Treude | JAWs 2026 Workshop</p>
+
+<div class="intro-box">
+מחקר אקדמי חדש שהוצג בסדנת JAWs 2026 בחן לראשונה בצורה מדעית את ההשפעה של קבצי AGENTS.md על יעילות סוכני AI coding. החוקרים הריצו 124 בקשות משיכה (pull requests) על 10 מאגרי קוד פתוחים, עם ובלי AGENTS.md, באמצעות OpenAI Codex (gpt-5.2-codex). התוצאות: ירידה של 28.64% בחציון זמן הריצה ו-16.58% בצריכת טוקנים.<br><br>
+<a href="https://arxiv.org/html/2601.20404" target="_blank">קראו את המאמר המלא ב-arXiv ←</a>
+</div>
+
+<h2>רקע: מה זה AGENTS.md?</h2>
+
+<p>AGENTS.md הם קבצים שנמצאים בשורש מאגרי קוד ומספקים הנחיות לסוכני AI coding. אפשר לחשוב עליהם כ-"READMEs לסוכנים": בעוד ש-README.md מיועד למפתחים אנושיים, AGENTS.md מיועד לסוכנים אוטומטיים שעובדים על הקוד.</p>
+
+<p>מה בדרך כלל מכיל קובץ AGENTS.md? מידע על ארכיטקטורת הפרויקט, פקודות build ו-test, כללי קידוד (coding conventions), אילוצים ודרישות ספציפיות, וכל מידע אחר שיכול לעזור לסוכן AI להבין את ההקשר ולבצע משימות ביעילות.</p>
+
+<p>הרעיון פשוט: במקום שסוכן AI ינסה "להבין" את הפרויקט מאפס בכל פעם, הוא מקבל מסמך מובנה שמסביר לו את הכללים. זה כמו לתת לעובד חדש תדריך מפורט במקום לשחרר אותו למשרד ולקוות שימצא את דרכו.</p>
+
+<p>הנוהג התחיל כאמנה בלתי רשמית בקהילת המפתחים, אבל צבר תאוצה מהירה. כיום, <span class="highlight">יותר מ-60,000 מאגרי קוד</span> אימצו את התבנית של AGENTS.md. GitHub, Anthropic, ו-OpenAI כולם מכירים ותומכים בפורמט. אבל עד למחקר הזה, לא היה ניסוי מדעי שבדק האם הקבצים האלה באמת עוזרים.</p>
+
+<div class="stat-grid">
+<div class="stat-card">
+<div class="stat-number">28.64%</div>
+<div class="stat-label">ירידה בחציון זמן הריצה</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">16.58%</div>
+<div class="stat-label">ירידה בצריכת טוקנים (חציון)</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">124</div>
+<div class="stat-label">בקשות משיכה שנבדקו</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">60K+</div>
+<div class="stat-label">מאגרים עם AGENTS.md</div>
+</div>
+</div>
+
+<h2>מתודולוגיית המחקר</h2>
+
+<p>החוקרים תכננו ניסוי מבוקר היטב עם עיצוב מזווג (paired design). בואו נפרק את המתודולוגיה:</p>
+
+<h3>בחירת מאגרי הקוד</h3>
+<p>נבחרו 10 מאגרי קוד פתוחים שכבר מכילים קבצי AGENTS.md. הבחירה לא הייתה אקראית: החוקרים חיפשו מאגרים עם היסטוריית PR פעילה, AGENTS.md מפורט, ומגוון בגודל ובמורכבות.</p>
+
+<h3>עיצוב מזווג (Paired Design)</h3>
+<p>זו הנקודה המתודולוגית החזקה ביותר של המחקר. כל משימה הורצה פעמיים: פעם אחת עם AGENTS.md ופעם אחת בלעדיו. אותו מודל (gpt-5.2-codex), אותה משימה, אותו סביבה, ההבדל היחיד הוא האם קובץ AGENTS.md נמצא או לא. זה מאפשר השוואה ישירה ומצמצם את הרעש הסטטיסטי.</p>
+
+<h3>סוכן ומודל</h3>
+<p>כל הריצות בוצעו עם OpenAI Codex שמבוסס על gpt-5.2-codex. הבחירה ב-Codex הייתה מכוונת: זהו סוכן coding מלא שמסוגל לנווט בפרויקט, לערוך קבצים, להריץ טסטים, ולבצע commits. הוא מייצג את הדור החדש של סוכני coding שפועלים באופן אוטונומי.</p>
+
+<h3>בידוד סביבתי</h3>
+<p>כל ריצה בוצעה בקונטיינר Docker מבודד, מה שמבטיח שתוצאות של ריצה אחת לא משפיעות על אחרת. זה חשוב במיוחד כשמדובר בסוכנים שיכולים לשנות קבצים, להתקין חבילות, ולבצע פעולות שמשפיעות על הסביבה.</p>
+
+<h3>תצלומי PR לפני מיזוג</h3>
+<p>המשימות הוגדרו כ-"pre-merge PR snapshots": החוקרים לקחו בקשות משיכה אמיתיות שכבר מוזגו, חזרו למצב שלפני המיזוג, ונתנו לסוכן לנסות לפתור את אותה בעיה. תיאורי הבעיות נוצרו באמצעות LLM כדי להבטיח עקביות בפורמט.</p>
+
+<svg viewBox="0 0 800 440" xmlns="http://www.w3.org/2000/svg">
+<text x="400" y="30" class="chart-title">מתודולוגיית המחקר: תרשים זרימה</text>
+<!-- Step 1: Select repos -->
+<rect x="280" y="55" width="240" height="45" rx="8" fill="#6c5ce7" opacity="0.15" stroke="#6c5ce7" stroke-width="1.5"/>
+<text x="400" y="83" text-anchor="middle" font-size="13" fill="#1a1a1a">בחירת 10 מאגרי קוד עם AGENTS.md</text>
+<line x1="400" y1="100" x2="400" y2="120" stroke="#6c5ce7" stroke-width="1.5" marker-end="url(#arrow2)"/>
+<!-- Step 2: Extract PRs -->
+<rect x="280" y="120" width="240" height="45" rx="8" fill="#6c5ce7" opacity="0.15" stroke="#6c5ce7" stroke-width="1.5"/>
+<text x="400" y="148" text-anchor="middle" font-size="13" fill="#1a1a1a">חילוץ 124 בקשות משיכה (PRs)</text>
+<line x1="400" y1="165" x2="400" y2="185" stroke="#6c5ce7" stroke-width="1.5" marker-end="url(#arrow2)"/>
+<!-- Step 3: Split -->
+<rect x="250" y="185" width="300" height="45" rx="8" fill="#6c5ce7" opacity="0.15" stroke="#6c5ce7" stroke-width="1.5"/>
+<text x="400" y="213" text-anchor="middle" font-size="13" fill="#1a1a1a">יצירת תיאורי בעיות (LLM-generated)</text>
+<line x1="400" y1="230" x2="400" y2="250" stroke="#6c5ce7" stroke-width="1.5"/>
+<!-- Fork into two -->
+<line x1="400" y1="250" x2="230" y2="270" stroke="#6c5ce7" stroke-width="1.5"/>
+<line x1="400" y1="250" x2="570" y2="270" stroke="#6c5ce7" stroke-width="1.5"/>
+<!-- With AGENTS.md -->
+<rect x="100" y="270" width="260" height="50" rx="8" fill="#2ecc71" opacity="0.15" stroke="#2ecc71" stroke-width="1.5"/>
+<text x="230" y="293" text-anchor="middle" font-size="13" fill="#2ecc71" font-weight="600">עם AGENTS.md</text>
+<text x="230" y="310" text-anchor="middle" font-size="11" fill="#666">Docker + Codex + AGENTS.md</text>
+<!-- Without AGENTS.md -->
+<rect x="440" y="270" width="260" height="50" rx="8" fill="#e74c3c" opacity="0.15" stroke="#e74c3c" stroke-width="1.5"/>
+<text x="570" y="293" text-anchor="middle" font-size="13" fill="#e74c3c" font-weight="600">בלי AGENTS.md</text>
+<text x="570" y="310" text-anchor="middle" font-size="11" fill="#666">Docker + Codex (ללא הנחיות)</text>
+<!-- Results -->
+<line x1="230" y1="320" x2="230" y2="345" stroke="#2ecc71" stroke-width="1.5"/>
+<line x1="570" y1="320" x2="570" y2="345" stroke="#e74c3c" stroke-width="1.5"/>
+<rect x="115" y="345" width="230" height="40" rx="6" fill="#2ecc71" opacity="0.1"/>
+<text x="230" y="365" text-anchor="middle" font-size="12" fill="#2ecc71">חציון: 115.98 שניות</text>
+<text x="230" y="380" text-anchor="middle" font-size="12" fill="#2ecc71">חציון טוקנים: 3,905</text>
+<rect x="455" y="345" width="230" height="40" rx="6" fill="#e74c3c" opacity="0.1"/>
+<text x="570" y="365" text-anchor="middle" font-size="12" fill="#e74c3c">חציון: 162.55 שניות</text>
+<text x="570" y="380" text-anchor="middle" font-size="12" fill="#e74c3c">חציון טוקנים: 4,681</text>
+<!-- Compare arrow -->
+<line x1="350" y1="370" x2="450" y2="370" stroke="#6c5ce7" stroke-width="2" stroke-dasharray="6"/>
+<text x="400" y="420" text-anchor="middle" font-size="14" fill="#6c5ce7" font-weight="600">השוואת תוצאות: זמן, טוקנים, והתנהגות</text>
+<defs><marker id="arrow2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#6c5ce7"/></marker></defs>
+</svg>
+
+<h2>התוצאות בפירוט</h2>
+
+<h3>זמן ריצה</h3>
+<p>התוצאה המרכזית: <span class="highlight">עם AGENTS.md, חציון זמן הריצה ירד ב-28.64%</span>. בממוצע, זמן הריצה ירד מ-162.94 שניות ל-129.91 שניות (ירידה של 20.27%). ההבדל בין החציון לממוצע מצביע על כך שההשפעה הגדולה ביותר היא על משימות בינוניות, בעוד שמשימות קצרות מאוד או ארוכות מאוד מושפעות פחות.</p>
+
+<p>זה הגיוני אינטואיטיבית: משימה קצרה (למשל, שינוי שורה אחת בקובץ config) לא דורשת הרבה הקשר ולכן AGENTS.md לא עוזר הרבה. משימה ארוכה ומורכבת עשויה לדרוש חקירה עמוקה בלי קשר ל-AGENTS.md. אבל משימות באמצע, שבהן הסוכן צריך להבין את מבנה הפרויקט ואת הכללים לפני שהוא מתחיל לעבוד, נהנות הכי הרבה מההנחיות.</p>
+
+<h3>צריכת טוקנים</h3>
+<p>צריכת הטוקנים (output tokens) ירדה ב-<span class="highlight">16.58% בחציון</span> ו-20.08% בממוצע. בנתונים מוחלטים: מממוצע של 5,744 טוקנים ל-4,591. זה אומר שהסוכן לא רק עובד מהר יותר, אלא גם "חושב" פחות. הוא מבזבז פחות זמן על חקירה, ניסוי וטעייה, ו-backtracking.</p>
+
+<p>הפחתה בטוקנים מתרגמת ישירות לחיסכון כספי. כשמשלמים לכל טוקן (כמו ב-API של OpenAI), 20% פחות טוקנים זה 20% פחות עלות. עבור ארגון שמריץ אלפי משימות ביום, זה מצטבר לסכומים משמעותיים.</p>
+
+<h3>השלמת משימות</h3>
+<p>נקודה חשובה: התנהגות השלמת המשימות נשארה דומה בשני התנאים. כלומר, AGENTS.md לא גרם לסוכן "לדלג" על עבודה או לפשט משימות. הוא פשוט עשה את אותה עבודה, מהר יותר ועם פחות משאבים. איכות ללא פשרות, יעילות ללא קיצורים.</p>
+
+<h3>האפקט על ריצות יקרות</h3>
+<p>ממצא מעניין: ההפחתה הגדולה ביותר בזמן ובטוקנים נצפתה דווקא בריצות "היקרות", כלומר המשימות שלקחו הכי הרבה זמן ודרשו הכי הרבה טוקנים. אלה בדיוק המשימות שבהן AGENTS.md הכי עוזר: משימות מורכבות שדורשות הבנה עמוקה של הפרויקט.</p>
+
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+<text x="400" y="30" class="chart-title">השוואת זמן ריצה: עם ובלי AGENTS.md</text>
+<!-- Axes -->
+<line x1="120" y1="320" x2="720" y2="320" stroke="#ccc" stroke-width="1.5"/>
+<line x1="120" y1="60" x2="120" y2="320" stroke="#ccc" stroke-width="1.5"/>
+<!-- Y labels -->
+<text x="110" y="320" text-anchor="end" font-size="11" fill="#888">0</text>
+<text x="110" y="255" text-anchor="end" font-size="11" fill="#888">50</text>
+<text x="110" y="190" text-anchor="end" font-size="11" fill="#888">100</text>
+<text x="110" y="125" text-anchor="end" font-size="11" fill="#888">150</text>
+<text x="110" y="68" text-anchor="end" font-size="11" fill="#888">200</text>
+<text x="55" y="190" text-anchor="middle" font-size="11" fill="#888" transform="rotate(-90, 55, 190)">שניות</text>
+<!-- Grid -->
+<line x1="120" y1="255" x2="720" y2="255" stroke="#eee" stroke-width="1"/>
+<line x1="120" y1="190" x2="720" y2="190" stroke="#eee" stroke-width="1"/>
+<line x1="120" y1="125" x2="720" y2="125" stroke="#eee" stroke-width="1"/>
+<!-- Median comparison -->
+<text x="280" y="345" text-anchor="middle" font-size="14" fill="#1a1a1a" font-weight="600">חציון</text>
+<!-- Without AGENTS.md bar -->
+<rect x="220" y="108" width="50" height="212" rx="4" fill="#e74c3c" opacity="0.7"/>
+<text x="245" y="100" text-anchor="middle" font-size="12" fill="#e74c3c" font-weight="600">162.55s</text>
+<!-- With AGENTS.md bar -->
+<rect x="290" y="168" width="50" height="152" rx="4" fill="#2ecc71" opacity="0.7"/>
+<text x="315" y="160" text-anchor="middle" font-size="12" fill="#2ecc71" font-weight="600">115.98s</text>
+<!-- Reduction arrow -->
+<line x1="365" y1="108" x2="365" y2="168" stroke="#6c5ce7" stroke-width="2"/>
+<line x1="358" y1="108" x2="372" y2="108" stroke="#6c5ce7" stroke-width="2"/>
+<line x1="358" y1="168" x2="372" y2="168" stroke="#6c5ce7" stroke-width="2"/>
+<text x="405" y="142" font-size="13" fill="#6c5ce7" font-weight="600">-28.64%</text>
+
+<!-- Mean comparison -->
+<text x="570" y="345" text-anchor="middle" font-size="14" fill="#1a1a1a" font-weight="600">ממוצע</text>
+<!-- Without bar -->
+<rect x="510" y="108" width="50" height="212" rx="4" fill="#e74c3c" opacity="0.7"/>
+<text x="535" y="100" text-anchor="middle" font-size="12" fill="#e74c3c" font-weight="600">162.94s</text>
+<!-- With bar -->
+<rect x="580" y="151" width="50" height="169" rx="4" fill="#2ecc71" opacity="0.7"/>
+<text x="605" y="143" text-anchor="middle" font-size="12" fill="#2ecc71" font-weight="600">129.91s</text>
+<!-- Reduction arrow -->
+<line x1="655" y1="108" x2="655" y2="151" stroke="#6c5ce7" stroke-width="2"/>
+<line x1="648" y1="108" x2="662" y2="108" stroke="#6c5ce7" stroke-width="2"/>
+<line x1="648" y1="151" x2="662" y2="151" stroke="#6c5ce7" stroke-width="2"/>
+<text x="695" y="133" font-size="13" fill="#6c5ce7" font-weight="600">-20.27%</text>
+
+<!-- Legend -->
+<rect x="220" y="370" width="14" height="14" rx="3" fill="#e74c3c" opacity="0.7"/>
+<text x="240" y="382" font-size="12" fill="#666">ללא AGENTS.md</text>
+<rect x="380" y="370" width="14" height="14" rx="3" fill="#2ecc71" opacity="0.7"/>
+<text x="400" y="382" font-size="12" fill="#666">עם AGENTS.md</text>
+</svg>
+
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+<text x="400" y="30" class="chart-title">השוואת צריכת טוקנים (Output Tokens)</text>
+<line x1="120" y1="320" x2="720" y2="320" stroke="#ccc" stroke-width="1.5"/>
+<line x1="120" y1="60" x2="120" y2="320" stroke="#ccc" stroke-width="1.5"/>
+<text x="110" y="320" text-anchor="end" font-size="11" fill="#888">0</text>
+<text x="110" y="255" text-anchor="end" font-size="11" fill="#888">2,000</text>
+<text x="110" y="190" text-anchor="end" font-size="11" fill="#888">4,000</text>
+<text x="110" y="125" text-anchor="end" font-size="11" fill="#888">6,000</text>
+<text x="110" y="68" text-anchor="end" font-size="11" fill="#888">8,000</text>
+<text x="55" y="190" text-anchor="middle" font-size="11" fill="#888" transform="rotate(-90, 55, 190)">טוקנים</text>
+<line x1="120" y1="255" x2="720" y2="255" stroke="#eee" stroke-width="1"/>
+<line x1="120" y1="190" x2="720" y2="190" stroke="#eee" stroke-width="1"/>
+<line x1="120" y1="125" x2="720" y2="125" stroke="#eee" stroke-width="1"/>
+
+<!-- Median -->
+<text x="280" y="345" text-anchor="middle" font-size="14" fill="#1a1a1a" font-weight="600">חציון</text>
+<rect x="220" y="168" width="50" height="152" rx="4" fill="#e74c3c" opacity="0.7"/>
+<text x="245" y="160" text-anchor="middle" font-size="12" fill="#e74c3c" font-weight="600">4,681</text>
+<rect x="290" y="193" width="50" height="127" rx="4" fill="#2ecc71" opacity="0.7"/>
+<text x="315" y="185" text-anchor="middle" font-size="12" fill="#2ecc71" font-weight="600">3,905</text>
+<line x1="365" y1="168" x2="365" y2="193" stroke="#6c5ce7" stroke-width="2"/>
+<line x1="358" y1="168" x2="372" y2="168" stroke="#6c5ce7" stroke-width="2"/>
+<line x1="358" y1="193" x2="372" y2="193" stroke="#6c5ce7" stroke-width="2"/>
+<text x="405" y="184" font-size="13" fill="#6c5ce7" font-weight="600">-16.58%</text>
+
+<!-- Mean -->
+<text x="570" y="345" text-anchor="middle" font-size="14" fill="#1a1a1a" font-weight="600">ממוצע</text>
+<rect x="510" y="133" width="50" height="187" rx="4" fill="#e74c3c" opacity="0.7"/>
+<text x="535" y="125" text-anchor="middle" font-size="12" fill="#e74c3c" font-weight="600">5,744</text>
+<rect x="580" y="170" width="50" height="150" rx="4" fill="#2ecc71" opacity="0.7"/>
+<text x="605" y="162" text-anchor="middle" font-size="12" fill="#2ecc71" font-weight="600">4,591</text>
+<line x1="655" y1="133" x2="655" y2="170" stroke="#6c5ce7" stroke-width="2"/>
+<line x1="648" y1="133" x2="662" y2="133" stroke="#6c5ce7" stroke-width="2"/>
+<line x1="648" y1="170" x2="662" y2="170" stroke="#6c5ce7" stroke-width="2"/>
+<text x="695" y="155" font-size="13" fill="#6c5ce7" font-weight="600">-20.08%</text>
+
+<rect x="220" y="370" width="14" height="14" rx="3" fill="#e74c3c" opacity="0.7"/>
+<text x="240" y="382" font-size="12" fill="#666">ללא AGENTS.md</text>
+<rect x="380" y="370" width="14" height="14" rx="3" fill="#2ecc71" opacity="0.7"/>
+<text x="400" y="382" font-size="12" fill="#666">עם AGENTS.md</text>
+</svg>
+
+<h2>אימוץ AGENTS.md: מ-0 ל-60,000</h2>
+
+<p>הפורמט של AGENTS.md התחיל כרעיון פשוט בקהילת המפתחים. מישהו הבין שכמו שיש README.md למפתחים אנושיים, צריך להיות קובץ דומה לסוכני AI. הרעיון התפשט במהירות, בעיקר בזכות האימוץ על ידי פלטפורמות גדולות.</p>
+
+<p>GitHub היו מהראשונים לתמוך: Copilot ו-Codex קוראים אוטומטית קבצי AGENTS.md כשהם עובדים על מאגר. Anthropic עם Claude Code ו-OpenAI עם Codex תומכים אף הם. זה יצר לולאה חיובית: ככל שיותר כלים תומכים בפורמט, יותר מפתחים כותבים קבצי AGENTS.md, מה שמעודד עוד כלים לתמוך.</p>
+
+<p>הצמיחה הייתה מעריכית: מכמה מאות מאגרים בתחילת 2025, דרך אלפים באמצע השנה, ליותר מ-60,000 בתחילת 2026. הקצב ממשיך לעלות ככל שסוכני AI coding הופכים לכלי עבודה יומיומי.</p>
+
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg">
+<text x="400" y="30" class="chart-title">אימוץ AGENTS.md: מספר מאגרים לאורך זמן</text>
+<line x1="100" y1="300" x2="720" y2="300" stroke="#ccc" stroke-width="1.5"/>
+<line x1="100" y1="60" x2="100" y2="300" stroke="#ccc" stroke-width="1.5"/>
+<text x="90" y="300" text-anchor="end" font-size="11" fill="#888">0</text>
+<text x="90" y="240" text-anchor="end" font-size="11" fill="#888">10K</text>
+<text x="90" y="180" text-anchor="end" font-size="11" fill="#888">20K</text>
+<text x="90" y="120" text-anchor="end" font-size="11" fill="#888">40K</text>
+<text x="90" y="65" text-anchor="end" font-size="11" fill="#888">60K+</text>
+<line x1="100" y1="240" x2="720" y2="240" stroke="#eee" stroke-width="1"/>
+<line x1="100" y1="180" x2="720" y2="180" stroke="#eee" stroke-width="1"/>
+<line x1="100" y1="120" x2="720" y2="120" stroke="#eee" stroke-width="1"/>
+<!-- Data points and curve -->
+<path d="M 140,296 Q 250,294 350,280 Q 450,250 520,200 Q 580,150 640,100 Q 680,75 710,62" fill="none" stroke="#6c5ce7" stroke-width="3" stroke-linecap="round"/>
+<!-- Area under curve -->
+<path d="M 140,296 Q 250,294 350,280 Q 450,250 520,200 Q 580,150 640,100 Q 680,75 710,62 L 710,300 L 140,300 Z" fill="#6c5ce7" opacity="0.08"/>
+<!-- Data points -->
+<circle cx="140" cy="296" r="5" fill="#6c5ce7"/>
+<circle cx="250" cy="294" r="5" fill="#6c5ce7"/>
+<circle cx="350" cy="280" r="5" fill="#6c5ce7"/>
+<circle cx="450" cy="250" r="5" fill="#6c5ce7"/>
+<circle cx="520" cy="200" r="5" fill="#6c5ce7"/>
+<circle cx="580" cy="150" r="5" fill="#6c5ce7"/>
+<circle cx="640" cy="100" r="5" fill="#6c5ce7"/>
+<circle cx="710" cy="62" r="6" fill="#6c5ce7" stroke="white" stroke-width="2"/>
+<!-- Labels -->
+<text x="140" y="316" text-anchor="middle" font-size="10" fill="#888">Q1 '25</text>
+<text x="250" y="316" text-anchor="middle" font-size="10" fill="#888">Q2 '25</text>
+<text x="350" y="316" text-anchor="middle" font-size="10" fill="#888">Q3 '25</text>
+<text x="450" y="316" text-anchor="middle" font-size="10" fill="#888">Q4 '25</text>
+<text x="580" y="316" text-anchor="middle" font-size="10" fill="#888">Q1 '26</text>
+<text x="710" y="316" text-anchor="middle" font-size="10" fill="#888">Q2 '26</text>
+<!-- Value labels -->
+<text x="142" y="288" font-size="9" fill="#6c5ce7">~200</text>
+<text x="352" y="272" font-size="9" fill="#6c5ce7">~5K</text>
+<text x="522" y="192" font-size="9" fill="#6c5ce7">~25K</text>
+<text x="712" y="54" font-size="11" fill="#6c5ce7" font-weight="600">60K+</text>
+<!-- Milestones -->
+<line x1="300" y1="288" x2="300" y2="300" stroke="#6c5ce7" stroke-width="1" stroke-dasharray="3"/>
+<text x="300" y="340" text-anchor="middle" font-size="9" fill="#666">GitHub Copilot</text>
+<text x="300" y="352" text-anchor="middle" font-size="9" fill="#666">תמיכה רשמית</text>
+<line x1="480" y1="230" x2="480" y2="260" stroke="#6c5ce7" stroke-width="1" stroke-dasharray="3"/>
+<text x="480" y="340" text-anchor="middle" font-size="9" fill="#666">OpenAI Codex</text>
+<text x="480" y="352" text-anchor="middle" font-size="9" fill="#666">אימוץ</text>
+</svg>
+
+<h2>למה AGENTS.md עובד?</h2>
+
+<p>המחקר לא רק מראה ש-AGENTS.md עוזר, אלא גם מאפשר להבין למה. כשסוכן AI מתחיל לעבוד על משימה בפרויקט חדש, הוא צריך לענות על כמה שאלות בסיסיות:</p>
+
+<ul>
+<li><strong>מבנה:</strong> איך הפרויקט מאורגן? איפה נמצא הקוד הראשי? איפה הטסטים?</li>
+<li><strong>פקודות:</strong> איך בונים את הפרויקט? איך מריצים טסטים? איך מפרמטים קוד?</li>
+<li><strong>כללים:</strong> מה סגנון הקוד? אילו ספריות מועדפות? מה האילוצים?</li>
+<li><strong>הקשר:</strong> מה התלויות בין חלקי הפרויקט? מה ה-patterns המקובלים?</li>
+</ul>
+
+<p>בלי AGENTS.md, הסוכן צריך "לגלות" את התשובות לשאלות האלה בעצמו. הוא קורא קבצים, מנסה להריץ פקודות, בודק תוצאות, וחוזר אחורה כשמשהו לא עובד. כל הגילוי הזה לוקח זמן וצורך טוקנים.</p>
+
+<p>עם AGENTS.md, רוב המידע הזה מוגש על מגש. הסוכן יודע מראש איך לבנות את הפרויקט, היכן נמצאים הקבצים הרלוונטיים, ומה כללי הקידוד. הוא יכול לדלג ישירות לביצוע המשימה במקום לבזבז זמן על חקירה.</p>
+
+<blockquote>
+"AGENTS.md עובד כמו תדריך לעובד חדש. אותה משימה, אבל פחות זמן על orientation ויותר זמן על עבודה אמיתית."
+</blockquote>
+
+<h2>מגבלות המחקר ועבודה עתידית</h2>
+
+<p>החוקרים ישרים לגבי מגבלות המחקר, וזה מחזק את האמינות שלו:</p>
+
+<p><strong>אין הערכת נכונות.</strong> המחקר מדד זמן וטוקנים, אבל לא בדק האם הפלט של הסוכן היה נכון. ייתכן שהסוכן סיים מהר יותר אבל עם פתרון פחות טוב. עבודה עתידית תצטרך לבחון את איכות הפלט לצד המהירות.</p>
+
+<p><strong>מודל יחיד.</strong> כל הניסויים בוצעו עם gpt-5.2-codex. מודלים אחרים (Claude, Gemini, DeepSeek) עשויים להגיב אחרת ל-AGENTS.md. מחקר עתידי צריך לבחון מספר סוכנים.</p>
+
+<p><strong>גודל מדגם.</strong> 10 מאגרים ו-124 PRs הם מדגם סביר אבל לא גדול. מחקר בקנה מידה גדול יותר עם מאות מאגרים ואלפי PRs יחזק את הממצאים.</p>
+
+<p><strong>PRs קטנים בלבד.</strong> המחקר התמקד ב-PRs קטנים ובינוניים. השפעת AGENTS.md על PRs גדולים (עם עשרות קבצים) עדיין לא נבדקה.</p>
+
+<p><strong>עבודה עתידית</strong> שהחוקרים מציעים כוללת: הערכת נכונות הפתרונות, בדיקה עם מספר סוכנים ומודלים, ניסוי על PRs גדולים יותר, ובחינת ההשפעה של איכות ופורמט ה-AGENTS.md על התוצאות.</p>
+
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg">
+<text x="400" y="30" class="chart-title">מפת דרכים: מחקר עתידי על AGENTS.md</text>
+<!-- Current study -->
+<rect x="40" y="70" width="200" height="100" rx="10" fill="#6c5ce7" opacity="0.15" stroke="#6c5ce7" stroke-width="2"/>
+<text x="140" y="95" text-anchor="middle" font-size="13" font-weight="600" fill="#6c5ce7">מחקר נוכחי</text>
+<text x="140" y="115" text-anchor="middle" font-size="11" fill="#666">10 מאגרים</text>
+<text x="140" y="132" text-anchor="middle" font-size="11" fill="#666">124 PRs</text>
+<text x="140" y="149" text-anchor="middle" font-size="11" fill="#666">מודל אחד</text>
+<text x="140" y="163" text-anchor="middle" font-size="11" fill="#666">זמן + טוקנים</text>
+<!-- Arrow -->
+<line x1="245" y1="120" x2="285" y2="120" stroke="#6c5ce7" stroke-width="2" marker-end="url(#arrow3)"/>
+<!-- Phase 2 -->
+<rect x="290" y="55" width="200" height="130" rx="10" fill="#3498db" opacity="0.15" stroke="#3498db" stroke-width="2"/>
+<text x="390" y="80" text-anchor="middle" font-size="13" font-weight="600" fill="#3498db">שלב 2: הרחבה</text>
+<text x="390" y="100" text-anchor="middle" font-size="11" fill="#666">100+ מאגרים</text>
+<text x="390" y="117" text-anchor="middle" font-size="11" fill="#666">מספר סוכנים</text>
+<text x="390" y="134" text-anchor="middle" font-size="11" fill="#666">הערכת נכונות</text>
+<text x="390" y="151" text-anchor="middle" font-size="11" fill="#666">PRs גדולים</text>
+<text x="390" y="168" text-anchor="middle" font-size="11" fill="#666">איכות AGENTS.md</text>
+<!-- Arrow -->
+<line x1="495" y1="120" x2="535" y2="120" stroke="#3498db" stroke-width="2" marker-end="url(#arrow3)"/>
+<!-- Phase 3 -->
+<rect x="540" y="55" width="220" height="130" rx="10" fill="#2ecc71" opacity="0.15" stroke="#2ecc71" stroke-width="2"/>
+<text x="650" y="80" text-anchor="middle" font-size="13" font-weight="600" fill="#2ecc71">שלב 3: סטנדרטיזציה</text>
+<text x="650" y="100" text-anchor="middle" font-size="11" fill="#666">פורמט אחיד</text>
+<text x="650" y="117" text-anchor="middle" font-size="11" fill="#666">Best Practices</text>
+<text x="650" y="134" text-anchor="middle" font-size="11" fill="#666">כלי יצירה אוטומטיים</text>
+<text x="650" y="151" text-anchor="middle" font-size="11" fill="#666">אינטגרציה עם CI/CD</text>
+<text x="650" y="168" text-anchor="middle" font-size="11" fill="#666">תיעוד חי ודינמי</text>
+<!-- Bottom: Impact areas -->
+<text x="400" y="230" text-anchor="middle" font-size="14" font-weight="600" fill="#1a1a1a">תחומי השפעה צפויים</text>
+<rect x="60" y="250" width="160" height="55" rx="8" fill="#f0edff"/>
+<text x="140" y="273" text-anchor="middle" font-size="12" fill="#6c5ce7" font-weight="600">פיתוח תוכנה</text>
+<text x="140" y="293" text-anchor="middle" font-size="10" fill="#666">סוכני coding יעילים יותר</text>
+<rect x="240" y="250" width="160" height="55" rx="8" fill="#e8f4fd"/>
+<text x="320" y="273" text-anchor="middle" font-size="12" fill="#3498db" font-weight="600">DevOps / MLOps</text>
+<text x="320" y="293" text-anchor="middle" font-size="10" fill="#666">אוטומציה חכמה יותר</text>
+<rect x="420" y="250" width="160" height="55" rx="8" fill="#e8faf0"/>
+<text x="500" y="273" text-anchor="middle" font-size="12" fill="#2ecc71" font-weight="600">ניהול ידע</text>
+<text x="500" y="293" text-anchor="middle" font-size="10" fill="#666">תיעוד חי לסוכנים</text>
+<rect x="600" y="250" width="160" height="55" rx="8" fill="#fef3e0"/>
+<text x="680" y="273" text-anchor="middle" font-size="12" fill="#f39c12" font-weight="600">חיסכון כלכלי</text>
+<text x="680" y="293" text-anchor="middle" font-size="10" fill="#666">פחות טוקנים = פחות עלות</text>
+<defs><marker id="arrow3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#6c5ce7"/></marker></defs>
+</svg>
+
+<h2>מה הלקחים המעשיים?</h2>
+
+<p>בין אם אתם מפתחים בודדים או חלק מצוות גדול, המחקר הזה מצביע על כמה לקחים מעשיים:</p>
+
+<p><strong>כתבו AGENTS.md לפרויקטים שלכם.</strong> ההשקעה מינימלית (שעה-שעתיים של כתיבה) אבל ההחזר מצטבר עם כל שימוש בסוכן AI. אם אתם משתמשים בכלים כמו GitHub Copilot, Claude Code, או Cursor, AGENTS.md ישפר את חוויית השימוש שלכם.</p>
+
+<p><strong>התמקדו במידע שסוכנים צריכים, לא במידע לבני אדם.</strong> AGENTS.md לא צריך להיות יפה או מעוצב. הוא צריך להיות מדויק, עדכני, ומכיל את המידע שסוכן AI צריך כדי לעבוד ביעילות: פקודות build, מבנה ספריות, כללי קידוד, ותלויות.</p>
+
+<p><strong>עדכנו את ה-AGENTS.md כשהפרויקט משתנה.</strong> קובץ AGENTS.md שלא מעודכן יכול להיות גרוע יותר מאשר חוסר קובץ, כי הוא מוביל את הסוכן לכיוון לא נכון. שלבו עדכון של AGENTS.md בתהליך ה-code review.</p>
+
+<p><strong>הפחתה של 20-29% בזמן ובטוקנים זה משמעותי.</strong> עבור צוות שמריץ עשרות משימות של סוכני AI ביום, זה מצטבר לשעות עבודה ומאות דולרים בחיסכון על טוקנים בחודש.</p>
+
+<h2>סיכום</h2>
+
+<p>המחקר של Lulla ועמיתיו הוא הראשון שמספק ראיות אמפיריות ברורות להשפעה של AGENTS.md על יעילות סוכני AI coding. הממצאים חד-משמעיים: <span class="highlight">28.64% פחות זמן (חציון)</span> ו-<span class="highlight">16.58% פחות טוקנים (חציון)</span>, עם השפעה גדולה יותר על משימות יקרות.</p>
+
+<p>זה לא מפתיע אם חושבים על זה. תיעוד טוב עוזר לבני אדם, אז למה שהוא לא יעזור לסוכני AI? ההבדל הוא שעם סוכני AI, אפשר למדוד את ההשפעה במדויק: שניות וטוקנים, לא "תחושה" של פרודוקטיביות.</p>
+
+<p>עם 60,000+ מאגרים שכבר אימצו את הפורמט, AGENTS.md הפך מנוהג קהילתי לסטנדרט de facto. המחקר הזה מאשר שזה לא רק אפקט מצב רוח (placebo): קבצי AGENTS.md באמת עוזרים לסוכנים לעבוד מהר יותר וביעילות רבה יותר. ובעולם שבו סוכני AI הופכים לחלק בלתי נפרד מתהליך הפיתוח, כל שיפור ביעילות שלהם הוא שיפור ביעילות של כולנו.</p>
+
+<div class="source-link">
+<a href="https://arxiv.org/html/2601.20404" target="_blank">📖 קראו את המאמר המלא ב-arXiv</a>
+</div>
+
+</div>
+</body>
+</html>
