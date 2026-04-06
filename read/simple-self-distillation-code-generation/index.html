@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>זיקוק עצמי פשוט להחריד: כשמודל שפה משפר את עצמו בלי עזרה מבחוץ</title>
+<meta property="og:title" content="זיקוק עצמי פשוט להחריד: כשמודל שפה משפר את עצמו בלי עזרה מבחוץ">
+<meta property="og:description" content="חוקרי Apple מציגים שיטה שמשפרת יצירת קוד של LLM ב-30%+ — בלי מורה, בלי מאמת, בלי RL. רק דגימה מהמודל עצמו ואימון מחדש. המחקר שמשנה את הכללים.">
+<meta name="twitter:card" content="summary">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  background: #fff;
+  color: #1a1a1a;
+  line-height: 1.9;
+  font-size: 18px;
+}
+h1 { font-size: 32px; font-weight: 600; margin-bottom: 12px; line-height: 1.4; }
+h2 { font-size: 24px; font-weight: 600; margin-top: 48px; margin-bottom: 20px; color: #1a1a1a; border-bottom: 2px solid #e8e8e8; padding-bottom: 8px; }
+h3 { font-size: 20px; font-weight: 600; margin-top: 32px; margin-bottom: 14px; }
+.subtitle { font-size: 20px; color: #555; margin-bottom: 24px; line-height: 1.6; }
+.intro-box {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-bottom: 36px;
+  font-size: 15px;
+  color: #555;
+  line-height: 1.7;
+}
+.intro-box strong { color: #1a1a1a; }
+p { margin-bottom: 18px; }
+blockquote {
+  border-right: 4px solid #cc0000;
+  padding: 12px 20px;
+  margin: 24px 0;
+  background: #fafafa;
+  font-style: italic;
+  color: #333;
+}
+ul { margin: 16px 0; padding-right: 24px; }
+li { margin-bottom: 10px; }
+.chart-container { margin: 32px 0; text-align: center; }
+.chart-container svg { max-width: 100%; height: auto; }
+.chart-title { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #333; }
+.sources {
+  margin-top: 48px; padding-top: 24px; border-top: 2px solid #e8e8e8;
+  font-size: 14px; color: #777;
+}
+.sources h3 { font-size: 16px; color: #555; }
+.sources ul { padding-right: 20px; }
+.sources li { margin-bottom: 6px; }
+.back-link { display: inline-block; margin-bottom: 24px; font-size: 14px; color: #0066cc; text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
+.highlight-stat { background: #fff3cd; padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+@media (max-width: 600px) {
+  body { padding: 20px 15px; font-size: 16px; }
+  h1 { font-size: 26px; }
+  h2 { font-size: 20px; }
+  .subtitle { font-size: 17px; }
+}
+</style>
+</head>
+<body>
+
+<a class="back-link" href="../">← חזרה לכל המאמרים</a>
+
+<h1>זיקוק עצמי פשוט להחריד: כשמודל שפה משפר את עצמו בלי עזרה מבחוץ</h1>
+<p class="subtitle">חוקרי Apple הפתיעו את עולם ה-AI עם שיטה שמשפרת יצירת קוד של מודלים גדולים ב-30% — בלי מורה חיצוני, בלי מאמת, בלי למידת חיזוק. רק לדגום מהמודל עצמו ולאמן מחדש. איך זה עובד, ולמה זה משנה את כל מה שחשבנו על אימון מודלים?</p>
+
+<div class="intro-box">
+<strong>📋 הערת מערכת:</strong> מאמר זה מבוסס על מחקר שפורסם ב-arXiv ב-1 באפריל 2026 על ידי צוות חוקרים מ-Apple. המאמר מציג שיטה בשם Simple Self-Distillation (SSD) לשיפור יצירת קוד במודלי שפה גדולים. כל הנתונים והתוצאות מתורגמים מהמאמר המקורי. המאמר כולל הרחבות וניתוח נוסף על ההשלכות לתעשייה.
+<br><br>
+<strong>מקור:</strong> Ruixiang Zhang, Richard He Bai, Huangjie Zheng, Navdeep Jaitly, Ronan Collobert, Yizhe Zhang — Apple<br>
+<strong>תאריך:</strong> 1 באפריל 2026<br>
+<strong>קישור:</strong> <a href="https://arxiv.org/abs/2604.01193">arXiv:2604.01193</a>
+</div>
+
+<h2>ההנחה שנשברה: מודל לא יכול לשפר את עצמו</h2>
+
+<p>יש הנחה שקובעת הרבה מהחשיבה בעולם ה-AI: מודל שפה לא יכול להשתפר מעבר ליכולות שלו בלי איזשהו אות חיצוני. אם אתה רוצה מודל טוב יותר, אתה צריך מישהו שיגיד לו מה נכון ומה לא — מורה חזק יותר, מאמת שבודק תשובות, או לפחות מנגנון של למידת חיזוק עם פונקציית תגמול. זה הגיוני אינטואיטיבית: איך תלמד את עצמך משהו שאתה לא יודע?</p>
+
+<p>אבל מה אם ההנחה הזו פשוט לא נכונה? מה אם מודלים גדולים כבר מכילים יכולות שהם לא מצליחים לממש — לא בגלל שחסר להם ידע, אלא בגלל שהדרך שבה הם מייצרים טקסט לא מאפשרת להם לנצל את מה שהם כבר יודעים?</p>
+
+<p>זו בדיוק הטענה של צוות חוקרים מ-Apple במאמר חדש שפורסם באפריל 2026. השיטה שלהם — <strong>Simple Self-Distillation</strong>, או בקיצור SSD — היא מביכה בפשטותה: תדגום פלט מהמודל עצמו עם הגדרות טמפרטורה וחיתוך מסוימות, ואז תאמן את המודל על הפלט הזה באמצעות אימון מפוקח רגיל לחלוטין. בלי לבדוק אם הפלט נכון. בלי מורה. בלי RL. בלי שום דבר מיוחד.</p>
+
+<p>התוצאות? <span class="highlight-stat">שיפור של 30.4%</span> ביצירת קוד עבור Qwen3-30B-Instruct על LiveCodeBench v6 — ממדד pass@1 של 42.4% ל-55.3%. וזה לא אנומליה: השיטה עובדת על חמישה מודלים שונים, בשני משפחות (Qwen ו-Llama), בשלושה גדלים, ובשני סגנונות חשיבה.</p>
+
+<!-- Chart 1: SSD Results Across Models -->
+<div class="chart-container">
+<div class="chart-title">תוצאות SSD על פני חמישה מודלים — pass@1 על LiveCodeBench v6</div>
+<svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg" style="direction:ltr">
+  <defs>
+    <linearGradient id="baseGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8a87c" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#d4845a" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="ssdGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#41b3a3" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#2d8e80" stop-opacity="0.9"/>
+    </linearGradient>
+  </defs>
+  <!-- Grid -->
+  <line x1="90" y1="40" x2="90" y2="300" stroke="#e0e0e0" stroke-width="1"/>
+  <line x1="90" y1="300" x2="690" y2="300" stroke="#e0e0e0" stroke-width="1"/>
+  <line x1="90" y1="248" x2="690" y2="248" stroke="#f0f0f0" stroke-width="1" stroke-dasharray="4"/>
+  <line x1="90" y1="196" x2="690" y2="196" stroke="#f0f0f0" stroke-width="1" stroke-dasharray="4"/>
+  <line x1="90" y1="144" x2="690" y2="144" stroke="#f0f0f0" stroke-width="1" stroke-dasharray="4"/>
+  <line x1="90" y1="92" x2="690" y2="92" stroke="#f0f0f0" stroke-width="1" stroke-dasharray="4"/>
+  <!-- Y-axis labels -->
+  <text x="80" y="304" text-anchor="end" font-size="12" fill="#888">0%</text>
+  <text x="80" y="252" text-anchor="end" font-size="12" fill="#888">20%</text>
+  <text x="80" y="200" text-anchor="end" font-size="12" fill="#888">40%</text>
+  <text x="80" y="148" text-anchor="end" font-size="12" fill="#888">60%</text>
+  <text x="80" y="96" text-anchor="end" font-size="12" fill="#888">80%</text>
+  
+  <!-- Llama-8B: base 21.1, +SSD 24.6 -->
+  <rect x="110" y="245" width="44" height="55" rx="3" fill="url(#baseGrad)"/>
+  <rect x="158" y="236" width="44" height="64" rx="3" fill="url(#ssdGrad)"/>
+  <text x="132" y="240" text-anchor="middle" font-size="11" fill="#d4845a" font-weight="600">21.1%</text>
+  <text x="180" y="231" text-anchor="middle" font-size="11" fill="#2d8e80" font-weight="600">24.6%</text>
+  <text x="156" y="325" text-anchor="middle" font-size="11" fill="#555">Llama-8B</text>
+  <text x="156" y="338" text-anchor="middle" font-size="10" fill="#999">Instruct</text>
+  
+  <!-- Qwen3-4B-Instruct: base 30.2, +SSD 37.7 -->
+  <rect x="230" y="221" width="44" height="79" rx="3" fill="url(#baseGrad)"/>
+  <rect x="278" y="202" width="44" height="98" rx="3" fill="url(#ssdGrad)"/>
+  <text x="252" y="216" text-anchor="middle" font-size="11" fill="#d4845a" font-weight="600">30.2%</text>
+  <text x="300" y="197" text-anchor="middle" font-size="11" fill="#2d8e80" font-weight="600">37.7%</text>
+  <text x="276" y="325" text-anchor="middle" font-size="11" fill="#555">Qwen3-4B</text>
+  <text x="276" y="338" text-anchor="middle" font-size="10" fill="#999">Instruct</text>
+  
+  <!-- Qwen3-4B-Thinking: base 45.1, +SSD 48.4 -->
+  <rect x="350" y="182" width="44" height="118" rx="3" fill="url(#baseGrad)"/>
+  <rect x="398" y="174" width="44" height="126" rx="3" fill="url(#ssdGrad)"/>
+  <text x="372" y="177" text-anchor="middle" font-size="11" fill="#d4845a" font-weight="600">45.1%</text>
+  <text x="420" y="169" text-anchor="middle" font-size="11" fill="#2d8e80" font-weight="600">48.4%</text>
+  <text x="396" y="325" text-anchor="middle" font-size="11" fill="#555">Qwen3-4B</text>
+  <text x="396" y="338" text-anchor="middle" font-size="10" fill="#999">Thinking</text>
+  
+  <!-- Qwen3-30B-Instruct: base 42.4, +SSD 55.3 -->
+  <rect x="470" y="189" width="44" height="111" rx="3" fill="url(#baseGrad)"/>
+  <rect x="518" y="156" width="44" height="144" rx="3" fill="url(#ssdGrad)"/>
+  <text x="492" y="184" text-anchor="middle" font-size="11" fill="#d4845a" font-weight="600">42.4%</text>
+  <text x="540" y="151" text-anchor="middle" font-size="11" fill="#2d8e80" font-weight="600">55.3%</text>
+  <text x="516" y="325" text-anchor="middle" font-size="11" fill="#555">Qwen3-30B</text>
+  <text x="516" y="338" text-anchor="middle" font-size="10" fill="#999">Instruct</text>
+  
+  <!-- Qwen3-30B-Thinking: base 57.7, +SSD 59.8 -->
+  <rect x="590" y="150" width="44" height="150" rx="3" fill="url(#baseGrad)"/>
+  <rect x="638" y="144" width="44" height="156" rx="3" fill="url(#ssdGrad)"/>
+  <text x="612" y="145" text-anchor="middle" font-size="11" fill="#d4845a" font-weight="600">57.7%</text>
+  <text x="660" y="139" text-anchor="middle" font-size="11" fill="#2d8e80" font-weight="600">59.8%</text>
+  <text x="636" y="325" text-anchor="middle" font-size="11" fill="#555">Qwen3-30B</text>
+  <text x="636" y="338" text-anchor="middle" font-size="10" fill="#999">Thinking</text>
+  
+  <!-- Legend -->
+  <rect x="250" y="355" width="16" height="12" rx="2" fill="url(#baseGrad)"/>
+  <text x="270" y="366" font-size="12" fill="#555">מודל בסיס</text>
+  <rect x="370" y="355" width="16" height="12" rx="2" fill="url(#ssdGrad)"/>
+  <text x="390" y="366" font-size="12" fill="#555">אחרי SSD</text>
+</svg>
+</div>
+
+<h2>המתכון: שלושה צעדים ותו לא</h2>
+
+<p>הפשטות של SSD היא מה שהופך אותה לכל כך מפתיעה. כל השיטה מתמצה בשלושה צעדים:</p>
+
+<p><strong>צעד 1 — דגימת נתונים:</strong> לוקחים את המודל הקיים, נותנים לו כ-10,000 שאלות תכנות תחרותיות, ומדגמים ממנו תשובה אחת לכל שאלה. הדגימה נעשית עם טמפרטורה גבוהה (שמגדילה את הרנדומליות) וחיתוך (top-k/top-p שמסיר את הזנבות הבלתי-סבירים). התשובות לא נבדקות — לא מריצים אותן, לא בודקים נכונות, לא מסננים שום דבר.</p>
+
+<p><strong>צעד 2 — אימון:</strong> מאמנים את המודל על הפלט שלו עצמו, באמצעות Supervised Fine-Tuning רגיל לחלוטין — cross-entropy loss, AdamW, 2,500 איטרציות. שום דבר מיוחד.</p>
+
+<p><strong>צעד 3 — הסקה:</strong> משתמשים במודל המעודכן עם הגדרות דגימה חדשות בזמן הסקה. זהו.</p>
+
+<blockquote>
+"SSD דורשת רק סט של שאלות ואת המודל עצמו: בלי פתרונות שנכתבו ע"י בני אדם, בלי תשובות ייחוס, בלי מודל מורה, בלי מודל תגמול, בלי מאמת, בלי סביבת הרצה, ובלי שום סוג של למידת חיזוק."
+</blockquote>
+
+<p>זה הכל. אין כאן חדשנות ארכיטקטונית, אין אלגוריתם מתוחכם, אין pipeline מורכב. וזה בדיוק מה שהופך את התוצאות למדהימות כל כך.</p>
+
+<h2>התוצאות: שיפור רוחבי ועמוק</h2>
+
+<p>הבנצ'מרק המרכזי במחקר הוא LiveCodeBench v6, מדד עדכני ליצירת קוד שמחולק לרמות קושי: קל, בינוני וקשה. המדד העיקרי הוא pass@1 — האחוז שבו ניסיון בודד של המודל עובר את כל בדיקות התקינות.</p>
+
+<h3>חמישה מודלים, אותו סיפור</h3>
+
+<p>SSD שיפרה את כל חמשת המודלים שנבדקו. השיפור הדרמטי ביותר היה ב-Qwen3-30B-Instruct: <span class="highlight-stat">קפיצה מ-42.4% ל-55.3%</span> ב-pass@1 — שיפור יחסי של למעלה מ-30%. אבל גם מודלים קטנים יותר הרוויחו: Qwen3-4B-Instruct השתפר ב-7.5 נקודות אחוז, ו-Llama-3.1-8B-Instruct ב-3.5 נקודות.</p>
+
+<p>גם מודלי "חשיבה" (thinking) — שכבר עוברים תהליך חשיבה מפורש — השתפרו: Qwen3-4B-Thinking עלה ב-3.3 נקודות, ו-Qwen3-30B-Thinking ב-2.1 נקודות. זה מרשים במיוחד כי מודלים אלה כבר עברו אופטימיזציה ספציפית לפתרון בעיות.</p>
+
+<h3>ככל שהבעיה קשה יותר — השיפור גדול יותר</h3>
+
+<p>אולי הממצא המעניין ביותר הוא שהשיפורים מתרכזים בבעיות הקשות. עבור Qwen3-30B-Instruct:</p>
+
+<ul>
+<li>בעיות קלות: שיפור של <span class="highlight-stat">+6.5</span> נקודות אחוז</li>
+<li>בעיות בינוניות: שיפור של <span class="highlight-stat">+14.2</span> נקודות אחוז</li>
+<li>בעיות קשות: שיפור של <span class="highlight-stat">+15.3</span> נקודות אחוז</li>
+</ul>
+
+<p>ב-pass@5 (חמישה ניסיונות), הפערים עוד יותר דרמטיים: בבעיות קשות, pass@5 זינק מ-31.1% ל-54.1% — קפיצה של 23 נקודות אחוז. זה אומר שהמודל לא רק נהיה מדויק יותר, אלא גם מגוון יותר באסטרטגיות הפתרון שלו.</p>
+
+<!-- Chart 2: Difficulty Breakdown -->
+<div class="chart-container">
+<div class="chart-title">פירוט לפי רמת קושי — Qwen3-30B-Instruct (pass@1)</div>
+<svg viewBox="0 0 700 350" xmlns="http://www.w3.org/2000/svg" style="direction:ltr">
+  <defs>
+    <linearGradient id="easyBase" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f6d365"/>
+      <stop offset="100%" stop-color="#e8b84b"/>
+    </linearGradient>
+    <linearGradient id="easySsd" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a8e063"/>
+      <stop offset="100%" stop-color="#7cb342"/>
+    </linearGradient>
+    <linearGradient id="medBase" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fda085"/>
+      <stop offset="100%" stop-color="#e87a5f"/>
+    </linearGradient>
+    <linearGradient id="medSsd" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#667eea"/>
+      <stop offset="100%" stop-color="#4a5ed4"/>
+    </linearGradient>
+    <linearGradient id="hardBase" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff9a9e"/>
+      <stop offset="100%" stop-color="#e06c6c"/>
+    </linearGradient>
+    <linearGradient id="hardSsd" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a18cd1"/>
+      <stop offset="100%" stop-color="#7b68b8"/>
+    </linearGradient>
+  </defs>
+  <!-- Grid -->
+  <line x1="90" y1="30" x2="90" y2="270" stroke="#e0e0e0" stroke-width="1"/>
+  <line x1="90" y1="270" x2="660" y2="270" stroke="#e0e0e0" stroke-width="1"/>
+  <line x1="90" y1="222" x2="660" y2="222" stroke="#f0f0f0" stroke-width="1" stroke-dasharray="4"/>
+  <line x1="90" y1="174" x2="660" y2="174" stroke="#f0f0f0" stroke-width="1" stroke-dasharray="4"/>
+  <line x1="90" y1="126" x2="660" y2="126" stroke="#f0f0f0" stroke-width="1" stroke-dasharray="4"/>
+  <line x1="90" y1="78" x2="660" y2="78" stroke="#f0f0f0" stroke-width="1" stroke-dasharray="4"/>
+  <!-- Y-axis -->
+  <text x="80" y="274" text-anchor="end" font-size="12" fill="#888">0%</text>
+  <text x="80" y="226" text-anchor="end" font-size="12" fill="#888">20%</text>
+  <text x="80" y="178" text-anchor="end" font-size="12" fill="#888">40%</text>
+  <text x="80" y="130" text-anchor="end" font-size="12" fill="#888">60%</text>
+  <text x="80" y="82" text-anchor="end" font-size="12" fill="#888">80%</text>
+  
+  <!-- Easy: base ~75, +SSD ~81.5 -->
+  <rect x="140" y="90" width="55" height="180" rx="4" fill="url(#easyBase)"/>
+  <rect x="200" y="74" width="55" height="196" rx="4" fill="url(#easySsd)"/>
+  <text x="168" y="83" text-anchor="middle" font-size="12" fill="#e8b84b" font-weight="600">75.0%</text>
+  <text x="228" y="67" text-anchor="middle" font-size="12" fill="#7cb342" font-weight="600">81.5%</text>
+  <text x="198" y="290" text-anchor="middle" font-size="13" fill="#555" font-weight="600">קל</text>
+  <text x="198" y="305" text-anchor="middle" font-size="11" fill="#7cb342">+6.5pp</text>
+  
+  <!-- Medium: base ~38, +SSD ~52.2 -->
+  <rect x="310" y="179" width="55" height="91" rx="4" fill="url(#medBase)"/>
+  <rect x="370" y="145" width="55" height="125" rx="4" fill="url(#medSsd)"/>
+  <text x="338" y="172" text-anchor="middle" font-size="12" fill="#e87a5f" font-weight="600">38.0%</text>
+  <text x="398" y="138" text-anchor="middle" font-size="12" fill="#4a5ed4" font-weight="600">52.2%</text>
+  <text x="368" y="290" text-anchor="middle" font-size="13" fill="#555" font-weight="600">בינוני</text>
+  <text x="368" y="305" text-anchor="middle" font-size="11" fill="#4a5ed4">+14.2pp</text>
+  
+  <!-- Hard: base ~16, +SSD ~31.3 -->
+  <rect x="480" y="232" width="55" height="38" rx="4" fill="url(#hardBase)"/>
+  <rect x="540" y="195" width="55" height="75" rx="4" fill="url(#hardSsd)"/>
+  <text x="508" y="225" text-anchor="middle" font-size="12" fill="#e06c6c" font-weight="600">16.0%</text>
+  <text x="568" y="188" text-anchor="middle" font-size="12" fill="#7b68b8" font-weight="600">31.3%</text>
+  <text x="538" y="290" text-anchor="middle" font-size="13" fill="#555" font-weight="600">קשה</text>
+  <text x="538" y="305" text-anchor="middle" font-size="11" fill="#7b68b8">+15.3pp</text>
+  
+  <!-- Legend -->
+  <rect x="210" y="325" width="14" height="10" rx="2" fill="url(#easyBase)"/>
+  <text x="228" y="335" font-size="11" fill="#555">מודל בסיס</text>
+  <rect x="320" y="325" width="14" height="10" rx="2" fill="url(#medSsd)"/>
+  <text x="338" y="335" font-size="11" fill="#555">אחרי SSD</text>
+  <rect x="430" y="325" width="14" height="10" rx="2" fill="#7cb342" opacity="0.6"/>
+  <text x="448" y="335" font-size="11" fill="#555">שיפור בנק"א</text>
+</svg>
+</div>
+
+<h2>למה זה עובד? קונפליקט הדיוק-חקירה</h2>
+
+<p>הפשטות של השיטה מעוררת שאלה מיידית: <strong>למה בכלל זה עובד?</strong> אם המודל מתאמן על הפלט שלו עצמו — ללא סינון, ללא בדיקת נכונות — מה בדיוק הוא לומד?</p>
+
+<p>התשובה של החוקרים היא אלגנטית ומפתיעה. הם מזהים בעיה מבנית ביצירת קוד שהם מכנים "קונפליקט הדיוק-חקירה" (precision-exploration conflict). כדי להבין אותה, צריך להכיר שני מושגים מרכזיים:</p>
+
+<h3>"מנעולים" ו"מזלגות" בקוד</h3>
+
+<p><strong>מנעול (Lock)</strong> הוא מיקום בקוד שבו יש בעצם רק תשובה אחת נכונה. למשל, אחרי שכתבנו <code>if n ==</code>, צריך להשלים עם הערך הספציפי שהלוגיקה דורשת. המודל בדרך כלל "יודע" מה נכון, אבל יש לו עדיין זנב ארוך של אפשרויות פחות סבירות שגונבות הסתברות.</p>
+
+<p><strong>מזלג (Fork)</strong> הוא מיקום שבו באמת יש כמה המשכים לגיטימיים. למשל, כשצריך לבחור גישה אלגוריתמית — אפשר ללכת על לולאת for, על רקורסיה, או על מבנה נתונים. כל אחת מהאפשרויות יכולה להוביל לפתרון נכון.</p>
+
+<p>והנה הבעיה: שני סוגי המיקומים דורשים הגדרות <strong>סותרות</strong> של טמפרטורת הדגימה:</p>
+
+<ul>
+<li><strong>טמפרטורה נמוכה</strong> טובה למנעולים — היא מדכאת את הזנב ומרכזת את ההסתברות על התשובה הנכונה. אבל היא <strong>הורסת</strong> את המזלגות, כי היא חונקת את הגיוון ומכריחה את המודל לבחור תמיד באותה גישה.</li>
+<li><strong>טמפרטורה גבוהה</strong> טובה למזלגות — היא מאפשרת חקירה של גישות שונות. אבל היא <strong>הורסת</strong> את המנעולים, כי היא מחזירה לחיים את כל הטוקנים המסיחים בזנב.</li>
+</ul>
+
+<blockquote>
+"הטמפרטורה שעוזרת למזלגות היא בדיוק מה שמאפשר למסיחים לצוף בחזרה במנעולים."
+</blockquote>
+
+<p>כל הגדרה גלובלית של טמפרטורה היא בהכרח <strong>פשרה</strong>. אי אפשר לזכות בשני העולמות.</p>
+
+<!-- Chart 3: Fork vs Lock Visualization -->
+<div class="chart-container">
+<div class="chart-title">קונפליקט הדיוק-חקירה: מנעולים vs מזלגות</div>
+<svg viewBox="0 0 720 400" xmlns="http://www.w3.org/2000/svg" style="direction:ltr">
+  <!-- Lock Section -->
+  <text x="180" y="30" text-anchor="middle" font-size="16" fill="#333" font-weight="600">🔒 מנעול (Lock)</text>
+  <text x="180" y="50" text-anchor="middle" font-size="11" fill="#888">מיקום עם תשובה אחת נכונה</text>
+  
+  <!-- Lock: Before SSD -->
+  <text x="180" y="80" text-anchor="middle" font-size="12" fill="#d4845a" font-weight="600">לפני SSD</text>
+  <rect x="100" y="90" width="40" height="100" rx="3" fill="#d4845a" opacity="0.8"/>
+  <rect x="145" y="145" width="25" height="45" rx="3" fill="#d4845a" opacity="0.5"/>
+  <rect x="175" y="160" width="20" height="30" rx="3" fill="#d4845a" opacity="0.35"/>
+  <rect x="200" y="168" width="18" height="22" rx="3" fill="#d4845a" opacity="0.25"/>
+  <rect x="223" y="173" width="15" height="17" rx="3" fill="#d4845a" opacity="0.18"/>
+  <rect x="243" y="177" width="12" height="13" rx="3" fill="#d4845a" opacity="0.12"/>
+  <text x="120" y="205" text-anchor="middle" font-size="10" fill="#555">נכון</text>
+  <text x="200" y="205" text-anchor="middle" font-size="10" fill="#cc0000">← זנב מסיח →</text>
+  
+  <!-- Lock: After SSD -->
+  <text x="180" y="235" text-anchor="middle" font-size="12" fill="#2d8e80" font-weight="600">אחרי SSD</text>
+  <rect x="100" y="245" width="40" height="120" rx="3" fill="#2d8e80" opacity="0.9"/>
+  <rect x="145" y="340" width="25" height="25" rx="3" fill="#2d8e80" opacity="0.3"/>
+  <rect x="175" y="350" width="18" height="15" rx="3" fill="#2d8e80" opacity="0.15"/>
+  <text x="120" y="380" text-anchor="middle" font-size="10" fill="#555">נכון</text>
+  <text x="180" y="380" text-anchor="middle" font-size="10" fill="#2d8e80">זנב נחתך ✓</text>
+  
+  <!-- Divider -->
+  <line x1="360" y1="20" x2="360" y2="390" stroke="#e0e0e0" stroke-width="2" stroke-dasharray="6"/>
+  
+  <!-- Fork Section -->
+  <text x="540" y="30" text-anchor="middle" font-size="16" fill="#333" font-weight="600">🍴 מזלג (Fork)</text>
+  <text x="540" y="50" text-anchor="middle" font-size="11" fill="#888">מיקום עם כמה המשכים לגיטימיים</text>
+  
+  <!-- Fork: Before SSD -->
+  <text x="540" y="80" text-anchor="middle" font-size="12" fill="#d4845a" font-weight="600">לפני SSD</text>
+  <rect x="420" y="110" width="35" height="75" rx="3" fill="#d4845a" opacity="0.7"/>
+  <rect x="460" y="120" width="35" height="65" rx="3" fill="#d4845a" opacity="0.6"/>
+  <rect x="500" y="130" width="35" height="55" rx="3" fill="#d4845a" opacity="0.5"/>
+  <rect x="540" y="145" width="30" height="40" rx="3" fill="#d4845a" opacity="0.35"/>
+  <rect x="575" y="155" width="25" height="30" rx="3" fill="#d4845a" opacity="0.25"/>
+  <rect x="605" y="162" width="22" height="23" rx="3" fill="#d4845a" opacity="0.18"/>
+  <rect x="632" y="168" width="18" height="17" rx="3" fill="#d4845a" opacity="0.12"/>
+  <text x="490" y="200" text-anchor="middle" font-size="10" fill="#555">גישות תקפות</text>
+  <text x="610" y="200" text-anchor="middle" font-size="10" fill="#cc0000">← זנב →</text>
+  
+  <!-- Fork: After SSD -->
+  <text x="540" y="235" text-anchor="middle" font-size="12" fill="#2d8e80" font-weight="600">אחרי SSD</text>
+  <rect x="420" y="260" width="40" height="90" rx="3" fill="#2d8e80" opacity="0.8"/>
+  <rect x="465" y="265" width="40" height="85" rx="3" fill="#2d8e80" opacity="0.75"/>
+  <rect x="510" y="275" width="40" height="75" rx="3" fill="#2d8e80" opacity="0.65"/>
+  <rect x="555" y="322" width="25" height="28" rx="3" fill="#2d8e80" opacity="0.2"/>
+  <text x="490" y="365" text-anchor="middle" font-size="10" fill="#2d8e80">גישות נשמרות ✓</text>
+  <text x="565" y="365" text-anchor="middle" font-size="10" fill="#2d8e80">זנב נחתך ✓</text>
+</svg>
+</div>
+
+<h3>איך SSD פותרת את הקונפליקט</h3>
+
+<p>הנה התובנה המרכזית: SSD לא משנה את המודל באופן אחיד. היא מעצבת מחדש את התפלגויות הטוקנים <strong>בצורה תלוית-הקשר</strong>:</p>
+
+<ul>
+<li><strong>במנעולים:</strong> הזנב המסיח נחתך באגרסיביות. הטוקן הדומיננטי נעשה חזק בהרבה — כמעט בלתי-ניתן להזיז. SSD הופכת את המנעולים ל"ספייקים" חדים.</li>
+<li><strong>במזלגות:</strong> הזנב הלא-שימושי נחתך, אבל כמה המשכים מובילים נשמרים ונעשים אחידים יותר — "רמה" רחבה של אפשרויות לגיטימיות. SSD הופכת את המזלגות ל"פלטו" — מישורים רחבים.</li>
+</ul>
+
+<p>במילים אחרות: SSD עושה בדיוק מה שלא ניתן להשיג עם טמפרטורה גלובלית — היא מפעילה דיוק מרבי היכן שצריך דיוק, וחקירה מרבית היכן שצריך חקירה, <strong>בו-זמנית</strong>.</p>
+
+<p>זו הסיבה שפשוט לכוונן את טמפרטורת הדגימה על המודל המקורי לא יכול להשיג את אותן תוצאות. כוונון הטמפרטורה רק משנה משקלות בהתפלגות קיימת; SSD משנה את <strong>ההתפלגות עצמה</strong>.</p>
+
+<h2>הפירוק המתמטי: שלושה כוחות בפעולה</h2>
+
+<p>החוקרים לא מסתפקים באינטואיציה — הם מציגים ניתוח מתמטי מדויק של מה ש-SSD עושה. את פונקציית ההפסד של SSD אפשר לפרק לשלושה מרכיבים:</p>
+
+<p><strong>1. דחיסת תמיכה (Support Compression):</strong> המרכיב הראשון דוחף את המודל להעביר הסתברות מהזנב אל הטוקנים ששרדו את החיתוך בזמן האימון. זה מה שמנקה את המנעולים — פחות מסה בזנב = פחות מסיחים.</p>
+
+<p><strong>2. עיצוב מחדש בתוך התמיכה (Within-Support Reshaping):</strong> המרכיב השני מעצב מחדש את ההתפלגות בין הטוקנים ששרדו. כשהטמפרטורה גבוהה, זה משטח את ההתפלגות — מה שעוזר למזלגות לשמור על גיוון. כשהטמפרטורה נמוכה, זה מחדד — מה שעוזר למנעולים.</p>
+
+<p><strong>3. התאמה למודל הבסיס (Alignment):</strong> המרכיב השלישי שומר על קרבה למודל המקורי, מונע סטייה קיצונית. זה מה שמבטיח שהמודל לא "ישכח" את מה שהוא כבר יודע.</p>
+
+<p>שלושת המרכיבים עובדים יחד: המודל לומד לנקות זנבות (דיוק) תוך שמירה על ראש מגוון (חקירה), מבלי להתרחק יותר מדי מהידע המקורי. זה הסוד.</p>
+
+<h2>ניסוי הלחץ: גם עם שטויות, זה עובד</h2>
+
+<p>אחד הניסויים המפתיעים ביותר במאמר הוא מבחן הקצה (stress test). החוקרים הרימו את טמפרטורת האימון ל-2.0 <strong>ללא שום חיתוך</strong>, מה שיצר נתוני אימון שהם ברובם חסרי ערך כתוכנות:</p>
+
+<ul>
+<li><span class="highlight-stat">~62% מהפלט לא הכיל קוד שניתן לחלץ כלל</span></li>
+<li>גם הפלט ה"קוהרנטי" התדרדר לג'יבריש רב-לשוני באמצע הרצף</li>
+<li>לפי כל סטנדרט רגיל, הנתונים הם חסרי ערך לאימון</li>
+</ul>
+
+<p>ובכל זאת: המודל שאומן על השטויות האלה <strong>השתפר</strong>. pass@1 עלה ל-48.1% (שיפור של 5.7 נקודות), ו-pass@5 זינק ל-64.0% (שיפור של 10.5 נקודות). בבעיות קשות, השיפור היה אפילו דרמטי יותר.</p>
+
+<blockquote>
+"הניסוי הזה מדגים שדחיסת התמיכה ועיצוב מחדש של ההתפלגות שואבים אותות שימושיים בנוגע לאיכות הטוקנים — כלומר שנכונות התוכנית אולי לא מה שמניע את השיפורים."
+</blockquote>
+
+<p>זו תובנה עמוקה: SSD לא לומדת מתשובות נכונות. היא לומדת מהמבנה הסטטיסטי של הפלט — אילו טוקנים מופיעים בראש ההתפלגות ואילו בזנב. המודל כבר "יודע" מה חשוב ומה לא; SSD פשוט מחזקת את הידע הזה.</p>
+
+<!-- Chart 4: Temperature Sweep -->
+<div class="chart-container">
+<div class="chart-title">כוונון טמפרטורה לעומת SSD — Qwen3-30B-Instruct</div>
+<svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg" style="direction:ltr">
+  <defs>
+    <linearGradient id="sweepGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d4845a" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#d4845a" stop-opacity="0.02"/>
+    </linearGradient>
+  </defs>
+  <!-- Grid -->
+  <line x1="80" y1="30" x2="80" y2="260" stroke="#e0e0e0" stroke-width="1"/>
+  <line x1="80" y1="260" x2="650" y2="260" stroke="#e0e0e0" stroke-width="1"/>
+  <line x1="80" y1="214" x2="650" y2="214" stroke="#f0f0f0" stroke-width="1" stroke-dasharray="4"/>
+  <line x1="80" y1="168" x2="650" y2="168" stroke="#f0f0f0" stroke-width="1" stroke-dasharray="4"/>
+  <line x1="80" y1="122" x2="650" y2="122" stroke="#f0f0f0" stroke-width="1" stroke-dasharray="4"/>
+  <line x1="80" y1="76" x2="650" y2="76" stroke="#f0f0f0" stroke-width="1" stroke-dasharray="4"/>
+  <!-- Y-axis -->
+  <text x="70" y="264" text-anchor="end" font-size="12" fill="#888">30%</text>
+  <text x="70" y="218" text-anchor="end" font-size="12" fill="#888">40%</text>
+  <text x="70" y="172" text-anchor="end" font-size="12" fill="#888">50%</text>
+  <text x="70" y="126" text-anchor="end" font-size="12" fill="#888">60%</text>
+  <!-- X-axis -->
+  <text x="120" y="280" text-anchor="middle" font-size="11" fill="#888">0.6</text>
+  <text x="225" y="280" text-anchor="middle" font-size="11" fill="#888">0.8</text>
+  <text x="330" y="280" text-anchor="middle" font-size="11" fill="#888">1.0</text>
+  <text x="435" y="280" text-anchor="middle" font-size="11" fill="#888">1.2</text>
+  <text x="540" y="280" text-anchor="middle" font-size="11" fill="#888">1.4</text>
+  <text x="360" y="300" text-anchor="middle" font-size="12" fill="#555">טמפרטורת הסקה (T_eval)</text>
+  
+  <!-- Base model sweep - flat line around 42-43.5% -->
+  <path d="M120,200 C180,198 225,195 280,194 C340,193 380,195 435,197 C490,200 530,206 580,215" fill="none" stroke="#d4845a" stroke-width="3" stroke-dasharray="6,4"/>
+  <path d="M120,200 C180,198 225,195 280,194 C340,193 380,195 435,197 C490,200 530,206 580,215 L580,260 L120,260 Z" fill="url(#sweepGrad)"/>
+  
+  <!-- SSD line - much higher -->
+  <line x1="80" y1="149" x2="650" y2="149" stroke="#2d8e80" stroke-width="3"/>
+  
+  <!-- Gap annotation -->
+  <line x1="330" y1="149" x2="330" y2="194" stroke="#cc0000" stroke-width="1.5" stroke-dasharray="3"/>
+  <text x="345" y="175" font-size="12" fill="#cc0000" font-weight="600">+11.8pp</text>
+  
+  <!-- Labels -->
+  <text x="590" y="220" font-size="12" fill="#d4845a" font-weight="600">מודל בסיס (sweep)</text>
+  <text x="590" y="145" font-size="12" fill="#2d8e80" font-weight="600">SSD: 55.3%</text>
+  
+  <!-- Base model range annotation -->
+  <text x="280" y="180" font-size="11" fill="#d4845a">~42-43.5% (טווח 2.2pp בלבד)</text>
+  
+  <!-- Points on base sweep -->
+  <circle cx="120" cy="200" r="4" fill="#d4845a"/>
+  <circle cx="225" cy="195" r="4" fill="#d4845a"/>
+  <circle cx="330" cy="194" r="4" fill="#d4845a"/>
+  <circle cx="435" cy="197" r="4" fill="#d4845a"/>
+  <circle cx="540" cy="208" r="4" fill="#d4845a"/>
+</svg>
+</div>
+
+<h2>מה זה אומר: יכולת חבויה במודלים קיימים</h2>
+
+<p>המסקנה הרחבה של המחקר היא תובנה עמוקה על מודלי שפה בכלל: <strong>מודלי קוד חזקים מכילים יכולת חבויה שלא ממומשת תחת דקודינג קבוע.</strong></p>
+
+<p>כשמודל מייצר קוד, הוא לא באמת "מנסה את הכי טוב שלו" — הוא כבול למדיניות דקודינג אחידה שמתפשרת בין דיוק לחקירה בכל מיקום. SSD מפתחת את היכולות האלה על ידי שינוי ההתפלגויות הפנימיות כך שפשרה פחות חריפה נדרשת.</p>
+
+<p>תחשבו על זה ככה: המודל הוא כמו שחמטאי שמשחק עם שעון דיגיטלי שנותן לו בדיוק את אותו זמן לכל מהלך — 10 שניות, גם לפתיחה וגם לסוף-משחק. SSD היא כמו לתת לו שעון "פישר" — יותר זמן למהלכים מורכבים, פחות זמן למהלכים ברורים. אותו שחמטאי, אותו ידע, תוצאות טובות בהרבה.</p>
+
+<h3>ההשוואה לשיטות אחרות</h3>
+
+<p>SSD עומדת בניגוד חד לפרדיגמות האימון המקובלות בתעשייה:</p>
+
+<ul>
+<li><strong>למידת חיזוק (RL) עם תגמול מאומת:</strong> דורשת סביבת הרצה, בדיקות אוטומטיות, ופונקציית תגמול. מורכבת תפעולית ולא יציבה. DeepSeek-R1, OpenAI o1 — כולם משתמשים בגישות כאלה.</li>
+<li><strong>זיקוק ממורה (Teacher Distillation):</strong> דורשת מודל חזק יותר כ"מורה". מוגבלת בתקרה של המורה. יקרה.</li>
+<li><strong>Self-Play / STaR:</strong> מדגמת מהמודל ומסננת לפי נכונות — עדיין דורשת מאמת.</li>
+<li><strong>SSD:</strong> רק שאלות + מודל. אפס תשתית נוספת.</li>
+</ul>
+
+<!-- Chart 5: Training Paradigm Comparison -->
+<div class="chart-container">
+<div class="chart-title">השוואת פרדיגמות אימון — מה כל שיטה דורשת</div>
+<svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg" style="direction:ltr">
+  <!-- Headers -->
+  <text x="110" y="30" text-anchor="middle" font-size="13" fill="#333" font-weight="600">שיטה</text>
+  <text x="260" y="30" text-anchor="middle" font-size="12" fill="#555">מורה</text>
+  <text x="340" y="30" text-anchor="middle" font-size="12" fill="#555">מאמת</text>
+  <text x="420" y="30" text-anchor="middle" font-size="12" fill="#555">RL</text>
+  <text x="500" y="30" text-anchor="middle" font-size="12" fill="#555">סביבת</text>
+  <text x="500" y="44" text-anchor="middle" font-size="12" fill="#555">הרצה</text>
+  <text x="590" y="30" text-anchor="middle" font-size="12" fill="#555">נתונים</text>
+  <text x="590" y="44" text-anchor="middle" font-size="12" fill="#555">מתויגים</text>
+  <text x="670" y="30" text-anchor="middle" font-size="12" fill="#555">מורכבות</text>
+  
+  <line x1="30" y1="55" x2="710" y2="55" stroke="#e0e0e0" stroke-width="1"/>
+  
+  <!-- Row 1: Teacher Distillation -->
+  <rect x="20" y="62" width="690" height="45" rx="4" fill="#fff5f5"/>
+  <text x="110" y="88" text-anchor="middle" font-size="12" fill="#333" font-weight="600">Teacher Distillation</text>
+  <text x="260" y="88" text-anchor="middle" font-size="16" fill="#cc0000">✗</text>
+  <text x="340" y="88" text-anchor="middle" font-size="16" fill="#7cb342">—</text>
+  <text x="420" y="88" text-anchor="middle" font-size="16" fill="#7cb342">—</text>
+  <text x="500" y="88" text-anchor="middle" font-size="16" fill="#7cb342">—</text>
+  <text x="590" y="88" text-anchor="middle" font-size="16" fill="#cc0000">✗</text>
+  <text x="670" y="88" text-anchor="middle" font-size="12" fill="#e87a5f">בינונית</text>
+  
+  <!-- Row 2: RL with Verifiable Reward -->
+  <rect x="20" y="112" width="690" height="45" rx="4" fill="#fff5f5"/>
+  <text x="110" y="138" text-anchor="middle" font-size="12" fill="#333" font-weight="600">RL + Verified Reward</text>
+  <text x="260" y="138" text-anchor="middle" font-size="16" fill="#7cb342">—</text>
+  <text x="340" y="138" text-anchor="middle" font-size="16" fill="#cc0000">✗</text>
+  <text x="420" y="138" text-anchor="middle" font-size="16" fill="#cc0000">✗</text>
+  <text x="500" y="138" text-anchor="middle" font-size="16" fill="#cc0000">✗</text>
+  <text x="590" y="138" text-anchor="middle" font-size="16" fill="#cc0000">✗</text>
+  <text x="670" y="138" text-anchor="middle" font-size="12" fill="#cc0000">גבוהה</text>
+  
+  <!-- Row 3: STaR / Self-Play -->
+  <rect x="20" y="162" width="690" height="45" rx="4" fill="#fffbf0"/>
+  <text x="110" y="188" text-anchor="middle" font-size="12" fill="#333" font-weight="600">STaR / Self-Play</text>
+  <text x="260" y="188" text-anchor="middle" font-size="16" fill="#7cb342">—</text>
+  <text x="340" y="188" text-anchor="middle" font-size="16" fill="#cc0000">✗</text>
+  <text x="420" y="188" text-anchor="middle" font-size="16" fill="#7cb342">—</text>
+  <text x="500" y="188" text-anchor="middle" font-size="16" fill="#cc0000">✗</text>
+  <text x="590" y="188" text-anchor="middle" font-size="16" fill="#cc0000">✗</text>
+  <text x="670" y="188" text-anchor="middle" font-size="12" fill="#e87a5f">בינונית</text>
+  
+  <!-- Row 4: Unsupervised RLVR -->
+  <rect x="20" y="212" width="690" height="45" rx="4" fill="#fffbf0"/>
+  <text x="110" y="238" text-anchor="middle" font-size="12" fill="#333" font-weight="600">Unsupervised RLVR</text>
+  <text x="260" y="238" text-anchor="middle" font-size="16" fill="#7cb342">—</text>
+  <text x="340" y="238" text-anchor="middle" font-size="16" fill="#7cb342">—</text>
+  <text x="420" y="238" text-anchor="middle" font-size="16" fill="#cc0000">✗</text>
+  <text x="500" y="238" text-anchor="middle" font-size="16" fill="#7cb342">—</text>
+  <text x="590" y="238" text-anchor="middle" font-size="16" fill="#7cb342">—</text>
+  <text x="670" y="238" text-anchor="middle" font-size="12" fill="#e87a5f">בינונית</text>
+  
+  <!-- Row 5: SSD (highlighted) -->
+  <rect x="20" y="262" width="690" height="50" rx="4" fill="#e8f5e9" stroke="#2d8e80" stroke-width="2"/>
+  <text x="110" y="291" text-anchor="middle" font-size="14" fill="#2d8e80" font-weight="600">SSD ✨</text>
+  <text x="260" y="291" text-anchor="middle" font-size="16" fill="#7cb342">✓</text>
+  <text x="340" y="291" text-anchor="middle" font-size="16" fill="#7cb342">✓</text>
+  <text x="420" y="291" text-anchor="middle" font-size="16" fill="#7cb342">✓</text>
+  <text x="500" y="291" text-anchor="middle" font-size="16" fill="#7cb342">✓</text>
+  <text x="590" y="291" text-anchor="middle" font-size="16" fill="#7cb342">✓</text>
+  <text x="670" y="291" text-anchor="middle" font-size="12" fill="#2d8e80" font-weight="600">נמוכה</text>
+  
+  <!-- Legend -->
+  <text x="260" y="340" text-anchor="middle" font-size="11" fill="#cc0000">✗ = נדרש</text>
+  <text x="360" y="340" text-anchor="middle" font-size="11" fill="#7cb342">✓ = לא נדרש</text>
+  <text x="470" y="340" text-anchor="middle" font-size="11" fill="#888">— = לא רלוונטי</text>
+  <text x="360" y="365" text-anchor="middle" font-size="12" fill="#555" font-style="italic">SSD דורשת רק סט שאלות + את המודל עצמו. אפס תשתית נוספת.</text>
+</svg>
+</div>
+
+<h2>הגדרות ההיפר-פרמטרים: לא טריוויאלי, אבל ניתן להבנה</h2>
+
+<p>למרות הפשטות הכללית, יש כמה הגדרות שחשוב לכוונן. החוקרים מגלים שטמפרטורת האימון (T<sub>train</sub>) וטמפרטורת ההסקה (T<sub>eval</sub>) עובדות יחד כמכפלה — מה שהם מכנים "טמפרטורה אפקטיבית":</p>
+
+<p><strong>T<sub>eff</sub> = T<sub>train</sub> × T<sub>eval</sub></strong></p>
+
+<p>ללא חיתוך, T<sub>eff</sub> מסביר 75% מהשונות בביצועים (R²=0.75), עם שיא סביב T<sub>eff</sub> ≈ 1.2. עם חיתוך, תקרת הביצועים עולה עוד: ההגדרה הטובה ביותר שנמצאה (T<sub>train</sub>=2.0, T<sub>eval</sub>=1.1, top-k=10) הגיעה ל-49.7% pass@1.</p>
+
+<p>אינטואיטיבית: T<sub>train</sub> גבוהה = המודל מעצב מחדש את ההתפלגויות בצורה אגרסיבית יותר. T<sub>eval</sub> גבוהה = המודל מנצל את המרחב שנוצר לחקירה. שילוב של שתיהן הוא מה שנותן את התוצאות הטובות ביותר.</p>
+
+<h2>מגבלות ושאלות פתוחות</h2>
+
+<p>למרות ההתלהבות, חשוב לציין מגבלות של המחקר:</p>
+
+<p><strong>תחום ספציפי:</strong> SSD נבדקה בעיקר על יצירת קוד תחרותי. למרות שהחוקרים מראים שהיא לא פוגעת בביצועים בתחומים אחרים (מתמטיקה, הבנת קוד), עדיין לא ברור אם התובנה על מנעולים ומזלגות מתרגמת לתחומים אחרים כמו כתיבה יצירתית, סיכום, או תרגום.</p>
+
+<p><strong>משלימה, לא מחליפה:</strong> SSD מוצגת כ"כיוון פוסט-אימון משלים" — היא לא מחליפה RL או זיקוק ממורה, אלא יכולה לרוץ <strong>בנוסף</strong> אליהם. איך היא משתלבת עם שיטות אחרות בצורה אופטימלית — זו שאלה פתוחה.</p>
+
+<p><strong>סקייל:</strong> ניסויים נערכו עד 30B פרמטרים. איך SSD מתנהגת על מודלים ענקיים (400B+)? האם היתרון גדל, קטן, או נשאר יציב?</p>
+
+<p><strong>קריסה לאורך זמן:</strong> המחקר לא בודק איטרציות חוזרות — מה קורה אם מפעילים SSD שוב ושוב? שיטות אחרות של self-improvement נוטות להתמוטט אחרי כמה סבבים. האם SSD שונה?</p>
+
+<h2>השלכות על תעשיית ה-AI הישראלית</h2>
+
+<p>למחקר הזה יש השלכות מיידיות ומשמעותיות על האקוסיסטם הישראלי:</p>
+
+<h3>הנגשת שיפור מודלים</h3>
+
+<p>סטארטאפים ישראליים רבים משתמשים במודלים בקוד-פתוח (Qwen, Llama) כבסיס למוצרים שלהם. עד עכשיו, שיפור מודלים דרש תשתית כבדה — מאמתים, RL, או גישה למודל מורה יקר. SSD מוריד את רף הכניסה דרמטית: כל מי שיש לו גישה ל-8 GPUs וסט שאלות יכול לשפר את המודל שלו.</p>
+
+<p>חברות כמו AI21, שבונות מודלים ייעודיים לעברית ולשפות נוספות, יכולות לנצל SSD כשכבה נוספת בתהליך האימון — במיוחד לקוד. סטארטאפים של DevTools ו-Coding Assistants (כמו Tabnine) יכולים ליישם את זה <strong>מחר בבוקר</strong>.</p>
+
+<h3>יתרון לחברות עם נתוני שאלות</h3>
+
+<p>SSD דורשת רק שאלות (prompts), לא תשובות. חברות שאוספות אינטראקציות של מפתחים — כמו חברות של coding assistants, פלטפורמות לימוד, או כלי DevOps — יושבות על מכרה זהב. הנתונים שלהן הופכים לחומר הגלם לשיפור מודלים, בלי ההשקעה העצומה של תיוג ידני.</p>
+
+<h3>מחקר אקדמי</h3>
+
+<p>הטכניון, WeizmannAI, HUJI ושאר מוסדות המחקר הישראליים יכולים לבנות על התובנה של "יכולת חבויה" בכיוונים חדשים. מה עוד מסתתר בתוך מודלים קיימים שלא מנוצל? האם אפשר להפעיל את אותו עיקרון על תרגום, על NLU, על מודלים מולטי-מודליים? הקרקע פורה למחקר.</p>
+
+<h3>תחרות עם ענקיות</h3>
+
+<p>SSD מהווה נשק אסימטרי: שיטה שדורשת מעט משאבים אבל נותנת שיפור משמעותי. בדיוק מה שצוותים קטנים צריכים כדי להתחרות עם ענקיות שיש להן תקציבי מחשוב אינסופיים. במובן מסוים, Apple הוכיחה שלא צריך לזרוק כסף על בעיות — צריך להבין אותן לעומק.</p>
+
+<h2>המבט קדימה: היכולת הלא-ממומשת</h2>
+
+<p>אם יש מסר אחד שצריך לקחת מהמחקר הזה, הוא זה: <strong>המודלים שלנו כבר יודעים יותר ממה שהם מראים לנו.</strong></p>
+
+<p>כל פעם שמודל שפה מייצר טקסט, הוא עובר תהליך דגימה שמתפשר בין אילוצים סותרים. SSD מראה שאפשר לשחרר חלק מהיכולת הזו — בשיטה פשוטה להחריד, בלי שום תשתית מיוחדת.</p>
+
+<p>השאלה שנשארת פתוחה היא: כמה עוד יכולת חבויה יש שם? ואם SSD מצליחה כל כך טוב בלי שום אות חיצוני — מה יקרה כשנשלב אותה <strong>עם</strong> אותות כמו RL או מאמתים?</p>
+
+<p>ייתכן שאנחנו נמצאים בתחילתה של פרדיגמה חדשה: במקום לאמן מודלים גדולים יותר, לפתח מודלים שמנצלים טוב יותר את מה שהם כבר יודעים. וזה, בהגדרה, יותר יעיל, יותר זול, ויותר נגיש.</p>
+
+<blockquote>
+"באופן רחב יותר, תוצאות אלה מרמזות שמודלי קוד חזקים מכילים יכולת חבויה שניתן לפתוח ללא מאמת, ללא מורה, וללא למידת חיזוק."
+</blockquote>
+
+<p>עבור Apple, שבדרך כלל שומרת את המחקר שלה קרוב לחזה, הפרסום הזה הוא איתות מעניין. הוא מראה שהחברה לא רק בונה מודלים — היא חושבת לעומק על מנגנונים בסיסיים של למידה. ואם הם מוצאים דרכים לשפר מודלים בשבריר מהעלות, אפשר רק לדמיין מה הם עושים עם זה בתוך הכותלים של קופרטינו.</p>
+
+<p>המאמר הזה הוא תזכורת שלפעמים הרעיונות הפשוטים ביותר הם הכי עוצמתיים. לא צריך ארכיטקטורה חדשה, לא צריך פריצת דרך תאורטית, לא צריך תקציב ענק. צריך להבין מה כבר נמצא שם — ולתת למודל להראות לנו.</p>
+
+<div class="sources">
+<h3>מקורות</h3>
+<ul>
+<li><a href="https://arxiv.org/abs/2604.01193">Zhang et al. (2026) — Embarrassingly Simple Self-Distillation Improves Code Generation, arXiv:2604.01193</a></li>
+<li><a href="https://arxiv.org/html/2604.01193v1">גרסת HTML מלאה של המאמר</a></li>
+<li><a href="https://livecodebench.github.io/">LiveCodeBench — בנצ'מרק ליצירת קוד</a></li>
+<li><a href="https://github.com/QwenLM/Qwen3">Qwen3 — סדרת מודלים בקוד-פתוח</a></li>
+<li><a href="https://github.com/NVIDIA/Megatron-LM">Megatron-LM — מסגרת אימון של NVIDIA</a></li>
+</ul>
+</div>
+
+</body>
+</html>
