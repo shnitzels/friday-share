@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LangAlpha: מה אם Claude Code היה בנוי לוול סטריט?</title>
+<meta property="og:title" content="LangAlpha: מה אם Claude Code היה בנוי לוול סטריט?">
+<meta property="og:description" content="פרויקט קוד פתוח שמביא את הלוגיקה של סוכני AI להשקעות — מחקר מתמשך, ניתוח נתוני שוק, ו-Programmatic Tool Calling שמהפך את כל מה שמוגבל ב-AI פיננסי">
+<meta name="twitter:card" content="summary_large_image">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans Hebrew', sans-serif; background: #fff; color: #1a1a1a; line-height: 1.85; }
+  .container { max-width: 720px; margin: 0 auto; padding: 28px 20px 80px; }
+  .intro-box { background: #f0f4ff; border-right: 4px solid #4a6cf7; padding: 16px 20px; border-radius: 8px; margin-bottom: 36px; font-size: 15px; color: #444; }
+  h1 { font-size: 34px; font-weight: 600; margin-bottom: 10px; line-height: 1.3; }
+  .subtitle { font-size: 20px; color: #555; margin-bottom: 10px; }
+  .meta { font-size: 14px; color: #999; margin-bottom: 32px; }
+  h2 { font-size: 26px; font-weight: 600; margin: 40px 0 16px; color: #1a1a1a; border-bottom: 2px solid #f0f4ff; padding-bottom: 8px; }
+  h3 { font-size: 20px; font-weight: 600; margin: 28px 0 12px; color: #2a2a2a; }
+  p { font-size: 18px; margin-bottom: 18px; text-align: right; }
+  blockquote { border-right: 4px solid #4a6cf7; padding: 14px 22px; margin: 24px 0; background: #f8f9ff; font-style: italic; color: #444; font-size: 18px; border-radius: 0 8px 8px 0; }
+  .highlight-box { background: #f0fff4; border: 1px solid #48bb78; border-radius: 8px; padding: 16px 20px; margin: 24px 0; }
+  .highlight-box p { margin-bottom: 8px; }
+  .highlight-box p:last-child { margin-bottom: 0; }
+  .warn-box { background: #fffbf0; border: 1px solid #ffd700; border-radius: 8px; padding: 16px 20px; margin: 24px 0; }
+  code { background: #f0f4ff; padding: 2px 8px; border-radius: 4px; font-family: monospace; font-size: 15px; }
+  .source { margin-top: 48px; padding-top: 20px; border-top: 1px solid #eee; font-size: 14px; color: #888; }
+  .source a { color: #4a6cf7; text-decoration: none; }
+  .back-link { display: inline-block; margin-bottom: 24px; color: #4a6cf7; text-decoration: none; font-size: 15px; }
+  .toc { background: #f8f9ff; border-radius: 8px; padding: 20px 24px; margin: 28px 0; }
+  .toc h3 { margin-top: 0; font-size: 17px; color: #4a6cf7; margin-bottom: 12px; }
+  .toc ol { padding-right: 20px; }
+  .toc li { margin-bottom: 6px; font-size: 15px; color: #555; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<a href="/friday-share/" class="back-link">← חזרה לכל המאמרים</a>
+
+<div class="intro-box">💻 ניתוח מעמיק של פרויקט קוד פתוח — LangAlpha מ-ginlix-ai. 105 נקודות ב-Hacker News, שיוצר ב-Gemini 3 Hackathon. תרגום וניתוח לעברית.</div>
+
+<h1>LangAlpha: מה אם Claude Code היה בנוי לוול סטריט?</h1>
+<p class="subtitle">סוכן השקעות AI עם זיכרון מתמשך, ניתוח נתונים בזמן אמת, ו-Programmatic Tool Calling שפותר את הבעיה שאף כלי AI פיננסי לא פתר</p>
+<p class="meta">קוד פתוח · GitHub: ginlix-ai/langalpha · הוצג ב-Hacker News (105+ נקודות)</p>
+
+<div class="toc">
+  <h3>📋 תוכן עניינים</h3>
+  <ol>
+    <li>מה זה LangAlpha ולמה זה שונה</li>
+    <li>הבעיה הגדולה שאף AI פיננסי לא פתר: MCP Tools וגודל ה-Context</li>
+    <li>Programmatic Tool Calling (PTC) — הפתרון שמשנה הכל</li>
+    <li>Workspaces מתמשכים — השקעה היא Bayesian, לא One-Shot</li>
+    <li>Agent Swarm — מחקר מקביל בזמן אמת</li>
+    <li>Skills — Workflows מוכנים לחקר פיננסי</li>
+    <li>ממשק המשתמש: דשבורד + TradingView + WebSocket</li>
+    <li>אוטומציות ו-Price Triggers</li>
+    <li>אבטחה: הצפנה, Sandbox, ו-Credential Detection</li>
+    <li>האדריכלות הטכנית</li>
+    <li>BYOK — הביאו את המודל שלכם</li>
+    <li>אנחנו בנינו את זה כי לא מצאנו אותו</li>
+  </ol>
+</div>
+
+<h2>1. מה זה LangAlpha ולמה זה שונה</h2>
+
+<p>כלי AI פיננסיים זה לא חדש. Bloomberg GPT, FinGPT, Kensho — כולם ניסו לחבר בין AI לשוק ההון. הבעיה? הם מטפלים בהשקעה כמשימה חד-פעמית: שאל שאלה, קבל תשובה, גמור.</p>
+
+<p>אבל השקעות אמיתיות הן Bayesian. אתה לא מתחיל בידיעה מלאה — אתה מתחיל בתזה, מעדכן אותה כשנתונים חדשים מגיעים, מחדד פוזיציות, ובונה הבנה עמוקה שמצטברת לאורך שבועות וחודשים.</p>
+
+<blockquote>"כל כלי AI פיננסי היום מטפל בהשקעה כ-One-Shot: שאל שאלה, קבל תשובה, המשך. אבל השקעה אמיתית היא Bayesian — אתה מתחיל בתזה, נתונים חדשים מגיעים מדי יום, ואתה מעדכן את האמון שלך בהתאם."</blockquote>
+
+<p>ה-Insight של LangAlpha: אם Claude Code הצליח כסוכן תכנות בגלל שהוא מבין Codebase כשלמות — אותו עיקרון חל על מחקר פיננסי. תן לסוכן Workspace מתמשך, וה-Research מצטבר ומשתפר לאורך זמן.</p>
+
+<h2>2. הבעיה הגדולה שאף AI פיננסי לא פתר: MCP Tools וגודל ה-Context</h2>
+
+<p>אחת הבעיות הטכניות המרכזיות שהצוות נתקל בהן — וכתבו עליה בפוסט ה-Show HN שלהם:</p>
+
+<blockquote>"MCP tools לא ממש עובדים עבור נתונים פיננסיים בקנה מידה. קריאת Tool אחת עבור חמש שנים של מחירים יומיים שופכת עשרות אלפי Tokens לתוך חלון ה-Context. וספקי נתונים ארוזים בעשרות כלים ב-MCP Server אחד — ה-Schemas בלבד יכולים לאכול 50,000+ Tokens לפני שהסוכן עשה בכלל משהו שימושי."</blockquote>
+
+<p>הגדלה: ספק נתונים פיננסי כמו Polygon.io מספק אלפי Endpoints שונים — מחירי מניות, נתוני אופציות, נתוני Macro, רווחים רבעוניים, תיקי SEC EDGAR, ועוד. אם מנסים להכניס את כל ה-Schema הזה ל-Context של המודל — לא נשאר מקום לחשיבה בפועל.</p>
+
+<h2>3. Programmatic Tool Calling (PTC) — הפתרון שמשנה הכל</h2>
+
+<p>זהו החידוש הטכנולוגי המרכזי של LangAlpha. במקום שהסוכן יקרא לכלים ישירות ויקבל JSON שנשפך ל-Context — הסוכן <strong>כותב קוד Python</strong> שרץ ב-Sandbox מבודד ומחזיר רק את התוצאה הסופית.</p>
+
+<div class="highlight-box">
+<p>📌 <strong>איך זה עובד:</strong></p>
+<p>1. המודל כותב קוד Python</p>
+<p>2. הקוד נשלח ל-Sandbox של Daytona (ענן מבודד)</p>
+<p>3. בתוך ה-Sandbox, הקוד מייבא מודולים שנוצרו אוטומטית מה-MCP Schemas</p>
+<p>4. המודולים מתקשרים עם שרתי ה-MCP ב-JSON-RPC</p>
+<p>5. שרתי ה-MCP פונים לשירותי ה-API (FMP, Yahoo, Polygon)</p>
+<p>6. הנתונים מעובדים, ותוצאה קומפקטית חוזרת למודל</p>
+</div>
+
+<p>התוצאה: ל-LangAlpha יש ~80 כלים פרוסים על פני מספר שרתי MCP — והעלות ב-Prompt היא זהה לשרת עם 3 כלים ולשרת עם 30. רק שורת תקציר אחת לכל שרת נכנסת ל-Context. הפרטים מגיעים רק כשצריך.</p>
+
+<p>מה זה מאפשר:</p>
+<p>• בנייה של DCF Model מלא (Discounted Cash Flow) לחברה ספציפית עם נתוני 5 שנים ויזואליזציה מובנית</p>
+<p>• ניתוח Earnings על מחזור של כמה שנים בחציה אחת של Context</p>
+<p>• עיבוד תיקי SEC EDGAR בסכאל תעשייתי</p>
+<p>• בניית גרפים אינטראקטיביים שמוצגים ישירות ב-UI</p>
+
+<h2>4. Workspaces מתמשכים — השקעה היא Bayesian, לא One-Shot</h2>
+
+<p>בניגוד לצ'אטבוטים רגילים שמתחילים בשיחה חדשה בכל פעם, LangAlpha בנוי סביב <strong>Workspaces</strong>. כל Workspace ממופה ל-Sandbox מתמשך עם מבנה ספריות מסודר:</p>
+
+<div class="highlight-box">
+<p>📁 <code>work/&lt;task&gt;/</code> — שטחי עבודה לכל משימה (נתונים, גרפים, קוד)</p>
+<p>📁 <code>results/</code> — דוחות וניתוחים מגובשים</p>
+<p>📁 <code>data/</code> — מאגרי נתונים משותפים</p>
+<p>📄 <code>agent.md</code> — זיכרון המחקר המתמשך של הסוכן</p>
+</div>
+
+<p>ה-<code>agent.md</code> הוא הלב של המערכת. זהו קובץ שה-Middleware מזריק לכל קריאת LLM, המכיל:</p>
+<p>• מטרות ה-Workspace ושאלות פתוחות</p>
+<p>• ממצאים מרכזיים מניתוחים קודמים</p>
+<p>• אינדקס של Threads ושל קבצים חשובים</p>
+
+<p>בפועל: אתה יוצר Workspace לנושא מחקרי ("<em>Q2 Rebalance</em>", "<em>Data Center Demand Deep Dive</em>", "<em>Energy Sector Rotation</em>") — הסוכן מראיין אותך על המטרות ואסטרטגיית ההשקעה שלך, מייצר ניתוח ראשוני, ושומר הכל. שבוע אחר כך — פותחים Thread חדש, הסוכן מכיר את כל הקונטקסט וממשיך מאיפה שנעצר.</p>
+
+<h2>5. Agent Swarm — מחקר מקביל בזמן אמת</h2>
+
+<p>אחד הפיצ'רים המרשימים: כשמפעילים Skill מסוים (למשל "Morning Note" — דוח בוקר), הסוכן <strong>שולח סוכני-משנה מקביליים</strong> לאסוף:</p>
+<p>• נתוני שוק בזמן אמת</p>
+<p>• חדשות רלוונטיות</p>
+<p>• Context מאקרו כלכלי</p>
+
+<p>כל סוכן-משנה רץ עם Context Window מבודד, ערכת כלים מותאמת, ויכולת לקבל עדכונים בזמן ריצה ("Live Steering") — בלי לחכות לסיום הריצה. תוצאה: Morning Note מקיפה עם ויזואליזציות אינטראקטיביות מוטמעות.</p>
+
+<h2>6. Skills — Workflows מוכנים לחקר פיננסי</h2>
+
+<p>LangAlpha כולל Skills מובנים שמתעוררים ב-Slash Command או בזיהוי אוטומטי של ה-Intent:</p>
+
+<div class="highlight-box">
+<p>📊 <strong>DCF Analysis</strong> — בניית מודל תזרים מזומנים מהוון</p>
+<p>📰 <strong>Initiating Coverage</strong> — דוח כניסה ראשוני לכיסוי של מניה</p>
+<p>💰 <strong>Earnings Analysis</strong> — ניתוח דוח רבעוני</p>
+<p>🌅 <strong>Morning Note</strong> — דוח בוקר מסוכם עם ויזואליזציות</p>
+<p>📄 <strong>Document Generation</strong> — ייצור מסמכי מחקר מסודרים</p>
+</div>
+
+<p>הרעיון: Skills מגבילים ומכוונים את הסוכן לעבוד בתוך Workflow מוגדר, ומחשיפים לו רק את הכלים הרלוונטיים. כך מוקטנת הסנטרופיה של מחקר פתוח.</p>
+
+<h2>7. ממשק המשתמש: דשבורד + TradingView + WebSocket</h2>
+
+<p>ה-Web UI בנוי ב-React 19 + Vite + Tailwind, ומספק:</p>
+<p>• גרפים פיננסיים אינטראקטיביים מוטמעים (TradingView integration)</p>
+<p>• נתוני שוק בזמן אמת ב-WebSocket</p>
+<p>• צפייה בקבצים בפורמטים מרובים (PDF, CSV, JSON, תרשימים)</p>
+<p>• ניטור חי של סוכני-משנה בריצה</p>
+<p>• שיחות שניתן לשתף</p>
+<p>• TUI (Terminal UI) למי שמעדיף לעבוד ב-CLI</p>
+<p>• אינטגרציה ל-Slack ו-Discord</p>
+
+<h2>8. אוטומציות ו-Price Triggers</h2>
+
+<p>אחד הפיצ'רים המפתיעים: <strong>Price-Triggered Automations</strong>. ניתן להגדיר אוטומציות שמתפעלות כש-מניה או מדד מגיע למחיר ספציפי בזמן אמת. לדוגמה:</p>
+
+<p>• "כשמניית NVDA תגיע ל-$400 — הרץ ניתוח של High-Low breakdown לשנה האחרונה"</p>
+<p>• "כשה-VIX יעלה מעל 25 — הפק דוח סקירה של Sector Rotation"</p>
+
+<p>ה-Secretary (סוכן Flash מהיר) מנהל את יצירת ה-Workspace, שולח ניתוחים ברקע, ומחזיר תוצאות בצורה שיחתית.</p>
+
+<h2>9. אבטחה: הצפנה, Sandbox, ו-Credential Detection</h2>
+
+<div class="highlight-box">
+<p>🔐 <strong>הצפנה בסיסמת ה-PostgreSQL pgcrypto</strong> — כל API Keys מוצפנים ב-Rest</p>
+<p>🔍 <strong>Automatic Credential Leak Detection</strong> — אם הסוכן בטעות מנסה להדפיס API Key, המערכת מזהה ומסננת</p>
+<p>📦 <strong>Sandboxed Execution</strong> — כל הקוד שהסוכן כותב רץ ב-Daytona Cloud Sandbox מבודד</p>
+<p>🔑 <strong>Per-Workspace Secret Storage</strong> — כל Workspace יכול לשמור Secrets משלו</p>
+</div>
+
+<h2>10. האדריכלות הטכנית</h2>
+
+<p>ה-Stack מאחורי LangAlpha:</p>
+
+<div class="highlight-box">
+<p>🐍 <strong>Backend:</strong> FastAPI — API Routers, WebSocket Proxy, Background Task Manager</p>
+<p>🗃️ <strong>Database:</strong> PostgreSQL (Dual Pool) — App Data + LangGraph Checkpointer</p>
+<p>⚡ <strong>Caching:</strong> Redis — SSE Event Buffer (150K events + reconnect replay), Market Data Cache, Steering Queue</p>
+<p>☁️ <strong>Sandboxes:</strong> Daytona Cloud — בידוד ביצוע קוד</p>
+<p>📡 <strong>Market Data:</strong> FMP, SEC EDGAR, Yahoo Finance, Polygon.io</p>
+<p>⚙️ <strong>Middleware:</strong> 24 שכבות קומפוזיביות — Skill Loading, Plan Mode, Multimodal Input, Auto-Summarization, Context Management</p>
+</div>
+
+<p>ה-Middleware stack של 24 שכבות הוא שקט אבל קריטי. הוא מאפשר ל-Workflow לרוץ לאורך זמן ארוך בלי לאבד Context, בלי לנפוח את ה-Token Cost, ובלי לפספס עדכונים חיים מהמשתמש.</p>
+
+<h2>11. BYOK — הביאו את המודל שלכם</h2>
+
+<p>LangAlpha לא נועל אתכם על מודל ספציפי. הוא Agnostic לחלוטין:</p>
+
+<p>• Claude OAuth (Claude Code OAuth) — חברים כבר מנויים ל-Claude? חברו אותו ישירות</p>
+<p>• OpenAI OAuth (ChatGPT) — זהה</p>
+<p>• Kimi (Moonshot), GLM (Zhipu), MiniMax — מודלים סינים עם תוכניות Coding מוזלות</p>
+<p>• BYOK (Bring Your Own Key) — כל API Key שתרצו, מוצפן ב-Rest</p>
+
+<p>Resilience: 3 ניסיונות חוזרים עם Exponential Backoff, ואז Failover אוטומטי למודל גיבוי. רמות ה-Reasoning (Low/Medium/High) מנורמלות אוטומטית בין ספקים.</p>
+
+<h2>12. "בנינו את זה כי לא מצאנו אותו"</h2>
+
+<p>הפוסט המקורי ב-HN של המפתח (zc2610) כולל את הסיכום הטוב ביותר:</p>
+
+<blockquote>"רצינו שהסוכן יהיה לו Context פיננסי אמיתי כמו שיש ל-Claude Code Context של Codebase — Portfolio, Watchlist, Risk Tolerance, מקורות נתונים פיננסיים — שכולם מוזרקים לכל Call. לפלטפורמות AI Investing הקיימות יש חלק מזה, אבל שום דבר שקרוב למה שסוכן AI אמיתי יכול לעשות. רצינו את שניהם ולא מצאנו, אז בנינו וזה קוד פתוח."</blockquote>
+
+<p>זו נקודת הפתיחה הכי כנה: הם לקחו את הלוגיקה של Claude Code — Agent עם Context של Codebase, כלים מתמשכים, זיכרון Workspace — והחילו אותה על עולם ההשקעות. ה-Result הוא פרויקט עם אדריכלות מרשימה שגם מפתחים וגם משקיעים יכולים להרחיב.</p>
+
+<div class="source">
+  <strong>מקור:</strong> <a href="https://github.com/ginlix-ai/langalpha" target="_blank">GitHub — ginlix-ai/LangAlpha</a><br>
+  <a href="https://news.ycombinator.com/item?id=47766370" target="_blank">Show HN: LangAlpha – what if Claude Code was built for Wall Street?</a>
+</div>
+
+</div>
+</body>
+</html>
