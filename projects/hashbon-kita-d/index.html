@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>חשבון לכיתה ד׳ | משימת UG VR</title>
+  <meta name="description" content="משחק עברי mobile-first לתרגול חילוק ארוך ושברים לכיתה ד׳ באווירת UG VR." />
+  <meta property="og:title" content="חשבון לכיתה ד׳ | משימת UG VR" />
+  <meta property="og:description" content="תרגול חילוק ארוך ושברים בעברית, עם משימות, כוכבים ואווירת VR שילד בן 9 יאהב." />
+  <meta name="theme-color" content="#15104b" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;600;700;800;900&family=Rubik+Glitch&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0825; --panel:#17113d; --panel2:#21165a; --ink:#fff9e8; --muted:#cfc8ff;
+      --neon:#55f7ff; --pink:#ff5bd8; --lime:#98ff5e; --gold:#ffd86b; --bad:#ff6b6b;
+      --shadow: 0 18px 50px rgba(0,0,0,.35); --radius:28px;
+    }
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent} html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:'Noto Sans Hebrew',system-ui,sans-serif;overflow-x:hidden}
+    body:before{content:"";position:fixed;inset:0;background:radial-gradient(circle at 18% 6%,rgba(85,247,255,.32),transparent 28%),radial-gradient(circle at 80% 14%,rgba(255,91,216,.28),transparent 31%),linear-gradient(180deg,#15104b 0%,#0b0825 54%,#090617 100%);z-index:-3}
+    body:after{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(85,247,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(85,247,255,.07) 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(to bottom,transparent,black 14%,black 84%,transparent);z-index:-2;animation:grid 7s linear infinite}@keyframes grid{to{transform:translateY(34px)}}
+    .app{width:min(100%,520px);margin:0 auto;min-height:100dvh;padding:env(safe-area-inset-top) 16px calc(20px + env(safe-area-inset-bottom));position:relative}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 0 10px;position:sticky;top:0;z-index:8;background:linear-gradient(180deg,rgba(11,8,37,.95),rgba(11,8,37,.62),transparent);backdrop-filter:blur(10px)}
+    .brand{display:flex;align-items:center;gap:10px}.logo{width:48px;height:48px;border-radius:18px;background:linear-gradient(135deg,var(--neon),var(--pink));display:grid;place-items:center;font-weight:900;color:#08051d;box-shadow:0 0 22px rgba(85,247,255,.45);transform:rotate(-4deg)}
+    .brand h1{font-size:18px;line-height:1.05;margin:0}.brand small{display:block;color:var(--muted);font-weight:700;font-size:11px}.pill{border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.08);border-radius:999px;padding:8px 11px;color:var(--ink);font-weight:800;box-shadow:inset 0 0 0 1px rgba(85,247,255,.08)}
+    .screen{display:none;animation:pop .22s ease}.screen.active{display:block}@keyframes pop{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
+    .hero{padding:14px 0 18px}.card{background:linear-gradient(160deg,rgba(255,255,255,.12),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.14);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;position:relative}.card:before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent,rgba(85,247,255,.12),transparent);transform:translateX(85%);animation:sheen 4.8s infinite}@keyframes sheen{55%,100%{transform:translateX(-100%)}}
+    .heroCard{padding:22px;min-height:500px;display:flex;flex-direction:column;gap:16px}.glitch{font-family:'Rubik Glitch','Noto Sans Hebrew',sans-serif;letter-spacing:.5px;font-size:38px;line-height:.96;margin:6px 0 0;text-shadow:0 0 18px rgba(85,247,255,.65),0 4px #000;color:#fff}.hero p{font-size:16px;color:#eee7ff;line-height:1.5;margin:0}.heroArt{height:190px;border-radius:26px;background:radial-gradient(circle at 50% 25%,rgba(152,255,94,.34),transparent 22%),linear-gradient(180deg,#281878,#100a35);border:1px solid rgba(255,255,255,.15);display:grid;place-items:center;position:relative;overflow:hidden}.heroArt svg{width:94%;max-height:190px}.float{position:absolute;border-radius:999px;padding:7px 10px;background:rgba(0,0,0,.27);border:1px solid rgba(255,255,255,.18);font-weight:900;color:#fff}.f1{top:18px;right:18px}.f2{bottom:16px;left:16px}.f3{top:80px;left:24px;color:var(--lime)}
+    .btn{border:0;border-radius:22px;padding:15px 18px;font:900 17px 'Noto Sans Hebrew';color:#090617;background:linear-gradient(135deg,var(--gold),#ff9e45);box-shadow:0 12px 26px rgba(255,216,107,.28),inset 0 -4px 0 rgba(0,0,0,.18);cursor:pointer;transition:.12s;min-height:54px}.btn:active{transform:translateY(2px);box-shadow:0 7px 15px rgba(255,216,107,.22),inset 0 -2px 0 rgba(0,0,0,.2)}.btn.secondary{background:linear-gradient(135deg,#30236f,#1d1649);color:var(--ink);border:1px solid rgba(255,255,255,.16);box-shadow:none}.btn.neon{background:linear-gradient(135deg,var(--neon),#7a6cff);box-shadow:0 12px 30px rgba(85,247,255,.22),inset 0 -4px 0 rgba(0,0,0,.18)}.btn.bad{background:linear-gradient(135deg,#ff6b6b,#ff9f43)}.row{display:flex;gap:10px}.row>*{flex:1}.hintBox{background:rgba(0,0,0,.22);border:1px dashed rgba(255,255,255,.22);border-radius:20px;padding:12px;color:#ded8ff;font-weight:700;line-height:1.45}.missions{display:grid;gap:12px;padding:8px 0 22px}.mission{padding:16px;border-radius:24px;border:1px solid rgba(255,255,255,.14);background:linear-gradient(135deg,rgba(255,255,255,.1),rgba(255,255,255,.04));box-shadow:0 10px 22px rgba(0,0,0,.22);display:flex;align-items:center;gap:13px;text-align:right;color:inherit}.missionIcon{width:58px;height:58px;border-radius:21px;display:grid;place-items:center;font-size:27px;background:linear-gradient(135deg,var(--neon),var(--pink));box-shadow:0 0 18px rgba(85,247,255,.28);flex:0 0 auto}.mission h3{margin:0;font-size:18px}.mission p{margin:4px 0 0;color:var(--muted);font-size:13px;line-height:1.35}.mission .stars{margin-inline-start:auto;color:var(--gold);white-space:nowrap;font-weight:900}.hud{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;margin:8px 0 12px}.progress{height:14px;border-radius:999px;background:rgba(255,255,255,.1);overflow:hidden;border:1px solid rgba(255,255,255,.12)}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--lime),var(--neon),var(--pink));border-radius:999px;transition:.25s}.arena{padding:16px;min-height:calc(100dvh - 120px);display:flex;flex-direction:column;gap:14px}.questionTop{display:flex;align-items:center;justify-content:space-between;gap:10px}.badge{background:rgba(85,247,255,.12);border:1px solid rgba(85,247,255,.25);color:#dffcff;border-radius:999px;padding:7px 10px;font-weight:900;font-size:13px}.qtitle{font-size:22px;line-height:1.2;margin:0}.monster{height:110px;border-radius:24px;background:linear-gradient(180deg,rgba(0,0,0,.18),rgba(255,255,255,.05));border:1px solid rgba(255,255,255,.12);display:grid;place-items:center;position:relative;overflow:hidden}.monster svg{height:105px}.monster.win{animation:bounce .42s ease}@keyframes bounce{50%{transform:scale(1.03) rotate(1deg)}}
+    .problem{background:#fff8df;color:#211444;border-radius:24px;padding:18px;text-align:center;box-shadow:inset 0 -5px 0 rgba(0,0,0,.08);border:4px solid rgba(255,216,107,.55);min-height:130px;display:grid;place-items:center}.bigMath{font-size:38px;font-weight:900;direction:ltr}.caption{font-weight:800;color:#5d4f86;font-size:14px}.longdiv{direction:ltr;display:inline-grid;grid-template-columns:auto auto;align-items:start;font-weight:900;font-size:34px;color:#211444}.divisor{padding:9px 8px 0 0}.inside{border-top:5px solid #211444;border-left:5px solid #211444;padding:8px 10px 0 12px;min-width:96px;text-align:left}.fractionVisual{display:flex;gap:7px;justify-content:center;align-items:center;flex-wrap:wrap;direction:ltr}.slice{width:32px;height:46px;border:3px solid #211444;border-radius:8px;background:#fff}.slice.on{background:linear-gradient(180deg,var(--pink),#a069ff)}.options{display:grid;grid-template-columns:1fr;gap:10px}.option{padding:14px;border-radius:20px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:var(--ink);font:900 18px 'Noto Sans Hebrew';min-height:56px}.option.correct{background:rgba(152,255,94,.25);border-color:var(--lime)}.option.wrong{background:rgba(255,107,107,.22);border-color:var(--bad)}.answerPanel{display:grid;gap:10px}.inputLine{display:flex;gap:10px;direction:ltr}.answerInput{flex:1;border:0;border-radius:20px;background:#fff;color:#211444;font:900 30px system-ui;text-align:center;min-width:0;padding:10px}.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;direction:ltr}.key{min-height:54px;border-radius:18px;border:0;background:rgba(255,255,255,.12);color:#fff;font:900 22px system-ui}.key.special{font-size:16px;color:var(--gold)}.feedback{min-height:62px;border-radius:20px;padding:12px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.12);font-weight:900;line-height:1.35}.feedback.good{border-color:rgba(152,255,94,.55);color:#eaffdf}.feedback.bad{border-color:rgba(255,107,107,.55);color:#ffe1e1}.modal{position:fixed;inset:0;background:rgba(4,2,15,.72);backdrop-filter:blur(8px);display:none;place-items:end center;z-index:20;padding:16px}.modal.show{display:grid}.sheet{width:min(100%,520px);border-radius:32px 32px 24px 24px;background:linear-gradient(180deg,#21165a,#120d36);border:1px solid rgba(255,255,255,.16);box-shadow:var(--shadow);padding:22px;text-align:center}.sheet h2{font-size:30px;margin:0 0 8px}.sheet p{color:#e2dcff;line-height:1.45}.loot{font-size:48px;margin:8px}.tiny{font-size:12px;color:var(--muted);line-height:1.4}.parents{margin-top:12px;padding:12px;border-radius:20px;background:rgba(0,0,0,.18);color:#ded8ff;font-size:13px;line-height:1.45}
+    @media (min-width:430px){.heroCard{min-height:560px}.options{grid-template-columns:1fr 1fr}.glitch{font-size:46px}.monster{height:135px}.monster svg{height:130px}}
+    @media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div class="brand"><div class="logo">UG</div><div><h1>חשבון לכיתה ד׳</h1><small>VR Math Quest</small></div></div>
+    <div class="pill" id="coinPill">🪙 0</div>
+  </div>
+
+  <section id="home" class="screen active">
+    <div class="hero">
+      <div class="card heroCard">
+        <div class="badge">בהשראת Prodigy, SplashLearn, Khan Academy Kids ו-Duolingo: קצר, מתגמל, ועם משימות ברורות</div>
+        <h2 class="glitch">משימת<br>UG VR</h2>
+        <p>נכנסים לזירת VR עברית, מנצחים מפלצות חשבון, צוברים מטבעות ומשדרגים את הקסדה. תרגול מותאם לכיתה ד׳: חילוק ארוך, שארית, שברים שקולים, השוואת שברים וחיבור שברים עם מכנה זהה.</p>
+        <div class="heroArt" aria-hidden="true">
+          <span class="float f1">÷ 4</span><span class="float f2">3/8</span><span class="float f3">LEVEL UP</span>
+          <svg viewBox="0 0 420 220" role="img">
+            <defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="#55f7ff"/><stop offset="1" stop-color="#ff5bd8"/></linearGradient></defs>
+            <ellipse cx="205" cy="198" rx="150" ry="18" fill="rgba(85,247,255,.25)"/>
+            <path d="M84 152 C75 112 93 74 132 60 C153 33 205 30 231 58 C279 61 315 94 316 139 C317 187 280 204 221 198 C165 211 94 195 84 152Z" fill="#2cf0cf" stroke="#06142d" stroke-width="8"/>
+            <path d="M135 65 l-14 -37 l42 25 M247 62 l35 -27 l-6 43" fill="#ffd86b" stroke="#06142d" stroke-width="8" stroke-linejoin="round"/>
+            <rect x="125" y="81" width="158" height="67" rx="26" fill="url(#g)" stroke="#06142d" stroke-width="9"/>
+            <circle cx="173" cy="114" r="17" fill="#09102c"/><circle cx="235" cy="114" r="17" fill="#09102c"/>
+            <circle cx="178" cy="109" r="5" fill="#fff"/><circle cx="240" cy="109" r="5" fill="#fff"/>
+            <path d="M175 161 q30 20 62 0" fill="none" stroke="#06142d" stroke-width="8" stroke-linecap="round"/>
+            <path d="M88 142 q-45 9 -54 45 M317 138 q48 8 58 46" fill="none" stroke="#98ff5e" stroke-width="13" stroke-linecap="round"/>
+            <path d="M43 188 h42 M334 187 h44" stroke="#06142d" stroke-width="8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <button class="btn neon" onclick="go('missions')">יאללה, נכנסים לזירה</button>
+        <button class="btn secondary" onclick="quickStart()">אימון מהיר של 5 שאלות</button>
+        <div class="parents">להורים: אין הרשמה, אין שרת, הכל נשמר מקומית בדפדפן. השאלות נוצרות מחדש בכל משחק.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="missions" class="screen">
+    <div class="hintBox">בחרו משימה. כל משימה היא 5 שאלות קצרות. תשובה נכונה נותנת מטבעות וכוכבים, וטעות פותחת רמז במקום להעניש.</div>
+    <div class="missions" id="missionList"></div>
+    <button class="btn secondary" onclick="go('home')">חזרה</button>
+  </section>
+
+  <section id="play" class="screen">
+    <div class="hud"><div class="progress"><div class="bar" id="bar"></div></div><div class="pill" id="stepPill">1/5</div></div>
+    <div class="card arena">
+      <div class="questionTop"><span class="badge" id="modeBadge">משימה</span><span class="pill" id="streakPill">🔥 0</span></div>
+      <h2 class="qtitle" id="qtitle">שאלה</h2>
+      <div class="monster" id="monster"><svg viewBox="0 0 240 150"><ellipse cx="119" cy="132" rx="72" ry="10" fill="rgba(85,247,255,.3)"/><path d="M55 91c-7-40 18-70 60-72 46-2 74 26 71 70-3 40-32 50-70 47-39 6-55-12-61-45Z" fill="#8a62ff" stroke="#090617" stroke-width="7"/><rect x="69" y="45" width="97" height="43" rx="18" fill="#55f7ff" stroke="#090617" stroke-width="7"/><circle cx="99" cy="67" r="8" fill="#090617"/><circle cx="138" cy="67" r="8" fill="#090617"/><path d="M96 102q23 15 47 0" fill="none" stroke="#090617" stroke-width="7" stroke-linecap="round"/><path d="M65 31l-18-23 31 11M169 30l28-16-12 32" fill="#ffd86b" stroke="#090617" stroke-width="7" stroke-linejoin="round"/></svg></div>
+      <div class="problem" id="problem"></div>
+      <div id="answerArea"></div>
+      <div class="feedback" id="feedback">טיפ: אפשר לטעות. המשחק ייתן רמז וימשיך.</div>
+      <div class="row"><button class="btn secondary" onclick="showHint()">רמז</button><button class="btn bad" onclick="quitRun()">סיום</button></div>
+    </div>
+  </section>
+</div>
+
+<div class="modal" id="modal"><div class="sheet"><div class="loot" id="loot">🏆</div><h2 id="modalTitle">כל הכבוד!</h2><p id="modalText"></p><div class="row"><button class="btn secondary" onclick="go('missions');hideModal()">עוד משימות</button><button class="btn neon" onclick="restartRun();hideModal()">שחק שוב</button></div></div></div>
+
+<script>
+const missions=[
+ {id:'long-easy',icon:'🧮',title:'חילוק ארוך: כניסה לזירה',desc:'מספר דו/תלת ספרתי ÷ חד ספרתי, בלי שארית.',type:'division',difficulty:1},
+ {id:'remainders',icon:'🌀',title:'שער השאריות',desc:'חילוק ארוך עם שארית, בדיוק כמו במחברת.',type:'division',difficulty:2},
+ {id:'fractions',icon:'🍕',title:'מעבדת שברים',desc:'זיהוי שבר לפי ציור ושברים שקולים.',type:'fractions',difficulty:1},
+ {id:'compare',icon:'⚔️',title:'קרב השוואת שברים',desc:'מי גדול יותר? משתמשים בהיגיון ובציור.',type:'compare',difficulty:2},
+ {id:'mix',icon:'🚀',title:'בוס UG VR',desc:'מיקס של חילוק, שאריות ושברים. 5 שאלות.',type:'mix',difficulty:3}
+];
+let save=JSON.parse(localStorage.getItem('ugMathSave')||'{"coins":0,"stars":{},"best":0}');
+let run=null;
+const $=id=>document.getElementById(id);
+function persist(){localStorage.setItem('ugMathSave',JSON.stringify(save));$('coinPill').textContent='🪙 '+save.coins}
+function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));$(id).classList.add('active');if(id==='missions')renderMissions();persist()}
+function renderMissions(){ $('missionList').innerHTML=missions.map(m=>`<button class="mission" onclick="startMission('${m.id}')"><span class="missionIcon">${m.icon}</span><span><h3>${m.title}</h3><p>${m.desc}</p></span><span class="stars">${'★'.repeat(save.stars[m.id]||0)}${'☆'.repeat(3-(save.stars[m.id]||0))}</span></button>`).join('') }
+function quickStart(){startMission('mix')}
+function startMission(id){let m=missions.find(x=>x.id===id);run={mission:m,idx:0,total:5,score:0,streak:0,questions:Array.from({length:5},()=>makeQuestion(m))};go('play');renderQuestion()}
+function restartRun(){startMission(run?.mission?.id||'mix')}
+function quitRun(){finishRun(true)}
+function rand(a,b){return Math.floor(Math.random()*(b-a+1))+a}function pick(a){return a[rand(0,a.length-1)]}function gcd(a,b){while(b){[a,b]=[b,a%b]}return a}
+function makeQuestion(m){let type=m.type==='mix'?pick(['division','division','fractions','compare','addFrac']):m.type;if(type==='division')return makeDivision(m.difficulty);if(type==='fractions')return makeFraction();if(type==='compare')return makeCompare();return makeAddFrac()}
+function makeDivision(diff){let divisor=rand(2,9), q=rand(diff>1?18:12,diff>1?98:55), rem=diff>1?rand(0,divisor-1):0, dividend=divisor*q+rem;let ans=rem?`${q} שארית ${rem}`:''+q;return{kind:'input',topic:'חילוק ארוך',title:`פתרו: ${dividend} ÷ ${divisor}`,answer:ans,accept:[ans,`${q}שארית${rem}`,`${q} r ${rem}`,`${q}r${rem}`],hint:`כמה פעמים ${divisor} נכנס ב-${dividend}? ${divisor} × ${q} = ${divisor*q}${rem?`, ונשאר ${rem}`:''}.`,html:`<div class="longdiv"><div class="divisor">${divisor}</div><div class="inside">${dividend}</div></div><div class="caption">כתבו את המנה${rem?' והשארית':''}</div>`}}
+function makeFraction(){let den=pick([5,6,8,10,12]), num=rand(1,den-1), correct=`${num}/${den}`;let opts=new Set([correct]);while(opts.size<4){let n=rand(1,den-1);opts.add(`${n}/${den}`)}return{kind:'choice',topic:'שברים',title:'איזה שבר צבוע?',answer:correct,options:shuffle([...opts]),hint:`סופרים ${num} חלקים צבועים מתוך ${den} חלקים שווים.`,html:`<div class="fractionVisual">${Array.from({length:den},(_,i)=>`<span class="slice ${i<num?'on':''}"></span>`).join('')}</div><div class="caption">כמה מתוך כל החלקים צבוע?</div>`}}
+function makeCompare(){let d1=pick([4,5,6,8,10,12]), d2=pick([3,4,6,8,10,12]);let n1=rand(1,d1-1),n2=rand(1,d2-1);let v1=n1/d1,v2=n2/d2;if(Math.abs(v1-v2)<.03)return makeCompare();let correct=v1>v2?`${n1}/${d1}`:`${n2}/${d2}`;return{kind:'choice',topic:'השוואת שברים',title:'מי גדול יותר?',answer:correct,options:shuffle([`${n1}/${d1}`,`${n2}/${d2}`,'שווים','אי אפשר לדעת']),hint:`משווים לפי גודל החלק מהשלם: ${n1}/${d1} ${v1>v2?'גדול מ':'קטן מ'} ${n2}/${d2}.`,html:`<div class="bigMath">${n1}/${d1}  ?  ${n2}/${d2}</div><div class="caption">בחרו את השבר הגדול יותר</div>`}}
+function makeAddFrac(){let den=pick([4,5,6,8,10,12]), a=rand(1,Math.floor((den-1)/2)), b=rand(1,den-a-1), ans=`${a+b}/${den}`;let opts=new Set([ans,`${a}/${den}`,`${b}/${den}`,`${a+b}/${den+a}`]);while(opts.size<4)opts.add(`${rand(1,den-1)}/${den}`);return{kind:'choice',topic:'חיבור שברים',title:`כמה זה ${a}/${den} + ${b}/${den}?`,answer:ans,options:shuffle([...opts]),hint:`כשהמכנה זהה, מחברים רק את המונים: ${a}+${b}=${a+b}. המכנה נשאר ${den}.`,html:`<div class="bigMath">${a}/${den} + ${b}/${den}</div><div class="caption">מכנה זהה? מחברים מונים.</div>`}}
+function shuffle(a){return a.sort(()=>Math.random()-.5)}
+function renderQuestion(){let q=run.questions[run.idx];$('modeBadge').textContent=q.topic;$('qtitle').textContent=q.title;$('problem').innerHTML=q.html;$('feedback').className='feedback';$('feedback').textContent='קדימה. מפלצת החשבון מחכה.';$('stepPill').textContent=`${run.idx+1}/${run.total}`;$('bar').style.width=(run.idx/run.total*100)+'%';$('streakPill').textContent='🔥 '+run.streak;$('monster').classList.remove('win');if(q.kind==='choice')renderChoice(q);else renderInput(q)}
+function renderChoice(q){$('answerArea').innerHTML=`<div class="options">${q.options.map(o=>`<button class="option" onclick="checkAnswer('${escapeAttr(o)}',this)">${o}</button>`).join('')}</div>`}
+function renderInput(q){$('answerArea').innerHTML=`<div class="answerPanel"><div class="inputLine"><input id="answerInput" class="answerInput" inputmode="numeric" autocomplete="off" placeholder="?"/><button class="btn" onclick="checkInput()">בדוק</button></div><div class="keypad">${['1','2','3','4','5','6','7','8','9','⌫','0','שארית'].map(k=>`<button class="key ${isNaN(+k)?'special':''}" onclick="tapKey('${k}')">${k}</button>`).join('')}</div></div>`;$('answerInput').focus()}
+function escapeAttr(s){return String(s).replace(/'/g,'&#39;')}function norm(s){return String(s).toLowerCase().replace(/\s+/g,'').replace('שארית','שארית').trim()}
+function tapKey(k){let i=$('answerInput');if(!i)return;if(k==='⌫')i.value=i.value.slice(0,-1);else if(k==='שארית')i.value+=' שארית ';else i.value+=k;i.focus()}
+function checkInput(){let q=run.questions[run.idx];let v=$('answerInput').value;let ok=(q.accept||[q.answer]).some(a=>norm(a)===norm(v));handleResult(ok,q)}
+function checkAnswer(v,el){let q=run.questions[run.idx];let ok=String(v).replace('&#39;',"'")===q.answer;document.querySelectorAll('.option').forEach(b=>{b.disabled=true;if(b.textContent===q.answer)b.classList.add('correct')});if(!ok)el.classList.add('wrong');handleResult(ok,q)}
+function handleResult(ok,q){if(ok){run.score++;run.streak++;save.coins+=10+Math.min(run.streak,5)*2;$('feedback').className='feedback good';$('feedback').textContent=pick(['בום! פתחת שער VR חדש.','דיוק של אלוף. המפלצת נמסה.','יפה! עוד ניצחון בדרך לקסדת הזהב.']);$('monster').classList.add('win')}else{run.streak=0;$('feedback').className='feedback bad';$('feedback').textContent='כמעט. '+q.hint}persist();$('streakPill').textContent='🔥 '+run.streak;setTimeout(()=>{run.idx++; if(run.idx>=run.total)finishRun(false); else renderQuestion()}, ok?850:1800)}
+function showHint(){let q=run.questions[run.idx];$('feedback').className='feedback';$('feedback').textContent='רמז: '+q.hint}
+function finishRun(quit){let pct=run.score/run.total;let stars=pct===1?3:pct>=.8?2:pct>=.5?1:0;let old=save.stars[run.mission.id]||0;save.stars[run.mission.id]=Math.max(old,stars);save.best=Math.max(save.best,run.score);save.coins+=stars*25;persist();$('bar').style.width='100%';$('loot').textContent=stars===3?'🏆':stars===2?'🌟':stars===1?'🪙':'💪';$('modalTitle').textContent=quit?'יצאת מהמשימה':stars===3?'ניצחון מושלם!':stars?'כל הכבוד!':'אימון טוב';$('modalText').textContent=quit?`עצרת אחרי ${run.idx} שאלות.`:`ענית נכון על ${run.score} מתוך ${run.total}. קיבלת ${stars} כוכבים ובונוס מטבעות. ${stars<3?'נסה שוב כדי להשיג 3 כוכבים!':'קסדת UG VR שלך זוהרת!'}`;$('modal').classList.add('show')}
+function hideModal(){$('modal').classList.remove('show')}
+persist();renderMissions();
+window.addEventListener('keydown',e=>{if(e.key==='Enter'&&$('answerInput'))checkInput()});
+</script>
+</body>
+</html>
