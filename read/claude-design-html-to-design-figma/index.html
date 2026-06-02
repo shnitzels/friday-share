@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Design ל-Figma: סוף סוף Workflow שמייצר קובץ שמיש</title>
+<meta property="og:title" content="Claude Design ל-Figma: סוף סוף Workflow שמייצר קובץ שמיש">
+<meta property="og:description" content="סרגיי מדגים איך Claude Design יחד עם html.to.design MCP הופכים UI שנוצר בדפדפן לקובץ Figma אמיתי: Auto Layout, Variables, Styles ושכבות מסודרות.">
+<meta property="og:image" content="https://i.ytimg.com/vi/0dj3_i849a4/maxresdefault.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Claude Design ל-Figma: סוף סוף Workflow שמייצר קובץ שמיש">
+<meta name="twitter:description" content="הבעיה הגדולה בכלי AI לעיצוב היא לא הדמו. היא המעבר לקובץ Figma שעובד. הנה Workflow שמנסה לסגור את הפער.">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Noto Sans Hebrew', sans-serif; font-size: 18px; line-height: 1.85; color: #1a1a1a; background: #fff; padding: 40px 20px; }
+.container { max-width: 900px; margin: 0 auto; }
+h1 { font-size: 34px; font-weight: 700; margin-bottom: 10px; line-height: 1.25; }
+h2 { font-size: 25px; font-weight: 700; margin-top: 48px; margin-bottom: 16px; line-height: 1.35; }
+h3 { font-size: 21px; font-weight: 700; margin-top: 32px; margin-bottom: 12px; }
+.subtitle { font-size: 21px; color: #555; margin-bottom: 32px; line-height: 1.5; }
+p { margin-bottom: 18px; }
+ul, ol { margin: 12px 26px 22px 0; }
+li { margin-bottom: 10px; }
+.intro-box { background: #f7f7f7; border-right: 4px solid #1a1a1a; padding: 20px 24px; margin-bottom: 40px; border-radius: 6px; }
+.intro-box a { color: #1a1a1a; font-weight: 600; }
+.takeaway { background: #fff7e6; border-right: 4px solid #d18b00; padding: 18px 22px; margin: 28px 0; border-radius: 6px; }
+.quote { border-right: 3px solid #ccc; padding-right: 20px; margin: 24px 0; color: #444; font-style: italic; }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 28px 0; }
+.card { background: #fafafa; border: 1px solid #e6e6e6; border-radius: 10px; padding: 18px; }
+.card strong { display: block; margin-bottom: 8px; }
+.source-link { margin-top: 52px; padding-top: 24px; border-top: 1px solid #ddd; font-size: 16px; color: #555; }
+.source-link a { color: #1a1a1a; }
+strong { font-weight: 700; }
+@media (max-width: 760px) { body { font-size: 17px; padding: 24px 16px; } h1 { font-size: 28px; } h2 { font-size: 23px; } .subtitle { font-size: 19px; } .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Claude Design ל-Figma: סוף סוף Workflow שמייצר קובץ שמיש</h1>
+<p class="subtitle">סרגיי מדגים איך Claude Design יחד עם html.to.design MCP יכולים להפוך UI שנוצר בדפדפן לקובץ Figma אמיתי: Auto Layout, Variables, Styles, שכבות מסודרות, והרבה פחות עבודת ניקוי ידנית.</p>
+
+<div class="intro-box">
+<strong>מקור:</strong> <a href="https://youtu.be/0dj3_i849a4" target="_blank">I Stopped Using Figma MCP</a><br>
+<strong>יוצר:</strong> Sergei, ערוץ על Figma, Framer, כלי AI לעיצוב ו-vibe coding<br>
+<strong>תאריך:</strong> 2 ביוני 2026<br>
+<strong>אורך:</strong> 17:31 דקות
+</div>
+
+<p>הסרטון הזה עוסק בבעיה שכל מי שניסה כלי AI לעיצוב מכיר: בדפדפן זה נראה מדהים, אבל ברגע שמנסים להעביר את התוצאה ל-Figma, הקסם מתפרק. במקום קובץ שאפשר לעבוד עליו מקבלים שכבות מבולגנות, בלי Auto Layout אמיתי, בלי Variables, בלי Styles, ועם הרבה עבודת שחזור ידנית.</p>
+
+<p>הטענה של סרגיי היא שהשילוב בין Claude Design לבין ה-MCP החדש של html.to.design משנה את הסיפור. Claude מייצר את ה-UI, ו-html.to.design משמש כגשר שמייבא אותו ל-Figma כקובץ עריך, עם מבנה עיצובי שמרגיש קרוב יותר למערכת אמיתית ולא לצילום מסך מפורק.</p>
+
+<div class="takeaway"><strong>השורה התחתונה:</strong> זה לא עוד דמו של “AI עושה עיצוב יפה”. הנקודה החשובה היא שהעיצוב נוחת ב-Figma עם Auto Layout, Variables, Styles ושמות שכבות. כלומר, הוא מתחיל להיראות כמו חומר גלם שמעצבים ומפתחים באמת יכולים להמשיך ממנו.</div>
+
+<h2>למה Figma MCP לבדו לא הספיק</h2>
+
+<p>סרגיי פותח בהבחנה פרקטית: אפשר לנסות לעבוד עם Figma MCP ישירות, אבל מניסיונו זה איטי והתוצאות לא מספיק טובות. בעיקר חסרים שני דברים שמעצבים מרגישים מיד: Auto Layout מסודר ו-Variables תקינים.</p>
+
+<p>זו נקודה קריטית. בעידן של כלי AI לעיצוב, הבעיה כבר לא רק “האם אפשר ליצור מסך יפה”. כמעט כלים רבים יודעים לייצר משהו שנראה טוב בפריים אחד. השאלה היא האם זה הופך לנכס עיצובי בתוך workflow אמיתי: האם אפשר לשנות spacing במקום אחד, לעדכן צבעים, לעבוד עם טיפוגרפיה עקבית, לבנות וריאנטים, להעביר למפתחים, או להמשיך לעצב בלי להתחיל מחדש.</p>
+
+<div class="grid">
+  <div class="card"><strong>דמו יפה</strong> נראה טוב בדפדפן, אבל לרוב נשבר כשצריך לערוך אותו.</div>
+  <div class="card"><strong>קובץ Figma אמיתי</strong> משתמש ב-Auto Layout, Variables, Styles ושמות שכבות הגיוניים.</div>
+  <div class="card"><strong>Workflow שימושי</strong> מאפשר למעצב להמשיך לעבוד, לא רק להתפעל מהתוצאה.</div>
+</div>
+
+<h2>שלב ראשון: Claude Design מייצר את המסך</h2>
+
+<p>סרגיי מתחיל ב-Claude Design דרך <span dir="ltr">claude.ai/design</span>. הוא פותח פרויקט חדש, בוחר Prototype, לא משתמש במערכת עיצוב מוכנה, ומבקש High Fidelity כדי לקבל תוצאה עשירה יותר.</p>
+
+<p>לפני הפרומפט עצמו הוא מוסיף לקבצי הפרויקט קובץ <span dir="ltr">DESIGN.md</span>. הקובץ הזה מתאר את הסגנון הרצוי: גרידים, סולמות, צבעים, טיפוגרפיה וחוקים עיצוביים בסיסיים. המטרה היא למנוע את הבעיה הקלאסית של “ממשק Claude גנרי”, ולתת למודל כיוון עיצובי ברור.</p>
+
+<p>הפרומפט שהוא נותן: לעצב Home Screen Dashboard לאפליקציית Neo Bank, עם יתרות, עסקאות פיאט וקריפטו, ממיר מטבעות, מניות, ETFs וכל מה שנראה רלוונטי לפי UX/UI best practices, תוך שימוש בקובץ DESIGN.md כרפרנס.</p>
+
+<p>Claude Design קורא את הקובץ, מבין את ההקשר, שואל שאלות כמו בריף, ואז מייצר דאשבורד שנראה טוב כבר בדפדפן. עד כאן זה החלק שרוב כלי ה-AI כבר יודעים לעשות יחסית יפה.</p>
+
+<h2>שלב שני: מחברים את html.to.design כ-MCP ל-Claude</h2>
+
+<p>החלק המעניין מתחיל כשהוא מחבר את html.to.design ל-Claude. html.to.design הוא פלאגין מוכר של Figma שמאפשר לייבא אתרים ו-HTML לתוך Figma. החידוש כאן הוא לשונית MCP שמאפשרת לחבר Agents כמו Claude, Cursor או Codex ישירות לפלאגין.</p>
+
+<p>ב-Claude פותחים את אזור Customize App, נכנסים ל-Connectors, מוסיפים Custom Connector, ומדביקים את שם הקונקטור ואת URL ה-MCP מתוך התיעוד של html.to.design. לאחר מכן מחברים את הקונקטור לחשבון Figma ומאשרים הרשאות.</p>
+
+<p>ב-Figma פותחים את הפלאגין html.to.design של Riots, עוברים ללשונית MCP, ומוודאים שהוא מחובר ל-Claude. ברגע שהפלאגין פתוח והקונקטור מחובר, Claude יכול להשתמש בו כדי לבצע את הייבוא.</p>
+
+<div class="takeaway"><strong>הנקודה החשובה:</strong> זה לא “Claude מצייר בתוך Figma” במובן נאיבי. זה workflow שבו Claude Design מייצר HTML/פרוטוטייפ, ו-html.to.design מתרגם אותו למבנה Figma שימושי.</div>
+
+<h2>שלב שלישי: מבקשים מ-Claude להביא את העיצוב לקובץ Figma</h2>
+
+<p>סרגיי חוזר לקובץ ה-Figma, מעתיק את לינק השיתוף, ואז חוזר ל-Claude Design ומבקש: “Bring this design to Figma file”, מדביק את הלינק, ומציין להשתמש בקונקטור של html.to.design.</p>
+
+<p>בשלב הזה Claude מזהה את הקונקטור, והפלאגין ב-Figma מתעורר. לפני הייבוא מופיעות אפשרויות חשובות: להשתמש ב-Auto Layout, ליצור Styles ו-Variables, להוסיף hyperlinks, להשתמש בשמות שכבות מה-HTML, ואפילו לייבא hover effects. סרגיי בוחר Auto Layout, Styles, Variables, Hyperlinks ושמות שכבות, ומוותר על hover.</p>
+
+<p>התוצאה מגיעה מהר מאוד. בתוך כמה שניות הייבוא מסתיים, וב-Figma מופיע הדאשבורד שנוצר ב-Claude Design. אבל יותר חשוב מהמהירות: הקובץ מגיע עם Variables, צבעים, spacing, פונטים, Styles ו-Auto Layout. כלומר, הוא לא רק נראה כמו העיצוב. הוא בנוי כמו משהו שאפשר לעבוד עליו.</p>
+
+<h2>מה הוא מוצא בתוך Figma</h2>
+
+<p>אחרי הייבוא סרגיי בודק את הקובץ. הוא רואה שכל ה-Variables קיימים: צבעים, גבהי stroke, spacing, פונטים ועוד. אפשר לשנות את שם הקולקציה אחר כך, אבל המבנה עצמו כבר שם.</p>
+
+<p>גם השכבות מסודרות ב-Auto Layout וגרידים. Styles קיימים ומשתמשים ב-Variables. Styles של פונטים משתמשים גם הם ב-Variables. מבחינתו זה החלק שחוסך “כמה שעות עבודה”: לא צריך לשחזר ידנית את כל המערכת העיצובית שנוצרה בדפדפן.</p>
+
+<div class="quote">“This saved me several hours of work.”</div>
+
+<p>הוא מציין שהמסך שהתקבל הוא ברוחב 1440 לפורמט Desktop, ושאפשר כמובן ליצור גם גרסת Mobile. אבל המסר הוא שהמעבר מ-code/design ל-Figma עובד, ולא רק כתמונה או כקבוצה שטוחה.</p>
+
+<h2>למה זה חשוב במיוחד ל-vibe coding ולעיצוב AI</h2>
+
+<p>הסרטון ממחיש היטב את הגבול בין “AI שמייצר UI” לבין “AI שמשתלב במערכת עבודה של מוצר”. בעולם vibe coding, קל מאוד לייצר מוצר שנראה מרשים בדפדפן. קשה הרבה יותר לחבר אותו חזרה לשפה של צוותי עיצוב: קומפוננטות, טוקנים, גרידים, היררכיה, states, רספונסיביות והעברה לפיתוח.</p>
+
+<p>לכן workflow כזה חשוב לא רק למעצבים שרוצים לחסוך זמן. הוא חשוב לכל מי שבונה כלי AI למוצר. אם העיצוב שנוצר על ידי AI לא יכול לחזור ל-Figma בצורה שמעצבים מכבדים, הוא נשאר דמו. אם הוא כן חוזר כקובץ עריך, הוא מתחיל להפוך לחלק ממחזור העבודה האמיתי.</p>
+
+<div class="takeaway"><strong>התובנה הרחבה:</strong> היתרון התחרותי בכלי AI לעיצוב לא יהיה רק איכות ה-output הוויזואלי. הוא יהיה איכות ה-handoff: כמה מעט עבודה צריך כדי להפוך תוצאה יפה לנכס מוצרי שאפשר לערוך, לשנות, למדוד ולמסור הלאה.</div>
+
+<h2>השימוש השני: העתקת אתרים קיימים לתוך Figma</h2>
+
+<p>בחלק השני של הסרטון סרגיי מדגים שימוש נוסף של html.to.design: העתקת אתר קיים לתוך Figma. הוא מספר על לקוח שהיה צריך להעביר אתר WordPress ל-Framer. במקום לשחזר את האתר ידנית ב-Figma או Framer, הם השתמשו ב-Chrome Extension של html.to.design כדי ללכוד את האתר ולהכניס אותו ל-Figma.</p>
+
+<p>בדוגמה הוא משתמש באתר של Tesla. דרך התוסף הוא בוחר שלושה Breakpoints, לוחץ Capture, והתוסף גולל את הדף ולוכד את העיצוב בכל רוחבי המסך. לאחר מכן הוא מעתיק את התוצאה ומדביק אותה ב-Figma. מתקבלים שלושה Breakpoints מסודרים, עם Auto Layout. יש בעיה מסוימת עם מפה אינטראקטיבית, אבל זה צפוי באזורים דינמיים.</p>
+
+<p>הוא מוסיף שאם רוצים, אפשר להשתמש אחר כך ב-AI כדי ליצור Variables מתוך העיצוב שהועתק. כלומר, גם כשמתחילים מאתר קיים, אפשר להפוך אותו בהדרגה למערכת עיצובית יותר מסודרת.</p>
+
+<h2>השימוש השלישי: ייבוא URL ישירות מתוך Figma</h2>
+
+<p>האפשרות השלישית היא להשתמש בפלאגין עצמו בתוך Figma: מדביקים URL של אתר, מגדירים Breakpoints ושפה, בוחרים Auto Layout, ומייבאים. בדוגמה הוא משתמש ב-apple.com, ותוך פחות מדקה מקבל את אתר Apple בשלושה Breakpoints בתוך Figma.</p>
+
+<p>גם כאן התוצאה לא בהכרח מושלמת, אבל היא חזקה מאוד כנקודת פתיחה. במקום להתחיל ממסך ריק, מקבלים מבנה, היררכיה, פריסה ואלמנטים שאפשר לערוך ולהציג ללקוח.</p>
+
+<h2>המשמעות: עיצוב AI עובר משלב ההדגמה לשלב התפעול</h2>
+
+<p>הסרטון הוא פרסומי בחלקו, כי html.to.design נותנת חסות, אבל עדיין יש בו נקודה אמיתית. אחד הכאבים הגדולים של AI Design Tools הוא שה-output לא מספיק “מקצועי” במובן התפעולי. הוא מרשים לעין, אבל לא בהכרח משתלב ב-Figma, במערכת עיצוב, ב-handoff או בתהליך עבודה של צוות.</p>
+
+<p>ה-workflow שסרגיי מציג לא פותר את כל הבעיות. עדיין צריך ביקורת עיצובית, עדיין צריך לבדוק קומפוננטות, רספונסיביות, שמות, היררכיה ואיכות UX. אבל הוא מקרב את העולם של יצירת UI באייג׳נט לעולם של קובץ עבודה אמיתי.</p>
+
+<p>וזה בדיוק הפער שבו השוק נמצא עכשיו: ה-AI כבר יודע לייצר הרבה. השאלה היא מי יגרום לזה לנחות נכון בכלים שבהם אנשים באמת עובדים.</p>
+
+<div class="takeaway"><strong>לקח לבוני מוצר:</strong> אל תמדדו כלי AI רק לפי צילום המסך שהוא מוציא. מדדו אותו לפי כמה מהר צוות אמיתי יכול להמשיך לעבוד מהתוצאה שלו.</div>
+
+<div class="source-link">
+<strong>מקור:</strong> <a href="https://youtu.be/0dj3_i849a4" target="_blank">I Stopped Using Figma MCP</a>
+</div>
+
+</div>
+</body>
+</html>
