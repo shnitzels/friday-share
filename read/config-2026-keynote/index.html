@@ -3,35 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Config 2026: פיגמה הופכת את הקנבס למקום שבו עיצוב, קוד, תנועה ו-AI נפגשים</title>
-<meta property="og:title" content="Config 2026: פיגמה הופכת את הקנבס למקום שבו עיצוב, קוד, תנועה ו-AI נפגשים">
-<meta property="og:description" content="סיכום עברי מפורט לקינוט Config 2026 של Figma: Code Layers, Weave, פלאגינים גנרטיביים, שיידרים, Figma Motion וסוכן Figma רחב יותר.">
+<title>Config 2026: Figma הופכת את הקנבס למקום שבו קוד, Motion ו-AI נפגשים</title>
+<meta property="og:title" content="Config 2026: Figma הופכת את הקנבס למקום שבו קוד, Motion ו-AI נפגשים">
+<meta property="og:description" content="סיכום עברי מפורט של keynote Config 2026: Code Layers, Weave, פלאגינים גנרטיביים, Shaders, Figma Motion והחזון של Figma לקנבס יצירתי אחד.">
 <meta property="og:image" content="https://i.ytimg.com/vi/2ZCc4k_IV5w/maxresdefault.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Config 2026: פיגמה הופכת את הקנבס למערכת הפעלה ליצירה">
-<meta name="twitter:description" content="הקינוט של Figma מציג לא עוד כלי AI נקודתי, אלא תפיסה חדשה: הקנבס כמקום שבו רעיונות הופכים לקוד, תנועה, אפקטים וכלים פנימיים.">
+<meta name="twitter:title" content="Config 2026: Figma הופכת את הקנבס למערכת יצירה מלאה">
+<meta name="twitter:description" content="מה Figma הכריזה ב-Config 2026 ולמה זה חשוב לעיצוב מוצר בעידן AI.">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'Noto Sans Hebrew', sans-serif; font-size: 18px; line-height: 1.85; color: #1a1a1a; background: #fff; padding: 40px 20px; }
 .container { max-width: 920px; margin: 0 auto; }
-h1 { font-size: 34px; font-weight: 700; margin-bottom: 12px; line-height: 1.25; }
+h1 { font-size: 34px; font-weight: 700; margin-bottom: 10px; line-height: 1.25; }
 h2 { font-size: 25px; font-weight: 700; margin-top: 48px; margin-bottom: 16px; line-height: 1.35; }
-h3 { font-size: 21px; font-weight: 700; margin-top: 32px; margin-bottom: 12px; }
+h3 { font-size: 21px; font-weight: 700; margin-top: 30px; margin-bottom: 10px; }
 p { margin-bottom: 18px; }
-ul, ol { margin: 12px 28px 22px 0; }
+ul, ol { margin: 12px 26px 22px 0; }
 li { margin-bottom: 10px; }
 .subtitle { font-size: 21px; color: #555; margin-bottom: 32px; line-height: 1.5; }
 .intro-box { background: #f7f7f7; border-right: 4px solid #1a1a1a; padding: 20px 24px; margin-bottom: 40px; border-radius: 6px; }
 .intro-box a { color: #1a1a1a; font-weight: 600; }
 .takeaway { background: #fff7e6; border-right: 4px solid #d18b00; padding: 18px 22px; margin: 28px 0; border-radius: 6px; }
-.note { background: #f0f7ff; border-right: 4px solid #0066cc; padding: 18px 22px; margin: 28px 0; border-radius: 6px; }
-.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 28px 0; }
+.note { background: #eef6ff; border-right: 4px solid #2b6cb0; padding: 18px 22px; margin: 28px 0; border-radius: 6px; }
+.quote { border-right: 3px solid #ccc; padding-right: 20px; margin: 24px 0; color: #444; font-style: italic; }
+.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 28px 0; }
 .card { background: #fafafa; border: 1px solid #e6e6e6; border-radius: 10px; padding: 18px; }
 .card strong { display: block; margin-bottom: 8px; }
-.quote { border-right: 3px solid #ccc; padding-right: 20px; margin: 24px 0; color: #444; font-style: italic; }
-.timeline { background: #fbfbfb; border: 1px solid #e8e8e8; border-radius: 10px; padding: 18px 22px; }
-.timeline li { margin-bottom: 12px; }
 .source-link { margin-top: 52px; padding-top: 24px; border-top: 1px solid #ddd; font-size: 16px; color: #555; }
 .source-link a { color: #1a1a1a; }
 strong { font-weight: 700; }
@@ -41,145 +39,129 @@ strong { font-weight: 700; }
 <body>
 <div class="container">
 
-<h1>Config 2026: פיגמה הופכת את הקנבס למקום שבו עיצוב, קוד, תנועה ו-AI נפגשים</h1>
-<p class="subtitle">הקינוט של Figma לא היה עוד רשימת פיצ׳רים. הוא היה הצהרת כיוון: הקנבס כבר לא אמור להיות רק המקום שבו מסדרים פריימים, אלא סביבת עבודה שמחברת קוד, אפקטים, תנועה, כלים פנימיים וסוכני AI — בלי להוציא את היצירה מהמרחב המשותף של הצוות.</p>
+<h1>Config 2026: Figma הופכת את הקנבס למקום שבו קוד, Motion ו-AI נפגשים</h1>
+<p class="subtitle">ה-keynote של Config 2026 הוא לא רק רשימת פיצ׳רים. הוא הצהרת כיוון: Figma רוצה שהקנבס יהפוך מסביבת עיצוב למסך עבודה אחד שבו מעצבים, מפתחים, Motion Designers ואייג׳נטים יוצרים יחד — עם קוד, וידאו, שיידרים, פלאגינים ו-AI כחומרים טבעיים.</p>
 
 <div class="intro-box">
-<strong>מקור:</strong> <a href="https://www.youtube.com/watch?v=2ZCc4k_IV5w" target="_blank">Config 2026 Keynote — Figma</a><br>
-<strong>יוצר:</strong> Figma<br>
-<strong>אורך:</strong> 79:30 דקות<br>
-<strong>הערת מקור:</strong> ל-YouTube לא היו כתוביות זמינות בזמן העבודה; המאמר מבוסס על תמלול מקומי בעזרת Whisper מהווידאו הציבורי.
+<strong>מקור:</strong> <a href="https://www.youtube.com/watch?v=2ZCc4k_IV5w" target="_blank">Config 2026 Keynote</a><br>
+<strong>מקור נוסף:</strong> <a href="https://share.google/YrvlqVRpcaDQbsv24" target="_blank">קישור השיתוף המקורי</a><br>
+<strong>אורך:</strong> כ-79 דקות<br>
+<strong>הערה:</strong> הסיכום מבוסס על תמלול מקומי של הווידאו, לאחר שלא היו כתוביות זמינות דרך YouTube.
 </div>
 
-<p>דילן פילד פתח את Config 2026 עם משפט שמסכם את כל הקינוט: פעם נאמר לנו שהעתיד שייך למי שיודע לקודד. היום, לטענתו, קוד כבר אינו ההפך מעיצוב — הוא חומר גלם עיצובי. כמו צבע, טקסטורה, תנועה או טיפוגרפיה, גם קוד צריך להיות משהו שאפשר למשש, לשכפל, להשוות, לשנות ולשתף על הקנבס.</p>
+<p>המסר המרכזי של Dylan Field בתחילת האירוע הוא משפט שכדאי לעצור עליו: <strong>“Code is not the opposite of design. Code is material for design.”</strong> במשך שנים התעשייה התווכחה אם מעצבים צריכים “לעבוד בקוד” או להישאר בכלים ויזואליים. Figma מנסה לפרק את הדיכוטומיה הזאת. לא עוד עיצוב מול קוד, אלא קוד כחומר נוסף על הקנבס — כמו צבע, טיפוגרפיה, תנועה או טקסטורה.</p>
 
-<p>זו תפיסה חשובה, כי היא שונה מאוד מגל כלי ה-AI לעיצוב שראינו בשנתיים האחרונות. רוב הכלים ניסו להאיץ נקודה אחת בתהליך: לייצר מסך, לכתוב קומפוננטה, לעשות אפקט, ליצור תמונה. Figma מנסה לומר משהו רחב יותר: אם AI אכן מוריד את סף הכניסה, התפקיד של כלי העיצוב הוא להעלות את התקרה — לאפשר לצוותים לעבוד על חומרים חדשים בלי לאבד את הדבר שפיגמה בנתה עליו את החברה: עבודה משותפת, חיה, על קנבס אחד.</p>
+<p>זו לא רק אמירה פילוסופית. כמעט כל ההכרזות ב-keynote מתכנסות לאותה תפיסה: ה-canvas של Figma צריך להכיל יותר סוגי חומר, יותר דרכי יצירה, ויותר לולאות עבודה שבהן AI לא מחליף את היוצר אלא מאפשר לו לרוץ מהר יותר, להתנסות יותר, ולהפוך רעיונות לפרוטוטייפים ולמוצרים בלי לצאת מהמרחב המשותף.</p>
 
-<div class="takeaway"><strong>השורה התחתונה:</strong> Config 2026 מציג את Figma כמעין “מערכת הפעלה ליצירה”: Code Layers לקוד על הקנבס, Weave לכלי AI יצירתיים, פלאגינים גנרטיביים, שיידרים, Figma Motion, וסוכן Figma שמתחיל לצאת מעבר לקובץ העיצוב אל FigJam ו-Slides.</div>
+<div class="takeaway"><strong>השורה התחתונה:</strong> Figma מכוונת לעולם שבו העיצוב אינו קובץ סטטי שמועבר הלאה, אלא סביבת יצירה חיה: קוד שרץ על הקנבס, Motion שנערך על timeline, שיידרים שנוצרים בפרומפט, פלאגינים שנולדים מתוך צורך רגעי, וכל זה מתחבר למערכת עבודה משותפת.</div>
 
-<h2>המסגרת: חומרים חדשים וכלים חדשים</h2>
+<h2>1. Code Layers: קוד כעוד שכבה על הקנבס</h2>
 
-<p>Figma חילקה את ההכרזות לשני צירים: <strong>חומרים חדשים</strong> שאפשר ליצור איתם, ו<strong>כלים חדשים</strong> שמאפשרים לעצב את החומרים האלה. זה נשמע כמו ניסוח שיווקי, אבל הוא עוזר להבין את הקינוט. Code, Motion, Shaders, Workflows, Plugins — כולם מוצגים לא כיעדים נפרדים אלא כעוד סוגי חומר שנכנסים לקנבס.</p>
+<p>החלק הראשון והחשוב ביותר עסק ב-Code Layers. Nico הסביר שהבעיה הנוכחית בכלי קוד מבוססי AI היא לא היכולת לייצר אלפי שורות קוד. הבעיה היא שהעבודה הופכת שוב לסילו: כל אחד עמוק בצ׳אט שלו עם האייג׳נט, ואז משתף הקלטת מסך או דמו ומקווה שאחרים יבינו מה קרה.</p>
 
-<p>פילד גם חזר על רעיון שהוא כבר אמר בעבר: AI “מוריד את הרצפה” — כלומר מאפשר ליותר אנשים להתחיל ליצור. אבל הוא הודה שהשאלה האמיתית היא האם AI גם “מעלה את התקרה”. במילים אחרות, האם הוא מאפשר לאנשים חזקים לעשות עבודה שאי אפשר היה לעשות קודם, או רק מייצר ממוצע מהיר יותר. הקינוט כולו ניסה לענות על השאלה הזאת דרך דמואים.</p>
+<p>Figma מציעה פתרון הפוך: הקוד עצמו נכנס לקנבס. אפשר ליצור שכבת קוד ישירות מתוך עיצוב קיים, לפתוח Code Tool חדש, לייבא ריפוזיטורי מ-GitHub או להעלות תיקייה מקומית. השכבה רצה אינטראקטיבית בתוך Figma: אפשר לגרור, ללחוץ, לבדוק סטייטים, להריץ כמה וריאציות במקביל, ולראות אותן אחת ליד השנייה.</p>
+
+<p>הדמו הראה כמה רעיונות מעניינים במיוחד:</p>
+<ul>
+  <li><strong>Branching מרחבי:</strong> כדי ליצור וריאציה חדשה מחזיקים Option וגוררים את שכבת הקוד. פעולה מוכרת מעולם העיצוב הופכת לפעולת branching של קוד.</li>
+  <li><strong>צ׳אט משותף:</strong> מכיוון שה-code layer חי בקובץ Figma, גם השיחה עם האייג׳נט משותפת. אפשר לראות איך קולגה הגיע לתוצאה, מה הוא ביקש ומה השתנה.</li>
+  <li><strong>Extract Design:</strong> אפשר להקליט flow מתוך שכבת קוד, ואז Figma מפיקה ממנו מבט-על של המסכים והסטייטים כ-design layers.</li>
+  <li><strong>חזרה לקוד:</strong> אם מעצבים סטייט סטטי מתוך ה-flow, אפשר לעדכן את שכבת הקוד, והאייג׳נט מקבל diff ממוקד של מה השתנה.</li>
+</ul>
+
+<p>החלק הזה הוא אולי הלב של החזון: במקום “מעצב יוצר mockup ואז מפתח בונה”, או “אייג׳נט מייצר אפליקציה בצד”, Figma מנסה להפוך את הקוד עצמו לחומר שיתופי. זו דרך להגיד שעידן ה-AI לא מחזיר אותנו לעבודה יחידנית מול IDE, אלא להפך — הוא דורש כלים מרחביים שמאפשרים לצוות לחשוב יחד.</p>
+
+<div class="note"><strong>זמינות:</strong> Code Layers יוצאים ל-closed beta. לפי ההכרזה, ההצטרפות תתחיל ביולי והפיצ׳ר יהיה זמין ל-full seat users בכל התוכניות.</div>
+
+<h2>2. Weave: כלי עבודה יצירתיים במקום פרומפט חד-פעמי</h2>
+
+<p>אחרי הקוד, Itai Shechter הציג את Weave — פלטפורמת workflow יצירתית שנכנסת אל Figma בעקבות הרכישה של Weavy. הנקודה שלו הייתה מדויקת: ב-AI קל ליצור תמונה מעניינת, אבל קשה ליצור משהו שימושי לפרויקט אמיתי. עבודה מקצועית דורשת references, עקביות, איטרציות, feedback ותהליכים שניתן להריץ שוב ושוב.</p>
+
+<p>Weave בנויה סביב workflows מבוססי nodes: חלק מה-nodes מחזיקים מידע כמו תמונות, וידאו או מודלי 3D, ואחרים מפעילים מודלי AI או בקרות ידניות כמו color grading וטיימליינים. אבל בתוך Figma המשתמש לא צריך לראות את כל ה“נודלס”. Figma חושפת את ה-inputs וה-outputs ככלי פשוטים ברשימת Tools.</p>
+
+<p>הדוגמאות שהוצגו היו מאוד פרקטיות:</p>
+<ul>
+  <li>יצירת סרטוני 360 למוצרים על בסיס תמונות קדמיות ואחוריות.</li>
+  <li>רינדור מהיר של אנימציית low-fi בסגנונות שונים, כדי לבדוק כיוון לפני עבודת shading ורינדור כבדה.</li>
+  <li>Style transfer קבוצתי לתמונות מוצר ממקורות שונים, כדי לגרום להן להיראות כחלק מאותה שפה ויזואלית.</li>
+  <li>כלים מוכנים כמו Sticker Pack, Replace Background, Texturize, Add Logo to Product ו-Generate Mockups.</li>
+</ul>
+
+<p>הנקודה החשובה היא לא שכלי כזה או אחר מרשים. החשיבות היא המעבר מ-“תכתוב פרומפט ותראה מה יוצא” ל-“בנה workflow יצירתי שאפשר להריץ, לשתף ולשכפל”. זה ההבדל בין AI כצעצוע לבין AI כחלק ממערכת ייצור.</p>
+
+<h2>3. Generative Plugins: לבנות את הפלאגין שחסר לך עכשיו</h2>
+
+<p>ההכרזה הבאה המשיכה את אותו קו: אם כל צוות וכל מעצב עובדים אחרת, למה לחכות לפלאגין שמישהו אחר יבנה? החל מ-Config 2026, אפשר ליצור generative plugins בעזרת Figma Agent — בלי desktop app, בלי לפרסם ל-Community, ובלי לכתוב קוד ידנית.</p>
+
+<p>הדמו של Georgia ו-Raji היה מכוון בכוונה לדברים קטנים: פלאגין שמרנדמז גבהים של rectangles כדי ליצור waveform, פלאגין שבונה Bento grid בסגנון ספציפי של מעצב, ופלאגין שמייצר racetracks על בסיס דאטה אמיתי עבור לקוח בתחום המרוצים. אפילו דוגמת nail design הופיעה כדי להראות שהכלי לא חייב להיות “רציני” כדי להיות שימושי.</p>
+
+<p>כאן מסתתרת תובנה גדולה על תוכנות יצירה בעידן אייג׳נטים: בעבר התאמה אישית הייתה עניין למפתחים או ל-power users. עכשיו התאמה אישית יכולה להיות שיחה. אם יש פעולה שחוזרת על עצמה, אפשר לבקש מהאייג׳נט לבנות לה כלי. ואם הכלי לא מדויק, ממשיכים לערוך אותו בצ׳אט.</p>
+
+<div class="quote">הרעיון אינו “AI יחליף פלאגינים”. הרעיון הוא שכל workflow קטן יכול להפוך לכלי מקומי, ספציפי, משותף, שממשיך לחיות בתוך הקובץ.</div>
+
+<h2>4. Shaders: אפקטים ויזואליים שהיו שמורים למומחים נכנסים ל-Figma</h2>
+
+<p>אחד החלקים הכי ויזואליים ב-keynote היה ההכרזה על Shaders ב-Figma. Raji ניסח את זה בצורה פשוטה: שיידרים כבר קיימים מתחת למכסה המנוע של הרבה דברים שאנחנו רואים — gradients מורכבים, blur מתקדם, glass effects — אבל עד היום הם היו קשים ליצירה, ודורשים ידע מתמטי וטכני.</p>
+
+<p>עכשיו אפשר ליצור shader fills ו-shader effects בעזרת Figma Agent. אפשר להוסיף reference image, לתאר בערך את התחושה הרצויה, ולבקש מהאייג׳נט לבנות אפקט. אחרי שהאפקט נוצר, הוא לא נשאר “קופסה שחורה”: אפשר לשנות sliders, להזיז on-canvas handles, לשלב blend modes, לערום אפקטים, ולחזור לצ׳אט כדי לערוך.</p>
+
+<p>הדמו כלל water caustics, mesh gradients, lens distortion, page curl, gooey merge ואפקטים אינטראקטיביים שמגיבים לעכבר. ההדגמה הייתה כמעט מוגזמת בכוונה, אבל היא מראה את הכיוון: Figma רוצה לאפשר עיצוב חזותי expressive הרבה יותר בלי להכריח את המשתמש לעזוב לכלים נפרדים או ללמוד graphics programming.</p>
+
+<p>זה משנה במיוחד למותגים ומוצרים שרוצים להיראות אחרת. בשנים האחרונות הרבה UI הפך אחיד: cards, gradients, glass, neumorphism, אותו סט של טרנדים. אם שיידרים הופכים נגישים, קל יותר לייצר שפה ויזואלית ייחודית שנשענת על תנועה, distortion, עומק וחומריות — ועדיין נשארת עריכה בתוך Figma.</p>
+
+<div class="note"><strong>זמינות:</strong> יצירת plugins, shader fills ו-shader effects זמינה ב-open beta ל-full seats בתוכניות paid. שיידרים אינטראקטיביים “coming soon”, כדי לטפל בביצועים.</div>
+
+<h2>5. Figma Motion: Timeline הופך ל-design primitive</h2>
+
+<p>החלק הגדול הבא היה Figma Motion, שהוצג על ידי Piers ו-Dave מהצוות שהגיע מ-Modify. כאן Figma נכנסת לטריטוריה של After Effects, Principle, Rive וכלי motion design — אבל מנסה לעשות את זה בדרך Figma: collaborative, real-time, browser-based, עם רכיבים, variables, comments ו-design systems.</p>
+
+<p>ההכרזה המרכזית: timeline הוא design primitive חדש. אפשר להיכנס ל-Motion mode, להוסיף keyframes, לשנות easing, לשחק עם timing, לעשות snapping ו-zooming, ולהרגיש את האנימציה בזמן אמת. הדמו הראה Auto Key עם Shift+K, גרירה של אובייקטים על הקנבס, שינוי scale ו-rotation, ועריכה של easing בזמן שהאנימציה מתנגנת.</p>
+
+<p>אבל Figma לא עוצרת בכלי timeline. גם כאן האייג׳נט נכנס לתמונה: אפשר לבחור כמה designs ולבקש ממנו לייצר fade in, slide in, loop, stagger, או אנימציה מורכבת יותר. כל מה שהאייג׳נט מייצר נשאר editable. כלומר, AI נותן draft, אבל המעצב עדיין עורך, מקצר, מזיז keyframes ומשפר את התחושה.</p>
+
+<p>הדמו הראה גם פלאגין שנבנה עם האייג׳נט כדי לעשות stagger ל-keyframes, כולל אפשרות לסדר את התזמון לפי Bezier curve. זו דוגמה טובה ל-composition של כל ההכרזות: Motion + generative plugins + agent + canvas.</p>
+
+<h2>6. Motion, Shaders וקוד מתחברים לאותו pipeline</h2>
+
+<p>מה שהופך את Figma Motion למעניין הוא לא רק שיש timeline. זה שהוא יושב על שאר פלטפורמת Figma. comments מופיעים גם על הטיימליין. קומפוננטות עם אנימציה מתעדכנות בזמן אמת. Spotlight על משתף פעולה מציג את המיקום שלו בטיימליין. Shader effects יכולים לשבת על אנימציה, וכל הפרמטרים שלהם יכולים להיות מונפשים.</p>
+
+<p>באחד הדמואים הוצג טקסט שנוצר עם path trimming ו-textured brush strokes, ואז קיבל noise displacement ו-chromatic aberration. בדמו אחר, מסך reward באפליקציה שילב motion ושיידרים כדי ליצור תחושת “unlock” עשירה. חשוב: זה לא וידאו שטוח. הטקסט והאובייקטים נשארים Figma layers שאפשר לערוך בזמן אמת.</p>
+
+<p>כשמגיעים לייצור, Figma מציעה כמה נתיבים: Dev Mode, extraction של קוד, שליחה דרך Figma MCP ל-LLM או ל-Figma Make, וגם יצוא ל-MP4, WebM, animated SVG או GIF. כלומר, Figma מנסה לסגור את המעגל מהאקספרימנט הוויזואלי ועד production או asset סופי.</p>
+
+<div class="takeaway"><strong>המשמעות:</strong> Motion לא מוצג כעוד טאאב, אלא כחלק ממערכת אחת שבה עיצוב, אנימציה, אפקטים, קוד ו-AI יכולים להתערבב. זו כנראה נקודת הבידול המרכזית של Figma מול כלי Motion ייעודיים.</div>
+
+<h2>7. Figma Agent: לא רק לעיצוב, אלא לכל מרחב העבודה</h2>
+
+<p>בסוף האירוע Dylan חזר לדבר על Figma Agent. האייג׳נט כבר התגלגל לכולם, והוא מקבל attachments ו-connectors. הקונקטורים הראשונים כוללים Notion, Slack, Granola, Hex, GitHub ו-Atlassian, כדי להביא הקשר ממקומות שבהם העבודה כבר מתרחשת.</p>
+
+<p>עוד הכרזה חשובה היא Custom Skills: אפשר להפוך פרומפטים שחוזרים על עצמם ל-slash commands. דילן נתן דוגמאות כמו בדיקת compliance, יצירת synthetic user test או אוטומציה של workflow צוותי. זו אותה מגמה שראינו בכל ה-keynote: במקום AI כפעולה חד-פעמית, AI כיכולת ארגונית שנשמרת ומשתכפלת.</p>
+
+<p>Figma גם רמזה על FigJam Agent ו-Slides Agent. הדוגמאות היו: לתרגם codebase לדיאגרמות מובנות, להפוך רעיונות ל-prioritization ולוחות זמנים, או להפוך briefs למצגות on-brand. כלומר, Figma לא מסתכלת רק על design file, אלא על כל סט הפעולות סביב מוצר: מחקר, סיעור מוחות, תכנון, הצגה ובנייה.</p>
+
+<h2>מה כבר זמין ומה בדרך</h2>
 
 <div class="grid">
-  <div class="card"><strong>קוד כחומר עיצובי</strong> לא רק handoff למפתחים, אלא שכבה אינטראקטיבית שנמצאת על הקנבס.</div>
-  <div class="card"><strong>יצירה כ-workflow</strong> לא פרומפט בודד, אלא מערכות חוזרות של רפרנסים, איטרציות, consistency וכלים פנימיים.</div>
-  <div class="card"><strong>תנועה ואפקטים</strong> Motion, Shaders ו-3D נכנסים לתוך Figma במקום להישאר בכלים נפרדים.</div>
+  <div class="card"><strong>זמין ב-open beta</strong> Figma Motion, generative plugins, shaders ו-Weave tools.</div>
+  <div class="card"><strong>Coming soon / closed beta</strong> Code Layers, FigJam Agent ו-Slides Agent.</div>
+  <div class="card"><strong>AI credits</strong> לפי ההכרזה, הפיצ׳רים החדשים לא יצרכו AI credits בזמן הבטא.</div>
+  <div class="card"><strong>הרשמה</strong> Early access דרך <span dir="ltr">figma.com/config-betas</span>.</div>
 </div>
 
-<h2>Code Layers: קוד נכנס פיזית לקנבס</h2>
+<h2>הקריאה האמיתית של האירוע: להעלות את התקרה</h2>
 
-<p>ההכרזה הראשונה והכנראה הכי אסטרטגית הייתה <strong>Code Layers</strong>. ניקו, אחד מאנשי Figma, הציג את הבעיה כך: סוכני קוד הפכו את הכתיבה של אלפי שורות קוד לקלה יותר, אבל העבודה סביב הקוד עדיין אינה בנויה לחקירה משותפת. כל אחד נמצא “מאות פרומפטים עמוק” עם הסוכן שלו, ובסוף שולחים הקלטת מסך כדי לנסות להסביר מה נבנה.</p>
+<p>דילן חזר כמה פעמים לרעיון ש-AI “lowers the floor” — כלומר מוריד את סף הכניסה. יותר אנשים יכולים ליצור, לנסות, לבנות, להנפיש, לכתוב קוד ולייצר אפקטים. אבל הוא אמר במפורש שהוא עדיין לא בטוח ש-AI באמת “raises the ceiling”. את התקרה, לטענתו, הקהילה צריכה להעלות.</p>
 
-<p>Code Layers מנסים להפוך את זה למשהו פיגמאי: שכבות קוד שנמצאות על הקנבס, שאפשר להריץ, להשוות, לשכפל, לגרור, לפתוח, ולראות לצד שכבות עיצוב רגילות. אפשר ליצור Code Layer מעיצוב קיים באמצעות “build this with code”, להשתמש בכלי קוד חדש בסרגל הכלים, או לייבא Repository מ-GitHub או תיקייה מקומית ישירות לקנבס.</p>
+<p>זו הבחנה טובה. הרבה כלי AI היום מייצרים ממוצע מהיר: משהו שנראה טוב, עובד בערך, מרשים בדמו, אבל לא בהכרח מעלה את הרמה היצירתית. Figma מנסה להציע תשובה אחרת: אם AI יושב בתוך מרחב שיתופי, עם שכבות עריכות, timeline, קוד חי, שיידרים וכלים מותאמים אישית, אולי הוא לא רק מקצר דרך — אולי הוא מאפשר לאנשים מוכשרים לבדוק יותר כיוונים, לקחת יותר סיכונים ולהגיע רחוק יותר.</p>
 
-<p>הדמו הראה כמה דברים מעניינים במיוחד. אפשר להריץ כמה codebases נפרדים במקביל על הקנבס כדי להשוות רעיונות. אפשר לפתוח את הצ׳אט של השכבה ולראות את ההיסטוריה המשותפת — מי ביקש מהסוכן מה, איך הגיעו לתוצאה, ומה השתנה. ואפשר לייצר branch בצורה הכי פיגמאית שיש: מחזיקים Option וגוררים את השכבה.</p>
+<p>האם זה יעבוד? תלוי בביצוע. Code Layers צריכים להיות יציבים מספיק כדי לא להפוך לגימיק. Motion צריך להיות חזק מספיק למעצבי Motion אמיתיים, אבל פשוט מספיק למעצבי מוצר. שיידרים צריכים להיות מהירים, צפויים ונגישים. והאייג׳נט צריך להבין קונטקסט בלי להפוך כל פעולה לשיחה מתישה.</p>
 
-<div class="note"><strong>למה זה חשוב:</strong> זה ניסיון להפוך Vibe Coding מפעולה פרטית של אדם מול סוכן לפעולה קבוצתית. אם קוד הופך לשכבה שאפשר לראות, לשכפל ולהשוות, צוותי מוצר מקבלים מרחב משותף לחקירה — לא רק Pull Request בסוף.</div>
+<p>אבל הכיוון ברור: Figma לא רוצה להיות רק המקום שבו מסיימים עיצוב. היא רוצה להיות המקום שבו רעיון עובר מסקיצה, דרך code prototype, דרך motion ו-visual effects, ועד handoff וייצוא — באותו קנבס, עם אותו צוות, ועם AI כחלק אינטגרלי מהעבודה.</p>
 
-<p>אחד הרגעים החזקים בדמו היה המעבר מקוד לעיצוב וחזרה. ניקו הקליט Flow מתוך שכבת קוד, Figma חילצה ממנו מצבים סטטיים כעיצוב, ואז המשתתפים ערכו את אותם states בכלי העיצוב הרגילים. לאחר מכן “Update Code Layers” ניתח את השינויים ועדכן את הקוד. מכיוון שהשכבה מחוברת ל-GitHub, אפשר גם לדחוף את השינויים חזרה לריפו.</p>
-
-<p>זה עדיין לא נשמע כמו פתרון מלא ל-production engineering, אבל כ-direction זה חזק: הקו בין prototype, design state ו-implementation מתחיל להיטשטש. Code Layers יושקו ב-closed beta, עם onboarding שמתחיל ביולי, ויהיו זמינים למשתמשי Full Seat בכל התוכניות.</p>
-
-<h2>Weave: לא “תמונה יפה”, אלא workflow יצירתי חוזר</h2>
-
-<p>החלק הבא עסק ב-Weave, החברה שפיגמה רכשה ושילבה בפלטפורמה. איתי שף, ממייסדי Weave, תיאר בעיה שכל מי שעבד עם GenAI ויזואלי מכיר: קל ליצור משהו מעניין, קשה ליצור משהו שימושי לפרויקט אמיתי. עבודה יצירתית מקצועית אינה פרומפט אחד; היא דורשת רפרנסים, איטרציות, עקביות, פידבק, ולעיתים גם כלי עבודה פנימיים שמותאמים לצוות.</p>
-
-<p>Weave מבוססת על workflows ויזואליים, בסגנון node-based. צמתים יכולים להכיל תמונות, וידאו או מודלים תלת־ממדיים, או לבצע פעולות באמצעות מודלי AI וכלים ידניים כמו color grading וטיימליינים. הדמואים כללו יצירת סרטוני 360 למוצרים מתמונות קדמיות ואחוריות, רינדור מהיר של אנימציה בסגנון מסוים, ו-style transfer שמאחד תמונות מוצרים ממקורות שונים לשפה חזותית אחת.</p>
-
-<p>החידוש ב-Figma הוא שה-workflows האלה מגיעים אל הקנבס כ<strong>כלים</strong>. המשתמש לא צריך לראות את “הנודלס” של כל הגרף; הוא בוחר כלי מהרשימה, מסמן inputs ו-style reference, ומקבל output בתוך הקובץ. בהמשך, צוותים יוכלו לארוז workflows משלהם ככלים פנימיים ולשתף אותם דרך Tools Panel.</p>
-
-<div class="takeaway"><strong>הנקודה האסטרטגית:</strong> Figma לא מנסה רק להוסיף “Generate Image”. היא רוצה שכל צוות יוכל להפוך את השפה החזותית שלו לכלים חוזרים — כאלה שמייצרים consistency ולא רק וריאציה אקראית.</div>
-
-<h2>Generative Plugins: כל אחד בונה את הכלי הקטן שחסר לו</h2>
-
-<p>אחר כך הגיעו Georgia ו-Raji עם הכרזה שמתחברת היטב ל-Weave: החל מ-Config 2026 אפשר <strong>לייצר פלאגינים בעזרת Figma Agent</strong>. אלו אינם הפלאגינים הקלאסיים שדורשים Desktop App, קוד ופרסום לקהילה. הם חיים בתוך הקובץ, מופיעים ב-Properties Panel, אפשר להשתמש בהם ולשתף אותם ישירות, והם נבנים בכמה פרומפטים.</p>
-
-<p>הדמו התחיל מצורך קטן ומוכר: באפליקציית אודיו היו מלבנים שטוחים, והמעצבת רצתה להפוך אותם ל-waveform אורגני. היא ביקשה מהסוכן ליצור פלאגין שמרנדמז את הגובה של תוכן הפריים כך שייראה כמו waveform אמיתי. בלי לכתוב קוד, נוצר כלי קטן עם controls, והיא יכלה להריץ אותו, לשנות פרמטרים ולשפר.</p>
-
-<p>הדוגמאות הבאות היו אפילו יותר מעניינות כי הן הראו את הרעיון של פלאגין אישי או צוותי: פלאגין שמייצר Bento grids בסגנון של מעצב ספציפי, פלאגין שמייצר מסלולי מרוצים אמיתיים על בסיס data, ופלאגין לעיצוב ציפורניים באסתטיקה של Config. הרעיון הוא לא שכל אלה “חשובים” בפני עצמם, אלא שהסף לבניית כלי קטן יורד כמעט לאפס.</p>
-
-<p>יש כאן שינוי תרבותי: במקום לבקש מצוות פלטפורמה לבנות utility קטן, או לוותר כי “זה רק חוסך חמש דקות בשבוע”, מעצב יכול לנסות לבנות אותו בעצמו. ואם הכלי שימושי, הוא נשאר עם הקובץ או הצוות. זה סוג חדש של אוטומציה יצירתית: לא מערכת ענקית, אלא הרבה כלים קטנים ומקומיים.</p>
-
-<h2>Shaders: אפקטים שהיו שמורים למי שמבין מתמטיקה</h2>
-
-<p>אחד החלקים הכי צבעוניים בקינוט היה ההכרזה על <strong>Shaders ב-Figma</strong>. Raji הסביר ששיידרים כבר קיימים מאחורי הקלעים של רינדור הקנבס — למשל ב-blur, glass effects או gradients — אבל עד עכשיו היה קשה מאוד ליצור אותם בעצמך. עכשיו אפשר ליצור Shader Fills ו-Shader Effects בעזרת Figma Agent.</p>
-
-<p>Shader Fill הוא חומר המקור: צבעים, gradients, images ודברים שממלאים שכבה. Shader Effect יושב מעל החומר ומשנה אותו: מעוות, מכופף, מטשטש, ממזג, מוסיף lens distortion, chromatic aberration, page curl, gooey merge, interactive particles ועוד. הדמו הדגיש שהכול נשאר שכבות Figma אמיתיות, לא תמונה שטוחה.</p>
-
-<p>החלק החשוב הוא האינטראקציה. לשיידרים יש sliders ו-on-canvas handles, כך שאפשר לשנות אותם באופן ישיר. אפשר גם לערוך אותם דרך הסוכן, להוסיף reference image, לבקש אפקט “שנראה כמו זה”, ואז להמשיך בלולאת edit. Effects יכולים להיות stackable: משנים את הסדר, מקבלים תוצאה אחרת, ומתחילים לשחק כמו עם blend modes — רק הרבה יותר עמוק.</p>
-
-<div class="note"><strong>זמינות:</strong> יצירת פלאגינים, Shader Effects ו-Shader Fills עם הסוכן זמינה למשתמשי Full Seat בתוכניות בתשלום. Interactive Shaders יגיעו בהמשך אחרי ש-Figma תשלים אופטימיזציות ביצועים, ובהמשך תהיה גם אפשרות לפרסם לארגון ולקהילה.</div>
-
-<h2>Figma Motion: טיימליין הופך לפרימיטיב עיצובי</h2>
-
-<p>ההכרזה הגדולה השנייה הייתה <strong>Figma Motion</strong>, שנולדה מהצוות של Modify. פיגמה מציגה את Motion לא כתוסף צדדי, אלא כפרימיטיב חדש בתוך Figma Design. יש Timeline, Keyframes, Easing, Presets, Styles, Variables ו-Components — וכל זה עובד עם שאר המערכת של Figma.</p>
-
-<p>הדמו התחיל בפעולה פשוטה: נכנסים ל-Motion Mode, לוחצים Space והעיצוב מתעורר לחיים. כדי להוסיף אנימציה מפעילים Auto Key עם Shift+K, מזיזים אובייקט, מוסיפים rotation או scale, ומנגנים. אפשר לערוך easing בזמן שהאנימציה מתנגנת, לגרור keyframes, לשנות תזמון, ולראות הכול על הקנבס.</p>
-
-<p>גם כאן הסוכן הוא לא “קסם סופי” אלא accelerator. Piers ביקש מה-Agent להוסיף לכל התמונות fade in, לטקסטים slide-and-fade, ואז fade out כדי ליצור loop. התוצאה הייתה עריכה מלאה על הטיימליין — לא וידאו סגור. כשה-transition out היה איטי מדי, הוא פשוט בחר keyframes ושינה תזמון.</p>
-
-<p>אחד הדמואים היפים היה Plugin שנבנה כדי לפתור פעולה מייגעת בטיימליין: stagger של אובייקטים. במקום להזיז ידנית בלוקים של keyframes, הפלאגין מאפשר לבחור אובייקטים, להגדיר מרווח, להפוך סדר, ואפילו לסדר כניסה לפי Bezier curve. לפי המציג, הכלי נבנה בארבעה או חמישה פרומפטים.</p>
-
-<p>Figma גם הציגה Preview של <strong>3D Transforms</strong>: אנימציה של X, Y ו-Z, עם controls תלת־ממדיים על הקנבס. זה עדיין לא ההכרזה המלאה, אבל המסר ברור: Motion לא מיועד רק למיקרו־אינטראקציות קטנות, אלא לשפה ויזואלית עשירה יותר.</p>
-
-<h2>החיבור החשוב: Motion + Shaders + Design Systems</h2>
-
-<p>החלק הכי מעניין ב-Figma Motion אינו עצם קיומו של טיימליין. After Effects, Principle, Rive וכלים אחרים קיימים שנים. מה שמעניין הוא החיבור של Motion לכל מה שכבר נמצא ב-Figma: קומפוננטות, comments, collaboration, variables, dev mode, MCP, וכעת גם shaders.</p>
-
-<p>בדמו, comments הופיעו גם על הטיימליין; spotlight למשתמש אחר הציג את המיקום שלו בתוך האנימציה; שינוי בקומפוננטה התעדכן בזמן אמת בסצנה; ו-Shader Effects יושמו על גבי תוכן מונפש. כלומר, אפקטים לא היו “בייקד” לתוך וידאו, אלא חיו מעל שכבות Figma אמיתיות והגיבו לתנועה שמתחתיהן.</p>
-
-<p>פיגמה הראתה גם איך לוקחים את זה לייצור. אם רוצים לבנות, עוברים ל-Dev Mode, מחלצים קוד ישירות, או שולחים דרך Figma MCP ל-LLM או ל-Figma Make. ואם לא רוצים קוד, אפשר לייצא MP4, WebM, Animated SVG או GIF. Motion יוצא ל-beta היום בכל התוכניות למשתמשי Full Seat.</p>
-
-<div class="takeaway"><strong>למה זה משנה למוצר:</strong> אם motion נשאר בכלי נפרד, הוא הופך מהר מאוד לנספח: קובץ וידאו, הסבר למפתח, או reference. אם הוא חי בתוך מערכת העיצוב, עם רכיבים, comments ו-handoff, הוא יכול להפוך לחלק אמיתי מהשפה המוצרית.</div>
-
-<h2>Figma Agent מתרחב: Connectors, Skills, FigJam ו-Slides</h2>
-
-<p>לקראת הסוף פילד חזר ל-Figma Agent, שהחל להתגלגל לכל המשתמשים יום לפני הקינוט. הסוכן תומך ב-attachments וב-connectors שמושכים context מכלים כמו Notion, Slack, Granola, Hex, GitHub ו-Atlassian. כלומר, הוא לא אמור לעבוד רק על מה שנמצא בקובץ, אלא להביא לתוך העיצוב מידע ממערכות העבודה של הצוות.</p>
-
-<p>הוכרזו גם <strong>Custom Skills</strong>: אפשר להפוך פרומפטים שחוזרים על עצמם לפקודות slash חוזרות. פילד נתן דוגמאות כמו בדיקות compliance, יצירת synthetic user test, או אוטומציה של workflow צוותי. זו נקודה מעניינת במיוחד כי היא מחברת בין Agent לבין ידע ארגוני: לא רק “תעשה לי X”, אלא “תעשה את X בדרך שבה הצוות שלנו עושה X”.</p>
-
-<p>ולבסוף הגיע tease להמשך: FigJam Agent ו-Slides Agent. פילד תיאר אפשרויות כמו תרגום codebase לדיאגרמות מובנות, הפיכת רעיונות ל-prioritization ו-next steps, או הפיכת customer briefs למצגות pitch deck ממותגות. כלומר, הסוכן של Figma מתחיל כעוזר עיצוב, אבל הכיוון הוא עוזר עבודה רחב יותר לכל תוצר ויזואלי ושיתופי.</p>
-
-<h2>מה זמין עכשיו ומה מגיע בהמשך</h2>
-
-<ul class="timeline">
-  <li><strong>זמין ב-open beta:</strong> Figma Motion, Generative Plugins, Shaders ו-Weave Tools.</li>
-  <li><strong>ללא צריכת קרדיטי AI בזמן הבטא:</strong> לפי פילד, העדכונים שהוצגו לא יצרכו AI credits בזמן שהם ב-beta.</li>
-  <li><strong>Closed beta / בקרוב:</strong> Code Layers, FigJam Agent ו-Slides Agent.</li>
-  <li><strong>הרשמה מוקדמת:</strong> Figma הפנתה לכתובת <span dir="ltr">figma.com/config-betas</span> למי שרוצה לנסות את הבטאות הסגורות.</li>
-  <li><strong>Config הבא:</strong> Figma הכריזה שגם Config 11 ייצא לדרך מאוחר יותר השנה, בבנגלור, הודו, ב-15 באוקטובר.</li>
-</ul>
-
-<h2>הקריאה בין השורות: Figma רוצה להיות המקום שבו ה-AI נהיה צוותי</h2>
-
-<p>הסיפור הגדול של Config 2026 הוא לא “Figma הוסיפה AI”. זה כבר קרה. הסיפור הוא ש-Figma מנסה לפתור בעיה עמוקה יותר של עידן הסוכנים: עבודה יצירתית עם AI נוטה להיות פרטית, מפוזרת ולא שקופה. כל אחד עובד בצ׳אט שלו, עם context שלו, ומביא תוצאה בסוף. זה מנוגד ל-DNA של Figma, שבנתה את עצמה סביב קנבס משותף.</p>
-
-<p>לכן כמעט כל הכרזה בקינוט מנסה להחזיר את ה-AI למרחב משותף: Code Layers מציגים קוד על הקנבס; Generative Plugins נשארים בקובץ; Weave Tools אורזים workflows לצוות; Shader ו-Motion נשארים עריכים; הצ׳אטים של הסוכן נשמרים וניתנים ללמידה; ו-Connectors מביאים context חיצוני לתוך הקובץ.</p>
-
-<p>זו גם הסיבה שהמשפט “Code is material for design” כל כך חשוב. פיגמה לא רוצה שהמעצב יהפוך למפתח במובן הצר. היא רוצה שכל חומר שמרכיב מוצר דיגיטלי — קוד, תנועה, אפקט, data, workflow, כלי פנימי — יהיה משהו שאפשר לעבוד עליו יחד, ויזואלית, באותה סביבת עבודה.</p>
-
-<div class="takeaway"><strong>המסר הכי מעניין:</strong> AI לבדו מוריד את הרצפה. הקנבס המשותף אמור להעלות את התקרה. אם Figma תצליח, היתרון שלה לא יהיה “הסוכן הכי חכם”, אלא היכולת להפוך תוצרים של סוכנים לחומרים משותפים, עריכים, וניתנים להמשך עבודה.</div>
-
-<h2>מה לקחת מזה כמעצב, PM או בונה מוצר</h2>
-
-<ul>
-  <li><strong>פרוטוטייפים עומדים להתקרב לקוד:</strong> Code Layers ו-Make מראים כיוון שבו חקירה, עיצוב ויישום מתקרבים זה לזה.</li>
-  <li><strong>כלים פנימיים קטנים יהפכו לנורמה:</strong> Generative Plugins ו-Skills מאפשרים לצוותים לבנות אוטומציות ספציפיות בלי להפוך כל צורך לפרויקט הנדסי.</li>
-  <li><strong>Consistency תהיה קריטית יותר מ-generation:</strong> Weave מדגישה שהערך אינו ביצירת asset בודד, אלא בבניית workflow חוזר שמייצר שפה עקבית.</li>
-  <li><strong>Motion ואפקטים יעברו שמאלה בתהליך:</strong> במקום להגיע בסוף כ-polish, הם יכולים להפוך לחלק ממערכת העיצוב וה-handoff.</li>
-  <li><strong>הפער בין כלי AI פרטיים לבין עבודה צוותית יגדל:</strong> מי שיצליח לחבר AI לשפה, לקבצים ולזיכרון של הצוות יקבל יתרון אמיתי.</li>
-</ul>
-
-<p>Config 2026 היה קינוט עמוס, אולי אפילו עמוס מדי. אבל מתחת לדמואים הצבעוניים הייתה טענה פשוטה: העתיד של כלי העיצוב לא יהיה עוד חלון צ׳אט שמייצר דברים. הוא יהיה קנבס שבו כל סוגי החומר — קוד, תנועה, ויזואליה, נתונים, כלים וסוכנים — יכולים להיפגש, להתערבב, ולהפוך למוצר יחד.</p>
-
-<p>פילד סיים בקריאה לקהל: “AI יכול להוריד את הרצפה. זה תלוי בכם להעלות את התקרה.” אם צריך לסכם את Config 2026 במשפט אחד, זה בדיוק זה: Figma מנסה לתת ליוצרים יותר חומרים ויותר מנופים, אבל להשאיר את השאלה החשובה אצלם — מה תבנו עכשיו כשאפשר לבנות כמעט כל דבר?</p>
+<div class="takeaway"><strong>אם צריך לסכם במשפט אחד:</strong> Config 2026 מציגה את Figma כמערכת הפעלה ליצירה מוצרית בעידן AI — לא עוד כלי למסכים, אלא קנבס שבו החומרים עצמם משתנים: קוד, תנועה, שיידרים, דאטה, פלאגינים ואייג׳נטים.</div>
 
 <div class="source-link">
-  <strong>מקור:</strong> <a href="https://www.youtube.com/watch?v=2ZCc4k_IV5w" target="_blank">Config 2026 Keynote — YouTube</a><br>
-  <strong>קישור מקוצר שנמסר:</strong> <a href="https://share.google/YrvlqVRpcaDQbsv24" target="_blank">share.google/YrvlqVRpcaDQbsv24</a>
+<strong>מקור:</strong> <a href="https://www.youtube.com/watch?v=2ZCc4k_IV5w" target="_blank">Config 2026 Keynote</a>
 </div>
 
 </div>
