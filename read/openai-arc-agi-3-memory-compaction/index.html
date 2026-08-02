@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenAI: שני שינויים ששילשו את הציון ב-ARC-AGI-3</title>
+<meta name="description" content="תרגום מלא לעברית: שמירת החשיבה ו-Compaction שילשו את ציון GPT-5.6 Sol ב-ARC-AGI-3 והפחיתו פי שישה את מספר טוקני הפלט.">
+<meta property="og:title" content="שני שינויים ששילשו את הציון ב-ARC-AGI-3">
+<meta property="og:description" content="המודל לא היה הבעיה. ה-Harness גרם לו לשכוח. תרגום מלא למאמר של OpenAI.">
+<meta property="og:image" content="https://shnitzels.github.io/friday-share/read/openai-arc-agi-3-memory-compaction/arc-game.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="OpenAI: שני שינויים ששילשו את הציון ב-ARC-AGI-3">
+<meta name="twitter:description" content="שמירת החשיבה ו-Compaction: פי 3 בציון, פי 6 פחות טוקני פלט.">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f5f2;color:#20211f;font-family:'Noto Sans Hebrew',sans-serif;font-size:18px;line-height:1.82}.page{max-width:930px;margin:0 auto;background:#fff;min-height:100vh;padding:58px 72px 78px}.eyebrow{font-size:14px;font-weight:700;color:#08786c;letter-spacing:.04em;margin-bottom:12px}h1{font-size:45px;line-height:1.18;margin:0 0 18px;font-weight:700}.dek{font-size:22px;line-height:1.58;color:#555;margin:0 0 25px}.meta{font-size:15px;color:#777;border-top:1px solid #e2e4df;border-bottom:1px solid #e2e4df;padding:14px 0;margin-bottom:34px}.meta a,.footer a{color:#08786c}.hero{margin:0 0 36px}.hero img{display:block;width:100%;border-radius:12px;border:1px solid #e5e5e5}.hero figcaption{font-size:14px;color:#777;line-height:1.55;margin-top:10px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:34px 0}.stat{background:#eff8f5;border:1px solid #d7ebe5;border-radius:12px;padding:20px;text-align:center}.stat strong{display:block;font-size:31px;line-height:1.1;color:#08786c;direction:ltr}.stat span{display:block;font-size:14px;color:#54625f;margin-top:8px}h2{font-size:30px;line-height:1.35;margin:52px 0 18px;padding-top:8px;border-top:2px solid #242624}p{margin:0 0 20px}ul{margin:0 0 23px;padding-right:27px}li{margin:8px 0}.callout{background:#fff8e7;border-right:4px solid #d8a118;border-radius:8px;padding:18px 20px;margin:30px 0}.recommend{background:#202824;color:#fff;border-radius:14px;padding:26px 28px;margin:34px 0}.recommend h2{color:#fff;border:0;margin:0 0 14px;padding:0;font-size:25px}.recommend ul{margin-bottom:0}.footer{margin-top:58px;padding-top:24px;border-top:1px solid #ddd;color:#666;font-size:15px}@media(max-width:700px){body{font-size:17px}.page{padding:30px 18px 52px}h1{font-size:32px}.dek{font-size:19px}.stats{grid-template-columns:1fr}.stat{text-align:right}.stat strong{display:inline-block;margin-left:10px}.stat span{display:inline}h2{font-size:25px}}
+</style>
+</head>
+<body><main class="page">
+<div class="eyebrow">OPENAI · תרגום מלא</div>
+<h1>איך שני שינויים בהגדרות שילשו את הציון שלנו ב-ARC-AGI-3</h1>
+<p class="dek">GPT-5.6 Sol לא התקשה במשחקים משום שחסרה לו יכולת. ה-Harness גרם לו לשכוח את החשיבה שלו, ובהמשך גם את הפעולות הקודמות. כש-OpenAI הפעילה שמירת חשיבה ו-Compaction, הציון זינק כמעט פי שלושה ומספר טוקני הפלט ירד פי שישה.</p>
+<div class="meta">OpenAI · 2 באוגוסט 2026 · <a href="https://openai.com/index/how-two-settings-tripled-our-arc-agi-3-scores/" target="_blank" rel="noopener">המאמר המקורי באנגלית</a></div>
+
+<div class="stats">
+  <div class="stat"><strong>13.3% → 38.3%</strong><span>ציון RHAE על סט המשימות הציבורי</span></div>
+  <div class="stat"><strong>3×</strong><span>שיפור בקירוב בציון</span></div>
+  <div class="stat"><strong>6× פחות</strong><span>טוקני פלט</span></div>
+</div>
+
+<p>GPT-5.6 Sol פתר בעיות פתוחות ותיקות במתמטיקה, בהן השערת כיסוי המחזורים הכפול, ואף ניצח במשחקים כמו Pokémon FireRed. אבל ב-ARC-AGI-3, בנצ׳מרק המבוסס על משחקי פאזל דו-ממדיים, הוא קיבל רק 7.8%. GPT-5.5 כמעט שלא הצליח לשחק כלל וקיבל 0.4% בלבד.</p>
+<p>האם משחקי פאזל דו-ממדיים קשים במיוחד למודלים שלנו? או שמשהו אחר התרחש?</p>
+<p>בנצ׳מרקים כמעט אף פעם אינם מודדים מודל AI בבידוד. הם מודדים גם שורה של החלטות פחות גלויות: הגדרות API, תכנון ה-Harness והפרומפטים. במקרה של ARC-AGI-3 גילינו שהפעלת שתי הגדרות API שבהן אנו משתמשים ב-ChatGPT וב-Codex, <strong>שמירת החשיבה</strong> ו-<strong>Compaction</strong>, שילשה את הציונים והפחיתה פי שישה את מספר טוקני הפלט בסט המשימות הציבורי.</p>
+
+<div class="callout"><strong>המספרים:</strong> עם ה-Harness הרשמי, GPT-5.6 Sol קיבל 13.3% בסט הציבורי של ARC-AGI-3. עם שמירת חשיבה ו-Compaction הוא קיבל 38.3%. הציון מבוסס על Relative Human Action Efficiency, מדד המשווה את ביצועי המודל לקו בסיס אנושי. על סמך יומני המשחק הרשמיים, אנו מעריכים שהבודק האנושי הממוצע קיבל 48%.</div>
+
+<h2>מהו ARC-AGI-3?</h2>
+<p>ARC-AGI-3 הוא בנצ׳מרק שנועד למדוד עד כמה סוכני AI מסוגלים ללמוד ולהסיק. הסוכנים חוקרים משחקי 2D לא מוכרים ומנסים להבין את חוקיהם ללא הוראות מפורשות. אפשר לשחק ב-25 משחקי הדגמה באתר ARC Prize.</p>
+<p>ה-Harness של ARC-AGI-3 גנרי במכוון, ללא כלים או יכולות מיוחדות. ההיגיון של ARC הוא ש-Harness פשוט חושף טוב יותר את מגבלות המודל ומאפשר השוואה הוגנת יותר בין מודלים. מפתחים מסחריים, לעומת זאת, מתאימים את ה-Harness ליכולות ולמאפיינים של כל מודל.</p>
+
+<figure class="hero">
+  <img src="arc-game.webp" alt="GPT-5.6 Sol ב-Codex משלים אתגר אקראי במשחק Slay the Spire 2" loading="lazy">
+  <figcaption>איתן מוליק מציג את GPT-5.6 Sol ב-Codex מנצח אתגר יומי אקראי ב-Slay the Spire 2, משחק שיצא לאחר מועד חיתוך הידע של המודל. צילום: OpenAI / Ethan Mollick.</figcaption>
+</figure>
+
+<p>ככל שבדקנו לעומק, גילינו שחלק גדול מן הבלבול של המודל לא נבע מהמודל עצמו, אלא מן ההגדרות של ה-Harness.</p>
+<p>ראשית, לאחר כל פעולה במשחק, כל החשיבה הפרטית של המודל נמחקה. בכל פעולה GPT-5.6 Sol נדרש להבין את המשחק מחדש, בלי לזכור את מה שחשב קודם. המודל עדיין ראה היסטוריה של המהלכים וכמה הערות קצרות, אבל לא את התוכניות, התובנות או המחשבות שהובילו אליהם.</p>
+<p>שנית, ה-Harness השתמש בחלון קיטום מתגלגל. כשההיסטוריה התארכה, פעולות ישנות יותר הפכו לבלתי נראות. כלומר, GPT-5.6 Sol לא רק שכח את החשיבה הקודמת שלו, אלא איבד בהדרגה גם את הזיכרון של פעולותיו.</p>
+<p>שתי התכונות האלה יחד, מחיקת החשיבה וקיטום מתגלגל, הסבירו במידה רבה מדוע המודל התקשה ללמוד לאורך זמן.</p>
+
+<h2>סוכנים מצליחים יותר כשהם זוכרים מה עשו</h2>
+<p>המודלים שלנו מאומנים לחשוב באמצעות הודעות חשיבה פרטיות לפני שהם מפיקים תשובה או קריאה לכלי. הודעות החשיבה האלה נשמרות כחלק מהיסטוריית השיחה. כשהשיחה נעשית ארוכה מדי, אנחנו מסכמים אותה וממשיכים.</p>
+<p>כך המודלים מאומנים, וכך הם מופעלים ב-ChatGPT וב-Codex. כדי להתקרב לסביבת הפרודקשן שלנו, מימשנו את ה-Harness של ARC-AGI-3 באמצעות Responses API. ב-GPT-5.6, העברת מזהה התשובה הקודמת שומרת אוטומטית את החשיבה לאורך קריאות לכלים וסבבים נוספים.</p>
+<p>כששמרנו את החשיבה, ראינו שני שינויים גדולים. ראשית, GPT-5.6 Sol השקיע פחות זמן בחשיבה לפני כל פעולה, מפני שלא נדרש לפרש את המשחק מחדש בכל תור. שנית, כשהוא זכר את מחשבותיו הקודמות, הוא למד טוב יותר לאורך זמן והפעיל אסטרטגיות עקביות.</p>
+
+<h2>במקום קיטום מתגלגל: Compaction</h2>
+<p>השיפור הבא הגיע כשהחלפנו את הקיטום המתגלגל ב-Compaction, הגדרה נוספת ב-Responses API.</p>
+<p>ה-Harness המקורי של ARC-AGI-3 מתמודד עם מגבלת ההקשר באמצעות קיטום מתגלגל: כשהקשר השיחה חוצה 175,000 תווים, ההודעות הישנות ביותר נמחקות.</p>
+<p>לקיטום מתגלגל יש שני חסרונות. ראשית, המודל מאבד תצפיות ופעולות מוקדמות. שנית, הוא מבצע חלק גדול מן המשימה כשחלון ההקשר שלו מלא יחסית, מצב שעלול לפגוע מעט בביצועים.</p>
+<p>לאחר שהפעלנו Compaction, GPT-5.6 Sol הצליח לשמר טוב יותר את מה שלמד על כל משחק לאורך ריצות ארוכות. התוצאה הייתה ציון גבוה יותר בפחות טוקני פלט.</p>
+<p>במימוש שלנו השתמשנו במגבלה של 175,000 טוקנים, ולא תווים. בפועל, ההבדל קטן יחסית במקרה הזה, מפני שרוב הטקסט הוא רשתות הפעולות של המשחק, שהטוקנייזר שלנו מקודד ביחס הקרוב ל-1:1.</p>
+<p><strong>ביחד, שמירת החשיבה ו-Compaction אפשרו ל-GPT-5.6 Sol במצב max להגיע לכמעט פי שלושה בציון, תוך שימוש בפי שישה פחות טוקני פלט.</strong></p>
+
+<h2>מסקנה</h2>
+<p>הניסויים האלה מזכירים שבנצ׳מרקים כמעט אף פעם אינם מודדים מודל לבדו. הם מודדים חבילה שלמה של החלטות פחות נראות בנוגע להגדרות API, מבנה ה-Harness והפרומפטים. זו אינה הפעם הראשונה שבה הופתענו מציון נמוך בבנצ׳מרק ציבורי, ואז גילינו שמריץ ההערכה השתמש ב-Harness גנרי שהשמיט את הודעות החשיבה.</p>
+
+<div class="recommend">
+<h2>ההמלצות של OpenAI למפתחי API</h2>
+<ul>
+<li>השתמשו ב-Responses API, לא ב-Chat Completions API הוותיק.</li>
+<li>שמרו את החשיבה לאורך הסבבים.</li>
+<li>הפעילו Compaction בשיחות ארוכות.</li>
+</ul>
+</div>
+
+<p>ולמי שמשווה בין מודלים, אנו ממליצים להסתמך על הערכות המשתמשות בהגדרות האלה, משום שהן משקפות בצורה הטובה ביותר את אופן השימוש האמיתי במודלים בתוך ChatGPT ו-Codex.</p>
+<p>אנו מודים ל-ARC על שנים של עבודה יצירתית בתחום הערכת AGI ועל הניתוח שהוביל אותנו לבחון את התוצאה לעומק.</p>
+
+<div class="footer">תרגום נאמן למאמר של OpenAI. <a href="https://openai.com/index/how-two-settings-tripled-our-arc-agi-3-scores/" target="_blank" rel="noopener">למקור באנגלית</a>.</div>
+</main></body>
+</html>
