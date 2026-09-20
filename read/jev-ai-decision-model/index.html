@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jev: מודל ה-AI שלא כותב, אלא מחליט</title>
+<meta name="description" content="Jev מקבל מידע וסכמת פלט, ומחזיר החלטות מובנות עם הסתברויות. כך הוא מנסה להפוך מיון, ניתוב ותעדוף לשכבת AI מהירה וזולה בתוך תוכנה.">
+<meta property="og:title" content="Jev: מודל ה-AI שלא כותב, אלא מחליט">
+<meta property="og:description" content="1,700 אימיילים, 4.2 מיליון טוקנים ו-18 סנט: ההבטחה של מודל החלטות מהיר, זול ומובנה לתוך תוכנה.">
+<meta property="og:image" content="https://shnitzels.github.io/friday-share/read/jev-ai-decision-model/jev-cover.png">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shnitzels.github.io/friday-share/read/jev-ai-decision-model/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Jev: מודל ה-AI שלא כותב, אלא מחליט">
+<meta name="twitter:description" content="מה קורה כשמחליפים את הצ׳אט במנוע החלטות שמחזיר תשובה מובנית בתוך כ-200 מילישניות?">
+<meta name="twitter:image" content="https://shnitzels.github.io/friday-share/read/jev-ai-decision-model/jev-cover.png">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { max-width: 100%; overflow-x: hidden; }
+body { font-family: 'Noto Sans Hebrew', sans-serif; font-size: 18px; line-height: 1.85; color: #1b1720; background: #fff; padding: 38px 20px 64px; }
+.container { max-width: 900px; margin: 0 auto; }
+h1 { font-size: 38px; font-weight: 800; line-height: 1.22; margin: 0 0 12px; letter-spacing: -0.4px; }
+h2 { font-size: 26px; font-weight: 800; line-height: 1.4; margin: 50px 0 16px; }
+h3 { font-size: 21px; font-weight: 700; margin: 30px 0 10px; }
+p { margin-bottom: 19px; }
+a { color: #6f1db8; overflow-wrap: anywhere; }
+.subtitle { font-size: 21px; line-height: 1.55; color: #5d5661; margin-bottom: 28px; }
+.hero { width: 100%; display: block; border-radius: 16px; margin: 8px 0 26px; box-shadow: 0 12px 32px rgba(68, 12, 74, .14); }
+.meta { background: #f7f3f9; border-right: 4px solid #a516ad; border-radius: 10px; padding: 19px 23px; margin: 0 0 36px; font-size: 16px; line-height: 1.9; overflow-wrap: anywhere; }
+.bottom-line { background: linear-gradient(135deg, #fff3ff, #f6f2ff); border: 1px solid #e3c9ef; border-right: 5px solid #a516ad; border-radius: 12px; padding: 22px 24px; margin: 28px 0 36px; }
+.bottom-line strong { font-size: 20px; }
+.metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 28px 0; }
+.metric { background: #17131a; color: #fff; border-radius: 12px; padding: 18px 14px; text-align: center; }
+.metric b { display: block; color: #ff7ff4; font-size: 25px; line-height: 1.2; margin-bottom: 5px; direction: ltr; }
+.metric span { font-size: 14px; line-height: 1.45; display: block; }
+.flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: stretch; gap: 10px; margin: 28px 0; direction: rtl; }
+.flow .step { background: #faf8fb; border: 1px solid #e6dfe9; border-radius: 11px; padding: 17px; }
+.flow .arrow { display: flex; align-items: center; font-size: 25px; color: #a516ad; }
+.callout { background: #fff8e8; border-right: 4px solid #e3a008; border-radius: 9px; padding: 19px 22px; margin: 27px 0; }
+.limit { background: #fff2f2; border-right: 4px solid #ce3f4b; border-radius: 9px; padding: 19px 22px; margin: 27px 0; }
+.example { border: 1px solid #e7e0e9; border-radius: 12px; padding: 20px 22px; margin: 18px 0; background: #fcfbfd; }
+.example strong { color: #74137c; }
+ul, ol { margin: 10px 28px 24px 0; }
+li { margin-bottom: 10px; }
+.quote { border-right: 3px solid #cab9cf; color: #504655; padding: 4px 20px 4px 0; margin: 24px 0; font-style: italic; }
+.source { margin-top: 54px; padding-top: 24px; border-top: 1px solid #ddd; color: #655e68; font-size: 15px; }
+.ltr { direction: ltr; unicode-bidi: isolate; display: inline-block; }
+@media (max-width: 760px) {
+  body { font-size: 17px; padding: 24px 15px 48px; }
+  h1 { font-size: 30px; }
+  h2 { font-size: 23px; margin-top: 42px; }
+  .subtitle { font-size: 19px; }
+  .metric-grid { grid-template-columns: repeat(2, 1fr); }
+  .flow { grid-template-columns: 1fr; }
+  .flow .arrow { transform: rotate(90deg); justify-content: center; height: 18px; }
+}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>מודל ה-AI שלא כותב, אלא מחליט: <bdi dir="ltr">Jev</bdi></h1>
+<p class="subtitle">במקום לבקש ממודל שיחשוב בקול וינסח תשובה, מגדירים לו אפשרויות החלטה והוא מחזיר הסתברויות בתוך מבנה נתונים מוכן לקוד. זו נראית כמו הבחנה קטנה, אבל היא עשויה לפתוח קטגוריה שלמה של אוטומציה מהירה וזולה.</p>
+
+<img class="hero" src="jev-cover.png" alt="תמונת הפרק Jev is HERE מתוך The Startup Ideas Podcast">
+
+<div class="meta">
+<strong>מקור:</strong> <a href="https://podcasts.apple.com/il/podcast/jev-is-here-how-to-use-it/id1593424985?i=1000790562941" target="_blank" rel="noopener">Jev is HERE. How to use it</a>, מתוך <span class="ltr">The Startup Ideas Podcast</span><br>
+<strong>משתתפים:</strong> גרג אייזנברג וריאן ווגל, מהצוות המייסד של <span class="ltr">OpenCode</span><br>
+<strong>פורסם:</strong> 18 בספטמבר 2026<br>
+<strong>אורך:</strong> 28:24 דקות<br>
+<strong>בסיס הכתבה:</strong> תמלול הפרק ותיאורו הרשמי. נתוני ביצועים ודוגמאות מיוחסים לדוברים ולא אומתו בבדיקה עצמאית מלאה.
+</div>
+
+<div class="bottom-line"><strong>השורה התחתונה:</strong> <span class="ltr">Jev</span> אינו עוד צ׳אטבוט. הוא בנוי להיות שכבת החלטות בתוך תוכנה. מכניסים אובייקט, למשל אימייל, ומגדירים סכמת פלט כמו קטגוריה, דחיפות, סיכוי לספאם והאם נדרשת תשובה. המודל מחזיר החלטות מובנות והסתברויות במהירות שלטענת ריאן היא סביב 200 מילישניות לשאילתה. הערך אינו בכתיבת טקסט יפה, אלא בהפיכת זרם מידע לפעולה הבאה.</div>
+
+<div class="metric-grid">
+  <div class="metric"><b>1,700</b><span>אימיילים בדמו</span></div>
+  <div class="metric"><b>4.2M</b><span>טוקני קלט</span></div>
+  <div class="metric"><b>$0.18</b><span>עלות כוללת שדווחה</span></div>
+  <div class="metric"><b>~200ms</b><span>זמן לשאילתה לפי הדובר</span></div>
+</div>
+
+<h2>המודל המנטלי: לא לשאול את <span class="ltr">Jev</span>, אלא להעביר אליו החלטה</h2>
+<p>שנים של עבודה עם ChatGPT ו-Claude הרגילו אותנו לזהות AI עם שיחה. שולחים פרומפט, המודל מייצר טקסט, ולעיתים גם מפרט הסבר או שרשרת פעולות. ריאן ווגל טוען שזה בדיוק המודל המנטלי שצריך לשבור כדי להבין את <span class="ltr">Jev</span>.</p>
+<p><span class="ltr">Jev</span> הוא מסווג. הוא מקבל שני דברים: <strong>קלט</strong> ו<strong>סכמת פלט</strong>. הקלט יכול להיות אימייל שלם, טופס ליד, תמלול, אירוע תמיכה או מצב בדפדפן. הסכמה מגדירה מראש אילו תשובות חוקיות: קטגוריה מתוך רשימה, מספר בין אפס לאחד, רמת עדיפות או פעולה אפשרית.</p>
+
+<div class="flow">
+  <div class="step"><strong>1. קלט</strong><br>אימייל, טופס, תמלול או מצב תוכנה</div>
+  <div class="arrow">←</div>
+  <div class="step"><strong>2. <span class="ltr">Jev</span></strong><br>מעריך כל אפשרות ומפיק הסתברויות</div>
+  <div class="arrow">←</div>
+  <div class="step"><strong>3. פלט מובנה</strong><br>קטגוריה, ציון ביטחון והפעולה הבאה</div>
+</div>
+
+<p>בדוגמה הפשוטה בפרק, אם הקלט מתאר אייפון והאפשרויות הן כחול, כתום, אדום, ירוק וצהוב, המודל לא חייב להכריז באופן מוחלט "כתום". הוא יכול להחזיר 80% כתום, 10% אדום ו-10% כחול. התוכנה שמסביב מחליטה מה לעשות עם רמת הביטחון הזאת.</p>
+<p>זה ההבדל בין מודל שמנסח תשובה לבין מודל שמזין מערכת החלטות. אין צורך לחלץ מספר מתוך פסקה, לתקן JSON שבור או לקוות שהמודל לא המציא פורמט חדש. הפלט כבר תואם לסוג הנתונים שהוגדר מראש, ולכן ניתן להזין אותו ישירות לקוד.</p>
+
+<h2>הדמו שממחיש את ההבטחה: מיון של 1,700 אימיילים</h2>
+<p>ווגל מציג מאגר של 1,700 אימיילים אמיתיים. כל שורה מכילה את אובייקט האימייל המלא: נושא, גוף, שולח ושדות נוספים. הוא מגדיר ארבעה סוגי פלט עיקריים:</p>
+<ul>
+  <li><strong>קטגוריה:</strong> עבודה, קניות, שיווק, כספים, אבטחה ועוד.</li>
+  <li><strong>עדיפות:</strong> נמוכה, בינונית, גבוהה, חשובה או דחופה.</li>
+  <li><strong>ציון ספאם:</strong> הסתברות רציפה במקום תשובת כן או לא.</li>
+  <li><strong>צורך בתגובה:</strong> כמה סביר שהאימייל מצדיק מענה.</li>
+</ul>
+<p>בדוגמה אחת המודל מזהה הודעה על אפשרות להפרת חשבון ככזאת שסביר מאוד שדורשת תגובה. בדוגמה אחרת, הודעת תשלום אוטומטית מסווגת כמידע פיננסי שאינו בהכרח ספאם ואינו דורש אותה רמת פעולה.</p>
+<p>ואז מגיע רגע ההדגמה: עוד לפני שהמארח מספיק להשלים את החשש שהריצה תיקח שעות ותעלה הרבה כסף, היא מסתיימת. לפי הנתונים שמוצגים בפרק, המערכת עיבדה 4.2 מיליון טוקני קלט וכחצי מיליון טוקני פלט בעלות כוללת של 18 סנט.</p>
+<div class="callout"><strong>למה זה חשוב:</strong> אם המספרים מחזיקים גם בעבודה אמיתית, אפשר להעביר דרך שכבת החלטות כמות גדולה מאוד של מידע שלא היה כלכלי לשלוח למודל Frontier בכל פעם. היתרון אינו רק חיסכון. הוא האפשרות להפעיל החלטה מבוססת AI כמעט בכל אירוע קטן במערכת.</div>
+
+<h2>פלט מובנה הוא לא פרט טכני. הוא המוצר</h2>
+<p>מודלים גנרטיביים מצטיינים במקומות שבהם צריך לנסח, להסביר, לתכנן או לפתור בעיה פתוחה. אבל מערכות תוכנה מלאות בהכרעות קטנות וחוזרות שלא דורשות חיבור. הן דורשות בחירה: לאיזו קטגוריה שייך האירוע, מי צריך לטפל בו, האם הוא חריג, ומה רמת הביטחון.</p>
+<p>כאן המבנה חשוב יותר מהשפה. אם המערכת מחזירה מספר אמיתי, ערך בוליאני או אחת מכמה אפשרויות מוגדרות, המפתח יכול לכתוב מדיניות ברורה:</p>
+<ul>
+  <li>מעל 90% ביטחון, לבצע את הפעולה אוטומטית.</li>
+  <li>בין 60% ל-90%, להעביר לבדיקה אנושית.</li>
+  <li>מתחת ל-60%, להתעלם, לבקש מידע נוסף או להעביר למודל חזק יותר.</li>
+</ul>
+<p>כלומר, <span class="ltr">Jev</span> לא מחליף בהכרח את המודל הגדול או את האדם. הוא יושב לפניהם ומחליט מה ראוי לקבל תשומת לב יקרה.</p>
+
+<h2>מטאפורת שוטר התנועה</h2>
+<p>גרג אייזנברג מסכם את הרעיון במטאפורה טובה: <span class="ltr">Jev</span> הוא שוטר תנועה של מידע. הוא ניצב בכניסה למערכת, בוחן כל אירוע ומחזיר שלוש תשובות:</p>
+<ol>
+  <li>מהו המידע הזה?</li>
+  <li>כמה הוא חשוב?</li>
+  <li>מה צריך לקרות עכשיו?</li>
+</ol>
+<p>ליד איכותי במיוחד יכול לעבור מיד לבעלת העסק. פנייה בינונית יכולה לעבור ל-LLM שינסח תגובה. הודעה עם ביטחון נמוך או ערך נמוך יכולה להישאר בתור. זו ארכיטקטורה של שכבות: מסווג מהיר וזול מקבל את ההחלטה הראשונית, ורק המקרים המתאימים צורכים אדם או מודל יקר.</p>
+
+<h2>היכן נפתחות הזדמנויות עסקיות</h2>
+<h3>1. ניקוד לידים לעסקים קטנים</h3>
+<p>ווגל מספר שבת זוגו מפעילה סוכנות לעיצוב גרפי ומקבלת פניות דרך טופס באתר. חלקן אמיתיות, חלקן חלשות וחלקן ספאם. אפשר להעביר כל פנייה ל-<span class="ltr">Jev</span> ולקבל ציון של "ליד טוב". ליד עם 98% ביטחון זוכה למענה מיידי. ליד מעורפל יכול להיכנס למסלול אחר שדורש יותר בירור.</p>
+
+<h3>2. ניתוב פניות תמיכה</h3>
+<p>כשלקוח מבקש עזרה במוצר מסוים, לא תמיד צריך שמודל יפתור את התקלה. הצעד הראשון הוא לדעת לאיזה צוות לנתב אותה, עד כמה היא דחופה והאם היא דומה לתקלה מוכרת. החלטה בתוך מאות מילישניות יכולה לקצר את כל התור שמגיע אחריה.</p>
+
+<h3>3. שוק שירותים מקומיים עם התאמה והצעת מחיר מיידית</h3>
+<p>הדוגמה היזמית המרכזית היא עסק שמאגד בעלי מקצוע מקומיים. לקוח כותב שהוא צריך ניקוי בלחץ מים לחניה. המערכת יכולה להשוות את הבקשה למאפייני הספקים, להחזיר הסתברות התאמה לכל אחד, ולבחור מסלול. במקום הטופס המוכר שמבטיח "הצעת מחיר מיידית" ואז שולח אימייל מאוחר יותר, ניתן לתת התאמה ראשונית אמיתית בזמן אמת.</p>
+<p>אייזנברג מכליל מכאן אסטרטגיית סטארטאפ: <strong>חפשו עסק שיש בו תור יקר של מידע נכנס, והציבו מסווג מהיר בראש התור.</strong> ככל שהמיון הראשוני דורש כיום זמן אנושי, וככל שטעות ניתוב עולה כסף, כך השכבה הזאת עשויה להיות בעלת ערך.</p>
+
+<h3>4. איתור רגעים טובים בווידאו</h3>
+<p>בדמו נוסף, ווגל מתמלל סרטון ברמת המילה ושולח את התמלול למסווג כדי לזהות קטעים שמתאימים לתוכן קצר. לפי הפרק, המערכת מדרגת 17 רגעים בתוך כשלוש שניות. הוא מדגיש שבנה את הניסוי בתוך כעשר דקות בלבד, ולכן זו הוכחת יכולת ולא מוצר ערוך, אבל היא ממחישה את הדפוס: לא לבקש מהמודל לכתוב סרטון חדש, אלא לבחור את הרגעים שכבר קיימים ושווים עריכה.</p>
+
+<h3>5. שליטה בדפדפן</h3>
+<p>הפרק מציג סרטון של מערכת Browser Use שבוחרת טיסה מציריך ללונדון בתוך 7.1 שניות. הרעיון הוא שכל צעד בדפדפן הוא החלטה מתוך מרחב פעולות. אם בחירת הפעולה יכולה להתבצע מהר מאוד, גם הסוכן כולו נע מהר יותר. עם זאת, הפרק מציג סרטון הדגמה ולא ניסוי השוואתי מבוקר, ולכן נכון לראות במספר המחשה ולא Benchmark סופי.</p>
+
+<h2>הגבול החשוב: מהירות וסיווג אינם אינטליגנציה כללית</h2>
+<p>החלק הכי חשוב בפרק הוא דווקא הניסוי שנכשל. ווגל חיבר את <span class="ltr">Jev</span> לאות ביטקוין שאמור להחליט בכל דקה אם לקנות, להחזיק או למכור. לדבריו, התוצאות לא היו טובות. הוא מזהיר במפורש שלא להציב את המודל מול תיק מניות או ביטקוין.</p>
+<div class="limit"><strong>המגבלה:</strong> <span class="ltr">Jev</span> מתאים להחלטות ניתוב, מיון ותעדוף שאינן דורשות עומק קיצוני. מסחר דורש שילוב של חדשות, הקשר רחב, ניתוח משתנה והסקה עשירה. שם מודל Frontier עשוי להיות מתאים יותר, גם אם הוא איטי ויקר יותר.</div>
+<p>ווגל גם מודה שאין למשתמש תהליך הסבר גלוי. המודל אינו מחזיר נימוק מילולי לצד כל החלטה. מבחוץ רואים תוצאה והסתברות. במערכות רגישות זה מחייב זהירות: הגדרת ספים, בדיקות שיטתיות, מדידת טעויות ומסלול הסלמה לאדם.</p>
+<p>זו אינה חולשה שולית. כאשר אין הסבר, קל לקבל החלטה מהירה שקשה לערער עליה. לכן המודל הבריא אינו "תנו ל-AI לנהל הכול", אלא <strong>תנו לו לייעץ, לסנן ולנתב, והגדירו במפורש מתי אסור לו לפעול לבד</strong>.</p>
+
+<h2>הארכיטקטורה המעניינת באמת: מודל קטן לפני מודל גדול</h2>
+<p>ההבטחה הרחבה אינה ש-<span class="ltr">Jev</span> מחליף LLMs. להפך. הוא עשוי להפוך אותם ליעילים יותר. במקום לשלוח כל אירוע ל-Claude או ל-GPT, אפשר להפעיל מסנן החלטות ראשון:</p>
+<ol>
+  <li>המסווג קובע סוג, עדיפות ורמת ביטחון.</li>
+  <li>אירועים פשוטים מקבלים פעולה אוטומטית.</li>
+  <li>אירועים שדורשים ניסוח עוברים ל-LLM.</li>
+  <li>אירועים בעלי סיכון גבוה או ביטחון נמוך עוברים לאדם.</li>
+</ol>
+<p>כך ניתן לבנות מערכת שמאזנת עלות, זמן תגובה ואיכות. ה-LLM נשמר למשימות שבהן יכולת גנרטיבית והסקה באמת מוסיפות ערך. האדם נשמר למקרים שבהם האחריות או העמימות גבוהות. וכל שאר הזרם עובר דרך מנגנון החלטה מהיר.</p>
+
+<div class="quote">הדרך הטובה לחשוב על ההזדמנות: בכל מקום שבו אדם מסתכל על נתונים ואומר לעצמו "עכשיו אני צריך להחליט מה לעשות", ייתכן שיש מקום לשכבת החלטה.</div>
+
+<h2>איך לנסות, ומה לבדוק לפני שבונים</h2>
+<p>בזמן הקלטת הפרק, גישה ישירה ל-<span class="ltr">Jev</span> הוצעה ב-Early Access. ווגל מפנה גם ל-<a href="https://vercel.com/ai-gateway" target="_blank" rel="noopener">Vercel AI Gateway</a>, שלדבריו אפשר גישה מיידית. האתר הרשמי של <a href="https://typesafe.ai" target="_blank" rel="noopener">TypeSafe AI</a> מציג את <span class="ltr">Jev</span> כ-<span class="ltr">System One Model</span> שמחזיר החלטות typed עם הסתברויות מכוילות.</p>
+<p>לפני שהופכים דמו למוצר, כדאי למדוד ארבעה דברים:</p>
+<ul>
+  <li><strong>דיוק על נתונים אמיתיים:</strong> לא רק עשר דוגמאות יפות, אלא מאות או אלפי אירועים מהמערכת שלכם.</li>
+  <li><strong>כיול ההסתברות:</strong> האם אירועים שקיבלו 90% אכן נכונים בערך בתשע מתוך עשר פעמים.</li>
+  <li><strong>עלות הטעות:</strong> טעות בסיווג ניוזלטר אינה דומה לטעות בהונאה, בריאות או מסחר.</li>
+  <li><strong>מסלול הסלמה:</strong> מה קורה כשאין מספיק ביטחון, והאם אדם או מודל חזק יותר יכולים לתפוס את המקרה.</li>
+</ul>
+
+<h2>המשמעות הגדולה: AI מתחיל להיכנס ללוגיקה, לא רק לממשק</h2>
+<p>הגל הראשון של AI במוצרים היה צ׳אט. הגל השני הוסיף Agents שמבצעים רצף פעולות. <span class="ltr">Jev</span> מצביע על שכבה נוספת, שקטה יותר: מודלים שמשובצים בתוך הלוגיקה של התוכנה ומקבלים מיליוני החלטות קטנות בלי לנהל שיחה עם המשתמש.</p>
+<p>זה עשוי להיות חשוב דווקא מפני שהוא פחות מרשים בדמו. אין פסקה שנשמעת אנושית ואין מסך שיחה. יש אובייקט שנכנס, הסתברויות שיוצאות וקוד שמחליט מה קורה אחר כך. במערכות גדולות, זה בדיוק החומר שממנו בנויה אוטומציה שימושית.</p>
+<div class="bottom-line"><strong>הלקח לבוני מוצרים:</strong> אל תשאלו רק איפה AI יכול לכתוב, להסביר או לבצע משימה שלמה. חפשו את אלפי ההחלטות הקטנות שמאטות את המערכת: מיון, ניתוב, תעדוף, התאמה והסלמה. ייתכן שהמוצר הגדול הבא לא יהיה עוד Agent שעושה הכול, אלא שכבת החלטות שמוודאת שכל דבר מגיע למקום הנכון.</div>
+
+<div class="source">
+<strong>מקורות:</strong><br>
+<a href="https://podcasts.apple.com/il/podcast/jev-is-here-how-to-use-it/id1593424985?i=1000790562941" target="_blank" rel="noopener">הפרק המקורי ב-Apple Podcasts</a><br>
+<a href="https://typesafe.ai" target="_blank" rel="noopener">TypeSafe AI / Jev</a><br>
+<a href="https://vercel.com/ai-gateway" target="_blank" rel="noopener">Vercel AI Gateway</a>
+</div>
+</main>
+</body>
+</html>
