@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>הבורד הדיח את המייסד. 33 שעות אחר כך, הבורד נעלם</title>
+  <meta name="description" content="הסיפור החריג של מאט מולנווג ואוטומטיק: הבורד הוציא את המייסד לחופשה כפויה, הוא חזר בתוך 33 שעות, הדירקטורים עזבו, ושני מנהלים השאירו אחריהם מצנחי זהב של 8.15 מיליון דולר.">
+  <meta property="og:title" content="הבורד הדיח את המייסד. 33 שעות אחר כך, הבורד נעלם">
+  <meta property="og:description" content="מה באמת קרה באוטומטיק, מה אפשר ללמוד מהדיון ב־Hacker News, ואיך חברה יכולה לגלות שיש לה בורד שיכול להדיח מנכ״ל אבל לא מייסד.">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="הבורד הדיח את המייסד. 33 שעות אחר כך, הבורד נעלם">
+  <meta name="twitter:description" content="אוטומטיק, מאט מולנווג והפיכת החצר שנכשלה בתוך 33 שעות.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root { --ink:#171512; --muted:#716b63; --paper:#f5f0e7; --card:#fffdf8; --red:#b93632; --gold:#e2a72e; --navy:#16263a; --line:#ddd3c4; --green:#dfeee5; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; max-width:100%; overflow-x:hidden; }
+    body { margin:0; max-width:100%; overflow-x:hidden; color:var(--ink); background:var(--paper); font-family:"Noto Sans Hebrew",Arial,sans-serif; line-height:1.85; font-size:18px; }
+    a { color:#8f2726; text-underline-offset:3px; }
+    .shell { width:100%; max-width:930px; margin:0 auto; padding:28px 22px 90px; overflow:hidden; }
+    .topbar { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px 18px; margin-bottom:34px; font-size:14px; color:var(--muted); }
+    .home { color:var(--navy); text-decoration:none; font-weight:800; }
+    .hero { position:relative; overflow:hidden; background:var(--navy); color:#fff; border-radius:30px; padding:52px 48px 45px; min-height:430px; display:flex; flex-direction:column; justify-content:flex-end; }
+    .hero:before { content:""; position:absolute; width:320px; height:320px; border:72px solid rgba(226,167,46,.22); border-radius:50%; left:-90px; top:-120px; }
+    .board { position:absolute; left:55px; top:72px; direction:ltr; display:flex; align-items:flex-end; gap:14px; opacity:.95; }
+    .seat { width:47px; height:88px; background:#f4e9d6; border-radius:9px 9px 4px 4px; position:relative; box-shadow:0 10px 0 rgba(0,0,0,.16); }
+    .seat:before { content:""; position:absolute; width:27px; height:27px; background:#f4e9d6; border-radius:50%; left:10px; top:-37px; }
+    .seat.out { transform:translateY(-34px) rotate(11deg); background:var(--red); }
+    .seat.out:before { background:var(--red); }
+    .seat.founder { height:118px; width:58px; background:var(--gold); }
+    .seat.founder:before { width:34px; height:34px; left:12px; top:-44px; background:var(--gold); }
+    .eyebrow { position:relative; z-index:1; color:#ffd88b; font-size:14px; font-weight:900; letter-spacing:.04em; margin-bottom:14px; }
+    h1 { position:relative; z-index:1; font-size:clamp(2.45rem,7vw,5.25rem); line-height:1.02; letter-spacing:-.045em; max-width:800px; margin:0 0 22px; overflow-wrap:anywhere; }
+    .dek { position:relative; z-index:1; max-width:760px; color:#dce5ef; font-size:1.16rem; line-height:1.72; margin:0; }
+    .meta { margin:18px 6px 0; color:var(--muted); font-size:14px; }
+    .lede { margin:38px 0 28px; background:var(--card); padding:29px 31px; border-radius:21px; border-right:6px solid var(--red); font-size:1.12rem; }
+    .lede strong { color:var(--red); }
+    h2 { font-size:1.78rem; line-height:1.35; margin:58px 0 18px; color:var(--navy); }
+    h3 { font-size:1.15rem; margin:29px 0 8px; color:var(--navy); }
+    p { margin:0 0 20px; }
+    strong { font-weight:800; }
+    .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:31px 0 43px; }
+    .stat { background:var(--card); border:1px solid var(--line); padding:21px; border-radius:17px; min-height:145px; }
+    .stat b { display:block; font-size:1.85rem; line-height:1.15; color:var(--red); direction:ltr; text-align:right; margin-bottom:9px; }
+    .stat span { font-size:.92rem; color:#4d4841; line-height:1.56; display:block; }
+    .timeline { margin:28px 0 42px; border-right:3px solid var(--gold); padding-right:23px; }
+    .event { position:relative; margin:0 0 26px; padding:0 0 1px; }
+    .event:before { content:""; width:13px; height:13px; border-radius:50%; background:var(--gold); position:absolute; right:-31px; top:9px; box-shadow:0 0 0 5px var(--paper); }
+    .event time { display:block; font-size:.82rem; font-weight:800; color:var(--red); margin-bottom:2px; }
+    .event p { margin:0; }
+    .quote { margin:35px 0; padding:29px 31px; background:var(--green); border-radius:20px; font-size:1.25rem; line-height:1.63; font-weight:700; color:#183e2b; }
+    .quote small { display:block; font-size:.78rem; font-weight:600; color:#496356; margin-top:12px; }
+    .callout { background:#fff4df; border:1px solid #efd29c; border-radius:19px; padding:23px 27px; margin:29px 0; }
+    .split { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:27px 0 40px; }
+    .view { background:var(--card); border:1px solid var(--line); border-radius:18px; padding:23px; }
+    .view h3 { margin-top:0; }
+    ul,ol { margin:0 0 25px; padding-right:26px; }
+    li { margin-bottom:11px; }
+    sup a { text-decoration:none; font-weight:800; }
+    .lessons { background:var(--navy); color:#fff; border-radius:25px; padding:31px 35px; margin-top:55px; }
+    .lessons h2 { color:#fff; margin-top:0; }
+    .lessons li::marker { color:#ffd06b; }
+    .sources { font-size:.91rem; color:#4f4a43; border-top:1px solid var(--line); margin-top:49px; padding-top:24px; }
+    .sources h2 { font-size:1.28rem; margin:0 0 15px; }
+    .sources ol { direction:ltr; text-align:left; padding-left:24px; padding-right:0; overflow-wrap:anywhere; }
+    .sources li { padding-left:5px; }
+    .source-note { direction:rtl; text-align:right; }
+    @media (max-width:720px) {
+      body { font-size:17px; }
+      .shell { padding:14px 14px 60px; }
+      .hero { padding:31px 27px; min-height:470px; border-radius:22px; }
+      .board { left:34px; top:78px; transform:scale(.82); transform-origin:left top; }
+      h1 { font-size:clamp(2.45rem,12vw,3.4rem); }
+      .stats { grid-template-columns:1fr; }
+      .split { grid-template-columns:1fr; }
+      h2 { margin-top:46px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="topbar"><a class="home" href="../../">← Friday Share</a><span>27 בספטמבר 2026 · 14 דקות קריאה</span></div>
+
+    <header class="hero">
+      <div class="board" aria-hidden="true"><div class="seat out"></div><div class="seat out"></div><div class="seat out"></div><div class="seat founder"></div></div>
+      <div class="eyebrow">AUTOMATTIC · המייסד, הבורד והפיכת החצר</div>
+      <h1>הבורד הדיח את המייסד. 33 שעות אחר כך, הבורד נעלם</h1>
+      <p class="dek">מאט מולנווג הוצא לחופשה כפויה, סירב להתנהג כאילו הודח, חזר לשליטה ופירק את הקואליציה שהצביעה נגדו. זה לא רק סיפור עסיסי על WordPress. זה שיעור קיצוני על ההבדל בין מנכ״ל, מייסד ובעל שליטה.</p>
+    </header>
+    <p class="meta">עיבוד וניתוח בעברית המבוסס על סדרת דיווחים של TechCrunch ועל הדיון המרכזי ב־Hacker News. טענות המבוססות על מקורות אנונימיים מוצגות ככאלה.</p>
+
+    <section class="lede">
+      <strong>השורה התחתונה:</strong> ב־9 בספטמבר הצביעו שלושת הדירקטורים האחרים באוטומטיק להוציא את מאט מולנווג לחופשה בתשלום ולמנות את סמנכ״ל הכספים למנכ״ל זמני. מולנווג התנגד, נשאר דירקטור, ובתוך 33 שעות ו־20 דקות חזר לכיסא המנכ״ל. זמן קצר אחר כך שלושת הדירקטורים שהצביעו נגדו כבר לא היו בבורד, והמנכ״ל הזמני והיועץ המשפטי הראשי פוטרו. הבורד הוכיח שהוא מסוגל להצביע נגד המייסד, אבל לא שהוא מסוגל להחזיק בשליטה לאחר ההצבעה.<sup><a href="#s1">[1]</a></sup><sup><a href="#s4">[4]</a></sup><sup><a href="#s5">[5]</a></sup>
+    </section>
+
+    <section class="stats" aria-label="המספרים המרכזיים">
+      <div class="stat"><b>50 min</b><span>לפי מולנווג, זה פרק הזמן שקיבל לעיין בהחלטה לפני ישיבת הבורד, בלי אפשרות להיוועץ בעורך דין חיצוני.</span></div>
+      <div class="stat"><b>33:20</b><span>משך הזמן הרשמי שבו, לפי אוטומטיק, מולנווג היה מחוץ לתפקיד.</span></div>
+      <div class="stat"><b>$8.15M</b><span>העלות הכוללת המדווחת של שכר והאצת הבשלת הון בשני הסכמי הפרישה שנחתמו בזמן ההדחה הקצרה.</span></div>
+    </section>
+
+    <h2>לפני הפוליטיקה: מי כאן באמת מחזיק במה?</h2>
+    <p>מאט מולנווג הוא ממייסדי WordPress ומייסד אוטומטיק, החברה המסחרית שמפעילה את WordPress.com ומחזיקה גם ב־WooCommerce, Tumblr ו־Pocket Casts. כבר כאן חשוב להפריד בין שלוש ישויות שקל לערבב: פרויקט הקוד הפתוח WordPress, התשתית הקהילתית WordPress.org, והחברה הפרטית Automattic.</p>
+    <p>כשהבורד הוציא אותו לחופשה מאוטומטיק, מנהלת WordPress.org מרי האברד הודיעה שהפרויקט הפתוח אינו מושפע, שמולנווג נשאר מנהיג הפרויקט ושהיא נשארת המנהלת הביצועית שלו.<sup><a href="#s1">[1]</a></sup> משפטית וארגונית זו הבחנה אמיתית. מעשית, הדיון ב־Hacker News הזכיר עד כמה הכוח, המוניטין והתשתיות של שלוש השכבות שזורים זה בזה.</p>
+    <p>וזו גם הנקודה שמסבירה את כל הדרמה: <strong>מנכ״ל הוא תפקיד שהבורד יכול לקחת; שליטה היא כוח שמגיע ממקום אחר.</strong> אחזקות, זכויות הצבעה, היכולת לבחור ולהדיח דירקטורים, שליטה בתשתיות ומעמד בקהילה אינם נעלמים ברגע שמתקבלת החלטת בורד. אוטומטיק לא פרסמה את מסמכי הממשל התאגידי שמסבירים בדיוק כיצד התהפכה ההחלטה, ולכן כל הסבר מלא יותר יהיה ספקולציה. אבל סדר האירועים מראה שההצבעה הספיקה להוציא את מולנווג מתפקידו, ולא הספיקה לנטרל את מוקדי הכוח האחרים שלו.</p>
+
+    <h2>הפיכת החצר, דקה אחר דקה</h2>
+    <div class="timeline">
+      <div class="event"><time>9 בספטמבר</time><p>לפי הודעת Slack שראה TechCrunch, הבורד מצביע להוציא את מולנווג לחופשה בתשלום. הוא מצביע נגד. סמנכ״ל הכספים מארק דייוויס מתמנה למנכ״ל זמני. מולנווג כותב שדייוויס ושלושת הדירקטורים ״קשרו קשר״ מאחורי גבו.<sup><a href="#s1">[1]</a></sup></p></div>
+      <div class="event"><time>10 בספטמבר</time><p>בתוך חלון השליטה הקצר, דייוויס והיועץ המשפטי הראשי אנדי מיסן חותמים זה לזה על הסכמי פרישה. כל אחד מקבל שנה של שכר בסיס, האצת הבשלת מניות או אופציות, אפשרות לממש אופציות ושנת כיסוי רפואי, בכפוף לוויתור על תביעות ולהגבלות נוספות.<sup><a href="#s6">[6]</a></sup></p></div>
+      <div class="event"><time>11 בספטמבר</time><p>מולנווג כותב לעובדים: ״אל תקראו לזה קאמבק״, מודיע שהבורד שוב מסכים ושהוא בשליטה, ומצרף את <span dir="ltr">Mama Said Knock You Out</span> של LL Cool J. לפי מקורות של TechCrunch, חשבון ה־Slack של דייוויס כבר מושבת.<sup><a href="#s3">[3]</a></sup></p></div>
+      <div class="event"><time>12 בספטמבר</time><p>אוטומטיק מאשרת רשמית שמולנווג שוב יו״ר ומנכ״ל ״בתמיכה מלאה של הבורד״. החברה תאמר בהמשך שהוא נעדר בדיוק 33 שעות ו־20 דקות.<sup><a href="#s4">[4]</a></sup></p></div>
+      <div class="event"><time>14 בספטמבר</time><p>TechCrunch מדווח ששלושת הדירקטורים שהצביעו נגדו אינם עוד בבורד: טוני שניידר התפטר, סו דקר התפטרה, והגנרלית בדימוס אן דנוודי הודחה בידי מולנווג. דייוויס ומיסן פוטרו.<sup><a href="#s5">[5]</a></sup></p></div>
+      <div class="event"><time>16 בספטמבר</time><p>נחשפים הסכמי הפרישה ההדדיים בשווי כולל מדווח של 8.15 מיליון דולר. אוטומטיק בוחנת אם לשלם או לערער על תוקפם.<sup><a href="#s6">[6]</a></sup></p></div>
+    </div>
+
+    <h2>למה הבורד עשה את זה?</h2>
+    <p>התשובה הישרה היא: <strong>לא ידוע.</strong> הבורד לא פרסם נימוק, ואוטומטיק לא סיפקה הסבר פומבי. זהו החור הגדול ביותר בכל הסיפור, וכל מי שממלא אותו בוודאות מספר יותר ממה שהמקורות מאפשרים.</p>
+    <p>ההקשר, לעומת זאת, ברור. אוטומטיק ומולנווג מנהלים מאבק משפטי חריף מול חברת האחסון WP Engine. מולנווג טען שהחברה נהנית מ־WordPress בלי לתרום מספיק לקוד הפתוח ודרש ממנה תמלוגים של 8% מההכנסה החודשית הגולמית עבור השימוש במותג. WP Engine תבעה את אוטומטיק ואת מולנווג בטענות הכוללות לשון הרע וניצול לרעה של כוח. ביולי היא גם טענה בבית המשפט שמולנווג השמיד ראיות מאפליקציות כמו Signal, WhatsApp ו־Telegram; הוא הכחיש שפעל בזדון.<sup><a href="#s1">[1]</a></sup><sup><a href="#s6">[6]</a></sup></p>
+    <p>TechCrunch הציגה שתי פרשנויות אפשריות, לא עובדות מוכחות. בראשונה, הדירקטורים חשבו שהתנהלות המייסד הפכה לסיכון משפטי ותאגידי, והשעייתו הייתה ניסיון להראות שהבורד פועל. בשנייה, ההנהלה והבורד ביקשו חלון שליטה לצורך מהלך אסטרטגי אחר; זו הפרשנות שמקורות ייחסו לחשדותיו של מולנווג. היעדר הסבר מהבורד איפשר לכל צד לבנות את הסיפור שמתאים לו.<sup><a href="#s6">[6]</a></sup></p>
+
+    <div class="callout"><strong>מה כן אפשר לומר:</strong> פעולה חריגה כל כך, ללא מסר מוסכם לעובדים, ללא הסבר פומבי וללא יכולת ברורה לאכוף את העברת השליטה, נראית פחות כמו תוכנית ירושה ויותר כמו מהלך חירום שלא פתר מראש את שאלת ״ומה יקרה בבוקר שאחרי?״</div>
+
+    <h2>ואז הגיעו מצנחי הזהב</h2>
+    <p>הפרט שהפך את הדרמה ממשבר ממשל תאגידי למותחן הוא שני הסכמי הפרישה. במהלך 33 השעות שבהן מארק דייוויס היה מנכ״ל זמני, הוא והיועץ המשפטי אנדי מיסן חתמו כל אחד על ההסכם של האחר. TechCrunch דיווחה שהחבילות עשויות לחייב את אוטומטיק ב־8.15 מיליון דולר לאחר ששניהם פוטרו עם חזרת מולנווג.<sup><a href="#s6">[6]</a></sup></p>
+    <p>חשוב לדייק: הדיווח אינו קובע שהחתימות ההדדיות היו בלתי חוקיות או אפילו בהכרח לא תקינות. אפשר לקרוא אותן כשכבת הגנה סבירה למנהלים שנכנסו לעימות עם מייסד חזק ועלולים להיפגע אם המהלך ייכשל. אפשר גם לראות בהן ניצול של חלון שליטה קצר כדי לייצר לעצמם ביטוח יקר. נכון לעכשיו, אוטומטיק עצמה עדיין בוחנת אם לשלם או לתקוף משפטית את ההסכמים.</p>
+    <p>ההסכמים גם הגדירו ״עילה״ לפיטורים בצורה צרה ודרשו תהליך של הודעה, זמן לתיקון והכרעת רוב הבורד. זה הופך את החלפת הבורד לפרט מהותי: מנגנון שמבקש אישור מהבורד נעשה שונה לגמרי כאשר הבורד שאישר את המהלך כבר איננו.</p>
+
+    <h2>מה Hacker News ראה שאי אפשר לראות בהודעה לעיתונות</h2>
+    <p>הדיון הגדול ב־Hacker News נפתח כשההדחה עוד נראתה סופית. 358 תגובות תיעדו בזמן אמת את ההפתעה, השמחה, החשש והוויכוח על WordPress. בדיעבד, מעניין במיוחד לראות כמה משתתפים זיהו מיד את החולשה המבנית של המהלך.<sup><a href="#s2">[2]</a></sup></p>
+
+    <div class="split">
+      <div class="view">
+        <h3>המחנה שאמר ״סוף סוף״</h3>
+        <p>תגובות רבות תיארו רצף של טעויות לא כפויות, עימותים עם הקהילה והסלמה מול WP Engine. המשתמש <span dir="ltr">gkoberger</span> ניסח את הטון המאוזן יותר: מולנווג עשה הרבה טוב לאינטרנט, אבל אחרי 23 שנים סביב אותו פרויקט ייתכן שאיבד פרספקטיבה. אחרים היו הרבה פחות נדיבים.</p>
+      </div>
+      <div class="view">
+        <h3>המחנה שראה סכנה למייסדים</h3>
+        <p>מנגד, היו מי שראו מהלך אישי של הנהלה שכירה נגד מייסד, ואף ״יום רע למייסדים״. תגובה קצרה אחת זיקקה את הפלייבוק: אל תהפוך לציבורי, אל תקים בורד, שמור שליטה. האירוניה היא שהמשך האירועים הראה שמולנווג כנראה מעולם לא ויתר על כל מוקדי השליטה.</p>
+      </div>
+    </div>
+
+    <div class="quote">״תמיד חשבתי שלמאט יש רוב מזכויות ההצבעה, ושהבורד נמצא שם בעיקר כדי לשמש חותמת גומי.״<small>ValentineC, בדיון ב־Hacker News. תגובת המשך הסבירה בצדק שהיכולת לבחור דירקטורים והיכולת של הדירקטורים לבחור מנכ״ל הן שכבות שונות, ואז שאלה מה יקרה אם בעל השליטה פשוט יחליף את הבורד. ימים אחר כך זו הייתה בדיוק השאלה המרכזית.<sup><a href="#s2">[2]</a></sup></small></div>
+
+    <p>הדיון לא היה אחיד, וגם לא כולו התנהל מרחוק. שני עובדי אוטומטיק ותיקים נכנסו להגנת מולנווג. <span dir="ltr">gui_azeredo</span>, עובד של תשע שנים, תיאר את אוטומטיק כסביבת העבודה הטובה, ההוגנת והמגוונת ביותר שחווה, וייחס למולנווג תרבות פתוחה ושקופה. <span dir="ltr">adamziel</span> סיפר כיצד מולנווג תמך ב־WordPress Playground כשהרעיון עוד נתקל בספקנות, עזר לו לבנות צוות ודחף לפתוח עוד קוד לקהילה.<sup><a href="#s2">[2]</a></sup></p>
+    <p>העדויות האלה אינן מבטלות את הביקורת, והביקורת אינה מוחקת שני עשורים של בנייה. הן מבהירות מדוע הסיפור אינו ״מייסד טוב נגד בורד רע״ או להפך. אותו ביטחון עצמי שמאפשר למייסד להחזיק חזון לאורך עשרים שנה יכול להפוך לקושי לקבל בלמים. ואותו בורד שנועד לבלום אותו יכול לגלות שהלגיטימציה, השליטה והקהילה עדיין קשורות לאדם שניסה להרחיק.</p>
+
+    <h2>הקרב העמוק יותר: חברה פרטית סביב תשתית ציבורית</h2>
+    <p>ב־Hacker News, הוויכוח על הממשל התאגידי גלש במהירות לוויכוח הישן על קוד פתוח. מבקרי מולנווג טענו ש־WP Engine פעלה במסגרת רישיון GPL ואינה חייבת מוסרית או משפטית להעביר לאוטומטיק את שיעור התרומה שהוא דורש. אחרים הזכירו בעיה אמיתית ורחבה יותר: חברות ענק יכולות לבנות עסקים רווחיים מאוד על קוד פתוח בלי לממן באופן יחסי את התחזוקה שלו.<sup><a href="#s2">[2]</a></sup></p>
+    <p>שני הדברים יכולים להיות נכונים בעת ובעונה אחת. לקוד פתוח יש בעיית לכידת ערך. ולמייסד של חברה מסחרית אין בהכרח זכות להמציא בדיעבד מס שחורג מהרישיון. זו אינה שאלה טכנית בלבד; היא נוגעת ללגיטימציה. מולנווג צבר במשך שנים כוח מפני שהקהילה האמינה שהוא מגן על WordPress. ברגע שחלק מהקהילה רואה בכוח הזה איום על המערכת, אותו נכס הופך לחבות.</p>
+
+    <h2>אז מי ניצח?</h2>
+    <p>בטווח המיידי, מולנווג ניצח באופן מוחלט. הוא חזר כמנכ״ל, נשאר יו״ר, והאנשים שהובילו או אפשרו את המהלך יצאו מהחברה ומהבורד. אפילו הביטוי ״תמיכה מלאה של הבורד״ קיבל משמעות כמעט קומית כאשר התברר שהבורד התחלף.</p>
+    <p>אבל זה ניצחון טקטי, לא פתרון. עצם העובדה ששלושה דירקטורים עצמאיים, סמנכ״ל כספים ויועץ משפטי הגיעו למהלך כה קיצוני אומרת שהיה שבר עמוק. העובדה שלא הסבירו אותו משאירה את העובדים, המשקיעים והקהילה עם תעלומה. העובדה שהמהלך נכשל בתוך פחות מיומיים משאירה את אוטומטיק עם בעיית בקרה חריפה אף יותר: מי מסוגל להציב גבול למייסד עכשיו?</p>
+    <p>וגם הבורד לא יוצא כאן כגיבור. אם דירקטורים מאמינים שהמנכ״ל מסכן את החברה, חובתם אינה רק להצביע. עליהם להכין מנגנון אכיפה, מעבר מסודר, גישה למערכות, תקשורת לעובדים, הסבר משפטי ותוכנית לבעלות השליטה. אחרת, ההחלטה היא תיאטרון ממשל תאגידי.</p>
+
+    <section class="lessons">
+      <h2>חמישה לקחים למייסדים ולבורדים</h2>
+      <ol>
+        <li><strong>ממשל תאגידי אינו תרשים ארגוני.</strong> צריך למפות מראש מי שולט במניות, בבורד, בחשבונות, במותג, בקהילה ובתשתית.</li>
+        <li><strong>בורד שלא יכול לאכוף החלטה אינו באמת בורד.</strong> הצבעה בלי תוכנית מעבר ובלי נעילת מוקדי שליטה עלולה להחריף את המשבר.</li>
+        <li><strong>שליטת מייסד היא גם נכס וגם סיכון.</strong> היא מאפשרת חשיבה ארוכת טווח והגנה מפני פוליטיקה קצרת טווח, אך יכולה להפוך כל מנגנון בקרה לדקורציה.</li>
+        <li><strong>שתיקה יוצרת קונספירציות.</strong> כשאין הסבר מוסכם, כל ציוץ, מכירת מניות או שינוי ב־LinkedIn הופך לראיה בסיפור שמישהו אחר כותב.</li>
+        <li><strong>קוד פתוח צריך הפרדת רשויות אמיתית.</strong> כשהחברה, הקהילה והפרויקט תלויים באותו אדם, משבר תאגידי פרטי נעשה מיד משבר אמון ציבורי.</li>
+      </ol>
+    </section>
+
+    <section class="sources">
+      <h2>מקורות והערת מתודולוגיה</h2>
+      <p class="source-note">הכתבה מבוססת בעיקר על דיווחי שרה פרז ב־TechCrunch ועל הדיון הגדול ב־Hacker News. TechCrunch נשענה בחלק מהפרטים על מקורות אנונימיים, מסמכים והודעות Slack שראתה. אוטומטיק, הדירקטורים והמנהלים לא סיפקו הסבר ציבורי מלא למניעי ההדחה. תגובות Hacker News הן עדויות ודעות של משתתפים, לא עובדות מאומתות על החברה.</p>
+      <ol>
+        <li id="s1"><a href="https://techcrunch.com/2026/09/09/automattics-board-forces-ceo-matt-mullenweg-into-leave-of-absence/">TechCrunch: Automattic’s board forces CEO Matt Mullenweg into leave of absence</a></li>
+        <li id="s2"><a href="https://news.ycombinator.com/item?id=49636283">Hacker News: הדיון המרכזי על ההדחה</a></li>
+        <li id="s3"><a href="https://techcrunch.com/2026/09/11/matt-mullenweg-tells-automattic-staff-in-slack-hes-back-in-control-after-ceo-ouster/">TechCrunch: Matt Mullenweg says he is back in control</a></li>
+        <li id="s4"><a href="https://techcrunch.com/2026/09/12/automattic-confirms-mullenweg-has-returned-as-ceo-after-attempted-ouster-by-board/">TechCrunch: Automattic confirms Mullenweg returned as CEO</a></li>
+        <li id="s5"><a href="https://techcrunch.com/2026/09/14/sources-say-automattics-board-is-out-after-failed-attempt-to-oust-ceo-matt-mullenweg/">TechCrunch: Automattic’s board is out after the failed ouster</a></li>
+        <li id="s6"><a href="https://techcrunch.com/2026/09/16/automattics-interim-ceo-and-legal-chief-signed-reciprocal-severance-deals-during-mullenwegs-brief-ouster/">TechCrunch: reciprocal severance deals during the brief ouster</a></li>
+      </ol>
+    </section>
+  </main>
+</body>
+</html>
