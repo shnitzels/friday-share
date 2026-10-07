@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>722 מאמרים ביום אחד: מה OpenAI באמת שחררה</title>
+<meta name="description" content="ניתוח עומק של מאגר המתמטיקה החדש של OpenAI: מה באמת אומת, איזה ערך הוא פותח, וחמש חברות שאפשר לבנות סביבו.">
+<meta property="og:title" content="722 מאמרים ביום אחד: מה OpenAI באמת שחררה">
+<meta property="og:description" content="לא עוד בנצ׳מרק, אלא מפעל מחקר. ניתוח ההזדמנות, הסיכונים והעסק שהכי נכון לבנות עכשיו.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shnitzels.github.io/friday-share/read/openai-722-math-manuscripts/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="722 מאמרים ביום אחד: מה OpenAI באמת שחררה">
+<meta name="twitter:description" content="מה באמת אומת, איזה ערך נפתח, ומה העסק שהכי נכון לבנות עכשיו.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root { --ink:#16202a; --muted:#5e6b78; --line:#dfe7e8; --paper:#fff; --wash:#f4f8f8; --teal:#087f79; --deep:#082f3d; --orange:#f2933a; }
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { margin:0; background:var(--wash); color:var(--ink); font-family:'Noto Sans Hebrew',sans-serif; line-height:1.85; }
+a { color:var(--teal); }
+.hero { background:linear-gradient(135deg,#062a37 0%,#0b4d56 58%,#087f79 100%); color:white; padding:56px 20px 48px; position:relative; overflow:hidden; }
+.hero:after { content:'∑'; position:absolute; left:4vw; top:-95px; font-size:320px; line-height:1; color:rgba(255,255,255,.055); font-family:Georgia,serif; transform:rotate(-8deg); }
+.hero-inner { max-width:900px; margin:auto; position:relative; z-index:1; }
+.kicker { display:inline-flex; gap:8px; align-items:center; font-size:13px; font-weight:700; letter-spacing:.03em; padding:6px 12px; border:1px solid rgba(255,255,255,.28); border-radius:999px; background:rgba(255,255,255,.08); margin-bottom:20px; }
+h1 { font-size:clamp(36px,7vw,68px); line-height:1.08; margin:0 0 18px; max-width:850px; letter-spacing:-.035em; }
+.deck { font-size:clamp(18px,2.8vw,24px); line-height:1.55; max-width:760px; color:#d9f0ee; margin:0 0 26px; }
+.byline { font-size:14px; color:#b8d7d5; }
+.stats { max-width:900px; margin:-24px auto 34px; padding:0 20px; position:relative; z-index:2; display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+.stat { background:#fff; border:1px solid var(--line); border-radius:14px; padding:18px 16px; box-shadow:0 8px 26px rgba(17,49,56,.07); }
+.stat strong { display:block; font-size:27px; color:var(--deep); line-height:1.1; }
+.stat span { display:block; color:var(--muted); font-size:13px; margin-top:6px; }
+main { max-width:900px; margin:0 auto 60px; background:var(--paper); border:1px solid var(--line); border-radius:18px; padding:clamp(24px,5vw,64px); box-shadow:0 12px 40px rgba(16,48,56,.06); }
+main > p:first-child { font-size:20px; line-height:1.8; color:#243541; }
+h2 { font-size:clamp(26px,4vw,36px); line-height:1.35; margin:56px 0 18px; padding-top:10px; color:var(--deep); letter-spacing:-.02em; }
+h3 { font-size:23px; line-height:1.45; margin:40px 0 12px; color:#0b5f62; }
+p { margin:0 0 18px; }
+strong { font-weight:750; }
+ul,ol { padding-right:24px; margin:0 0 24px; }
+li { margin:7px 0; }
+blockquote { margin:28px 0; border-right:5px solid var(--orange); background:#fff7ec; padding:18px 22px; border-radius:10px; }
+code { direction:ltr; unicode-bidi:isolate; background:#edf3f3; border-radius:5px; padding:1px 5px; font-size:.9em; }
+.cite { display:inline-flex; align-items:center; justify-content:center; min-width:19px; height:19px; padding:0 4px; margin-inline:2px; border-radius:50%; text-decoration:none; background:#dff1ef; color:#08645f; font-size:11px; font-weight:800; vertical-align:super; line-height:1; }
+.verdict { margin:34px 0; border:1px solid #9ecfca; border-right:6px solid var(--teal); background:#effaf8; border-radius:12px; padding:22px 24px; }
+.verdict b { color:var(--deep); }
+.source-section { max-width:900px; margin:0 auto 70px; padding:0 20px; }
+.source-section h2 { margin-top:0; font-size:28px; }
+.sources { list-style:none; padding:0; display:grid; gap:10px; }
+.sources li { background:#fff; border:1px solid var(--line); border-radius:12px; padding:14px 16px 14px 54px; position:relative; min-height:58px; }
+.source-num { position:absolute; right:auto; left:16px; top:15px; width:28px; height:28px; display:grid; place-items:center; background:var(--deep); color:#fff; border-radius:50%; font-weight:700; font-size:12px; }
+.sources a { display:block; font-weight:650; text-decoration:none; }
+.sources small { display:block; direction:ltr; text-align:left; color:#8a969f; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.footer { text-align:center; color:#83909a; font-size:13px; padding:24px; }
+.back { display:inline-block; margin-top:10px; text-decoration:none; color:#5b7277; }
+@media(max-width:700px) {
+ .hero { padding-top:38px; }
+ .stats { grid-template-columns:repeat(2,1fr); }
+ main { margin:0 12px 45px; border-radius:14px; }
+ .source-section { padding:0 12px; }
+ h2 { margin-top:44px; }
+}
+</style>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('/friday-share/sw.js', {updateViaCache:'none'});</script>
+</head>
+<body>
+<header class="hero">
+  <div class="hero-inner">
+    <div class="kicker">OpenAI × מתמטיקה × עסקים</div>
+    <h1>722 מאמרים ביום אחד</h1>
+    <p class="deck">מה OpenAI באמת שחררה, כמה מזה כבר מאומת, איזה ערך זה פותח, ומה העסק שהכי נכון לבנות עכשיו</p>
+    <div class="byline">ניתוח Friday · 7 באוקטובר 2026 · כ־12 דקות קריאה</div>
+  </div>
+</header>
+<section class="stats" aria-label="נתונים מרכזיים">
+  <div class="stat"><strong>722</strong><span>כתבי־יד</span></div>
+  <div class="stat"><strong>372</strong><span>משפחות תוצאות</span></div>
+  <div class="stat"><strong>17</strong><span>תחומי מחקר</span></div>
+  <div class="stat"><strong>4,000~</strong><span>בעיות שנוסו</span></div>
+</section>
+<main>
+<div class="verdict"><b>פסק הדין:</b> זו עשויה להיות קפיצה היסטורית בייצור ידע. אבל המוצר המיידי איננו עוד מנוע הוכחות. הוא שכבת האמון שמבדילה בין פלט מרשים, הוכחה פורמלית וידע שאפשר להסתמך עליו.</div>
+<h2>השורה התחתונה</h2>
+<p>OpenAI לא פרסמה עוד בנצ׳מרק. היא פרסמה מפעל מחקר שלם: 722 כתבי־יד, מאורגנים ב־372 משפחות של תוצאות, על פני 17 תחומים במתמטיקה ומדעי המחשב. החומר הופק ברובו בידי מודל פנימי שטרם שוחרר. לפי OpenAI, המודל קיבל בערך 4,000 בעיות, וכל תוצאה שנבחרה דרשה בממוצע חישוב השקול לכשלוש שעות של ChatGPT Pro.<a class="cite" href="#source-1" aria-label="מקור 1">1</a><a class="cite" href="#source-2" aria-label="מקור 2">2</a></p>
+<p>אם אפילו חלק משמעותי מהטענות יחזיק מעמד בבדיקה, זו קפיצה אמיתית: לא רק AI שפותר תרגילים או מסייע למתמטיקאי, אלא מערכת שמייצרת בקצב תעשייתי טענות מחקר, הוכחות, הוכחות חלופיות, דוגמאות נגד ומימושים פורמליים.</p>
+<p>אבל המאגר איננו 722 אמיתות חתומות. OpenAI עצמה מזהירה שחלק מהתוצאות עדיין אינן מפורמלות ועלולות להכיל בעיות.<a class="cite" href="#source-2" aria-label="מקור 2">2</a> גם קטלוג Lean מסומן במפורש כ־“Partial progress”, וסטטוס הביקורת שלו הוא “unchecked”.<a class="cite" href="#source-4" aria-label="מקור 4">4</a> לכן הערך המיידי איננו רק בתשובות. הוא נמצא בצוואר הבקבוק החדש שהשחרור חושף: מיון, אימות, הבנה, תרגום ליישומים וניהול אמון בקנה מידה שאף קהילה מדעית לא נבנתה עבורו.</p>
+<p>מכאן גם מגיעה הזדמנות עסקית ברורה. החברה המעניינת ביותר שאפשר להקים על בסיס האירוע הזה איננה “OpenAI למתמטיקה”. OpenAI כבר בונה אותה. ההזדמנות היא לבנות את שכבת האמון של המדע שנוצר בידי מכונות: Proof CI שמוודא שהטענה בשפה אנושית תואמת למה שהוכח פורמלית, ממפה הנחות ותלויות, מחפש חורים ודוגמאות נגד, ומנתב כל תוצאה למומחים המתאימים.</p>
+<h2>מה בדיוק יצא</h2>
+<p>הקטלוג משתרע על מספרים, גיאומטריה אלגברית, אנליזה, גיאומטריה קמורה, מדעי המחשב התיאורטיים, מערכות דינמיות, קומבינטוריקה, אלגברה, הסתברות, לוגיקה, תורת החבורות, פיזיקה מתמטית, אלגברות אופרטורים, טופולוגיה, אנליזה פונקציונלית, גיאומטריה דיפרנציאלית ומשוואות דיפרנציאליות חלקיות.<a class="cite" href="#source-3" aria-label="מקור 3">3</a><a class="cite" href="#source-7" aria-label="מקור 7">7</a></p>
+<p>התחומים הגדולים ביותר הם מדעי המחשב התיאורטיים עם 40 משפחות תוצאות, קומבינטוריקה עם 37, גיאומטריה אלגברית ומרוכבת עם 36, תורת המספרים עם 31, והסתברות ומכניקה סטטיסטית וגיאומטריה דיפרנציאלית עם 29 כל אחת. זו אינה הדגמה צרה שנבחרה סביב כישרון יחיד של המודל. מדובר בניסיון לכסות כמעט את כל מפת המחקר המתמטי.<a class="cite" href="#source-7" aria-label="מקור 7">7</a></p>
+<p>רמת השאפתנות קיצונית. הקטלוג טוען, בין השאר, להוכחת השערת Unique Games, לחצי־מישור נטול אפסים עבור פונקציית הזטא של רימן ופונקציות דיריכלה, לחסם חדש לכפל מטריצות, להכרעה בשאלות ותיקות בגיאומטריה, קומבינטוריקה ותורת החבורות, ולאלגוריתמים אסימפטוטיים חדשים.<a class="cite" href="#source-3" aria-label="מקור 3">3</a></p>
+<p>שלוש דוגמאות ממחישות גם את העוצמה וגם את הזהירות הנדרשת:</p>
+<ol>
+<li><strong>Unique Games.</strong> התוצאה אמורה להכריע השערה מרכזית בסיבוכיות חישובית, שעליה נשענות תוצאות רבות של קושי בקירוב. במקרה הזה תיעוד ה־Lean מתאר במפורש רדוקציה פולינומית מ־3SAT, יחד עם תוצאות קושי אופטימליות עבור Max-Cut ו־Vertex Cover.<a class="cite" href="#source-3" aria-label="מקור 3">3</a></li>
+<li><strong>כפל מטריצות.</strong> המאגר טוען לחסם ‎ω≤9/4‎ מעל המספרים המרוכבים ולחסמים נוספים מעל שדות כלליים. תיעוד הפורמליזציה מדגיש שמדובר בסיבוכיות אריתמטית, לא בזמן ריצה מעשי או בסיבוכיות ביטים. כלומר, זו עשויה להיות תוצאה תיאורטית עצומה בלי להפוך מחר את PyTorch למהיר יותר.<a class="cite" href="#source-3" aria-label="מקור 3">3</a></li>
+<li><strong>FFT מתחת ל־n log n.</strong> הכותרת הראשית מציגה אלגוריתם מדויק לכל אורך קלט. אבל מסמך ה־Lean המקושר מתאר תוצאה צרה יותר: חיסכון לאורך תת־סדרה לא חסומה, בלי טענה לכל אורך, ליציבות נומרית או לסיבוכיות ביטים.<a class="cite" href="#source-8" aria-label="מקור 8">8</a> זו דוגמה מצוינת לכך שהמילה “Lean” ליד משפחת תוצאות אינה חותמת אוטומטית על כל משפט בכותרת.</li>
+</ol>
+<h2>כמה מזה באמת מאומת</h2>
+<p>במפת 372 המשפחות, 235 כוללות קישור כלשהו למסמך Lean. קטלוג הפורמליזציה עצמו מונה 162 כתבי־יד כמקורות, 185 הצהרות של תוצאות עיקריות ו־178 קובצי Comparator ייחודיים. אלה מספרים מרשימים, אבל הם אינם שקולים ל־“235 מאמרים הוכחו במלואם”.<a class="cite" href="#source-3" aria-label="מקור 3">3</a><a class="cite" href="#source-4" aria-label="מקור 4">4</a></p>
+<p>יש ארבע שכבות שונות שצריך להפריד ביניהן:</p>
+<ul>
+<li><strong>הטענה השיווקית או כותרת המשפחה.</strong> מה הקטלוג אומר שנפתר.</li>
+<li><strong>המאמר בשפה טבעית.</strong> ההוכחה שמתמטיקאי אמור לקרוא ולהבין.</li>
+<li><strong>המשפט הפורמלי.</strong> מה בדיוק נוסח ב־Lean, כולל כל ההנחות.</li>
+<li><strong>הקוד שעבר בדיקת kernel.</strong> האם Lean קיבל את ההוכחה של המשפט הפורמלי שנוסח.</li>
+</ul>
+<p>Lean חזק מאוד בשכבה הרביעית. הוא אינו פותר לבדו שגיאה בשכבה הראשונה או השנייה, ואינו מבטיח שהמשפט הפורמלי בשכבה השלישית באמת זהה לטענה שאדם חושב שקרא. אם השערה נוסחה עם הנחה חזקה מדי, אם תרגום משפה טבעית השמיט תנאי, או אם הפורמליזציה מכסה רק טענת עזר, kernel תקין לא מציל את הכותרת.</p>
+<p>החשש הזה אינו ביקורת חיצונית בלבד. OpenAI אומרת שחלק מהתוצאות הלא־מפורמלות עלולות להיות שגויות ושיתבצעו תיקונים וגרסאות.<a class="cite" href="#source-2" aria-label="מקור 2">2</a> קבוצת הייעוץ העצמאית AGMAI דרשה בדיוק את מה שחסר כשמכונה מייצרת מחקר מהר יותר מבני אדם: ציטוטים נאותים, ניסוח קריא, מאגרים שאינם בשליטת המעבדה, פירוט המודל והעלות, קישור מכונה־קריא בין הטענה הטבעית לפורמלית, ותמיכה כספית בכנסים, קבוצות עבודה וספרי הסבר.<a class="cite" href="#source-6" aria-label="מקור 6">6</a></p>
+<p>גם הדיון הציבורי התמקד פחות במספר המאמרים ויותר בשאלת האמון: מי בדק, האם משפטי Lean תואמים לכותרות, מי ייתן דין וחשבון, ומה קורה לחוקרים שעבדו שנים על אותן בעיות. הדיון הראשי ב־Hacker News צבר מאות תגובות בתוך שעות.<a class="cite" href="#source-5" aria-label="מקור 5">5</a></p>
+<p>לכן נכון לקרוא למאגר הזה לא “ספר תשובות”, אלא <strong>תור עצום של מועמדים לידע חדש</strong>. עכשיו צריך לעבד את התור.</p>
+<h2>מה זה באמת פותח</h2>
+<h3>1. מעבר ממחסור ברעיונות למחסור באימות</h3>
+<p>עד עכשיו, הדימוי המקובל היה שמתמטיקה מתקדמת מוגבלת בעיקר על ידי הברקה אנושית. המאגר מציע מצב חדש: יצירת מועמדים להוכחה יכולה להפוך לזולה ומהירה, בעוד שבדיקה, הבנה, ייחוס והטמעה נשארות איטיות.</p>
+<p>זה אותו שינוי שקרה בתוכנה כשיצירת קוד נהייתה זולה. הערך זז מכתיבת כל שורה אל בדיקות, CI, review, observability ואבטחה. במתמטיקה ובמדע, המקבילות הן בדיקת משפטים, איתור הנחות נסתרות, שחזור, סקירת ספרות, ביקורת מומחים וניהול גרסאות.</p>
+<h3>2. מחקר הופך לצינור ייצור</h3>
+<p>OpenAI מדווחת על בערך 4,000 ניסיונות ועל 372 משפחות שנבחרו לפרסום.<a class="cite" href="#source-2" aria-label="מקור 2">2</a> גם בלי לדעת כמה ניסיונות היו נכונים, יש כאן תבנית פעולה: לבחור פורטפוליו בעיות, להריץ חיפוש רחב, לאגד תוצאות קשורות, לייצר מאמרים, להוסיף פורמליזציה ולשחרר גרסאות.</p>
+<p>זו כבר לא שיחה עם chatbot. זו תשתית מחקר. ארגונים יוכלו בעתיד לנהל backlog של בעיות מדעיות כפי שחברת תוכנה מנהלת backlog של מוצרים.</p>
+<h3>3. ידע אסימפטוטי לא שווה מוצר מיידי</h3>
+<p>חלק מהתוצאות במדעי המחשב נשמעות מסחריות מאוד: FFT, כפל מספרים, כפל מטריצות, אלגוריתמי קירוב. אבל תוצאה אסימפטוטית יכולה לעבוד רק בגדלים דמיוניים, להסתמך על מודל חישוב לא מציאותי, או להסתיר קבועים עצומים. החסם לכפל מספרים, למשל, משתמש ב־‎κ=2^-182‎. הוא חשוב מפני שהוא שובר מחסום תיאורטי, לא מפני שהוא מבטיח ספריית קריפטוגרפיה מהירה יותר ברבעון הבא.<a class="cite" href="#source-3" aria-label="מקור 3">3</a></p>
+<p>הערך היישומי יגיע רק אחרי שלב נוסף: מימוש, benchmarking, ניתוח קבועים, יציבות נומרית והתאמה לחומרה. זהו כשלעצמו שוק חדש.</p>
+<h3>4. מאגר אימון נדיר, אבל לא מודל פתוח</h3>
+<p>הקוד והמאמרים משוחררים ברישיון Apache 2.0.<a class="cite" href="#source-4" aria-label="מקור 4">4</a><a class="cite" href="#source-9" aria-label="מקור 9">9</a> הם יכולים לשמש לבניית מנועי חיפוש מתמטיים, מערכי eval, כלי פורמליזציה, סוכני ביקורת ומודלים ייעודיים. אבל המודל שיצר אותם נשאר פנימי. OpenAI אומרת שהיא עובדת על שחרור אחראי שלו בעתיד.<a class="cite" href="#source-1" aria-label="מקור 1">1</a></p>
+<p>כלומר, הציבור קיבל תוצרים ותשתית אימות חלקית, לא את מכונת הייצור עצמה. זה מצמצם את ההזדמנות להתחרות ישירות ביצירה, ומגדיל את ההזדמנות לבנות סביב אימות, ארגון ויישום.</p>
+<h2>חמש חברות שאפשר להקים</h2>
+<h3>1. Proof CI: שכבת האמון למדע שנוצר בידי AI</h3>
+<p><strong>הלקוח:</strong> מעבדות AI, צוותי מחקר תעשייתיים, כתבי־עת, מכוני מחקר ואוניברסיטאות.</p>
+<p><strong>המוצר:</strong> מעלים מאמר, קוד Lean וחומרי עזר. המערכת מחלצת את הטענות המרכזיות, משווה אותן למשפטים הפורמליים, בונה גרף תלויות והנחות, מריצה kernel נקי, מחפשת <code>sorry</code>, axioms חריגים או ניסוחים חלשים מדי, מנסה דוגמאות נגד, ומפיקה דוח שאפשר למסור לסוקר אנושי.</p>
+<p><strong>הטריז:</strong> GitHub Action חינמי לפרויקטי Lean, לצד דוח ארגוני בתשלום. כל pull request מקבל סטטוס: מה השתנה בטענה, מה נשבר, ואילו משפטים טבעיים כבר אינם מכוסים.</p>
+<p><strong>החפיר:</strong> מאגר מצטבר של התאמות בין שפה טבעית למשפטים פורמליים, דפוסי כשל, ביקורות אנושיות ומוניטין של סוקרים. הקוד הפתוח לבדו אינו החפיר. היסטוריית האמון היא החפיר.</p>
+<p><strong>הערכה:</strong> זו ההזדמנות הטובה ביותר. השחרור יוצר הוכחת צורך מיידית, ו־AGMAI למעשה כתבה חלק ממפרט המוצר.<a class="cite" href="#source-6" aria-label="מקור 6">6</a></p>
+<h3>2. בורסת אימות עם bounties</h3>
+<p><strong>הלקוח:</strong> מעבדות שמייצרות אלפי תוצאות ואין להן כוח אדם לבדוק את כולן.</p>
+<p><strong>המוצר:</strong> כל טענה הופכת ליחידת עבודה עם פרס: אימות פורמלי, ביקורת ספרות, בדיקה בידי שני מומחים, כתיבת הסבר, או מימוש ניסויי. חוקרים בונים מוניטין לפי תחום ואיכות. מממנים רואים dashboard של סטטוס ואי־ודאות.</p>
+<p><strong>החפיר:</strong> רשת מומחים, היסטוריית החלטות ומערכת מוניטין. זה יכול להפוך ל־“Bugcrowd של המדע”, אבל חייב להימנע מתמריץ לבדיקה שטחית ומהצפה של חוקרים בעבודה לא מתוגמלת.</p>
+<h3>3. Theorem-to-Production Lab</h3>
+<p><strong>הלקוח:</strong> חברות תשתית, שבבים, קריפטוגרפיה, אופטימיזציה, לוגיסטיקה ומחשוב מדעי.</p>
+<p><strong>המוצר:</strong> צוות וסוכן שמאתרים תוצאות אלגוריתמיות חדשות, מממשים אותן, משווים ל־state of the art ומחזירים verdict עסקי: מה עובד בפועל, באיזה גודל, על איזו חומרה ובאיזה סיכון.</p>
+<p><strong>הטריז:</strong> להתחיל מעשר תוצאות אלגוריתמיות בלבד, לא מכל המתמטיקה. למשל כפל מטריצות, FFT, ספירה מקורבת או scheduling.</p>
+<p><strong>הסיכון:</strong> רוב התוצאות לא יבשילו למוצר. זו יותר מעבדת deep tech מאשר SaaS, אבל תוצאה אחת מעשית יכולה להיות שווה הרבה.</p>
+<h3>4. גרף הידע של המתמטיקה החדשה</h3>
+<p><strong>הלקוח:</strong> חוקרים, ספריות, קרנות ומעבדות AI.</p>
+<p><strong>המוצר:</strong> חיפוש לפי בעיה, הנחה, משפט קודם, תחום וסטטוס אימות; גרף שמראה איזו תוצאה תלויה באיזו אחרת, היכן יש גרסאות, מי בדק ומה עדיין לא מובן.</p>
+<p><strong>הסיכון:</strong> חיפוש וסיכום לבדם יהפכו מהר לקומודיטי. העסק נהיה חזק רק אם הגרף מחובר לנתוני אימות, citations, גרסאות ומוניטין שלא ניתן לשכפל בקלות.</p>
+<h3>5. Copilot למחקר פרטי עם הוכחות ניתנות לבדיקה</h3>
+<p><strong>הלקוח:</strong> צוותי R&amp;D שיש להם בעיות מתמטיות קשות ונתונים קנייניים, למשל תכנון שבבים, בקרה, חומרים, רובוטיקה או quant.</p>
+<p><strong>המוצר:</strong> לא chatbot כללי, אלא סביבת מחקר סגורה שמקבלת הגדרת בעיה, יוצרת מסלולי פתרון, בודקת אותם פורמלית או נומרית, ומתעדת כל הנחה ומקור.</p>
+<p><strong>הסיכון:</strong> המאגר של OpenAI מוכיח יכולת בעולם בעיות פתוחות, אבל אינו מוכיח שהמערכת יודעת להתחבר לנתוני חברה, לאילוצים הנדסיים ולעלות שגיאה. כאן נדרשת אינטגרציה עמוקה ו־human in the loop.</p>
+<h2>מה הייתי בונה עכשיו</h2>
+<p>הייתי בונה את Proof CI, אבל מתחיל קטן מאוד.</p>
+<p>גרסת MVP של שישה שבועות:</p>
+<ol>
+<li>קלט של PDF או LaTeX יחד עם repository ב־Lean.</li>
+<li>חילוץ אוטומטי של משפטים, הנחות ומסקנות.</li>
+<li>התאמה בין כל טענה בשפה טבעית להצהרת Lean הרלוונטית.</li>
+<li>build בסביבה נקייה ודוח על axioms, <code>sorry</code>, תלויות וגרסאות.</li>
+<li>“פער סמנטי” מודגש: כל מקום שבו הטענה האנושית רחבה יותר מהמשפט הפורמלי.</li>
+<li>דוח קצר למומחה ו־badge ציבורי לגרסה שנבדקה.</li>
+</ol>
+<p>המאגר החדש הוא dataset פתיחה מושלם: מאות זוגות של מאמרים, משפחות תוצאות, מסמכי scope וקוד Lean, כולל מקרים שבהם הפורמליזציה מכסה רק חלק מהכותרת. אפשר לבנות eval אמיתי: האם המערכת מזהה לבדה את הפער בין כותרת ה־FFT לבין היקף ההוכחה הפורמלית?<a class="cite" href="#source-3" aria-label="מקור 3">3</a><a class="cite" href="#source-4" aria-label="מקור 4">4</a><a class="cite" href="#source-8" aria-label="מקור 8">8</a></p>
+<p>הלקוח הראשון אינו כתב־עת שמרני. הוא מעבדת AI שרוצה לפרסם עוד אלפי תוצאות בלי להסתכן באסון אמינות. הלקוח השני הוא כל גוף שמקבל זרם תוצאות ממודלים ואינו יודע במה להשקיע זמן אנושי.</p>
+<p>מודל התמחור יכול להיות פשוט: תשלום לפי repository או לפי “חבילת תוצאה”, עם שכבה ארגונית שמוסיפה סוקרים מאומתים, audit trail ו־SLA. הקוד שבודק build יכול להיות פתוח; המנוע שמזהה פער סמנטי, נתוני הביקורת ורשת המומחים נשארים החפיר.</p>
+<h2>המסקנה הרחבה</h2>
+<p>האירוע החשוב אינו ש־AI אולי פתר מאות בעיות. האירוע החשוב הוא שהפקת מחקר הפכה מהירה יותר ממנגנון הקליטה של המדע.</p>
+<p>זה יוצר שני עתידים אפשריים. באחד, האינטרנט מוצף באלפי “מאמרים” שאיש אינו מבין, והמילה הוכחה מאבדת מערכה. בשני, נבנית שרשרת אספקה חדשה לידע: מודלים מציעים, מערכות פורמליות בודקות, מומחים מפרשים, קהילות מאמתות, ומהנדסים מתרגמים לתועלת.</p>
+<p>OpenAI סיפקה את חומר הגלם ואת ההדגמה הראשונה בקנה מידה חריג. העסק הגדול שנולד כאן יהיה מי שבונה את האמון, הסינון והתרגום בין פלט של מכונה לבין ידע שאנשים מוכנים להסתמך עליו.</p>
+</main>
+<section class="source-section">
+  <h2>מקורות</h2>
+  <ol class="sources"><li id="source-1"><span class="source-num">1</span><a href="https://openai.com/index/sharing-ai-progress-in-mathematics" target="_blank" rel="noopener">Sharing AI progress in mathematics</a><small>https://openai.com/index/sharing-ai-progress-in-mathematics</small></li><li id="source-2"><span class="source-num">2</span><a href="https://github.com/openai/math" target="_blank" rel="noopener">OpenAI math repository</a><small>https://github.com/openai/math</small></li><li id="source-3"><span class="source-num">3</span><a href="https://github.com/openai/math/blob/main/CONTENTS.md" target="_blank" rel="noopener">OpenAI mathematics manuscript map</a><small>https://github.com/openai/math/blob/main/CONTENTS.md</small></li><li id="source-4"><span class="source-num">4</span><a href="https://github.com/openai/math/blob/main/lean/formalization.yaml" target="_blank" rel="noopener">OpenAI Lean formalization catalogue</a><small>https://github.com/openai/math/blob/main/lean/formalization.yaml</small></li><li id="source-5"><span class="source-num">5</span><a href="https://news.ycombinator.com/item?id=49984923" target="_blank" rel="noopener">Hacker News discussion</a><small>https://news.ycombinator.com/item?id=49984923</small></li><li id="source-6"><span class="source-num">6</span><a href="https://agmai.org/general-sep29" target="_blank" rel="noopener">AGMAI public recommendations</a><small>https://agmai.org/general-sep29</small></li><li id="source-7"><span class="source-num">7</span><a href="https://github.com/openai/math/blob/main/overview.pdf" target="_blank" rel="noopener">OpenAI Research Catalog overview</a><small>https://github.com/openai/math/blob/main/overview.pdf</small></li><li id="source-8"><span class="source-num">8</span><a href="https://github.com/openai/math/blob/main/lean/docs/130.md" target="_blank" rel="noopener">Lean scope for exact Fourier transforms</a><small>https://github.com/openai/math/blob/main/lean/docs/130.md</small></li><li id="source-9"><span class="source-num">9</span><a href="https://github.com/openai/math/blob/main/LICENSE" target="_blank" rel="noopener">OpenAI math repository license</a><small>https://github.com/openai/math/blob/main/LICENSE</small></li></ol>
+</section>
+<footer class="footer">Friday Share · מאמרים ומחקרים בעברית<br><a class="back" href="../../">← חזרה לכל המאמרים</a></footer>
+</body>
+</html>
