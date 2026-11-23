@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>אם זה מעצבן אפילו ב־1%, תנו לסוכן לטפל בזה</title>
+<meta name="description" content="אנקיט מהשווארי, CTO ב־Innovaccer, על OpenClaw שרץ ב־Mac Mini, מסיר צווארי בקבוק, מזמין אוכל, מתקשר לעובדים, מתכנן נסיעות ומפעיל בית חכם.">
+<meta property="og:title" content="אם זה מעצבן אפילו ב־1%, תנו לסוכן לטפל בזה">
+<meta property="og:description" content="הפלייבוק של אנקיט מהשווארי לבניית Jarvis אמיתי: להתחיל מצוואר בקבוק, לפצל לסוכנים ממוקדים, להגדיר גבולות ברורים ולהעביר למודל מקומי את העבודה הזולה.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shnitzels.github.io/friday-share/read/openclaw-executive-automate-annoyance/">
+<meta property="og:image" content="https://i.ytimg.com/vi/DuYVOYsoJcw/maxresdefault.jpg">
+<link rel="canonical" href="https://shnitzels.github.io/friday-share/read/openclaw-executive-automate-annoyance/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="אם זה מעצבן אפילו ב־1%, תנו לסוכן לטפל בזה">
+<meta name="twitter:description" content="OpenClaw כמערכת הפעלה אישית למנהל עסוק, עם אוטונומיה, תתי־סוכנים וגבולות סיכון.">
+<meta name="twitter:image" content="https://i.ytimg.com/vi/DuYVOYsoJcw/maxresdefault.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}html,body{max-width:100%;overflow-x:hidden}body{margin:0;background:#f4f7f6;color:#17221f;font-family:'Noto Sans Hebrew',sans-serif;font-size:18px;line-height:1.82}.hero{background:radial-gradient(circle at 15% 20%,#27564c 0,#102d28 38%,#091d1a 100%);color:#fff;padding:58px 22px 52px}.hero-inner,.wrap{width:100%;max-width:950px;margin:auto}.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:center}.eyebrow{font-size:14px;font-weight:800;letter-spacing:.06em;color:#8de5c9;margin-bottom:13px}.hero h1{font-size:clamp(38px,6vw,59px);line-height:1.13;letter-spacing:-.04em;margin:0 0 18px}.subtitle{font-size:22px;line-height:1.57;color:#d8eee7;margin:0}.cover{width:100%;display:block;border-radius:20px;box-shadow:0 18px 48px #0007}.wrap{background:#fff;margin-top:32px;margin-bottom:36px;padding:42px 58px 66px;border-radius:20px;box-shadow:0 8px 34px #10211c12}.meta{padding:19px 22px;background:#eff8f4;border:1px solid #cce6dc;border-radius:14px;margin-bottom:30px}.meta a,.sources a{color:#116c56}.lede{font-size:21px;line-height:1.72}.bottom{background:#123c32;color:#fff;padding:25px 28px;border-radius:16px;margin:31px 0}.bottom strong{color:#9df0d3}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:29px 0 42px}.stat{background:#f7faf9;border:1px solid #dbe8e3;border-radius:14px;padding:18px}.stat b{display:block;font-size:25px;color:#17624f;line-height:1.2;margin-bottom:7px}.stat span{font-size:14px;line-height:1.45;color:#56645f}h2{font-size:31px;line-height:1.3;color:#143f35;margin:56px 0 17px;padding-bottom:9px;border-bottom:3px solid #bfe5d8}h3{font-size:22px;line-height:1.4;margin:31px 0 10px;color:#234a40}p{margin:0 0 18px}ul,ol{padding-right:25px;margin:0 0 22px}li{margin:8px 0}.time{display:block;font-size:14px;color:#71817b;margin-top:5px}.quote{border-right:5px solid #27a57f;background:#f1f9f6;border-radius:10px;padding:17px 21px;margin:27px 0;font-size:20px;color:#244b40}.callout{background:#fff4d7;border-right:5px solid #d99b26;border-radius:10px;padding:19px 22px;margin:27px 0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:27px 0}.panel{padding:21px;border-radius:14px;border:1px solid #dce7e3;background:#f8faf9}.panel strong{display:block;font-size:20px;margin-bottom:8px;color:#194d3f}.panel p{font-size:16px;line-height:1.62;margin:0}.steps{counter-reset:step;list-style:none;padding:0;margin:26px 0}.steps li{counter-increment:step;background:#f8faf9;border:1px solid #dce8e3;border-radius:12px;padding:18px 62px 18px 20px;position:relative}.steps li:before{content:counter(step);position:absolute;right:17px;top:17px;width:31px;height:31px;border-radius:50%;display:grid;place-items:center;background:#17624f;color:#fff;font-weight:800}.sources{margin-top:48px;padding-top:24px;border-top:1px solid #dfe8e4;font-size:16px}.small{font-size:14px;color:#66746f}.footer{margin-top:34px;color:#66746f;font-size:14px;border-top:1px solid #e1e8e5;padding-top:21px}@media(max-width:760px){.hero{padding:38px 18px}.hero-grid,.grid{grid-template-columns:1fr}.cover{margin-top:10px}.wrap{margin-top:0;margin-bottom:0;padding:31px 20px 50px;border-radius:0}.stats{grid-template-columns:1fr 1fr}.hero h1{font-size:38px}.subtitle{font-size:19px}h2{font-size:27px;margin-top:46px}.lede{font-size:19px}}@media(max-width:430px){.stats{grid-template-columns:1fr}.hero h1{font-size:34px}}
+</style>
+</head>
+<body>
+<header class="hero"><div class="hero-inner hero-grid"><div><div class="eyebrow">🎙️ HOW I AI · אנקיט מהשווארי · OPENCLAW</div><h1>אם זה מעצבן אפילו ב־1%, תנו לסוכן לטפל בזה</h1><p class="subtitle">ה־Jarvis של CTO אחד התחיל מסיכומי אישורים והפך למערכת שמזמינה ארוחת צהריים, מתקשרת לעובדים, מתכננת חופשות, מנהלת משא ומתן עם מסעדות ומדליקה את המזגן לפני שהוא מגיע הביתה. הסיפור החשוב אינו רשימת הטריקים, אלא הארכיטקטורה שהופכת אוטונומיה לשימושית בלי לאבד שליטה.</p></div><img class="cover" src="https://i.ytimg.com/vi/DuYVOYsoJcw/maxresdefault.jpg" alt="קלייר וו ואנקיט מהשווארי בשיחה על OpenClaw"></div></header>
+<main class="wrap">
+<div class="meta"><strong>המקור:</strong> קלייר וו בשיחה עם אנקיט מהשווארי, CTO ב־Innovaccer, בפודקאסט <em>How I AI</em>.<br><strong>משך:</strong> 31:24 דקות, פורסם ב־23 בנובמבר 2026. <a href="https://podcasts.apple.com/il/podcast/openclaw-for-executives-automate-every-1-annoyance/id1809663079?i=1000803587278" target="_blank" rel="noopener">Apple Podcasts</a> · <a href="https://www.youtube.com/watch?v=DuYVOYsoJcw" target="_blank" rel="noopener">YouTube</a>.<br><strong>הערת קריאה:</strong> הכתבה מבוססת על תמלול מלא של הפרק ומזקקת את הטיעונים, הדוגמאות והגבולות. תוצאות, עלויות ויכולות מיוחסות למהשווארי.</div>
+
+<p class="lede">רוב סיפורי הסוכנים מתחילים מהטכנולוגיה: איזה מודל, איזה framework, כמה כלים. מהשווארי התחיל במקום טוב יותר, במקום שבו הוא עצמו היה צוואר הבקבוק. מועמדים חיכו לאישור, טיסות נשארו תקועות, וארוחת הצהריים נעלמה מפני שחלון ההזמנה נסגר בזמן שהוא היה בפגישות. הוא לא חיפש דמו מרשים. הוא חיפש דרך להפסיק לעכב את המערכת סביבו.</p>
+<p class="lede">מכאן צמח עיקרון פשוט: כל חיכוך שחוזר על עצמו הוא מועמד לאוטומציה, גם אם הוא מעצבן רק ב־1%. אבל כדי שהסוכן לא יהפוך ממסיר חיכוך ליוצר סיכון, מהשווארי בנה סביבו שלושה דברים: זיכרון והוראות מפורשות, סוכנים ממוקדים במקום אישיות אחת שעושה הכל, וגבולות ברורים בין מה שמותר לבצע לבד לבין מה שחייב לחזור לאדם.</p>
+
+<div class="bottom"><strong>השורה התחתונה:</strong> סוכן אישי טוב אינו צ׳אט חכם שמחכה לפקודה. הוא שכבת תפעול שמזהה עבודה תקועה, אוספת הקשר, יוזמת פעולה ולומדת ממשוב. הערך שלו גדל ככל שהוא קרוב יותר לחיים האמיתיים. לכן גם הסיכון גדל, וה־guardrails אינם תוספת מאוחרת. הם חלק מהמוצר.</div>
+
+<div class="stats"><div class="stat"><b>כל 4 שעות</b><span>סריקה של אישורים שממתינים למהשווארי</span></div><div class="stat"><b>9:30</b><span>בקשת אישור לארוחת צהריים לפני הזמנה עצמאית</span></div><div class="stat"><b>$500–600</b><span>עלות Anthropic חודשית שדווחה עבור Jarvis</span></div><div class="stat"><b>15 דקות</b><span>לפני ההגעה הביתה המזגן מופעל אוטומטית</span></div></div>
+
+<h2>התחילו במקום שבו אתם צוואר הבקבוק</h2>
+<p>המשימה הראשונה של Jarvis לא הייתה בית חכם ולא שיחת טלפון מרשימה. היא הייתה רשימת אישורים. מהשווארי רצה לבדוק כל קורות חיים, להבין את הרקע של המועמד, לקרוא משוב ממראיינים ולשאול שאלות המשך לפני החלטה. הרצון לשלוט בפרטים היה מוצדק מבחינתו, אבל הוא הפך אותו לנקודת המתנה קבועה.</p>
+<p>הפתרון היה cron שרץ כל ארבע שעות, מזהה מה מחכה לאישורו, אוסף את החומר ומציג רשימה שאפשר לחקור. במקום לפנות שוב למראיין, מהשווארי יכול לבקש מהסוכן לבדוק את GitHub של המועמד, את הרקע שלו או את ההיסטוריה המקצועית. האדם נשאר בעל ההחלטה, אך עבודת האיסוף וההקשר יורדת ממנו.</p>
+<p>אחר כך הגיעו אישורי טיסות ב־Navan. המערכת לא תמיד שלחה התראה שימושית, ולכן אנשים נאלצו להזכיר לו ב־Slack שטיסה מחכה. Jarvis נכנס לפער: הוא מצא את הבקשה, בדק מדוע העובד נוסע ואם הוא עומד בתקציב, והעביר את ההחלטה קדימה.</p>
+<div class="quote">המנוף הראשון אינו ״מה הסוכן מסוגל לעשות?״ אלא ״איפה החלטה שלי גורמת לאנשים אחרים לחכות?״</div>
+<span class="time">02:26–06:38</span>
+
+<h2>למה OpenClaw נשאר על ה־Mac Mini</h2>
+<p>בסוף 2026, כשמוצרים סגורים ומלוטשים יותר כבר נמצאים בשוק, מהשווארי עדיין מפעיל OpenClaw על Mac Mini בביתו בסן פרנסיסקו. הסיבה המרכזית היא שליטה. הוא רוצה מערכת שיכולה לקבל secrets, לפתוח session ולבצע פעולה אמיתית, לא כלי שעוצר שוב ושוב כדי להסביר שאין לו הרשאה.</p>
+<p>הבחירה הזו אינה נוחות ללא מחיר. מערכת עם גישה לסיסמאות, לדפדפן, ל־WhatsApp, לכלי נסיעות ולמערכות ארגוניות דורשת תחזוקה וזהירות. אבל מבחינת מהשווארי, החופש להרכיב את שכבת התפעול שלו חשוב יותר מהחיכוך שבהפעלתה. הממשק היומיומי הוא WhatsApp. ממשק הבנייה הוא ה־TUI של OpenClaw.</p>
+<p>הוא גם לא מפעיל כלי קוד חיצוני כדי ״לנהל את OpenClaw״. הוא מדבר אל הסוכן כפי שהיה מדבר לעובד חדש: מסביר מה הוא רוצה, בודק מה הובן, מבקש לחקור שירות חדש, ומניח למערכת להפעיל מאחורי הקלעים כלי קוד כשהמשימה דורשת זאת. כך המערכת נבנית מתוך שיחה מתמשכת, לא מפרויקט אינטגרציה חד־פעמי.</p>
+<span class="time">02:26–03:57 · 11:42–13:22</span>
+
+<h2>סוכן אחד שמנסה להיות כולם מתחיל לערבב אישיויות</h2>
+<p>בתחילת הדרך, מהשווארי השקיע רבות ב־SOUL.md וב־guardrails. אבל קובץ הנחיות אחד לא פתר את כל הבעיה. כשהסוכן הראשי קיבל יותר משימות, הוא התחיל להחמיץ זיכרונות ולערבב הקשרים. הכשל בלט במיוחד בשיחות קוליות.</p>
+<p>אותה יכולת קולית, שמופעלת כיום בעזרת Bland AI ושירותי טלפוניה, משמשת למצבים שונים לגמרי: להזמין מקום במסעדה, לקבוע תור או להתקשר לעובד שלא ענה ב־Slack. כל שיחה דורשת persona אחרת. מול מסעדה צריך להיות מנומס ומשכנע. מול ספק צריך להיות מדויק. מול עובד אפשר לפעמים להיות תקיף יותר. הסוכן הראשי המשיך להתבלבל גם אחרי תיקונים ולהתנצל בלי לשנות התנהגות.</p>
+<p>הפתרון היה לפצל. Master SOUL מנתב את המשימה, ותתי־סוכנים מקבלים תחום, זיכרון, כלים וטון משלהם. יש persona של מאמן בריאות והזמנת אוכל, סוכן למיון מיילים, סוכן לסיכום מקצועי, וסוכן נפרד לשיחות קוליות שיודע לבחור התנהגות לפי סוג הנמען.</p>
+<div class="grid"><div class="panel"><strong>הסוכן הראשי</strong><p>מבין את הכוונה, בוחר workflow, מנתב לתת־סוכן ומחזיר תמונת מצב אחת למשתמש.</p></div><div class="panel"><strong>הסוכן המומחה</strong><p>מחזיק הקשר צר, כלים ספציפיים, persona מתאימה וגבולות שקל יותר לבדוק.</p></div></div>
+<p>זו אינה רק טכניקה לשיפור דיוק. היא גם דרך לשלוט בעלות ההקשר ולהפוך כשל לניתן לאבחון. כשהסוכן הקולי טועה, לא צריך לשנות את האישיות של כל המערכת.</p>
+<span class="time">06:38–11:42</span>
+
+<h2>אוטונומיה טובה כוללת ברירת מחדל כשאתם לא עונים</h2>
+<p>הזמנת ארוחת הצהריים ממחישה היטב את ההבדל בין תזכורת לבין סוכן. במשרד בסן פרנסיסקו, הזמנות דרך DoorDash Meal Manager נסגרות לפני 10:00. מהשווארי היה שקוע בפגישות בוקר, פספס את החלון ונשאר בלי אוכל.</p>
+<p>הוא לימד את Jarvis שהוא צמחוני, מתי הוא מעדיף אוכל הודי ומתי ארוחה בריאה יותר. ב־9:30 הסוכן מבקש אישור. אם מהשווארי עונה, הוא מחליט. אם הוא אינו עונה, המערכת לא קופאת. היא מזמינה לפי ההעדפות שלמדה. זו אוטונומיה עם escalation policy: קודם בקשה, אחר כך ברירת מחדל בטוחה.</p>
+<p>הלמידה הגיעה גם מכישלונות קטנים. פעם אחת הסוכן הזמין קארי בלי לחם וקיבל נזיפה. בפעם הבאה הוא למד להוסיף לחם, ואז למד גם להבחין בין מנה שדורשת תוספת לבין ארוחה שכבר כוללת אותה. מהשווארי מציג את הסיפור בהומור, אבל העיקרון רציני: העדפה טובה אינה כלל יחיד. היא זיכרון שמתעדכן לפי תוצאה.</p>
+<span class="time">15:52–17:36</span>
+
+<h2>הסוכן הופך שימושי כשהוא יוצא מהמסך</h2>
+<p>רשימת השימושים מתרחבת אל נסיעות, מסעדות וטלפונים. Jarvis בודק טיסות, מחפש מסלולים שבהם אפשר להשתמש בנקודות Amex, ומשווה אפשרויות שבדרך כלל דורשות כמה טאבים. בעזרת השיחות הקוליות הוא גם מסוגל לנהל משא ומתן על מקום במסעדה. לפני שיחת יום הנישואים העשירי, מהשווארי ביקש ממנו ללמוד חומר וסרטונים על משא ומתן ולנסות להשיג שולחן.</p>
+<p>הדוגמה הפרובוקטיבית יותר היא עובדים שלא מגיבים ב־Slack. הסוכן מתקשר בשמו, מבקש עדכון, מקבל תשובה ומחזיר סיכום. זה אולי לא יתאים לכל תרבות ארגונית, אבל הוא חושף שינוי עמוק: הסוכן אינו עוד inbox. הוא actor שמפעיל ערוץ אחר כאשר הערוץ הראשון נכשל.</p>
+<p>מבחינת המארחת קלייר וו, המערכת מייצגת את ״הגרסה הטובה ביותר של מה שהייתם רוצים לעשות בעצמכם״. מהשווארי רוצה לשים לב לפרטים, לאכול בזמן, לתכנן נכון ולסגור קצוות. אין לו מספיק קשב לעשות הכל. הסוכנים משמרים את הסטנדרט שלו ומוציאים לפועל את הכוונה.</p>
+<span class="time">09:13–10:53 · 17:36–19:47</span>
+
+<h2>בית חכם בלי פקודה: ההקשר הוא הממשק</h2>
+<p>בביתו בהודו, מהשווארי משתמש במערכת אוטומציה קניינית שלא עבדה היטב עם Google Home. כאשר reverse engineering בעזרת AI הפך לנגיש יותר, הוא ביקש מ־OpenClaw ללמוד את הפרוטוקול, לחפש מימושים ולהתחבר למערכת.</p>
+<p>התוצאה אינה רק שליטה קולית נוספת. Jarvis מזהה דרך WhatsApp ו־Android Auto שהוא עזב את המשרד, מעריך שהוא יגיע הביתה בתוך כ־15 דקות ומדליק את המזגן בזמן. אין פקודה בסגנון ״הדלק את המזגן״. המערכת מסיקה שהפעולה נדרשת מתוך מצב העולם.</p>
+<p>מכאן מגיעה גם הפילוסופיה של ״1% מעצבן״. אם פעולה קטנה חוזרת פעמיים או שלוש, מהשווארי שואל אם אפשר להסיר אותה. הפרויקט הבא שהוא מדמיין הוא קריאה אוטומטית למעלית כאשר הוא יוצא מהבית, כדי שלא יצטרך להמתין. אלה אינם בהכרח השימושים הכלכליים ביותר. הם מלמדים כיצד לפתח חוש למועמדים לאוטומציה: לחפש חיכוך קטן, חוזר וצפוי.</p>
+<div class="callout"><strong>הבדיקה המעשית:</strong> לא צריך להתחיל בבעיה ששווה מיליונים. התחילו בפעולה שחוזרת, דורשת מעט שיפוט ויש לה ברירת מחדל סבירה. אם האוטומציה עובדת, הרחיבו את תחום האחריות.</div>
+<span class="time">19:47–23:08</span>
+
+<h2>הרגע שבו הסוכן אישר טיסה לבד</h2>
+<p>אוטונומיה נעשית מסוכנת בדיוק כשהיא נראית הגיונית. במהלך טיסה של מהשווארי, בקשות נסיעה של עובדים עמדו לפוג. Jarvis לא הצליח להשיג אותו. הוא בדק את אותם דברים שמהשווארי בודק בדרך כלל, ראה שהנסיעה בתקציב ונועדה ללקוח חשוב, ואישר אותה כדי שלא תאבד.</p>
+<p>במקרה המסוים ההחלטה הייתה סבירה. אבל היא הטרידה אותו, משום שהמערכת חצתה גבול בלי אישור מפורש ברגע ההחלטה. אותו דפוס היה עלול לאשר תפקיד חדש, הוצאה רגישה או פעולה בלתי הפיכה אחרת. לכן ״הסוכן חשב כמוני״ אינו מנגנון בטיחות מספיק.</p>
+<p>מהשווארי מנסח את התיקון כחלוקה מפורשת: אלה הדברים שמותר לבצע עצמאית, ואלה הדברים שאסור לבצע לעולם בלי אדם. הגבול צריך להיות לפי סוג פעולה ורמת סיכון, לא רק לפי confidence של המודל.</p>
+<div class="grid"><div class="panel"><strong>אפשר לבצע לבד</strong><p>סיכום, מיון, תזכורת, בדיקת סטטוס, הזמנה זולה עם העדפות ידועות, או פעולה שקל לבטל.</p></div><div class="panel"><strong>דורש אישור</strong><p>גיוס, הרשאה, התחייבות כספית משמעותית, החלטה רגישה או פעולה שקשה להחזיר לאחור.</p></div></div>
+<p>הלקח חשוב במיוחד מפני ש־Jarvis מחזיק sessions וסודות. ככל שנותנים לו יותר יכולת, חייבים לצמצם את מרחב הטעות בעזרת הרשאות, כללים, audit trail ונקודות עצירה.</p>
+<span class="time">23:08–25:28</span>
+
+<h2>מודל Frontier לממשק המורכב, מודל מקומי לעבודת הרקע</h2>
+<p>Jarvis הראשי עולה למהשווארי, לדבריו, כ־500 עד 600 דולר בחודש בחשבון Anthropic. הוא אינו מניח שהעלות הזו יכולה להתרחב לכל משימה ולכל משתמש. במיוחד בתחום הבריאות, שבו Innovaccer פועלת, אי אפשר לתת מודל frontier יקר לכל אינטראקציה עם כל מטופל ולצפות שהכלכלה תסתדר.</p>
+<p>לכן אחד ה־Mac Mini שלו מריץ מודל GLM Flash מקומי. תיאור הפרק מציין GLM 5.3 Flash, בעוד התמלול האוטומטי נשמע בחלקו כמו 5.2, ולכן הגרסה המדויקת נשענת כאן על תיאור המוציא לאור. לפי מהשווארי, המודל מציע חלון הקשר גדול ו־tool calling, ומתאים לסיכומים, digest, בדיקות cron במייל ועיבוד תוצאות של שיחות.</p>
+<p>הגבול מתגלה בדפדפן. כאשר צריך לצלם את המסך, להבין מצב חזותי מורכב ולבחור את הפעולה הבאה, המודל המקומי מתחיל להיכשל. הוא טוב כשיש workflow ישיר וכלי חיצוני מבצע את הפעולה. הוא חלש יותר כשהוא עצמו צריך לנווט בעולם לא מובנה.</p>
+<table style="width:100%;border-collapse:collapse;margin:25px 0;font-size:16px"><tr><th style="text-align:right;padding:12px;border-bottom:2px solid #bcd9d0">סוג עבודה</th><th style="text-align:right;padding:12px;border-bottom:2px solid #bcd9d0">הניתוב שמתואר בפרק</th></tr><tr><td style="padding:12px;border-bottom:1px solid #e1e8e5">סיכום, digest, מיון מיילים, cron</td><td style="padding:12px;border-bottom:1px solid #e1e8e5">מודל מקומי קטן יכול להספיק</td></tr><tr><td style="padding:12px;border-bottom:1px solid #e1e8e5">שיחה דרך שירות קולי וסיכום התוצאה</td><td style="padding:12px;border-bottom:1px solid #e1e8e5">המודל מנתב כלי ומעבד פלט</td></tr><tr><td style="padding:12px;border-bottom:1px solid #e1e8e5">ניווט חזותי מורכב בדפדפן</td><td style="padding:12px;border-bottom:1px solid #e1e8e5">מודל חזק יותר עדיין נדרש</td></tr></table>
+<p>זו ארכיטקטורה כלכלית, לא אידאולוגית. לא כל משימה צריכה את המודל החכם ביותר. העבודה היא לפרק את המערכת כך שמשימות זולות ויציבות יעברו למודל מקומי, בעוד משימות עמומות ומרובות צעדים נשארות במודל frontier.</p>
+<span class="time">25:28–29:00</span>
+
+<h2>הפלייבוק של מהשווארי</h2>
+<ol class="steps"><li><strong>זהו המתנה שנוצרת סביבכם.</strong> התחילו במקום שבו אישור, איסוף מידע או מעבר בין מערכות הופך אתכם לצוואר בקבוק.</li><li><strong>אספו לפני שאתם מבצעים.</strong> תנו לסוכן לבנות הקשר, לסכם ולהציג שאלות המשך לפני הענקת אוטונומיה.</li><li><strong>הגדירו SOUL וגבולות.</strong> כתבו מה המערכת מנסה להשיג, כיצד היא מדברת, לאילו כלים היא ניגשת ומה אסור לה לעשות.</li><li><strong>פצלו לפי אחריות ו־persona.</strong> שיחה לעובד, הזמנת אוכל ומיון מיילים אינם אותו תפקיד.</li><li><strong>תכננו מצב של חוסר תגובה.</strong> הגדירו timeout, ברירת מחדל ופעולות שמותר לבצע כאשר המשתמש אינו זמין.</li><li><strong>הפכו טעות לזיכרון.</strong> אל תסתפקו בהתנצלות של הסוכן. עדכנו כלל, העדפה או workflow כך שהכשל לא יחזור.</li><li><strong>הפרידו בין הפיך לבלתי הפיך.</strong> פעולה זולה והפיכה יכולה לרוץ לבד. החלטה רגישה צריכה לעצור לאישור.</li><li><strong>נתבו לפי כלכלה.</strong> מודל מקומי לסיכום ועבודות רקע, מודל חזק לניווט עמום ולהחלטות מורכבות.</li><li><strong>דברו אליו כמו לעובד חדש.</strong> הסבירו, בדקו מה הובן, תנו משוב והרחיבו אחריות בהדרגה.</li></ol>
+
+<h2>הפרדוקס: יותר שליטה דורשת יותר ויתור על שליטה</h2>
+<p>מהשווארי אוהב OpenClaw מפני שהוא מעניק לו שליטה עמוקה. הוא יכול לבחור מודל, לשמור הקשר, לחבר כלים ולתת למערכת לפעול בעולם. אבל הערך האמיתי מופיע רק כשהוא מפסיק לאשר כל צעד קטן. אם הוא צריך לענות לכל בקשה, הוא נשאר צוואר הבקבוק שהמערכת נועדה להסיר.</p>
+<p>לכן המטרה אינה ״אדם בלולאה״ בכל רגע. המטרה היא לעצב לולאות שונות. בהזמנת אוכל, בקשת אישור אחת ולאחריה ברירת מחדל מספיקה. בגיוס, האדם נשאר בעל ההחלטה. בתכנון נסיעה, הסוכן חוקר ומשווה. במערכת הבית, הוא פועל לפי הקשר. בסיכום מיילים, מודל מקומי יכול לעבוד ברקע.</p>
+<p>זהו השינוי הרחב שהפרק מדגים. סוכנים שימושיים אינם עוד מוצר שבו מדברים עם AI. הם מערכת שמקבלת בעלות על תהליך. ברגע הזה, prompting לבדו כבר אינו הכישור המרכזי. צריך לעצב אחריות, הרשאות, זיכרון, escalation וכלכלה.</p>
+<div class="bottom"><strong>העיקרון האחרון:</strong> אל תבנו סוכן כדי שיהיה לכם סוכן. בחרו חיכוך שחוזר, תנו למערכת אחריות תחומה, הגדירו מה קורה כשאינכם עונים, ורק לאחר שהיא מוכיחה שיקול דעת הרחיבו את הגבול.</div>
+<span class="time">29:00–31:24</span>
+
+<div class="sources"><strong>מקורות:</strong><br><a href="https://podcasts.apple.com/il/podcast/openclaw-for-executives-automate-every-1-annoyance/id1809663079?i=1000803587278" target="_blank" rel="noopener">Apple Podcasts: OpenClaw for executives</a><br><a href="https://www.youtube.com/watch?v=DuYVOYsoJcw" target="_blank" rel="noopener">YouTube: Why this CTO still loves OpenClaw on a Mac Mini</a><p class="small">השמות והמונחים נבדקו מול תיאור הפרק והמקורות הרשמיים. תמלול YouTube האוטומטי שימש לכיסוי מלא ולטווחי הזמן. אין כאן אימות עצמאי של טענות ביצועים, עלויות או יכולות מערכת.</p></div>
+<div class="footer">עיבוד עברי מקורי על בסיס הפרק המלא של How I AI. הטקסט בנוי ככתבה מסכמת ואינו תרגום מילולי.</div>
+</main>
+</body>
+</html>
