@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>אלופי השברים — 50 שאלות בחשבון לכיתה ה׳</title>
+  <meta name="description" content="אימון אינטראקטיבי לכיתה ה׳: שברים, מספרים מעורבים, מספרים עשרוניים ובעיות מילוליות.">
+  <meta property="og:title" content="אלופי השברים — 50 שאלות בחשבון לכיתה ה׳">
+  <meta property="og:description" content="תרגול אינטראקטיבי ממוקד למבחן בחשבון לכיתה ה׳">
+  <meta property="og:url" content="https://shnitzels.github.io/friday-share/read/grade-5-math-practice/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <link rel="canonical" href="https://shnitzels.github.io/friday-share/read/grade-5-math-practice/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="../../" aria-label="חזרה ל-Friday Share"><span class="brand-mark">ƒ</span><span>Friday Share</span></a>
+      <button class="ghost-button" id="syllabusBtn" type="button">מה לומדים השנה?</button>
+    </header>
+
+    <main>
+      <section class="hero" id="homeScreen">
+        <div class="hero-copy">
+          <div class="eyebrow">תרגול ממוקד לכיתה ה׳</div>
+          <h1>אלופי<br><span>השברים</span></h1>
+          <p>50 שאלות קבועות ומדורגות בדיוק על חומר המבחן: שברים על ישר המספרים והמרה בין שבר פשוט למספר מעורב.</p>
+          <div class="hero-actions">
+            <button class="primary-button" id="startBtn" type="button">מתחילים לתרגל <span>←</span></button>
+            <button class="secondary-button" id="resumeBtn" type="button" hidden>להמשיך מהמקום שעצרתי</button>
+          </div>
+          <p class="note">ללא הרשמה. ההתקדמות נשמרת רק במכשיר הזה.</p>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="sun"></div>
+          <div class="orbit orbit-a"></div>
+          <div class="orbit orbit-b"></div>
+          <div class="fraction-card card-a"><b>¾</b><small>כמעט שלם</small></div>
+          <div class="fraction-card card-b"><b>1⅔</b><small>מספר מעורב</small></div>
+          <div class="fraction-card card-c"><b>0.5</b><small>= ½</small></div>
+          <div class="pencil">✎</div>
+        </div>
+      </section>
+
+      <section class="quiz" id="quizScreen" hidden>
+        <div class="quiz-head">
+          <button class="icon-button" id="homeBtn" type="button" aria-label="חזרה למסך הבית">⌂</button>
+          <div class="progress-wrap">
+            <div class="progress-copy"><span id="topicLabel">שברים</span><span><b id="questionNumber">1</b> / 50</span></div>
+            <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+          </div>
+          <div class="score-pill">★ <b id="scoreValue">0</b></div>
+        </div>
+
+        <article class="question-card">
+          <div class="question-badge" id="questionBadge">חימום</div>
+          <h2 id="questionText"></h2>
+          <div class="number-line" id="numberLine" hidden aria-label="ישר המספרים"></div>
+          <div class="answers" id="answers"></div>
+          <div class="feedback" id="feedback" aria-live="polite" hidden>
+            <div class="feedback-icon" id="feedbackIcon"></div>
+            <div><b id="feedbackTitle"></b><p id="feedbackText"></p></div>
+          </div>
+          <button class="next-button" id="nextBtn" type="button" hidden>לשאלה הבאה <span>←</span></button>
+        </article>
+      </section>
+
+      <section class="results" id="resultsScreen" hidden>
+        <div class="result-medal">★</div>
+        <div class="eyebrow">סיימת את כל 50 השאלות</div>
+        <h2 id="resultTitle">כל הכבוד!</h2>
+        <div class="big-score"><span id="finalScore">0</span><small>/ 50</small></div>
+        <p id="resultMessage"></p>
+        <div class="result-stats">
+          <div><b id="correctStat">0</b><span>נכונות</span></div>
+          <div><b id="wrongStat">0</b><span>לחיזוק</span></div>
+          <div><b id="percentStat">0%</b><span>הצלחה</span></div>
+        </div>
+        <div class="result-actions">
+          <button class="primary-button" id="retryWrongBtn" type="button">לתרגל שוב את הטעויות</button>
+          <button class="secondary-button" id="restartBtn" type="button">להתחיל מחדש</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="syllabusDialog">
+    <div class="dialog-head">
+      <div><div class="eyebrow">מפת החומר השנתית</div><h2>חשבון לכיתה ה׳</h2></div>
+      <button class="icon-button" id="closeDialogBtn" type="button" aria-label="סגירה">×</button>
+    </div>
+    <p class="dialog-intro"><b>למבחן השבוע:</b> התרגול באפליקציה ממוקד בשני הנושאים שנמסרו: שברים על ישר המספרים, והפיכה ממספר מעורב לשבר פשוט ולהפך.</p>
+    <div class="syllabus-grid">
+      <section><span>01</span><div><h3>שברים ועשרוניים</h3><p>מספרים מעורבים, צמצום והרחבה, השוואה, חיבור וחיסור, מעבר בין שבר פשוט לעשרוני.</p></div></section>
+      <section><span>02</span><div><h3>מספרים טבעיים</h3><p>ארבע פעולות, סדר פעולות וסוגריים, חילוק במספר דו־ספרתי, אומדן ושאלות רב־שלביות.</p></div></section>
+      <section><span>03</span><div><h3>נתונים וממוצע</h3><p>קריאת טבלאות וגרפים, שכיחות יחסית, חישוב ממוצע והבנת תכונותיו.</p></div></section>
+      <section><span>04</span><div><h3>גאומטריה ומדידה</h3><p>זוויות, מרובעים, גבהים, היקף ושטח של מלבן, מקבילית, משולש וצורות מורכבות.</p></div></section>
+    </div>
+    <a class="source-link" href="https://meyda.education.gov.il/files/mazkirut_pedagogit/matematika/tochnyotlemud/kita5.pdf" target="_blank" rel="noopener">תוכנית הלימודים הרשמית של משרד החינוך ↗</a>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
